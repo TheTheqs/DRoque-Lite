@@ -1,17 +1,3 @@
-# Godot-specific files to ignore
-.import/
-.cache/
-.mono/
-
-# Configurações locais e arquivos temporários
-*.tmp
-*.bak
-*.log
-
-# Arquivos de exportação e builds
-/bin/
-*.exe
-*.app
-export_presets.cfg
-export/*.pck
-export/*.zip
+# Godot 4+ specific ignores
+.godot/
+/android/
