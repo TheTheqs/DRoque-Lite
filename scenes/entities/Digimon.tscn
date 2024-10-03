@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://hds32c6watad"]
 
 [ext_resource type="Script" path="res://scripts/entities/Digimon.gd" id="1_2rk3n"]
-[ext_resource type="Texture2D" uid="uid://cbp0iqujatb8c" path="res://assets/sprites/creatures/Betamon.png" id="2_uexg5"]
+[ext_resource type="Texture2D" uid="uid://dthvyph5ejswy" path="res://assets/sprites/creatures/Dorumon.png" id="2_qduqn"]
 
 [sub_resource type="Animation" id="Animation_6xc4h"]
 resource_name = "Idle"
@@ -49,7 +49,7 @@ DigimonAnimator = NodePath("Animator")
 
 [node name="DigimonSprite" type="Sprite2D" parent="."]
 texture_filter = 2
-texture = ExtResource("2_uexg5")
+texture = ExtResource("2_qduqn")
 hframes = 3
 vframes = 2
 frame = 1

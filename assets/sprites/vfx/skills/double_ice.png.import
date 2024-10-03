@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bldiiktd1pvow"
-path="res://.godot/imported/TestStage2.png-9540e2304fb2379fa13b5b41c3dfd3e8.ctex"
+uid="uid://cs0286qwuvbwj"
+path="res://.godot/imported/double_ice.png-991aca269d77e0b48dbc5b3ebbb0a3fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/backgrounds/TestStage2.png"
-dest_files=["res://.godot/imported/TestStage2.png-9540e2304fb2379fa13b5b41c3dfd3e8.ctex"]
+source_file="res://assets/sprites/vfx/skills/double_ice.png"
+dest_files=["res://.godot/imported/double_ice.png-991aca269d77e0b48dbc5b3ebbb0a3fe.ctex"]
 
 [params]
 

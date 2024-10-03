@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yprn18d371c"
-path="res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"
+uid="uid://cfh45xmjc2xbj"
+path="res://.godot/imported/knuckle_punch.png-11f81144c6d7ee4ac2c150a3d57d75c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/UI/DigimonPlaceHolder.png"
-dest_files=["res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"]
+source_file="res://assets/sprites/vfx/skills/knuckle_punch.png"
+dest_files=["res://.godot/imported/knuckle_punch.png-11f81144c6d7ee4ac2c150a3d57d75c5.ctex"]
 
 [params]
 

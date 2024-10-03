@@ -18,5 +18,5 @@ var ItsBlind: bool = false
 func _ready():
 	if(not ItsDisable):
 		DigimonAnimator.play("Idle")
-	if(self.position.x < 180):
+	if(self.position.x < 140):
 		DigimonSprite.flip_h = true

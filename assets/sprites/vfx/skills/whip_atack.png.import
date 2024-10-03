@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yprn18d371c"
-path="res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"
+uid="uid://ddytiack6qh8a"
+path="res://.godot/imported/whip_atack.png-2e27cdd8e385f1a5f49445372990517a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/UI/DigimonPlaceHolder.png"
-dest_files=["res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"]
+source_file="res://assets/sprites/vfx/skills/whip_atack.png"
+dest_files=["res://.godot/imported/whip_atack.png-2e27cdd8e385f1a5f49445372990517a.ctex"]
 
 [params]
 

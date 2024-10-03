@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s3d88tqw8wmq"
-path="res://.godot/imported/TestStage1.png-8667cffc17032b0703d92da95b17fd23.ctex"
+uid="uid://d3rd4okecqmc0"
+path="res://.godot/imported/pepper_breath.png-7a45e029d74247655b16a199bed4368c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/backgrounds/TestStage1.png"
-dest_files=["res://.godot/imported/TestStage1.png-8667cffc17032b0703d92da95b17fd23.ctex"]
+source_file="res://assets/sprites/vfx/skills/pepper_breath.png"
+dest_files=["res://.godot/imported/pepper_breath.png-7a45e029d74247655b16a199bed4368c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yprn18d371c"
-path="res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"
+uid="uid://b3r2vu32mmifn"
+path="res://.godot/imported/sword_atack.png-9d54eb8b3d28c3455355297456ffcbdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/UI/DigimonPlaceHolder.png"
-dest_files=["res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"]
+source_file="res://assets/sprites/vfx/skills/sword_atack.png"
+dest_files=["res://.godot/imported/sword_atack.png-9d54eb8b3d28c3455355297456ffcbdb.ctex"]
 
 [params]
 

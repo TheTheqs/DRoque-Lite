@@ -3,6 +3,6 @@ Genre: Rogue Like RPG
 Plataform: Mobile/WEB
 Palette: GameBoy Color Type 1
 Font: Press Start 2P
-Resolution: 720x1280
-ViwerPoint: 360x640
+Resolution: 540x960
+ViwerPoint: 270x480
 Script Sintaxe: Camel Case

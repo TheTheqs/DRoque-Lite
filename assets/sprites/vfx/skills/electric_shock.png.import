@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1mrasbryphce"
-path="res://.godot/imported/TestStage3.png-0f599ebb692be14e579726a8e659917f.ctex"
+uid="uid://dcqqoq7b6gp2o"
+path="res://.godot/imported/electric_shock.png-58bfce33b706dce6db71a8f32380d0c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/backgrounds/TestStage3.png"
-dest_files=["res://.godot/imported/TestStage3.png-0f599ebb692be14e579726a8e659917f.ctex"]
+source_file="res://assets/sprites/vfx/skills/electric_shock.png"
+dest_files=["res://.godot/imported/electric_shock.png-58bfce33b706dce6db71a8f32380d0c1.ctex"]
 
 [params]
 

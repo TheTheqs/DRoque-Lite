@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yprn18d371c"
-path="res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"
+uid="uid://dvfrci5f4n1rj"
+path="res://.godot/imported/red_fangs.png-b8c636008c90878e1542174eeda62c77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/UI/DigimonPlaceHolder.png"
-dest_files=["res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"]
+source_file="res://assets/sprites/vfx/skills/red_fangs.png"
+dest_files=["res://.godot/imported/red_fangs.png-b8c636008c90878e1542174eeda62c77.ctex"]
 
 [params]
 

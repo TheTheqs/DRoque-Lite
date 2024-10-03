@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yprn18d371c"
-path="res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"
+uid="uid://nan8eriucsik"
+path="res://.godot/imported/PlayerPanel.png-bd98cf0470d5a0f9a733409d0066868c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/UI/DigimonPlaceHolder.png"
-dest_files=["res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"]
+source_file="res://assets/interface/UI/PlayerPanel.png"
+dest_files=["res://.godot/imported/PlayerPanel.png-bd98cf0470d5a0f9a733409d0066868c.ctex"]
 
 [params]
 

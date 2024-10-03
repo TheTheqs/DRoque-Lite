@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7yprn18d371c"
-path="res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"
+uid="uid://dsag17lmvqmup"
+path="res://.godot/imported/gullible_gust.png-957b44f9043b93acfffeb872409d33a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/UI/DigimonPlaceHolder.png"
-dest_files=["res://.godot/imported/DigimonPlaceHolder.png-288764c2f99483d5bb11e4bcb8504401.ctex"]
+source_file="res://assets/sprites/vfx/skills/gullible_gust.png"
+dest_files=["res://.godot/imported/gullible_gust.png-957b44f9043b93acfffeb872409d33a1.ctex"]
 
 [params]
 

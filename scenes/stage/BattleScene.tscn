@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhb81icqdvpux"]
+[gd_scene load_steps=4 format=3 uid="uid://bhb81icqdvpux"]
 
-[ext_resource type="Texture2D" uid="uid://dog51pg8l8ro4" path="res://assets/interface/UI/BaseBattleUI.png" id="1_wrb3k"]
+[ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_ekq6u"]
+[ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_0qchd"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="2_gbffe"]
 
 [node name="BattleScene" type="Node2D"]
@@ -8,25 +9,21 @@
 [node name="Interface" type="Node2D" parent="."]
 
 [node name="UserUI" type="Sprite2D" parent="Interface"]
-position = Vector2(180, 320)
-texture = ExtResource("1_wrb3k")
+position = Vector2(135, 419)
+texture = ExtResource("1_ekq6u")
 
 [node name="BackGround" type="Sprite2D" parent="Interface"]
+position = Vector2(135, 180)
+texture = ExtResource("2_0qchd")
 
 [node name="BattleManager" type="Node2D" parent="."]
 
 [node name="Enemy" type="Node2D" parent="BattleManager"]
 
-[node name="Main" parent="BattleManager/Enemy" instance=ExtResource("2_gbffe")]
-position = Vector2(276, 208)
-
-[node name="Companion" parent="BattleManager/Enemy" instance=ExtResource("2_gbffe")]
-position = Vector2(84, 208)
+[node name="Digimon" parent="BattleManager/Enemy" instance=ExtResource("2_gbffe")]
+position = Vector2(172, 92)
 
 [node name="Player" type="Node2D" parent="BattleManager"]
 
-[node name="Main" parent="BattleManager/Player" instance=ExtResource("2_gbffe")]
-position = Vector2(84, 393)
-
-[node name="Companion" parent="BattleManager/Player" instance=ExtResource("2_gbffe")]
-position = Vector2(276, 393)
+[node name="Digimon" parent="BattleManager/Player" instance=ExtResource("2_gbffe")]
+position = Vector2(99, 264)
