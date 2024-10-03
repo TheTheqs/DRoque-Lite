@@ -11,10 +11,21 @@ config_version=5
 [application]
 
 config/name="DRogue Lite"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=360
+window/size/viewport_height=640
+window/size/resizable=false
+window/size/window_width_override=720
+window/size/window_height_override=1280
+window/stretch/mode="viewport"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/lossless_compression/force_png=true
+anti_aliasing/screen_space_roughness_limiter/enabled=false

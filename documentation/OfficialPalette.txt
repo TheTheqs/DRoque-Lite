@@ -1,0 +1,39 @@
+Paleta: GameBoy Color Type 1
+Cores:
+#000000 - Preto
+#FFAD63 - Laranja Claro / Pêssego
+#833100 - Marrom Escuro / Terracota
+#FFFFFF - Branco
+#F7C4A5 - Bege Claro / Pêssego Claro
+#7BFF30 - Verde Neon / Verde Limão
+#008300 - Verde Escuro
+#65A49B - Verde Água / Azul Petróleo Claro
+#0000FE - Azul Neon / Azul Elétrico
+#FF8584 - Rosa Salmão / Rosa Coral Claro
+#943A3A - Marrom Avermelhado / Vinho
+#E60000 - Vermelho Vivo
+#FFE7C5 - Creme / Bege
+#CE9C85 - Bege Médio / Areia
+#846B29 - Marrom Mostarda / Marrom Ouro
+#5B315B - Roxo Escuro / Ameixa
+#A56B31 - Marrom Cobre
+#64A5FF - Azul Céu Claro
+#8B8CDE - Azul Lavanda / Azul Cinza
+#53528C - Azul Marinho Escuro / Azul Escuro
+#A5A5A5 - Cinza Médio
+#525252 - Cinza Escuro
+#949494 - Cinza Claro
+#FE9494 - Rosa Claro / Rosa Salmão
+#9394FE - Azul Pastel / Lavanda
+#FFFFA5 - Amarelo Claro / Amarelo Baunilha
+#FF00FE - Rosa Neon / Fúcsia
+#FFFF00 - Amarelo Vivo
+#FE0000 - Vermelho Vivo
+#7D4900 - Marrom Terra / Marrom Madeira
+#FFFF3A - Amarelo Limão
+#3A2802 - Marrom Escuro / Chocolate
+#51FF00 - Verde Neon / Verde Limão Claro
+#FF4200 - Laranja Vermelho / Vermelho Alaranjado
+#0163C6 - Azul Real / Azul Royal
+#008486 - Verde Água Escuro / Verde Azulado
+#FFDE00 - Amarelo Ouro / Amarelo Vibrante
