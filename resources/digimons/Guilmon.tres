@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://cs4kvtum1eloo"]
+
+[ext_resource type="Texture2D" uid="uid://d0q6r87uwqj0" path="res://assets/sprites/creatures/Guilmon.png" id="1_7p8k0"]
+[ext_resource type="Script" path="res://scripts/Resources Abstract Scripts/DigimonData.gd" id="2_ro7ci"]
+
+[resource]
+script = ExtResource("2_ro7ci")
+digimonId = 3
+digimonName = "Guilmon"
+digimonTexture = ExtResource("1_7p8k0")

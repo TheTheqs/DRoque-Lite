@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://cvsicvbw2a8c6"]
+
+[ext_resource type="Texture2D" uid="uid://40afmqsbt6ok" path="res://assets/sprites/creatures/Agumon.png" id="1_sgyxp"]
+[ext_resource type="Script" path="res://scripts/Resources Abstract Scripts/DigimonData.gd" id="2_vtoqi"]
+
+[resource]
+script = ExtResource("2_vtoqi")
+digimonId = 0
+digimonName = "Agumon"
+digimonTexture = ExtResource("1_sgyxp")

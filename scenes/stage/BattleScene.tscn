@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhb81icqdvpux"]
+[gd_scene load_steps=6 format=3 uid="uid://bhb81icqdvpux"]
 
 [ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_ekq6u"]
 [ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_0qchd"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="2_gbffe"]
+[ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="3_lyftt"]
+[ext_resource type="Script" path="res://scripts/entities/Player.gd" id="5_72dng"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -18,12 +20,16 @@ texture = ExtResource("2_0qchd")
 
 [node name="BattleManager" type="Node2D" parent="."]
 
-[node name="Enemy" type="Node2D" parent="BattleManager"]
+[node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon")]
+script = ExtResource("3_lyftt")
+digimon = NodePath("Digimon")
 
 [node name="Digimon" parent="BattleManager/Enemy" instance=ExtResource("2_gbffe")]
 position = Vector2(172, 92)
 
-[node name="Player" type="Node2D" parent="BattleManager"]
+[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon")]
+script = ExtResource("5_72dng")
+digimon = NodePath("Digimon")
 
 [node name="Digimon" parent="BattleManager/Player" instance=ExtResource("2_gbffe")]
 position = Vector2(99, 264)

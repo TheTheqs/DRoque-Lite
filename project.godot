@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="DRogue Lite"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DDB="*res://scripts/database and globals/DigimonDB.gd"
+Util="*res://scripts/database and globals/Utility.gd"
 
 [display]
 
@@ -22,6 +27,7 @@ window/size/resizable=false
 window/size/window_width_override=540
 window/size/window_height_override=960
 window/stretch/mode="viewport"
+window/handheld/orientation=1
 
 [rendering]
 

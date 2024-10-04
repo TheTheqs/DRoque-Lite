@@ -3,20 +3,26 @@ extends Node
 class_name Digimon
 
 #Database info
-var DigimonId: int
-var DigimonName: String
-var DigimonDescription: String
+var digimonId: int
+var digimonName: String
+var digimonDescription: String
 
 #Scene Elements
-@export var DigimonSprite: Sprite2D
-@export var DigimonAnimator: AnimationPlayer
+@export var digimonSprite: Sprite2D
+@export var digimonAnimator: AnimationPlayer
 
 #Status Control
-var ItsDisable: bool = false
-var ItsBlind: bool = false
+var itsDisable: bool = false
+var itsBlind: bool = false
 
-func _ready():
-	if(not ItsDisable):
-		DigimonAnimator.play("Idle")
+func setBehave() -> void:
+	if(not itsDisable):
+		digimonAnimator.play("Idle")
 	if(self.position.x < 140):
-		DigimonSprite.flip_h = true
+		digimonSprite.flip_h = true
+
+func setStats(stats: DigimonData) -> void:
+	self.digimonId = stats.digimonId
+	self.digimonName = stats.digimonName
+	self.digimonSprite.texture = stats.digimonTexture
+	setBehave()
