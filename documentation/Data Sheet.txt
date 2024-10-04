@@ -6,3 +6,4 @@ Font: Press Start 2P
 Resolution: 540x960
 ViwerPoint: 270x480
 Script Sintaxe: Camel Case
+Trello Project Board: https://trello.com/b/ZfkzsPK5/drogue-lite (private)

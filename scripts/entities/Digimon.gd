@@ -10,13 +10,14 @@ var digimonDescription: String
 #Scene Elements
 @export var digimonSprite: Sprite2D
 @export var digimonAnimator: AnimationPlayer
+@export var tamer: Tamer
 
 #Status Control
-var itsDisable: bool = false
-var itsBlind: bool = false
+var isDisabled: bool = false
+var isBlind: bool = false
 
 func setBehave() -> void:
-	if(not itsDisable):
+	if(not isDisabled):
 		digimonAnimator.play("Idle")
 	if(self.position.x < 140):
 		digimonSprite.flip_h = true

@@ -1,0 +1,81 @@
+#This document will be entirely in Portuguese. I don't have the time to do the translation properly, but maybe my personal employee (ChatGPT) can translate it for me <3
+O documento que segue ainda está em construção. Ele é atualizado conforme o projeto implementa a sua lógica.
+Cena Tela - é uma cena que funciona como uma tela do jogo, um estágio da gameplay, como a tela inicial, a tela de batalha, a tela de exploração, tela de diálogo etc. O primeiro nó das cenas de tela deve, preferencialmente, ser um nó sem script.
+Cena Entidade - É um conjunto de nós que se organizam num microssistema para a representação de um elemento visual concreto e realmente independente. Ele não é uma tela do estágio do jogo, mas uma entidade que integra uma tela.
+
+1- Cenas Telas e seus elementos (Nós e suas funções). O distanciamento remete à posição e relação (nó pai e filho) com o nó superior, inferior.
+Cena Tela de Batalha (Battle Scene) - Tela de batalha, contendo a principal dinâmica do jogo.
+	Interface - Nó que contempla elementos puramente visuais.
+		UserUI - Nó do tipo Sprite2D. Ele é responsável por exibir o elemento visual estático da parte inferior da cena de batalha. Não possui script próprio, pois é sempre a mesma imagem estática.
+		BackGround - Nó do tipo Sprite2D que representa o cenário. Não é estático e possui um script que gerencia o cenário a ser exibido (ver classe StageManager) #ainda não implementado.
+	BattleManager - Nó do tipo Node2D. Além de conter como filhos todos os nós que participam da batalha, possui um script para a classe que gerencia a batalha, como ordem de turnos, fase da batalha, ciclo de vida da aplicação, dentre outros (veja classe BattleManager) #ainda não implementado.
+		Enemy - Nó do tipo Node2D - Representa o inimigo, oponente do jogador, e possui o script do tipo Enemy (que herda de Tamer, confira ambas as classes). Assim como o nó pai (BattleManager), não possui representação visual em cena e apenas gerencia o comportamento do Digimon Inimigo.
+			Digimon(Enemy) - Nó do tipo Node2D que representa uma cena entidade (Digimon). Ele representa um elemento visual da cena, possuindo posição e comportamento. Para mais detalhes, veja a Cena Entidade Digimon.
+		Player - Nó do tipo Node2D, possui um script do tipo Player (que também herda de Tamer). Contempla todas as dinâmicas de interface para a interação com o usuário, como botões etc. Além disso, possui uma Cena Entidade do tipo Digimon como filho (o personagem do jogador). Não possui representação visual em si, mas contempla todos os aspectos de interface para interação do usuário.
+			Digimon(Player) - Nó do tipo Node2D que também é uma cena entidade idêntica ao Digimon(Enemy). Apesar de serem a mesma estrutura, existe uma lógica na classe Digimon que determina o comportamento da entidade baseado no seu Tamer (Player ou Enemy).
+
+2 - Cenas Entidades e seus elementos. Ao contrário das cenas telas, estas precisam possuir um script no nó principal.
+Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
+	DigimonSprite - Nó do tipo Sprite2D, responsável por armazenar a textura do digimon. Não possui Script.
+	Animator - Nó do tipo AnimationPlayer, responsável por gerenciar as animações do digimon. Não possui Script.
+
+3 - Modelagem de Dados, descrição das classes e suas funções e atributos principais.
+
+	Classes globais e de armazenamento de dados (database).
+
+		DigimonDB - Basicamente armazena todos os recursos que representam os digimons individualmente.
+			Atributos:
+				digimons (dicionário) - Possui uma relação chave-valor com o id do digimon e seu respectivo endereço dentro do projeto, para acesso rápido e direto.
+			Funções:
+				getDigimonData(index: int)  - Retorna um valor do tipo DigimonData (veja classes abstratas de recursos), baseado no valor fornecido. Essa função recebe o id do Digimon e busca no dicionário o recurso respectivo.
+
+		Utility - Classe global que possui funções de utilidade variadas.
+			Atributos:
+				No presente momento, não possui nenhum atributo. No entanto, futuramente pode receber valores que representem constantes.
+			Funções:
+				random(minn: int, maxn: int) - Função que recebe dois valores e retorna um valor aleatório entre eles. A Godot possui uma função nativa para isso, mas criei esta por uma questão de formalidade e padronização.
+				cap(value: float) - Função que recebe um valor flutuante e retorna esse mesmo valor com apenas duas casas decimais. #ainda não implementado.
+
+	Classes Entidade.
+		Digimon - Classe que representa o principal elemento do jogo, os digimons. É supostamente muito extensa, mas tentarei ser sucinto em seus atributos e funções.
+			Atributos:
+				#Atributos de identificação
+				digimonID: int
+				digimonName: String
+				digimonDescription: String
+				#Atributos de elemento em cena (todos com a tag @export)
+				digimonSprite: Sprite2D
+				digimonAnimator: AnimationPlayer
+				tamer: Tamer (veja classe Tamer)
+				#Atributos de controle de estado
+				isDisabled: bool - false por padrão
+				isBlind: bool - false por padrão
+			Funções:
+				setBehave() -> void: Determina a posição do digimon em cena, baseado no seu Tamer (player ou inimigo) e no seu estágio (ainda não implementado). Além disso, manipula o flipH da sua textura.
+				setStats(stats: DigimonData) -> void: Muda os status do digimon a partir de um DigimonData, variável armazenada no database de Digimons. O DigimonData é uma espécie de JSON que armazena valores dos atributos de cada digimon único. Esses valores são transferidos para o digimon em cena através dessa função. Valores como o nome, id, descrição, textura e atributos variados. Ao final da função, a função setBehave() é chamada para atualizar a representação do digimon em cena.
+
+		Tamer - Classe que "domina" o digimon. Puramente backend, não possui representação visual, mas gerencia aspectos relacionados ao próprio digimon.
+			Atributos:
+				digimon: Digimon - obviamente, o digimon que o tamer possui. Recebe a tag @export, pois esse digimon é obrigatoriamente um elemento em cena.
+			Funções:
+				summonDigimon(index: int) -> void: Recebe um valor int que representa a Id de um digimon. Em seguida, busca esse digimon no banco de dados, retornando um DigimonData do respectivo digimon. Após isso, usa a função setStats do seu digimon para "invocá-lo" em cena, com todas as características respectivas.
+
+		Player - Classe que herda Tamer, com seus atributos e funções.
+			Atributos:
+				No momento, sem atributos, mas futuramente serão atribuídos elementos de interface para interação do usuário.
+			Funções:
+				_ready() -> void: Função básica da Godot, usada quando a cena é carregada. No momento, para fins de teste, essa função usa a função herdada summon aplicando a função random de Utility para gerar um digimon aleatório do banco de dados.
+
+		Enemy - Classe que herda Tamer. No momento, está idêntica ao Player, mas futuramente receberá atributos e funções que simularão uma inteligência artificial simples, que jogará contra o jogador obedecendo certos padrões.
+
+	Classes Abstratas para Recursos (essas classes servem apenas para determinar o formato e os atributos dos recursos). É importante pensar nos recursos como arquivos JSON que armazenam dados, e essas classes determinam os elementos e atributos desses recursos.
+
+		DigimonData: Armazena dados estáticos de entidades do tipo Digimon no banco de dados.
+			Atributos:
+				#Identificação
+				digimonId: int
+				digimonName: String
+				#Elementos em cena
+				digimonTexture: CompressedTexture2D
+
+//O documento que você leu está em desenvolvimento, acompanhando os avanços do desenvolvimento do próprio sistema :D.

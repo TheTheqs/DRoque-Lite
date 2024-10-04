@@ -24,12 +24,14 @@ texture = ExtResource("2_0qchd")
 script = ExtResource("3_lyftt")
 digimon = NodePath("Digimon")
 
-[node name="Digimon" parent="BattleManager/Enemy" instance=ExtResource("2_gbffe")]
+[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(172, 92)
+tamer = NodePath("..")
 
 [node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon")]
 script = ExtResource("5_72dng")
 digimon = NodePath("Digimon")
 
-[node name="Digimon" parent="BattleManager/Player" instance=ExtResource("2_gbffe")]
+[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(99, 264)
+tamer = NodePath("..")
