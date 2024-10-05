@@ -13,11 +13,15 @@ Cena Tela de Batalha (Battle Scene) - Tela de batalha, contendo a principal din�
 			Digimon(Enemy) - Nó do tipo Node2D que representa uma cena entidade (Digimon). Ele representa um elemento visual da cena, possuindo posição e comportamento. Para mais detalhes, veja a Cena Entidade Digimon.
 		Player - Nó do tipo Node2D, possui um script do tipo Player (que também herda de Tamer). Contempla todas as dinâmicas de interface para a interação com o usuário, como botões etc. Além disso, possui uma Cena Entidade do tipo Digimon como filho (o personagem do jogador). Não possui representação visual em si, mas contempla todos os aspectos de interface para interação do usuário.
 			Digimon(Player) - Nó do tipo Node2D que também é uma cena entidade idêntica ao Digimon(Enemy). Apesar de serem a mesma estrutura, existe uma lógica na classe Digimon que determina o comportamento da entidade baseado no seu Tamer (Player ou Enemy).
+			ButtonPanel - Nó do tipo Node2D. Ele acopla todos os botões e gerencia os mesmos.
 
 2 - Cenas Entidades e seus elementos. Ao contrário das cenas telas, estas precisam possuir um script no nó principal.
 Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 	DigimonSprite - Nó do tipo Sprite2D, responsável por armazenar a textura do digimon. Não possui Script.
 	Animator - Nó do tipo AnimationPlayer, responsável por gerenciar as animações do digimon. Não possui Script.
+	SkillSpawner - Nó do tipo Node2D, ele é responsável por mostrar efeitos visuais das skill que serão usadas sobre o Digimon, por iso seu posicionamento é sempre (0, 0).
+		SkillSprite - Nó do tipo Sprite2D. Recebe a textura da skill que será "spawnada".
+		Animator - Nó do tipo AnimationPlayer. Ele executa a animação da skill recebida pelo skill spawner.
 
 3 - Modelagem de Dados, descrição das classes e suas funções e atributos principais.
 
@@ -28,13 +32,21 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 				digimons (dicionário) - Possui uma relação chave-valor com o id do digimon e seu respectivo endereço dentro do projeto, para acesso rápido e direto.
 			Funções:
 				getDigimonData(index: int)  - Retorna um valor do tipo DigimonData (veja classes abstratas de recursos), baseado no valor fornecido. Essa função recebe o id do Digimon e busca no dicionário o recurso respectivo.
-
+		
+		EnumDB - Classe que armazena todos os enums. É uma forma de centralizar todos os enums da aplicação. Não possui Funções e todos os seus atributos são enums.
+			Atributos:
+				Type - Contempla todos os tipos de Digimon(5)
+				Tier - Contempla todos os Tiers de Digimon(4)
+				Element - Contempla todos os elementos(9)
+				DamageType - Contempla os 3 tipos de Dano.
 		Utility - Classe global que possui funções de utilidade variadas.
 			Atributos:
 				No presente momento, não possui nenhum atributo. No entanto, futuramente pode receber valores que representem constantes.
 			Funções:
 				random(minn: int, maxn: int) - Função que recebe dois valores e retorna um valor aleatório entre eles. A Godot possui uma função nativa para isso, mas criei esta por uma questão de formalidade e padronização.
-				cap(value: float) - Função que recebe um valor flutuante e retorna esse mesmo valor com apenas duas casas decimais. #ainda não implementado.
+				chance(nchance: float) - Função que retorna um bool. Ele calcula um valor float entre 0 e 100. Se o valor for menor que nchance, retorna true. Caso contrário retorna false.
+				cap(value: float) - Função que recebe um valor flutuante e retorna esse mesmo valor com apenas duas casas decimais.
+				damageAbilityBuilder(damageSkill: DamageSkill) - Função que cria uma variável do tipo DamageData a partir de uma DamageSkill, depois retorna essa variável.
 
 	Classes Entidade.
 		Digimon - Classe que representa o principal elemento do jogo, os digimons. É supostamente muito extensa, mas tentarei ser sucinto em seus atributos e funções.
@@ -42,17 +54,52 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 				#Atributos de identificação
 				digimonID: int
 				digimonName: String
+				digimonIcon: CompressedTexture2D
 				digimonDescription: String
-				#Atributos de elemento em cena (todos com a tag @export)
+				#Atributos do enum
+				element: Enums.Element
+				digimonTier: Enums.Tier
+				digimonType: Enums.Type
+				#Atributos base
+				baseSTR: int
+				baseINT: int
+				baseAGI: int
+				baseVIT: int
+				baseWIS: int
+				baseDEX: int
+				#Atributos Bonus
+				bonusSTR: int
+				bonusINT: int
+				bonusAGI: int
+				bonusVIT: int
+				bonusWIS: int
+				bonusDEX: int
+				#valores de cálculo dinâmico (eles recebem uma variável fixa por precisarem passar por aminupalção indireta futuramente)
+				totalDamage: int
+				criticalChance: int
+				currentAccuracy: int
+				gotHited: bool
+				#Atributos de cena (todos com a tag @export)
+				enemy: Digimon - Representa o digimon inimigo
 				digimonSprite: Sprite2D
 				digimonAnimator: AnimationPlayer
 				tamer: Tamer (veja classe Tamer)
+				#array de habilidades. O tamanho sempre deve ser 5
+				digimonSkills: Array[Skill]
 				#Atributos de controle de estado
 				isDisabled: bool - false por padrão
 				isBlind: bool - false por padrão
 			Funções:
 				setBehave() -> void: Determina a posição do digimon em cena, baseado no seu Tamer (player ou inimigo) e no seu estágio (ainda não implementado). Além disso, manipula o flipH da sua textura.
 				setStats(stats: DigimonData) -> void: Muda os status do digimon a partir de um DigimonData, variável armazenada no database de Digimons. O DigimonData é uma espécie de JSON que armazena valores dos atributos de cada digimon único. Esses valores são transferidos para o digimon em cena através dessa função. Valores como o nome, id, descrição, textura e atributos variados. Ao final da função, a função setBehave() é chamada para atualizar a representação do digimon em cena.
+				#as funções abaixo sao acessadas por habilidades e outros contextos em que o o digimon precisa fornecer atributos específicos, como quando ataca ou recebe dano.
+				getAttribute(att: String) -> int - retorn aum inteiro que representa a soma de um atributo base e seu bonus. O valor nunca pode ser inferior a 1.
+				getCriticalChance() -> int - Atribui a chance de crítico à variável criticalChance e depois retorna esse valor.
+				getAcurracy() -> int  - Atribui a acurracy a currentAcurracy e depois retorna esse valor.
+				getSkillDamage(damageType: enums.DamageType) -> int: calcula o dano que o digimon dará com uma habilidade baseado no tipo da habilidade.
+				getTargeted(skill: Skill) -> void: Função chamado para atacar esse digimon, ele chama o skillSpawner para fzer o efeito visual da habilidade que foi usada.
+				gotTargeted(skill: Skill) -> void: Função que o skillSpawner retorna depois de executar o efeito visual da habilidade. Essa função faz os cálculos responsáveis para ver se a habilidade vai acertar, em caso positivo chama a função responsável por processar o que a habilidade fará (dano ou status).
+				processDamage(damagData: DamageData) -> processa um dano recebido e faz os cálculos e descontos na vida.
 
 		Tamer - Classe que "domina" o digimon. Puramente backend, não possui representação visual, mas gerencia aspectos relacionados ao próprio digimon.
 			Atributos:
@@ -62,13 +109,38 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 
 		Player - Classe que herda Tamer, com seus atributos e funções.
 			Atributos:
-				No momento, sem atributos, mas futuramente serão atribuídos elementos de interface para interação do usuário.
+				buttonPanel: ButtonPanel - Literalmente um painel com as representações backend de todos os botões. Veja classe ButtonPanel.
 			Funções:
-				_ready() -> void: Função básica da Godot, usada quando a cena é carregada. No momento, para fins de teste, essa função usa a função herdada summon aplicando a função random de Utility para gerar um digimon aleatório do banco de dados.
+				_ready() -> void: Função básica da Godot, usada quando a cena é carregada. No momento, essa função usa a função herdada summon aplicando a função random de Utility para gerar um digimon aleatório do banco de dados. Depois ela usa as funções de atualizações do painel de botões.
 
 		Enemy - Classe que herda Tamer. No momento, está idêntica ao Player, mas futuramente receberá atributos e funções que simularão uma inteligência artificial simples, que jogará contra o jogador obedecendo certos padrões.
+	Classes para construtores de interface.
+		ButtonPanel - classe responsável por conter todos os botões em tela, modificar suas aparências e determinar o comportamento de cada um.
+			Atributos:
+				#elementos de cena
+				relatedPlayer: Player - Jogador que detém o painel de botões. Usa a Tag @export por ser um elemento obrigatório em cena.
+				relatedDigimon: Digimon - Digimon do jogador, essencial para a construção dos botões de habilidade. Também possui a tag @export.
+				#botões
+				allButtons: Array[Button] - array com a tag export para conter todos os botões da tela.
+				skillButtons:Array [Button] - array que contém somente os botões de habilidades (entenda que aqui os botões também estarão presentes no outro array, mas é importante fazer um array só com as habilidades para futuras manipulações).
+			Funções:
+				setButtons() -> void - Função responsável por associar cada botão de habilidade com a sua respectiva habilidade do Digimon. Chamada no começo da partida, mas cuidado! O digimon em si precisa já estar bem estabelecido na cena, caso contrário isso retornará um erro, por isso essa função não deve ser chamada na função _ready(), e sim ser chamada manualmente pelo Player.
+				updateButtons() -> -  atualiza os botões das habilidades, desabilitando skills em cooldown e colocando o valor desse cooldown sobre o botão. Ela também faz o contrário, habilitando botçoes cujo cooldown chegou a zero. Essa função será chamada diversas vezes.
 
-	Classes Abstratas para Recursos (essas classes servem apenas para determinar o formato e os atributos dos recursos). É importante pensar nos recursos como arquivos JSON que armazenam dados, e essas classes determinam os elementos e atributos desses recursos.
+		SkillSpawner - Classe responsável por criar o vfx das habilidades. Ela recebe uma skill, executa sua animação sobre o digimon, depois devolve a habilidade para o digimon processá-la.
+			Atributos:
+				currentSkill: Skill - habilidade recebida.
+				#elementos da cena
+				relatedDigimon: Digimon - Digimon que detém esse skillSpawner
+				skillSprite: Sprite 2D. Sprite que armazena a textura da habilidade recebida.
+				animator: AnimationPlayer - Animation que executa a animação da habilidade recebida.
+			Funções:
+				_ready(): - Função padrão ready, aqui ela é usada apenas para flipar o H do sprite, com base no tamer do digimon (player ou inimigo).
+				spawSkill(skill : Skill) -> void: - função principal da classe. Executa a animação da habilidade.
+				_onAnimationFinished(anim_name): - função do tipo sinal. Ela é executa sempre que uma animação termina. Chama a função gotTarget do digimon para processamento da habilidade.
+
+	Classes Abstratas para Recursos (essas classes servem apenas para
+determinar o formato e os atributos dos recursos). É importante pensar nos recursos como arquivos JSON que armazenam dados, e essas classes determinam os elementos e atributos desses recursos.
 
 		DigimonData: Armazena dados estáticos de entidades do tipo Digimon no banco de dados.
 			Atributos:
@@ -77,5 +149,7 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 				digimonName: String
 				#Elementos em cena
 				digimonTexture: CompressedTexture2D
-
+		
+		DamageData: Recurso dinâmico, criado no momento da batalha para processar dano. Possui atributos básico para que um dano possa ser processado. (precisar ser detalhado).
+		
 //O documento que você leu está em desenvolvimento, acompanhando os avanços do desenvolvimento do próprio sistema :D.

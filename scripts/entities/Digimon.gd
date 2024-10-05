@@ -5,6 +5,7 @@ class_name Digimon
 #Database info
 var digimonId: int
 var digimonName: String
+var digimonIcon: CompressedTexture2D
 var digimonDescription: String
 #enums
 var element: Enums.Element
@@ -30,6 +31,7 @@ var criticalChance: int
 var currentAccuracy: int
 var gotHited: bool
 #Scene Elements
+@export var skillSpawner: SkillSpawner
 @export var enemy: Digimon
 @export var digimonSprite: Sprite2D
 @export var digimonAnimator: AnimationPlayer
@@ -99,6 +101,9 @@ func getSkillDamage(damageType: Enums.DamageType) -> int:
 	elif(damageType == Enums.DamageType.MAGICAL):
 		totalDamage = getAttribute("int")
 	return totalDamage
+#função que chama o skill spawner para executar o vfx de uma skill usada no digimon
+func getTageted(skill: Skill) -> void:
+	skillSpawner.spawSkill(skill)
 #função que determina o acerto das habilidades.
 func gotTargeted(skill: Skill) -> void:
 	gotHited = false
@@ -110,8 +115,9 @@ func gotTargeted(skill: Skill) -> void:
 
 #função que processa o dano recebido
 func processDamage(_damageData: DamageData) -> void:
-	pass #Essa função precisa ser implementada.
+	pass 
 
+#Essa função precisa ser implementada.
 func learnSkill(skill: Skill) -> void:
 	var _learned: bool = false
 	if(skill is DamageSkill):
