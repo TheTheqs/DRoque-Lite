@@ -1,17 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhb81icqdvpux"]
+[gd_scene load_steps=11 format=3 uid="uid://bhb81icqdvpux"]
 
 [ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_ekq6u"]
 [ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_0qchd"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="2_gbffe"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="3_lyftt"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="5_72dng"]
+[ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="6_5hlcs"]
+[ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="6_134bq"]
+[ext_resource type="Texture2D" uid="uid://cn0kwuglh30yt" path="res://assets/interface/Icons/SkillIcons/BaseSkillIcon.png" id="7_fcgoq"]
+[ext_resource type="Texture2D" uid="uid://c674b3sx2xnuq" path="res://assets/interface/Icons/InterfaceIcons/InventoryIcon.png" id="8_fmg4f"]
+[ext_resource type="Texture2D" uid="uid://bf62rogblcndj" path="res://assets/interface/Icons/InterfaceIcons/DigimonCompanionChange.png" id="10_xb1nm"]
 
 [node name="BattleScene" type="Node2D"]
 
 [node name="Interface" type="Node2D" parent="."]
 
 [node name="UserUI" type="Sprite2D" parent="Interface"]
-position = Vector2(135, 419)
+position = Vector2(135, 420)
 texture = ExtResource("1_ekq6u")
 
 [node name="BackGround" type="Sprite2D" parent="Interface"]
@@ -28,10 +33,75 @@ digimon = NodePath("Digimon")
 position = Vector2(172, 92)
 tamer = NodePath("..")
 
-[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon")]
+[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "digimon")]
 script = ExtResource("5_72dng")
+buttonPanel = NodePath("ButtonPanel")
 digimon = NodePath("Digimon")
 
 [node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(99, 264)
 tamer = NodePath("..")
+
+[node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "allButtons", "skillButtons")]
+script = ExtResource("6_5hlcs")
+relatedPlayer = NodePath("..")
+relatedDigimon = NodePath("../Digimon")
+allButtons = [NodePath("PassTurn"), NodePath("Menu"), NodePath("Inventory"), NodePath("Companion"), NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
+skillButtons = [NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
+
+[node name="PassTurn" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 8.0
+offset_top = 405.0
+offset_right = 30.0
+offset_bottom = 428.0
+
+[node name="Menu" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 238.0
+offset_top = 407.0
+offset_right = 260.0
+offset_bottom = 430.0
+
+[node name="Inventory" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 58.0
+offset_right = 90.0
+icon = ExtResource("8_fmg4f")
+
+[node name="BasicAtack" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 118.0
+offset_right = 150.0
+icon = ExtResource("7_fcgoq")
+
+[node name="Companion" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 178.0
+offset_right = 210.0
+icon = ExtResource("10_xb1nm")
+
+[node name="SignatureSkill" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 29.0
+offset_top = 441.0
+offset_right = 61.0
+offset_bottom = 473.0
+icon = ExtResource("7_fcgoq")
+
+[node name="ExtraSkill1" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 89.0
+offset_top = 441.0
+offset_right = 121.0
+offset_bottom = 473.0
+icon = ExtResource("7_fcgoq")
+
+[node name="ExtraSkill2" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 149.0
+offset_top = 441.0
+offset_right = 181.0
+offset_bottom = 473.0
+icon = ExtResource("7_fcgoq")
+
+[node name="ExtraSkill3" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
+offset_left = 209.0
+offset_top = 441.0
+offset_right = 241.0
+offset_bottom = 473.0
+icon = ExtResource("7_fcgoq")

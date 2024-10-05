@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 DDB="*res://scripts/database and globals/DigimonDB.gd"
 Util="*res://scripts/database and globals/Utility.gd"
+EnumDB="*res://scripts/database and globals/EnumDB.gd"
 
 [display]
 

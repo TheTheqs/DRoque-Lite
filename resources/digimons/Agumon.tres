@@ -1,10 +1,13 @@
 [gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://cvsicvbw2a8c6"]
 
 [ext_resource type="Texture2D" uid="uid://40afmqsbt6ok" path="res://assets/sprites/creatures/Agumon.png" id="1_sgyxp"]
-[ext_resource type="Script" path="res://scripts/Resources Abstract Scripts/DigimonData.gd" id="2_vtoqi"]
+[ext_resource type="Script" path="res://scripts/resources abstract scripts/DigimonData.gd" id="2_m8v8p"]
 
 [resource]
-script = ExtResource("2_vtoqi")
+script = ExtResource("2_m8v8p")
 digimonId = 0
 digimonName = "Agumon"
+digimonTier = 0
+digimonType = 2
+element = 1
 digimonTexture = ExtResource("1_sgyxp")

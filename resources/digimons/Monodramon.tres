@@ -1,10 +1,13 @@
 [gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://dxv5uekafkmd3"]
 
 [ext_resource type="Texture2D" uid="uid://bq3tew0u55knk" path="res://assets/sprites/creatures/Monodramon.png" id="1_niva5"]
-[ext_resource type="Script" path="res://scripts/Resources Abstract Scripts/DigimonData.gd" id="2_vymhf"]
+[ext_resource type="Script" path="res://scripts/resources abstract scripts/DigimonData.gd" id="2_hpyvy"]
 
 [resource]
-script = ExtResource("2_vymhf")
+script = ExtResource("2_hpyvy")
 digimonId = 1
 digimonName = "Monodramon"
+digimonTier = 0
+digimonType = 2
+element = 0
 digimonTexture = ExtResource("1_niva5")

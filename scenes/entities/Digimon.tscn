@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://hds32c6watad"]
+[gd_scene load_steps=6 format=3 uid="uid://hds32c6watad"]
 
 [ext_resource type="Script" path="res://scripts/entities/Digimon.gd" id="1_2rk3n"]
+[ext_resource type="Script" path="res://scripts/interface builders/SkillSpawner.gd" id="2_38vac"]
 
 [sub_resource type="Animation" id="Animation_6xc4h"]
 resource_name = "Idle"
@@ -56,3 +57,15 @@ frame = 1
 libraries = {
 "": SubResource("AnimationLibrary_3tk41")
 }
+
+[node name="SkillSpawner" type="Node2D" parent="." node_paths=PackedStringArray("relatedDigimon", "skillSprite", "animator")]
+script = ExtResource("2_38vac")
+relatedDigimon = NodePath("..")
+skillSprite = NodePath("SkillSprite")
+animator = NodePath("Animator")
+
+[node name="SkillSprite" type="Sprite2D" parent="SkillSpawner"]
+
+[node name="Animator" type="AnimationPlayer" parent="SkillSpawner"]
+
+[connection signal="animation_finished" from="SkillSpawner/Animator" to="SkillSpawner" method="_onAnimationFinished"]
