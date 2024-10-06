@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://b472h8uypiryq"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://dbuixx7nlggs7"]
 
-[ext_resource type="Texture2D" uid="uid://cbp0iqujatb8c" path="res://assets/sprites/creatures/Betamon.png" id="1_b24g2"]
-[ext_resource type="Script" path="res://scripts/resources abstract scripts/DigimonData.gd" id="2_uijdc"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_atc1x"]
+[ext_resource type="Texture2D" uid="uid://cbp0iqujatb8c" path="res://assets/sprites/creatures/Betamon.png" id="2_vd3jr"]
 
 [resource]
-script = ExtResource("2_uijdc")
+script = ExtResource("1_atc1x")
 digimonId = 5
 digimonName = "Betamon"
+digimonDescription = ""
 digimonTier = 0
 digimonType = 0
 element = 2
-digimonTexture = ExtResource("1_b24g2")
+texture = ExtResource("2_vd3jr")

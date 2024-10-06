@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://cs4kvtum1eloo"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://ddsti4ckrmo3l"]
 
-[ext_resource type="Texture2D" uid="uid://d0q6r87uwqj0" path="res://assets/sprites/creatures/Guilmon.png" id="1_7p8k0"]
-[ext_resource type="Script" path="res://scripts/resources abstract scripts/DigimonData.gd" id="2_6sn88"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_7en31"]
+[ext_resource type="Texture2D" uid="uid://d0q6r87uwqj0" path="res://assets/sprites/creatures/Guilmon.png" id="2_i1y5q"]
 
 [resource]
-script = ExtResource("2_6sn88")
+script = ExtResource("1_7en31")
 digimonId = 3
 digimonName = "Guilmon"
+digimonDescription = ""
 digimonTier = 0
 digimonType = 0
 element = 1
-digimonTexture = ExtResource("1_7p8k0")
+texture = ExtResource("2_i1y5q")

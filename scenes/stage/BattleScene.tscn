@@ -29,8 +29,9 @@ texture = ExtResource("2_0qchd")
 script = ExtResource("3_lyftt")
 digimon = NodePath("Digimon")
 
-[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("tamer") instance=ExtResource("2_gbffe")]
+[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(172, 92)
+enemy = NodePath("../../Player/Digimon")
 tamer = NodePath("..")
 
 [node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "digimon")]
@@ -38,8 +39,9 @@ script = ExtResource("5_72dng")
 buttonPanel = NodePath("ButtonPanel")
 digimon = NodePath("Digimon")
 
-[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("tamer") instance=ExtResource("2_gbffe")]
+[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(99, 264)
+enemy = NodePath("../../Enemy/Digimon")
 tamer = NodePath("..")
 
 [node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "allButtons", "skillButtons")]

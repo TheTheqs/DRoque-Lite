@@ -42,8 +42,9 @@ _data = {
 "RESET": SubResource("Animation_eigcw")
 }
 
-[node name="Digimon" type="Node2D" node_paths=PackedStringArray("digimonSprite", "digimonAnimator")]
+[node name="Digimon" type="Node2D" node_paths=PackedStringArray("skillSpawner", "digimonSprite", "digimonAnimator")]
 script = ExtResource("1_2rk3n")
+skillSpawner = NodePath("SkillSpawner")
 digimonSprite = NodePath("DigimonSprite")
 digimonAnimator = NodePath("Animator")
 
