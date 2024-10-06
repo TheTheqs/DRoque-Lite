@@ -6,7 +6,7 @@ class_name DamageSkillData
 @export var skillId: int
 @export var skillName: String
 @export var skillIcon: CompressedTexture2D
-@export_multiline var skillDescription: String
+@export var skillDescription: String
 
 #atributos de valores e comportamento
 @export var element: Enums.Element

@@ -147,9 +147,81 @@ determinar o formato e os atributos dos recursos). É importante pensar nos recu
 				#Identificação
 				digimonId: int
 				digimonName: String
+				digimonDescription: String
+				digimonTier: Enums.Tier
+				digimonType: Enums.Type
+				element: Enums.Element
+				texture: CompressedTexture2D
 				#Elementos em cena
 				digimonTexture: CompressedTexture2D
 		
-		DamageData: Recurso dinâmico, criado no momento da batalha para processar dano. Possui atributos básico para que um dano possa ser processado. (precisar ser detalhado).
+		DamageData: Recurso dinâmico, criado no momento da batalha para processar dano. Possui atributos básicos para que um dano possa ser processado.
+			Atributos:
+				damageType: Enums.DamageType
+				damageElement: Enums.Element
+				atackerType: Enums.Type
+				damageValue: float
+				isCritic: bool
+			Funções:
+				buildData(5 args) -> : simulação de uma funções construtora. Essencial para a construção dinâmica desse reucrso.
 		
+		DamageSkillData: Recurso para armazenamento de habilidades de dano em um banco de dados.
+			Atributos:
+				#Identificação
+				skillId: int
+				skillName: String
+				skillIcon: CompressedTexture2D
+				skillDescription: String
+				#atributos de valores e comportamento
+				element: Enums.Element
+				damageType: Enums.DamageType
+				ratio: float
+				manaCost: int
+				coolDown: int
+				hasEffect: bool
+				#Elementos VFX
+				skillTexture: CmpressedTexture2D
+				textureRange: int
+
+	Classes de Habilidades. As seguintes classes são a base da modeagem das classes de skills. Mostrarei apenas as classes abstrastas das quais as habilidades herdam. Para detalhes de cada habilidade em específico, veja o banco de dados de habilidades (ainda não documentado).
+		Skill - Principal e mais básica classe de habilidade, possuindo os atributos comuns de todas as habilidades de todos os tipos.
+			Atributos:
+				#Identificação
+				skillId: int
+				skillName: String
+				skillDescription: String
+				skillIcon: CompressedTexture2D
+				#elementos de controle
+				usable: bool
+				accuracy: int
+				cooldown: int
+				currentCooldown: int
+				#elementos de cena e vfx
+				texture: CompressedTexture2D
+				textureRange: int
+			Funções:
+				learn(learner: Digimon, index: int) -> void: Faz o digimon aprender uma habilidade. O index é a posição que a habilidade vai assumir nas habilidades do digimon. Essa função é essencial porque existem habilidades que precisarão incluir Triggers, e não simplesmente serem atribuídas a árvore de habilidades do digimon, nesses casos, essa função será sobrescrita pelas suas classes filhas.
+				unlearn(unlearner: Digimon) -> void: faz o mesmo que a função anterior, só que o oposto. Remove qualquer trigger ou elemento adicional que foi necessário para o aprendizado da habilidade.
+				applyCooldown() -> void: Função chamada depois do uso da habilidae, fazendo ela ficar desativada e aplicando o seu valor de coolDown em currentCooldown.
+				countCooldown() -> void: Função chamada ao final de cada turno. Ela desconta 1 turno do currentCooldown da habilidade, depois verifica se o currentCooldown chegou a zero. Nesse caso habilita a habilidade novamente.
+
+		DamageSkill: Classe que herda Skill e representa as habilidades que causam dano, mas que também podem possuir um efeito secundário.
+			Atributos:
+				#herda todos os atributos de Skill e inclui o atributos abaixo:
+				manaCost: int
+				ratio: float
+				isCritic: bool
+				damageValue: float
+				hasEffect: bool
+				element: Enums.Element
+				atackerType: Enums.Type
+				damageType: Enums.DamageType
+			Funções:
+				#função de transferência de dados estáticos.
+				setStats(stats: DamageSkillData) -> void: Função construtora que atribui valores aos dados estáticos de uma habilidade de dano baseado em um recurso do banco de dados de habilidades.
+				setValues(digimon: Digimon( -> void: Essa função atribui os valores dionâmicos da habilidades, como seu dano, sua precisão e se ela resultou em um ataque crítico. Valores dinÂmicos que dependem dos atributos do digimon que usa a habilidade.
+				applyStatus(digimon: Digimon) -> void: Função abstrata da classe, feita para ser sobreescrita quando uma habilidade possui um efeito adicional.
+				skillSingularity(digimon: Digimon) -> void: Função criada para atribuir um comportamento específico de uma habildiade. Por exemplo, uma habilidade cuja chance de crítico é dobrada, ou que tem seu valor reduzido pela metade dentro de um contexto. Essa função vai alterar caracteristicas dos atributos dinâmicos da skill que não seguem o fluxo comum de cálculo e é chamado ao final da função setValues(). Também criada para ser sobreescrita, pois por padrão não faz nada.
+
 //O documento que você leu está em desenvolvimento, acompanhando os avanços do desenvolvimento do próprio sistema :D.
+

@@ -34,11 +34,11 @@ func setValues(digimon: Digimon) -> void:
 	self.damageValue *= ratio
 	self.accuracy = digimon.getAccuracy()
 	self.isCritic = Util.chance(digimon.getCriticalChance())
-	
-	
+	skillSingularity(digimon)
+
 #A função abaixo só é usada quando o bool has stats for True
 func applyStats(_digimon: Digimon) -> void:
 	pass
 #função abistrada que vai executar comandos específicos de cada skill caso houver
-func skillSingularity() -> void:
+func skillSingularity(_digimon: Digimon) -> void:
 	pass
