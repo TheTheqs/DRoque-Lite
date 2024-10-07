@@ -1,0 +1,12 @@
+[gd_resource type="Translation" format=3 uid="uid://cl8q65u13ft24"]
+
+[resource]
+messages = {
+"ChangeLanguage": &"Change language",
+"DigimonName0": &"Agumon",
+"DigimonName1": &"Monodramon",
+"DigimonName2": &"Veemon",
+"DigimonName3": &"Guilmon",
+"DigimonName4": &"Dorumon",
+"DigimonName5": &"Betamon"
+}

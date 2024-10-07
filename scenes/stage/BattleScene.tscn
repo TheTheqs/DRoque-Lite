@@ -1,15 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhb81icqdvpux"]
+[gd_scene load_steps=14 format=3 uid="uid://bhb81icqdvpux"]
 
 [ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_ekq6u"]
 [ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_0qchd"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="2_gbffe"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="3_lyftt"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="5_72dng"]
+[ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="5_jrhsy"]
 [ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="6_5hlcs"]
 [ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="6_134bq"]
-[ext_resource type="Texture2D" uid="uid://cn0kwuglh30yt" path="res://assets/interface/Icons/SkillIcons/BaseSkillIcon.png" id="7_fcgoq"]
 [ext_resource type="Texture2D" uid="uid://c674b3sx2xnuq" path="res://assets/interface/Icons/InterfaceIcons/InventoryIcon.png" id="8_fmg4f"]
+[ext_resource type="Texture2D" uid="uid://c0rquotsyn4vn" path="res://assets/interface/Icons/SkillIcons/001BasicAtackframe.png" id="9_1cr0k"]
 [ext_resource type="Texture2D" uid="uid://bf62rogblcndj" path="res://assets/interface/Icons/InterfaceIcons/DigimonCompanionChange.png" id="10_xb1nm"]
+[ext_resource type="Texture2D" uid="uid://ffkyibueeglu" path="res://assets/interface/Icons/SkillIcons/002SignatureSkillFrame.png" id="11_nhcnd"]
+[ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="12_kft5e"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -25,24 +28,34 @@ texture = ExtResource("2_0qchd")
 
 [node name="BattleManager" type="Node2D" parent="."]
 
-[node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon")]
+[node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon", "HUDD")]
 script = ExtResource("3_lyftt")
 digimon = NodePath("Digimon")
+HUDD = NodePath("HUDDisplay")
 
 [node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(172, 92)
 enemy = NodePath("../../Player/Digimon")
 tamer = NodePath("..")
 
-[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "digimon")]
+[node name="HUDDisplay" parent="BattleManager/Enemy" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("5_jrhsy")]
+position = Vector2(69, 46)
+ownerPlayer = NodePath("..")
+
+[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "digimon", "HUDD")]
 script = ExtResource("5_72dng")
 buttonPanel = NodePath("ButtonPanel")
 digimon = NodePath("Digimon")
+HUDD = NodePath("HUDDisplay")
 
 [node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer") instance=ExtResource("2_gbffe")]
 position = Vector2(99, 264)
 enemy = NodePath("../../Enemy/Digimon")
 tamer = NodePath("..")
+
+[node name="HUDDisplay" parent="BattleManager/Player" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("5_jrhsy")]
+position = Vector2(200, 218)
+ownerPlayer = NodePath("..")
 
 [node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "allButtons", "skillButtons")]
 script = ExtResource("6_5hlcs")
@@ -73,7 +86,10 @@ icon = ExtResource("8_fmg4f")
 [node name="BasicAtack" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
 offset_left = 118.0
 offset_right = 150.0
-icon = ExtResource("7_fcgoq")
+
+[node name="SkillFrame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/BasicAtack"]
+position = Vector2(16, 16)
+texture = ExtResource("9_1cr0k")
 
 [node name="Companion" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
 offset_left = 178.0
@@ -85,25 +101,37 @@ offset_left = 29.0
 offset_top = 441.0
 offset_right = 61.0
 offset_bottom = 473.0
-icon = ExtResource("7_fcgoq")
+
+[node name="SkillFrame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/SignatureSkill"]
+position = Vector2(16, 16)
+texture = ExtResource("11_nhcnd")
 
 [node name="ExtraSkill1" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
 offset_left = 89.0
 offset_top = 441.0
 offset_right = 121.0
 offset_bottom = 473.0
-icon = ExtResource("7_fcgoq")
+
+[node name="SkillFrame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill1"]
+position = Vector2(16, 16)
+texture = ExtResource("12_kft5e")
 
 [node name="ExtraSkill2" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
 offset_left = 149.0
 offset_top = 441.0
 offset_right = 181.0
 offset_bottom = 473.0
-icon = ExtResource("7_fcgoq")
+
+[node name="SkillFrame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill2"]
+position = Vector2(16, 16)
+texture = ExtResource("12_kft5e")
 
 [node name="ExtraSkill3" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("6_134bq")]
 offset_left = 209.0
 offset_top = 441.0
 offset_right = 241.0
 offset_bottom = 473.0
-icon = ExtResource("7_fcgoq")
+
+[node name="SkillFrame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill3"]
+position = Vector2(16, 16)
+texture = ExtResource("12_kft5e")

@@ -1,8 +1,11 @@
 extends Node
 
 class_name Tamer
-#Current Digimon
+#elementos de cena
 @export var digimon : Digimon
+@export var HUDD: HUDDisplay
+#tamer attributes
+var tamerLevel: int = 3
 
 #Sumoning Digimon
 func summonDigimon(index: int) -> void:

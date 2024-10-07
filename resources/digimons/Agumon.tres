@@ -6,9 +6,13 @@
 [resource]
 script = ExtResource("1_kv7ex")
 digimonId = 0
-digimonName = "Agumon"
-digimonDescription = ""
 digimonTier = 0
 digimonType = 2
 element = 1
 texture = ExtResource("1_sgyxp")
+levelSTR = 6
+levelINT = 1
+levelAGI = 3
+levelVIT = 5
+levelWIS = 2
+levelDEX = 3

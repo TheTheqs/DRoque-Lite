@@ -67,6 +67,13 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 				baseVIT: int
 				baseWIS: int
 				baseDEX: int
+				#Artributos de level (aumentam os atributos base por level)
+				levelSTR: int
+				levelINT: int
+				levelAGI: int
+				levelVIT: int
+				levelWIS: int
+				levelDEX: int
 				#Atributos Bonus
 				bonusSTR: int
 				bonusINT: int
@@ -80,6 +87,7 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 				currentAccuracy: int
 				gotHited: bool
 				#Atributos de cena (todos com a tag @export)
+				skillSpawner: SkillSpawner
 				enemy: Digimon - Representa o digimon inimigo
 				digimonSprite: Sprite2D
 				digimonAnimator: AnimationPlayer
@@ -100,10 +108,16 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 				getTargeted(skill: Skill) -> void: Função chamado para atacar esse digimon, ele chama o skillSpawner para fzer o efeito visual da habilidade que foi usada.
 				gotTargeted(skill: Skill) -> void: Função que o skillSpawner retorna depois de executar o efeito visual da habilidade. Essa função faz os cálculos responsáveis para ver se a habilidade vai acertar, em caso positivo chama a função responsável por processar o que a habilidade fará (dano ou status).
 				processDamage(damagData: DamageData) -> processa um dano recebido e faz os cálculos e descontos na vida.
-
+				learnSkill(skill: Skill) -> void: aprende uma habilidade
+				leveuUpAttributes(level: int) -> void: atualiza os atributos base com base na quantidade de níveis ganhos.
+				updateMaxHealth(newMaxHealth: float) -> void: atualiza a vida maxima, mantendo a proporção que já existia entre a vida máxima e a autal
+				updateMaxMana(newMaxHealth: float) -> void: faz o mesmo que o anterior mas com a mana.
+				heal(value: float, isMana: bool) -> void: cura a mana ou vida do digimon.
 		Tamer - Classe que "domina" o digimon. Puramente backend, não possui representação visual, mas gerencia aspectos relacionados ao próprio digimon.
 			Atributos:
 				digimon: Digimon - obviamente, o digimon que o tamer possui. Recebe a tag @export, pois esse digimon é obrigatoriamente um elemento em cena.
+				HUDD: HUDDisplay - elemento que faz a construção de interface durante a batalha.
+				tamerLevel: int - determina o level do digimon.
 			Funções:
 				summonDigimon(index: int) -> void: Recebe um valor int que representa a Id de um digimon. Em seguida, busca esse digimon no banco de dados, retornando um DigimonData do respectivo digimon. Após isso, usa a função setStats do seu digimon para "invocá-lo" em cena, com todas as características respectivas.
 
@@ -126,6 +140,18 @@ Digimon - Nó principal do tipo Node2D, possui um script da classe Digimon.
 			Funções:
 				setButtons() -> void - Função responsável por associar cada botão de habilidade com a sua respectiva habilidade do Digimon. Chamada no começo da partida, mas cuidado! O digimon em si precisa já estar bem estabelecido na cena, caso contrário isso retornará um erro, por isso essa função não deve ser chamada na função _ready(), e sim ser chamada manualmente pelo Player.
 				updateButtons() -> -  atualiza os botões das habilidades, desabilitando skills em cooldown e colocando o valor desse cooldown sobre o botão. Ela também faz o contrário, habilitando botçoes cujo cooldown chegou a zero. Essa função será chamada diversas vezes.
+		HUDDisplay - Classe que constrói as principal informações em batalha: Nome, nível, vida e mana.
+			Atributos:
+				nameAndLevel: RichTextLabel - exibe o nome e level
+				helth: ProgressBar
+				mana: ProgressBar
+				ownerPlayer: Tamer
+				RelatedDigimon: Digimon
+			Funções:
+				_ready(): - associa o digimon do player com o seu próprio. Em seguida, modifica 
+				setHealth() - atualiza a barra para expressar o valor real entre vida maxima e vida corrente.
+				setMana() - faz o mesmo que a anterior mas com a mana.
+				updateValues() - Muda o display de exibição, em seguida chama as duas funções de atualização.
 
 		SkillSpawner - Classe responsável por criar o vfx das habilidades. Ela recebe uma skill, executa sua animação sobre o digimon, depois devolve a habilidade para o digimon processá-la.
 			Atributos:

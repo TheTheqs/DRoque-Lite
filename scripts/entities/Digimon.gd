@@ -12,12 +12,19 @@ var element: Enums.Element
 var digimonTier: Enums.Tier
 var digimonType: Enums.Type
 #atributos base.
-var baseSTR: int 
-var baseINT: int
-var baseAGI: int
-var baseVIT: int
-var baseWIS: int
-var baseDEX: int
+var baseSTR: int = 5
+var baseINT: int = 5
+var baseAGI: int = 5
+var baseVIT: int = 5
+var baseWIS: int = 5
+var baseDEX: int = 5
+#atributos por nível
+var levelSTR: int
+var levelINT: int
+var levelAGI: int
+var levelVIT: int
+var levelWIS: int
+var levelDEX: int
 #atributo bonus.
 var bonusSTR: int
 var bonusINT: int
@@ -25,6 +32,14 @@ var bonusAGI: int
 var bonusVIT: int
 var bonusWIS: int
 var bonusDEX: int
+#vida mana, experiência e nível
+var maxHelth: float = 1
+var currentHealth: float = 1
+var maxMana: float = 1
+var currentMana: float = 1
+var currentExp: float
+var maxExp: float
+var currentLevel: int
 #valores constantes de retorno.
 var totalDamage: int
 var criticalChance: int
@@ -60,11 +75,19 @@ func setBehave() -> void:
 
 func setStats(stats: DigimonData) -> void:
 	self.digimonId = stats.digimonId
-	self.digimonName = stats.digimonName
+	self.digimonName = tr(StringName("DigimonName" + str(self.digimonId)))
 	self.digimonSprite.texture = stats.texture
 	self.element = stats.element
 	self.digimonTier = stats.digimonTier
 	self.digimonType = stats.digimonType
+	self.currentLevel = tamer.tamerLevel
+	self.levelSTR = stats.levelSTR
+	self.levelINT = stats.levelINT
+	self.levelAGI = stats.levelAGI
+	self.levelVIT = stats.levelVIT
+	self.levelWIS = stats.levelWIS
+	self.levelDEX = stats.levelDEX
+	levelUpAttributes(currentLevel)
 	setBehave()
 
 #a função abaixo vai retornar a soma de atributo base e atributo bonus, negando valores menores que 1
@@ -125,3 +148,41 @@ func learnSkill(skill: Skill) -> void:
 			if(digimonSkills[i] == null):
 				_learned = skill.learn(self, i)
 				break
+
+func levelUpAttributes(level: int) -> void:
+	self.baseSTR += (self.levelSTR*level)
+	self.baseINT += (self.levelINT*level)
+	self.baseAGI += (self.levelAGI*level)
+	self.baseVIT += (self.levelVIT*level)
+	self.baseWIS += (self.levelWIS*level)
+	self.baseDEX += (self.levelDEX*level)
+	var maxHelthBonus = baseVIT*3.5
+	var newMaxHealth = self.maxHelth + maxHelthBonus
+	updateMaxHelth(newMaxHealth)
+	var maxManaBonus = baseWIS*3.5
+	var newMaxMana = self.maxMana + maxManaBonus
+	updateMaxMana(newMaxMana)
+
+func updateMaxHelth(newMaxHealth: float) -> void:
+	var proportion: float = Util.getProportion(currentHealth, maxHelth)
+	self.maxHelth = newMaxHealth
+	self.currentHealth = Util.cap(self.maxHelth*proportion)
+
+func updateMaxMana(newMaxMana: float) -> void:
+	var proportion: float = Util.getProportion(currentMana, maxMana)
+	self.maxMana = newMaxMana
+	self.currentMana = Util.cap(self.maxMana*proportion)
+
+func heal(value: float, isMana: bool) -> void:
+	value = Util.cap(value)
+	if(not isMana):
+		if((currentHealth + value) > maxHelth):
+			currentHealth = maxHelth
+		else:
+			currentHealth += value
+	else:
+		if((currentMana + value) > maxMana):
+			currentHealth = maxMana
+		else:
+			currentMana += value
+	tamer.HUDD.updateValues()

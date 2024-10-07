@@ -21,3 +21,6 @@ func damageDataBuilder(damageSkill: DamageSkill) -> DamageData:
 	var newDamageData : DamageData = DamageData.new()
 	newDamageData.buildData(damageSkill.damageType, damageSkill.element, damageSkill.atackerType, damageSkill.damageValue, damageSkill.isCritic)
 	return newDamageData
+
+func getProportion(portion: float, whole: float) -> float:
+	return portion/whole

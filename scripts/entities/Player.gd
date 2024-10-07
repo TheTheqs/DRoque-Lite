@@ -10,5 +10,6 @@ func _ready() -> void:
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
 	#atualização da interface. Sempre a última coisa a se fazer!
+	HUDD.updateValues()
 	buttonPanel.setButtons()
 	buttonPanel.updateButtons()
