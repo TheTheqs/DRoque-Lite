@@ -37,3 +37,22 @@ enum DamageType {
 	MAGICAL,
 	TRUE
 }
+
+#Subtipo de dano
+enum DamageSubType {
+	DIRECT,
+	OVERTIME,
+	DEFLECT,
+	SPECIAL
+}
+
+#Fase de batalha
+enum BattlePhase {
+	BATTLESTART,
+	TURNSTART,
+	CHOICE,
+	ACTION,
+	POSACTION,
+	TURNEND,
+	BATTLEEND
+}

@@ -24,6 +24,6 @@ func setMana() -> void:
 	mana.value = relatedDigimon.currentMana
 
 func updateValues() -> void:
-	nameAndLevel.text = "[center]" + relatedDigimon.digimonName + "\nLv. " + str(relatedDigimon.currentLevel) + "[/center]"
+	nameAndLevel.text = "[center]" + tr(relatedDigimon.digimonName) + "\nLv. " + str(relatedDigimon.currentLevel) + "[/center]"
 	setHealth()
 	setMana()

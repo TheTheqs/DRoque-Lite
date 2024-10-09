@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://hds32c6watad"]
+[gd_scene load_steps=8 format=3 uid="uid://hds32c6watad"]
 
 [ext_resource type="Script" path="res://scripts/entities/Digimon.gd" id="1_2rk3n"]
 [ext_resource type="Script" path="res://scripts/interface builders/SkillSpawner.gd" id="2_38vac"]
@@ -35,11 +35,71 @@ tracks/0/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DigimonSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_thsoa"]
+resource_name = "action"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DigimonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DigimonSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sryji"]
+resource_name = "damage"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DigimonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 5, 3, 5, 3, 5, 3]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3tk41"]
 _data = {
 "Idle": SubResource("Animation_6xc4h"),
-"RESET": SubResource("Animation_eigcw")
+"RESET": SubResource("Animation_eigcw"),
+"action": SubResource("Animation_thsoa"),
+"damage": SubResource("Animation_sryji")
 }
 
 [node name="Digimon" type="Node2D" node_paths=PackedStringArray("skillSpawner", "digimonSprite", "digimonAnimator")]
@@ -50,6 +110,7 @@ digimonAnimator = NodePath("Animator")
 
 [node name="DigimonSprite" type="Sprite2D" parent="."]
 texture_filter = 2
+scale = Vector2(0.8, 0.8)
 hframes = 3
 vframes = 2
 frame = 1
@@ -69,4 +130,5 @@ animator = NodePath("Animator")
 
 [node name="Animator" type="AnimationPlayer" parent="SkillSpawner"]
 
+[connection signal="animation_finished" from="Animator" to="." method="animationFinished"]
 [connection signal="animation_finished" from="SkillSpawner/Animator" to="SkillSpawner" method="_onAnimationFinished"]

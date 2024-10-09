@@ -13,3 +13,4 @@ func _ready() -> void:
 	HUDD.updateValues()
 	buttonPanel.setButtons()
 	buttonPanel.updateButtons()
+	judge.gettingStarted()

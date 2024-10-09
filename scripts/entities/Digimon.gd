@@ -51,6 +51,7 @@ var gotHited: bool
 @export var digimonSprite: Sprite2D
 @export var digimonAnimator: AnimationPlayer
 @export var tamer: Tamer
+@export var damageShower: DamageShower
 
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
@@ -59,6 +60,17 @@ var digimonSkills:Array[Skill] = [null, null, null, null, null]
 #Status Control
 var isDisabled: bool = false
 var isBlind: bool = false
+#actions
+var currentAction: Skill
+
+#Triggers
+var onBattleStart: Array[Trigger]
+var onTurnStart: Array[Trigger]
+var onTurnEnd: Array[Trigger]
+
+#Actions Array
+var actionsToGo: Array
+var effectsToGo: Array[Trigger]
 
 func setBehave() -> void:
 	if(not isDisabled):
@@ -75,7 +87,7 @@ func setBehave() -> void:
 
 func setStats(stats: DigimonData) -> void:
 	self.digimonId = stats.digimonId
-	self.digimonName = tr(StringName("DigimonName" + str(self.digimonId)))
+	self.digimonName ="DigimonName" + str(self.digimonId)
 	self.digimonSprite.texture = stats.texture
 	self.element = stats.element
 	self.digimonTier = stats.digimonTier
@@ -135,18 +147,31 @@ func gotTargeted(skill: Skill) -> void:
 		if(gotHited):
 			var processableDamage: DamageData = Util.damageDataBuilder(skill)
 			processDamage(processableDamage)
+		else:
+			#função de mandar msg quando um ataque erra o alvo
+			BTM.outAction()
 
-#função que processa o dano recebido
-func processDamage(_damageData: DamageData) -> void:
-	pass 
+#Função que processa o dano recebido
+func processDamage(damageData: DamageData) -> void:
+	damageData.damageValue *= Util.getTypeRatio(damageData.atackerType, self.digimonType)
+	damageData.damageValue *= Util.getElementRatio(damageData.damageElement, self.element)
+	applyDefense(damageData)
+	#calculando dano
+	if(self.currentHealth - damageData.damageValue >= 0):
+		currentHealth = 0
+		digimonAnimator.play("damaged")
+	else:
+		currentHealth -= damageData.damageValue
+		digimonAnimator.play("damaged")
+	damageShower.showDamage(damageData)
 
-#Essa função precisa ser implementada.
+#essa função está incompleta
 func learnSkill(skill: Skill) -> void:
 	var _learned: bool = false
 	if(skill is DamageSkill):
 		for i in range(digimonSkills.size()):
 			if(digimonSkills[i] == null):
-				_learned = skill.learn(self, i)
+				#_learned = skill.learn(self, i)
 				break
 
 func levelUpAttributes(level: int) -> void:
@@ -174,6 +199,7 @@ func updateMaxMana(newMaxMana: float) -> void:
 	self.currentMana = Util.cap(self.maxMana*proportion)
 
 func heal(value: float, isMana: bool) -> void:
+	BTM.inAction()
 	value = Util.cap(value)
 	if(not isMana):
 		if((currentHealth + value) > maxHelth):
@@ -186,3 +212,33 @@ func heal(value: float, isMana: bool) -> void:
 		else:
 			currentMana += value
 	tamer.HUDD.updateValues()
+	BTM.outAction()
+
+func action() -> void:
+	BTM.inAction()
+	if(actionsToGo.size() > 0 or effectsToGo.size() > 0):
+		if(effectsToGo.size() > 0):
+			effectsToGo[0].effect(self)
+			effectsToGo.remove_at(0)
+			#implementar BTM out action no final da aplicação de efeitos!!
+		elif(actionsToGo[0] is Skill):
+			currentAction = actionsToGo[0]
+			actionsToGo.remove_at(0)
+			self.digimonAnimator.play("action")
+	else:
+		BTM.outAction()
+
+func animationFinished(anim_name: String):
+	if(anim_name == "action"):
+		currentAction.effect(self)
+		#implementar BTM out action ao final da ação
+	elif(anim_name == "damaged"):
+		BTM.outAction()
+
+func applyDefense(damageData: DamageData) -> void:
+	if(damageData.damageType == Enums.DamageType.PHYSICAL):
+		damageData.damageValue *= 1 - (self.getAttribute("vit")/(100.0 + self.getAttribute("vit")))
+	elif(damageData.damageType == Enums.DamageType.MAGICAL):
+		damageData.damageValue *= 1 - (self.getAttribute("wis")/(100.0 + self.getAttribute("wis")))
+	else:
+		damageData.damageValue += 0

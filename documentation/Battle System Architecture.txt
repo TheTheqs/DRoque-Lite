@@ -1,0 +1,15 @@
+Ciclo de vida da batalha.
+
+-Início da batalha: É decidido o Digimon que jogará primeiro. Em seguida, os efeitos de triggers de início de batalha são verificados (de ambos digimons) e ativados, caso as condições sejam satisfeitas.
+
+Início de turno: Primeiro se calcula quantas ações o digimon atuante terá em função da diferença da sua agilidade e da agulidade do oponente. Em seguida, há a verificão de triggers de início de turno, ativando-os caso as condições sejam satisfeitas.
+
+Fase de Escolha: Aqui, o jogador escolhe uma ação (se for a vez dele) ou a inteligência artifical escolhe uma ação (se for a vez dela).
+
+Fase de Ação: A ação escolhida é executada. Se uma ação desencadeia outras ações, como uma série de ataques subsequêntes, elas são todas executadas nessa fase.
+
+Fase de Pós-Ação: Essa fase verifica se o digimon tem mais ações disponíveis. Se ele possuir, o ciclo do turno volta para a fase de escolha, se não, o ciclo avança para a fase de encerramento de turno. Caso ele passar o turno, o turno se encerra mesmo que ele tenha ações disponíveis e essas ações extras ficam armazenadas para o próximo turno.
+
+Encerramento de Turno: Verifica os triggers de fim de turno, ativando seus efeitos caso as condições sejam satisfeitas. Por fim, o digimon atuante e o digimon oponente trocam de posição e o turno se reinicia, voltando para a fase de início.
+
+Fim da Batalha: Essa fase só entra em vigor quando um dos digimons for derrotado. Ativa qualquer trigger de fim de batalha e encerra a mesma.

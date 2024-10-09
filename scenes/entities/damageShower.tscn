@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8p3k2o3gh2t3"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/damageShower.gd" id="1_5yrml"]
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="2_f2ytg"]
+
+[node name="DamageShower" type="Node2D" node_paths=PackedStringArray("damageToShow", "showTimer")]
+script = ExtResource("1_5yrml")
+damageToShow = NodePath("damage")
+showTimer = NodePath("ShowTimer")
+
+[node name="damage" type="RichTextLabel" parent="."]
+offset_right = 64.0
+offset_bottom = 8.0
+theme_override_fonts/normal_font = ExtResource("2_f2ytg")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ShowTimer" type="Timer" parent="."]

@@ -37,3 +37,6 @@ func countCooldown() -> void:
 		currentCooldown -= 1
 		if(currentCooldown == 0):
 			usable = true
+
+func effect(_digimon: Digimon) -> void:
+	pass

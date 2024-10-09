@@ -11,6 +11,7 @@ class_name DamageSkillData
 #atributos de valores e comportamento
 @export var element: Enums.Element
 @export var damageType: Enums.DamageType
+@export var damageSubType: Enums.DamageSubType
 @export var ratio: float
 @export var manaCost: int
 @export var coolDown: int

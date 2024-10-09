@@ -1,18 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhb81icqdvpux"]
+[gd_scene load_steps=18 format=3 uid="uid://bhb81icqdvpux"]
 
 [ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_ekq6u"]
 [ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_0qchd"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="2_gbffe"]
+[ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="3_bx8xt"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="3_lyftt"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="5_72dng"]
 [ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="5_jrhsy"]
 [ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="6_5hlcs"]
 [ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="6_134bq"]
+[ext_resource type="PackedScene" uid="uid://c8p3k2o3gh2t3" path="res://scenes/entities/damageShower.tscn" id="7_ypfgm"]
 [ext_resource type="Texture2D" uid="uid://c674b3sx2xnuq" path="res://assets/interface/Icons/InterfaceIcons/InventoryIcon.png" id="8_fmg4f"]
 [ext_resource type="Texture2D" uid="uid://c0rquotsyn4vn" path="res://assets/interface/Icons/SkillIcons/001BasicAtackframe.png" id="9_1cr0k"]
 [ext_resource type="Texture2D" uid="uid://bf62rogblcndj" path="res://assets/interface/Icons/InterfaceIcons/DigimonCompanionChange.png" id="10_xb1nm"]
 [ext_resource type="Texture2D" uid="uid://ffkyibueeglu" path="res://assets/interface/Icons/SkillIcons/002SignatureSkillFrame.png" id="11_nhcnd"]
 [ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="12_kft5e"]
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="16_jw0tp"]
+[ext_resource type="Script" path="res://scripts/interface builders/BattleMessenger.gd" id="17_8ufji"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -26,36 +30,54 @@ texture = ExtResource("1_ekq6u")
 position = Vector2(135, 180)
 texture = ExtResource("2_0qchd")
 
-[node name="BattleManager" type="Node2D" parent="."]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "enemy", "playerDigimon", "enemyDigimon", "changeTurnTimer")]
+script = ExtResource("3_bx8xt")
+player = NodePath("Player")
+enemy = NodePath("Enemy")
+playerDigimon = NodePath("Player/Digimon")
+enemyDigimon = NodePath("Enemy/Digimon")
+changeTurnTimer = NodePath("ChangeTurnTimer")
 
-[node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon", "HUDD")]
+[node name="ChangeTurnTimer" type="Timer" parent="BattleManager"]
+
+[node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon", "HUDD", "judge")]
 script = ExtResource("3_lyftt")
 digimon = NodePath("Digimon")
 HUDD = NodePath("HUDDisplay")
+judge = NodePath("..")
 
-[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer") instance=ExtResource("2_gbffe")]
+[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer", "damageShower") instance=ExtResource("2_gbffe")]
 position = Vector2(172, 92)
 enemy = NodePath("../../Player/Digimon")
 tamer = NodePath("..")
+damageShower = NodePath("../DamageShower")
 
 [node name="HUDDisplay" parent="BattleManager/Enemy" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("5_jrhsy")]
 position = Vector2(69, 46)
 ownerPlayer = NodePath("..")
 
-[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "digimon", "HUDD")]
+[node name="DamageShower" parent="BattleManager/Enemy" instance=ExtResource("7_ypfgm")]
+position = Vector2(90, 150)
+
+[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "digimon", "HUDD", "judge")]
 script = ExtResource("5_72dng")
 buttonPanel = NodePath("ButtonPanel")
 digimon = NodePath("Digimon")
 HUDD = NodePath("HUDDisplay")
+judge = NodePath("..")
 
-[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer") instance=ExtResource("2_gbffe")]
+[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer", "damageShower") instance=ExtResource("2_gbffe")]
 position = Vector2(99, 264)
 enemy = NodePath("../../Enemy/Digimon")
 tamer = NodePath("..")
+damageShower = NodePath("../DamageShower")
 
 [node name="HUDDisplay" parent="BattleManager/Player" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("5_jrhsy")]
 position = Vector2(200, 218)
 ownerPlayer = NodePath("..")
+
+[node name="DamageShower" parent="BattleManager/Player" instance=ExtResource("7_ypfgm")]
+position = Vector2(135, 325)
 
 [node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "allButtons", "skillButtons")]
 script = ExtResource("6_5hlcs")
@@ -135,3 +157,20 @@ offset_bottom = 473.0
 [node name="SkillFrame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill3"]
 position = Vector2(16, 16)
 texture = ExtResource("12_kft5e")
+
+[node name="BattleMessage" type="RichTextLabel" parent="BattleManager" node_paths=PackedStringArray("changeMessageTimer")]
+offset_left = 3.0
+offset_top = 368.0
+offset_right = 267.0
+offset_bottom = 384.0
+theme_override_fonts/normal_font = ExtResource("16_jw0tp")
+theme_override_font_sizes/normal_font_size = 8
+fit_content = true
+scroll_active = false
+script = ExtResource("17_8ufji")
+changeMessageTimer = NodePath("ChangeMessage")
+
+[node name="ChangeMessage" type="Timer" parent="BattleManager/BattleMessage"]
+
+[connection signal="timeout" from="BattleManager/ChangeTurnTimer" to="BattleManager" method="changeTurn"]
+[connection signal="timeout" from="BattleManager/BattleMessage/ChangeMessage" to="BattleManager/BattleMessage" method="onChangeMessageTimeout"]

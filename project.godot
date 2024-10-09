@@ -20,6 +20,8 @@ DDB="*res://scripts/database and globals/DigimonDB.gd"
 Util="*res://scripts/database and globals/Utility.gd"
 EnumDB="*res://scripts/database and globals/EnumDB.gd"
 TTR="*res://translation/Translator.gd"
+BTM="*res://scripts/entities/BattleManager.gd"
+BM="*res://scripts/interface builders/BattleMessenger.gd"
 
 [display]
 

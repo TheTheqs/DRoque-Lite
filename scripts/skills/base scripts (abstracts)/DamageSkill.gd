@@ -11,6 +11,7 @@ var hasEffect: bool
 var element: Enums.Element
 var atackerType: Enums.Type
 var damageType: Enums.DamageType
+var damageSubtype: Enums.DamageSubType
 
 #transferência de dados estáticos
 func setStats(stats: DamageSkillData) -> void:
@@ -20,6 +21,7 @@ func setStats(stats: DamageSkillData) -> void:
 	self.skillDescritption = stats.skillDescription
 	self.element = stats.element
 	self.damageType = stats.damageType
+	self.damageSubtype = stats.DamageSubType
 	self.ratio = stats.ratio
 	self.manaCost = stats.manaCost
 	self.cooldowm = stats.coolDown
