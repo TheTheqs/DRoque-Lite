@@ -51,7 +51,6 @@ var gotHited: bool
 @export var digimonSprite: Sprite2D
 @export var digimonAnimator: AnimationPlayer
 @export var tamer: Tamer
-@export var damageShower: DamageShower
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
 
@@ -168,7 +167,6 @@ func processDamage(damageData: DamageData) -> void:
 	else:
 		currentHealth -= damageData.damageValue
 		digimonAnimator.play("damage")
-	damageShower.showDamage(damageData)
 	tamer.HUDD.updateValues()
 
 #essa função está incompleta

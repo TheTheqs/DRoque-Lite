@@ -5,9 +5,6 @@ class_name Enemy
 func _ready() -> void:
 	self.tamerName = "Enemy"
 	#setando o damage shower
-	damageShower.position = Vector2(90, 150)
-	damageShower.inicitialPosition = Vector2(90, 150)
-	damageShower.positionLimit = 95
 	turnFrame.visible = false
 	summonDigimon(Util.random(0, 5))
 	#teste de habilidades.

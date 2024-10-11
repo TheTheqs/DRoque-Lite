@@ -4,7 +4,6 @@ class_name Tamer
 #Só para identificação
 var tamerName: String
 #elementos de cena
-@export var damageShower: DamageShower
 @export var digimon : Digimon
 @export var opponent: Tamer
 @export var HUDD: HUDDisplay

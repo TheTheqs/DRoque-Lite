@@ -119,7 +119,7 @@ func changeActor() -> void:
 		currentTamer = player
 		oppositeDigimon = enemyDigimon
 		oppositeTamer = enemy
-	print(currentTamer.tamerName, currentDigimon.digimonName, oppositeTamer.tamerName, oppositeDigimon.digimonName)
+	
 
 func gettingStarted() -> void:
 	tamerReady += 1
