@@ -6,6 +6,12 @@ class_name Player
 @export var buttonPanel : ButtonPanel
 
 func _ready() -> void:
+	self.tamerName = "Player"
+	#setando o damage shower
+	damageShower.position = Vector2(135, 325)
+	damageShower.inicitialPosition = Vector2(135, 325)
+	damageShower.positionLimit = 260
+	turnFrame.visible = false
 	summonDigimon(Util.random(0, 5))
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
@@ -14,3 +20,8 @@ func _ready() -> void:
 	buttonPanel.setButtons()
 	buttonPanel.updateButtons()
 	judge.gettingStarted()
+
+func onFrameAnimation(anim_name: String):
+	if(anim_name == "blinkFrame"):
+		self.canAct = true
+		BM.showMessage(tr(StringName("BattleMessage2a")))

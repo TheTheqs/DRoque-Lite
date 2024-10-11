@@ -5,23 +5,100 @@ class_name ButtonPanel
 @export var relatedPlayer: Player
 @export var relatedDigimon: Digimon
 #Botões
-@export var allButtons: Array[Button]
-@export var skillButtons: Array[Button]
+@export var allButtons: Array[ButtonDescription]
+@export var skillButtons: Array[ButtonDescription]
+@export var showDescTimer: Timer
+@export var infoWindow: InfoWindow
+@export var BM: BattleMessenger
+@export var BTM: BattleManager
+var descWindowOn: bool = false
+var currentButtonToShow: ButtonDescription
+#setar os botões padrões.
+func _ready() -> void:
+	allButtons[0].buttonName = "PassingTurnButtonTittle"
+	allButtons[0].buttonDescription = "PassingTurnButtonDescription"
+	allButtons[1].buttonName = "MenuButtonTittle"
+	allButtons[1].buttonDescription = "MenuButtonDescription"
+	allButtons[2].buttonName = "InventoryButtonTittle"
+	allButtons[2].buttonDescription = "InventoryButtonDescription"
+	allButtons[3].buttonName = "CompanionButtonTittle"
+	allButtons[3].buttonDescription = "CompanionButtonDescription"
 #função que relaciona cada skill com um botão
 func setButtons() -> void:
 	for i in range(relatedDigimon.digimonSkills.size()):
 		if(relatedDigimon.digimonSkills[i] != null):
-			skillButtons[i].icon = relatedDigimon.digimonSkills[i].skillIcon
+			skillButtons[i].associateSkill(relatedDigimon.digimonSkills[i])
 		else:
 			skillButtons[i].visible = false
 
 func updateButtons() -> void:
-	for i in range(skillButtons.size()):
-		if(relatedDigimon.digimonSkills[i] != null):
-			var relatedButton: Button = skillButtons[i]
-			if(relatedDigimon.digimonSkills[i].currentCooldown > 0):
-				relatedButton.disabled = true
-				relatedButton.text = str(relatedDigimon.digimonSkills[i].currentCooldown)
-			elif(relatedDigimon.digimonSkills[i].currentCooldown == 0):
-				relatedButton.disabled = false
-				relatedButton.text = ""
+	for nbutton: ButtonDescription in skillButtons:
+		nbutton.updateSkills()
+
+func blockAllsButtons() -> void:
+	for cbutton in allButtons:
+		cbutton.visible = false
+
+
+func unBlockAllButtons() -> void:
+	for cbutton in allButtons:
+		cbutton.visible = true
+	setButtons()
+	updateButtons()
+
+func _on_pass_turn_button_down():
+	currentButtonToShow = allButtons[0]
+	showDescTimer.start(0.5)
+
+func _on_menu_button_down():
+	currentButtonToShow = allButtons[1]
+	showDescTimer.start(0.5)
+
+func _on_inventory_button_down():
+	currentButtonToShow = allButtons[2]
+	showDescTimer.start(0.5)
+
+func _on_companion_button_down():
+	currentButtonToShow = allButtons[3]
+	showDescTimer.start(0.5)
+
+func _on_basic_atack_button_down():
+	currentButtonToShow = skillButtons[0]
+	showDescTimer.start(0.5)
+
+func _on_signature_skill_button_down():
+	currentButtonToShow = skillButtons[1]
+	showDescTimer.start(0.5)
+
+func _on_extra_skill_1_button_down():
+	currentButtonToShow = skillButtons[2]
+	showDescTimer.start(0.5)
+
+func _on_extra_skill_2_button_down():
+	currentButtonToShow = skillButtons[2]
+	showDescTimer.start(0.5)
+
+func _on_extra_skill_3_button_down():
+	currentButtonToShow = skillButtons[5]
+	showDescTimer.start(0.5)
+
+func showInfoWindow():
+	if(currentButtonToShow != null):
+		infoWindow.showWindow(tr(StringName(currentButtonToShow.buttonName)), tr(StringName(currentButtonToShow.buttonDescription)))
+
+func activateButton() -> void:
+	showDescTimer.stop()
+	if(!descWindowOn and currentButtonToShow != null and relatedPlayer.canAct == true):
+		if(currentButtonToShow in skillButtons):
+			var selectedSkill: Skill = currentButtonToShow.relatedSkill
+			if(!selectedSkill.usable):
+				BM.showMessage(tr(StringName("CantUse")))
+			elif(selectedSkill.currentCooldown > 0):
+				BM.showMessage(tr(StringName("NoCD")))
+			elif(selectedSkill.manaCost > relatedDigimon.currentMana):
+				BM.showMessage(tr(StringName("NoMana")))
+			else:
+				relatedDigimon.chooseAction(selectedSkill)
+				relatedPlayer.canAct = false
+				BTM.choosing = false
+				BTM.outAction("Button Panel")

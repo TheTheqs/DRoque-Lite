@@ -6,8 +6,11 @@ var skillId: int
 var skillName: String
 var skillDescritption: String
 var skillIcon: CompressedTexture2D
+var manaCost: int
 
 #elementos de controle
+var staticPriority: int
+var priority: int
 var usable: bool = true
 var accuracy : int
 var cooldowm: int
@@ -40,3 +43,13 @@ func countCooldown() -> void:
 
 func effect(_digimon: Digimon) -> void:
 	pass
+
+func priorityCheck(_digimon: Digimon) -> void:
+	pass
+
+func priorityCalculation(digimon: Digimon) -> void:
+	priorityCheck(digimon)
+	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
+		self.priority = 0
+
+	

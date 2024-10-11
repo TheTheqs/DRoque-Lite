@@ -5,7 +5,9 @@ class_name Utility
 var convertType: Dictionary = {
 	Enums.Type.VIRUS : "0",
 	Enums.Type.VACCINE : "1",
-	Enums.Type.DATA: "2"
+	Enums.Type.DATA: "2",
+	Enums.Type.FREE: "3",
+	Enums.Type.SPECIAL: "4"
 }
 #type ratio
 var typeRatio: Dictionary = {
@@ -25,7 +27,8 @@ var convertElement: Dictionary = {
 	Enums.Element.THUNDER : "4",
 	Enums.Element.WIND : "5",
 	Enums.Element.LIGHT : "6",
-	Enums.Element.DARK : "7"
+	Enums.Element.DARK : "7",
+	Enums.Element.NEUTRAL : "8"
 }
 #element ratio
 var elementRatio: Dictionary = {
@@ -53,7 +56,7 @@ func chance(nchance: float) -> bool:
 	if (nchance >= 100):
 		return true
 	var randomValue = randf() * 100
-	return randomValue <= chance
+	return (randomValue <= nchance)
 #função que capa números float, para que eles tenham apenas 2 casa decimais
 func cap(value: float) -> float:
 	return round(value*100)/100
@@ -80,3 +83,7 @@ func getTypeRatio(atacker: Enums.Type, defender: Enums.Type) -> float:
 		return typeRatio[typeConvert]
 	else:
 		return 1.0
+
+func pickOne(options: Array) -> Object:
+	var selectedIndex: int = random(0, (options.size() -1))
+	return options[selectedIndex]

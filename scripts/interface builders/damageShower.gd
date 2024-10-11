@@ -1,16 +1,17 @@
 extends Node
 
-
 class_name DamageShower
 #Elementos de Cena
 @export var damageToShow: RichTextLabel
 @export var showTimer: Timer
+@export var BTM: BattleManager
+@export var relatedTamer: Tamer
 #Variáveis de controle
-var inicitialPosition: int
+var inicitialPosition: Vector2
 var showing: bool = false
 var damagesToShow: Array[DamageData]
-var speed: float = 1.2
-var modulateSpeed: float = 0.08
+var speed: float = 1.3
+var modulateSpeed: float = 0.008
 var positionLimit: int
 #Cores para borda.
 var damageColor: Dictionary = {
@@ -30,30 +31,31 @@ func showDamage(damageData: DamageData) -> void:
 		BTM.inAction()
 		showing = true
 		damagesToShow.append(damageData)
+		queueSweep()
 	else:
 		damagesToShow.append(damageData)
 
 func updateDamage() -> void:
-	var outlineColor: String = damageColor[damagesToShow[0].Element]
+	var outlineColor: String = damageColor[damagesToShow[0].damageElement]
 	if(not damagesToShow[0].isCritic):
-		damageToShow.text = "[center][outline_size=5][font_size=8][outline_color= #" + outlineColor + "]" + str(Util.cap(damagesToShow[0].damageValue)) + "[/outline_color][/font_size][outline_size][/center]"
+		damageToShow.text = "[center][font_size=16][outline_color=#"+ outlineColor +"]" + str(Util.cap(damagesToShow[0].damageValue)) + "[/outline_color][/font_size][/center]"
 	else:
-		damageToShow.text = "[center][outline_size=6][font_size=16][outline_color= #" + outlineColor + "]" + str(Util.cap(damagesToShow[0].damageValue)) + "[/outline_color][/font_size][outline_size][/center]"
-	damageToShow.visible = true
+		damageToShow.text = "[center][font_size=32][outline_color=#"+ outlineColor +"]" + str(Util.cap(damagesToShow[0].damageValue)) + "[/outline_color][/font_size][/center]"
+	self.visible = true
 	damagesToShow.remove_at(0)
 	set_process(true)
 
 func _ready() -> void:
+	set_process(false)
 	self.visible = false
-	inicitialPosition = self.position.y
-	positionLimit = inicitialPosition - 65
+	
 
 func _process(_delta) -> void:
-	if(damageToShow.position.y > positionLimit):
-		if(damageToShow.position.y - speed <= positionLimit):
-			damageToShow.position.y = positionLimit
+	if(self.position.y > positionLimit):
+		if(self.position.y - speed <= positionLimit):
+			self.position.y = positionLimit
 		else:
-			damageToShow.position.y -= speed
+			self.position.y -= speed
 	if(self.modulate.a > 0):
 		if(self.modulate.a - modulateSpeed <= 0):
 			self.modulate.a = 0
@@ -61,7 +63,7 @@ func _process(_delta) -> void:
 			self.modulate.a -= modulateSpeed
 	if(self.modulate.a == 0):
 		self.visible = false
-		damageToShow.position.y = inicitialPosition
+		self.position = inicitialPosition
 		self.modulate.a = 1.0
 		queueSweep()
 
@@ -70,4 +72,5 @@ func queueSweep() -> void:
 		updateDamage()
 	else:
 		showing = false
-		BTM.outAction()
+		set_process(false)
+		BTM.outAction("Damage Shower")

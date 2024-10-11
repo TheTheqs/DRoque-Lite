@@ -20,8 +20,6 @@ DDB="*res://scripts/database and globals/DigimonDB.gd"
 Util="*res://scripts/database and globals/Utility.gd"
 EnumDB="*res://scripts/database and globals/EnumDB.gd"
 TTR="*res://translation/Translator.gd"
-BTM="*res://scripts/entities/BattleManager.gd"
-BM="*res://scripts/interface builders/BattleMessenger.gd"
 
 [display]
 
@@ -38,4 +36,5 @@ window/handheld/orientation=1
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-anti_aliasing/screen_space_roughness_limiter/enabled=false
+textures/decals/filter=0
+textures/light_projectors/filter=0

@@ -4,11 +4,10 @@ class_name DamageSkillData
 
 #Atributos de identificação
 @export var skillId: int
-@export var skillName: String
 @export var skillIcon: CompressedTexture2D
-@export var skillDescription: String
 
 #atributos de valores e comportamento
+@export var staticPriority: int
 @export var element: Enums.Element
 @export var damageType: Enums.DamageType
 @export var damageSubType: Enums.DamageSubType

@@ -7,11 +7,11 @@
 [resource]
 script = ExtResource("1_dlmyw")
 skillId = 0
-skillName = "Ataque Básico"
 skillIcon = ExtResource("2_0v5f1")
-skillDescription = "Causa 100% de dano Físico no oponente."
+staticPriority = 1
 element = 0
 damageType = 0
+damageSubType = 0
 ratio = 1.0
 manaCost = 0
 coolDown = 0

@@ -5,11 +5,11 @@ class_name Trigger
 var isActionTrigger: bool
 var action: Skill
 #funções de checagem. A primeira é para ser sobreescrita.
-func checkContext(_digimon: Digimon) -> bool:
+func checkContext(_digimon: Digimon, _context) -> bool:
 	return true
 
 func triggerValidation(digimon: Digimon, context) -> void:
-	if(checkContext(digimon)):
+	if(checkContext(digimon, context)):
 		if(self.isActionTrigger):
 			digimon.actionsToGo.append(action)
 		else:

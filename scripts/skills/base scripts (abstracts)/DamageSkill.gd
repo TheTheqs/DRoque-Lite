@@ -3,7 +3,6 @@ extends Skill
 class_name DamageSkill
 
 #actvation atributtes
-var manaCost: int
 var ratio: float
 var isCritic: bool
 var damageValue: float
@@ -11,17 +10,18 @@ var hasEffect: bool
 var element: Enums.Element
 var atackerType: Enums.Type
 var damageType: Enums.DamageType
-var damageSubtype: Enums.DamageSubType
+var damageSubType: Enums.DamageSubType
 
 #transferência de dados estáticos
 func setStats(stats: DamageSkillData) -> void:
 	self.skillId = stats.skillId
-	self.skillName = stats.skillName
+	self.skillName = "SkillName" + str(self.skillId)
 	self.skillIcon = stats.skillIcon
-	self.skillDescritption = stats.skillDescription
+	self.skillDescritption = "SkillDescription" + str(self.skillId)
+	self.staticPriority = stats.staticPriority
 	self.element = stats.element
 	self.damageType = stats.damageType
-	self.damageSubtype = stats.DamageSubType
+	self.damageSubType = stats.damageSubType
 	self.ratio = stats.ratio
 	self.manaCost = stats.manaCost
 	self.cooldowm = stats.coolDown
@@ -36,8 +36,19 @@ func setValues(digimon: Digimon) -> void:
 	self.damageValue *= ratio
 	self.accuracy = digimon.getAccuracy()
 	self.isCritic = Util.chance(digimon.getCriticalChance())
+	if(self.isCritic):
+		self.damageValue *= 1.5
 	skillSingularity(digimon)
+#função de ataque de fato
 
+func effect(digimon: Digimon) -> void:
+	setValues(digimon)
+	applyCooldown()
+	digimon.enemy.getTageted(self)
+	if(digimon.tamer is Player):
+		var player: Player = digimon.tamer
+		player.buttonPanel.updateButtons()
+	
 #A função abaixo só é usada quando o bool has stats for True
 func applyStats(_digimon: Digimon) -> void:
 	pass

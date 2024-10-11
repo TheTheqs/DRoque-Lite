@@ -1,12 +1,35 @@
-[gd_resource type="Translation" format=3 uid="uid://cl8q65u13ft24"]
+[gd_resource type="Translation" format=3]
 
 [resource]
 messages = {
+"BattleMessage0": &"Starting Battle!",
+"BattleMessage1": &"Starting turn ",
+"BattleMessage2a": &"Your turn",
+"BattleMessage2b": &"Enemy turn",
+"BattleMessage3": &" used the skill ",
+"BattleMessage4": &" used the item ",
+"BattleMessage5a": &" took ",
+"BattleMessage5b": &" damage",
+"BattleMessage6": &"Ending the turn...",
+"BattleMessage7": &" skipped the turn.",
+"CantUse": &"Skill Unavailable!",
 "ChangeLanguage": &"Change language",
+"CompanionButtonDescription": &"Select a Companion Digimon (if you have one) to take your place in battle.",
+"CompanionButtonTittle": &"Switch places with the Companion.",
 "DigimonName0": &"Agumon",
 "DigimonName1": &"Monodramon",
 "DigimonName2": &"Veemon",
 "DigimonName3": &"Guilmon",
 "DigimonName4": &"Dorumon",
-"DigimonName5": &"Betamon"
+"DigimonName5": &"Betamon",
+"InventoryButtonDescription": &"Opens the inventory. Using an item or equipping gear consumes one action.",
+"InventoryButtonTittle": &"Open Inventory",
+"MenuButtonDescription": &"Opens the menu. The game will not be paused.",
+"MenuButtonTittle": &"Open menu",
+"NoCD": &"The skill is on cooldown!",
+"NoMana": &"Insufficient mana!",
+"PassingTurnButtonDescription": &"Passes the turn to the opponent. Extra actions will be preserved for the next turn.",
+"PassingTurnButtonTittle": &"Skip turn",
+"SkillDescription0": &"Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage.",
+"SkillName0": &"Basic Attack"
 }

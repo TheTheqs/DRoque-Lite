@@ -1,0 +1,22 @@
+Digimon:
+	Action(): Chama inAction, pois uma ação será executada. A partir daqui temos vários cenários possíveis e cada um deles precisa terminar com um outAction para fechar o ciclo. Vamos aos cenários:
+		- Caso nao haja nenhuma ação a ser executada. Isso é uma medida defensiva para cobrir qualquer erro na lógico, pois em teoria Action() somente deve ser chamada se houver ações para serem executadas: #OK
+		- Caso a ação seja a aplicação de um efeito. A lógica de efeitos ainda nao foi implementada e por isso ainda nao assseguramos a chamada de outAction aqui.
+		- Caso a ação seja de fato uma ação (esse é o caso da animação "Action" ser chamada, desencadeando uma seria de funções, vamos a elas):
+			- Primeiro a currentAction recebe o primeiro elemento do Array actionsToGo. Depois o elemento do index 0 de actionsToGo é removido (remove_at). Por fim a animação "action" é chamada. Existe um sinal ao final da executação dessa animação, que ativa o efeito da currentAction (setada anteriormente). O efeito da ação é simples, considerando que ela é sempre um objeto da classe skill, os elementoas dinâmicos são definidos e em seguida a habilidade é "jogada" no skillSpawner do Digimon alvo (sendo o próprio digimon ou o jogador). O skillSpawner vai exibir o VFX da habilidade e depois devolver ela ao digimon como argumento da Função gotTargeted. Que vai interpretar o tipo de habilidade. A partir daqui, todos os possíveis cenários precisam terminar em outAction. Apenas cenários para habilidades de dano direto foram implementadas.
+				Cenário 1 - A habilidade erra o alvo. Como algumas habilidade possuem taxa de acerto, é possivel que elas errem seu alvo. O erro é anunciado pelo mensageiro de batalha e a função outAction é chamada em seguida #OK
+				Cenário 2 - A habilidade acerta o alvo, iniciando o gerenciador de dano recebido. A função damageDataBuilder de Util é chamada para criação de um DamageData, a função processDamage é chamada com esse DamageData como argumento. Por fim, é chamada a função outAction() encerrando o ciclo de Action nesse caso. O próprio processamento de dano tem a sua chamada inAction/OutAction para garantir a estabilidade do ciclo.
+	processDamage(): Função que processa um dano recebido, ela inicia chamando a função inAction, em seguida, a animação de dano recebido sempre é tocada, e ao final dela é chamada a função outAction encerrando o ciclo. #OK	
+
+SkillSpawner: Função inAction é chamada quando uma skill tem seu efeito "spawnado" na batalha, e a outAction é chamada quando a animação termina. Encerrando o ciclo #OK.
+
+
+BattleManager:  #OK
+	GettingStarted() - inAction()
+			 - outAction()
+	ChangeTurn() - inAction()
+		     - outAction() // exceto na choice phase e action phase. Procurar assegurar as chamadas de outAction em ambas as fases.
+
+BatteMessenger: Uma chamada inAction quando uma mensagem é adicionada a fila de mensagens a serem exibidas. Uma chamada de outAction quando não há mais mensagens a serem exibidas. #OK
+
+DamageShower: Uma chamada inAction quando um dano é adicionado a fila para ser exibido. Uma chamada de outAction quando não há mais danos na fila. #OK

@@ -1,0 +1,310 @@
+[gd_scene load_steps=25 format=3 uid="uid://bkiax0gwpx20o"]
+
+[ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_bmwp2"]
+[ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="2_ray8e"]
+[ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="3_w8qjs"]
+[ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="4_6scnb"]
+[ext_resource type="PackedScene" uid="uid://c8p3k2o3gh2t3" path="res://scenes/entities/damageShower.tscn" id="5_7pbww"]
+[ext_resource type="Texture2D" uid="uid://c8wmd2aucho2m" path="res://assets/interface/UI/EnemyFrame.png" id="6_dyeyq"]
+[ext_resource type="Script" path="res://scripts/entities/Player.gd" id="7_5gnrb"]
+[ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="8_yj36c"]
+[ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="9_elhsp"]
+[ext_resource type="Script" path="res://scripts/interface builders/ButtonDescription.gd" id="10_f05bp"]
+[ext_resource type="Texture2D" uid="uid://c674b3sx2xnuq" path="res://assets/interface/Icons/InterfaceIcons/InventoryIcon.png" id="11_j00ef"]
+[ext_resource type="Texture2D" uid="uid://c0rquotsyn4vn" path="res://assets/interface/Icons/SkillIcons/001BasicAtackframe.png" id="12_f3ht2"]
+[ext_resource type="Texture2D" uid="uid://bf62rogblcndj" path="res://assets/interface/Icons/InterfaceIcons/DigimonCompanionChange.png" id="13_6v8o7"]
+[ext_resource type="Texture2D" uid="uid://ffkyibueeglu" path="res://assets/interface/Icons/SkillIcons/002SignatureSkillFrame.png" id="14_k1rhy"]
+[ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="15_afyrq"]
+[ext_resource type="PackedScene" uid="uid://bjvpe6qbtqj17" path="res://scenes/entities/infoWindow.tscn" id="16_me3ba"]
+[ext_resource type="Texture2D" uid="uid://dn8yuwipg3voi" path="res://assets/interface/UI/PlayerFrame.png" id="17_7lwst"]
+[ext_resource type="PackedScene" uid="uid://dkgpmujw3pmp1" path="res://scenes/entities/BattleMessage.tscn" id="18_lykkh"]
+
+[sub_resource type="Animation" id="Animation_6wmh1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TurnFrame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7ji4s"]
+resource_name = "blinkFrame"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TurnFrame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ojqp8"]
+_data = {
+"RESET": SubResource("Animation_6wmh1"),
+"blinkFrame": SubResource("Animation_7ji4s")
+}
+
+[sub_resource type="Animation" id="Animation_rxqqc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turn Frame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ay44l"]
+resource_name = "blinkFrame"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turn Frame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjnew"]
+_data = {
+"RESET": SubResource("Animation_rxqqc"),
+"blinkFrame": SubResource("Animation_ay44l")
+}
+
+[node name="BattleManager" type="Node2D" node_paths=PackedStringArray("player", "enemy", "playerDigimon", "enemyDigimon", "changeTurnTimer", "BM")]
+script = ExtResource("1_bmwp2")
+player = NodePath("Player")
+enemy = NodePath("Enemy")
+playerDigimon = NodePath("Player/Digimon")
+enemyDigimon = NodePath("Enemy/Digimon")
+changeTurnTimer = NodePath("ChangeTurnTimer")
+BM = NodePath("BattleMessage")
+
+[node name="ChangeTurnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("damageShower", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM")]
+script = ExtResource("2_ray8e")
+damageShower = NodePath("DamageShower")
+digimon = NodePath("Digimon")
+opponent = NodePath("../Player")
+HUDD = NodePath("HUDDisplay")
+judge = NodePath("..")
+turnFrame = NodePath("TurnFrame")
+frameAnimator = NodePath("FrameAnimator")
+BM = NodePath("../BattleMessage")
+BTM = NodePath("..")
+
+[node name="Digimon" parent="Enemy" node_paths=PackedStringArray("enemy", "tamer", "damageShower", "BM", "BTM") instance=ExtResource("3_w8qjs")]
+position = Vector2(172, 92)
+enemy = NodePath("../../Player/Digimon")
+tamer = NodePath("..")
+damageShower = NodePath("../DamageShower")
+BM = NodePath("../../BattleMessage")
+BTM = NodePath("../..")
+
+[node name="HUDDisplay" parent="Enemy" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("4_6scnb")]
+position = Vector2(69, 46)
+ownerPlayer = NodePath("..")
+
+[node name="TurnFrame" type="Sprite2D" parent="Enemy"]
+position = Vector2(135, 94)
+texture = ExtResource("6_dyeyq")
+
+[node name="FrameAnimator" type="AnimationPlayer" parent="Enemy"]
+libraries = {
+"": SubResource("AnimationLibrary_ojqp8")
+}
+
+[node name="DamageShower" parent="Enemy" node_paths=PackedStringArray("BTM", "relatedTamer") instance=ExtResource("5_7pbww")]
+BTM = NodePath("../..")
+relatedTamer = NodePath("..")
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "damageShower", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM")]
+script = ExtResource("7_5gnrb")
+buttonPanel = NodePath("ButtonPanel")
+damageShower = NodePath("DamageShower")
+digimon = NodePath("Digimon")
+opponent = NodePath("../Enemy")
+HUDD = NodePath("HUDDisplay")
+judge = NodePath("..")
+turnFrame = NodePath("Turn Frame")
+frameAnimator = NodePath("Frame Animator")
+BM = NodePath("../BattleMessage")
+BTM = NodePath("..")
+
+[node name="Digimon" parent="Player" node_paths=PackedStringArray("enemy", "tamer", "damageShower", "BM", "BTM") instance=ExtResource("3_w8qjs")]
+position = Vector2(99, 264)
+enemy = NodePath("../../Enemy/Digimon")
+tamer = NodePath("..")
+damageShower = NodePath("../DamageShower")
+BM = NodePath("../../BattleMessage")
+BTM = NodePath("../..")
+
+[node name="HUDDisplay" parent="Player" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("4_6scnb")]
+position = Vector2(200, 218)
+ownerPlayer = NodePath("..")
+
+[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "BM", "BTM")]
+script = ExtResource("8_yj36c")
+relatedPlayer = NodePath("..")
+relatedDigimon = NodePath("../Digimon")
+allButtons = [NodePath("PassTurn"), NodePath("Menu"), NodePath("Inventory"), NodePath("Companion"), NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
+skillButtons = [NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
+showDescTimer = NodePath("ShowDescWindow")
+infoWindow = NodePath("InfoWindow")
+BM = NodePath("../../BattleMessage")
+BTM = NodePath("../..")
+
+[node name="PassTurn" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 8.0
+offset_top = 405.0
+offset_right = 30.0
+offset_bottom = 428.0
+script = ExtResource("10_f05bp")
+
+[node name="Menu" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 238.0
+offset_top = 407.0
+offset_right = 260.0
+offset_bottom = 430.0
+script = ExtResource("10_f05bp")
+
+[node name="Inventory" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 58.0
+offset_right = 90.0
+icon = ExtResource("11_j00ef")
+script = ExtResource("10_f05bp")
+
+[node name="BasicAtack" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 118.0
+offset_right = 150.0
+script = ExtResource("10_f05bp")
+
+[node name="SkillFrame" type="Sprite2D" parent="Player/ButtonPanel/BasicAtack"]
+position = Vector2(16, 16)
+texture = ExtResource("12_f3ht2")
+
+[node name="Companion" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 178.0
+offset_right = 210.0
+icon = ExtResource("13_6v8o7")
+script = ExtResource("10_f05bp")
+
+[node name="SignatureSkill" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 29.0
+offset_top = 441.0
+offset_right = 61.0
+offset_bottom = 473.0
+script = ExtResource("10_f05bp")
+
+[node name="SkillFrame" type="Sprite2D" parent="Player/ButtonPanel/SignatureSkill"]
+position = Vector2(16, 16)
+texture = ExtResource("14_k1rhy")
+
+[node name="ExtraSkill1" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 89.0
+offset_top = 441.0
+offset_right = 121.0
+offset_bottom = 473.0
+script = ExtResource("10_f05bp")
+
+[node name="SkillFrame" type="Sprite2D" parent="Player/ButtonPanel/ExtraSkill1"]
+position = Vector2(16, 16)
+texture = ExtResource("15_afyrq")
+
+[node name="ExtraSkill2" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 149.0
+offset_top = 441.0
+offset_right = 181.0
+offset_bottom = 473.0
+script = ExtResource("10_f05bp")
+
+[node name="SkillFrame" type="Sprite2D" parent="Player/ButtonPanel/ExtraSkill2"]
+position = Vector2(16, 16)
+texture = ExtResource("15_afyrq")
+
+[node name="ExtraSkill3" parent="Player/ButtonPanel" instance=ExtResource("9_elhsp")]
+offset_left = 209.0
+offset_top = 441.0
+offset_right = 241.0
+offset_bottom = 473.0
+script = ExtResource("10_f05bp")
+
+[node name="SkillFrame" type="Sprite2D" parent="Player/ButtonPanel/ExtraSkill3"]
+position = Vector2(16, 16)
+texture = ExtResource("15_afyrq")
+
+[node name="ShowDescWindow" type="Timer" parent="Player/ButtonPanel"]
+one_shot = true
+
+[node name="InfoWindow" parent="Player/ButtonPanel" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("16_me3ba")]
+visible = false
+position = Vector2(144, 213)
+buttonPanel = NodePath("..")
+
+[node name="Turn Frame" type="Sprite2D" parent="Player"]
+position = Vector2(135, 266)
+texture = ExtResource("17_7lwst")
+
+[node name="Frame Animator" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_bjnew")
+}
+
+[node name="DamageShower" parent="Player" node_paths=PackedStringArray("BTM", "relatedTamer") instance=ExtResource("5_7pbww")]
+BTM = NodePath("../..")
+relatedTamer = NodePath("..")
+
+[node name="BattleMessage" parent="." node_paths=PackedStringArray("BTM") instance=ExtResource("18_lykkh")]
+z_index = 1
+BTM = NodePath("..")
+
+[connection signal="timeout" from="ChangeTurnTimer" to="." method="changeTurn"]
+[connection signal="animation_finished" from="Enemy/FrameAnimator" to="Enemy" method="onFrameAnimation"]
+[connection signal="button_down" from="Player/ButtonPanel/PassTurn" to="Player/ButtonPanel" method="_on_pass_turn_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/PassTurn" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/Menu" to="Player/ButtonPanel" method="_on_menu_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/Menu" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/Inventory" to="Player/ButtonPanel" method="_on_inventory_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/Inventory" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/BasicAtack" to="Player/ButtonPanel" method="_on_basic_atack_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/BasicAtack" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/Companion" to="Player/ButtonPanel" method="_on_companion_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/Companion" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/SignatureSkill" to="Player/ButtonPanel" method="_on_signature_skill_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/SignatureSkill" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/ExtraSkill1" to="Player/ButtonPanel" method="_on_extra_skill_1_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/ExtraSkill1" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/ExtraSkill2" to="Player/ButtonPanel" method="_on_extra_skill_2_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/ExtraSkill2" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="Player/ButtonPanel/ExtraSkill3" to="Player/ButtonPanel" method="_on_extra_skill_3_button_down"]
+[connection signal="button_up" from="Player/ButtonPanel/ExtraSkill3" to="Player/ButtonPanel" method="activateButton"]
+[connection signal="timeout" from="Player/ButtonPanel/ShowDescWindow" to="Player/ButtonPanel" method="showInfoWindow"]
+[connection signal="animation_finished" from="Player/Frame Animator" to="Player" method="onFrameAnimation"]

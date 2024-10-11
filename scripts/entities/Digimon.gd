@@ -52,6 +52,8 @@ var gotHited: bool
 @export var digimonAnimator: AnimationPlayer
 @export var tamer: Tamer
 @export var damageShower: DamageShower
+@export var BM: BattleMessenger
+@export var BTM: BattleManager
 
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
@@ -69,8 +71,8 @@ var onTurnStart: Array[Trigger]
 var onTurnEnd: Array[Trigger]
 
 #Actions Array
-var actionsToGo: Array
-var effectsToGo: Array[Trigger]
+var actionsToGo: Array[Skill] = []
+var effectsToGo: Array[Trigger] = []
 
 func setBehave() -> void:
 	if(not isDisabled):
@@ -100,6 +102,7 @@ func setStats(stats: DigimonData) -> void:
 	self.levelWIS = stats.levelWIS
 	self.levelDEX = stats.levelDEX
 	levelUpAttributes(currentLevel)
+	print(str(self.maxHelth))
 	setBehave()
 
 #a função abaixo vai retornar a soma de atributo base e atributo bonus, negando valores menores que 1
@@ -149,21 +152,24 @@ func gotTargeted(skill: Skill) -> void:
 			processDamage(processableDamage)
 		else:
 			#função de mandar msg quando um ataque erra o alvo
-			BTM.outAction()
+			pass
+	BTM.outAction("Digimon Got Targeted")
 
 #Função que processa o dano recebido
 func processDamage(damageData: DamageData) -> void:
+	BTM.inAction()
 	damageData.damageValue *= Util.getTypeRatio(damageData.atackerType, self.digimonType)
 	damageData.damageValue *= Util.getElementRatio(damageData.damageElement, self.element)
 	applyDefense(damageData)
 	#calculando dano
-	if(self.currentHealth - damageData.damageValue >= 0):
+	if(self.currentHealth - damageData.damageValue <= 0):
 		currentHealth = 0
-		digimonAnimator.play("damaged")
+		digimonAnimator.play("damage")
 	else:
 		currentHealth -= damageData.damageValue
-		digimonAnimator.play("damaged")
+		digimonAnimator.play("damage")
 	damageShower.showDamage(damageData)
+	tamer.HUDD.updateValues()
 
 #essa função está incompleta
 func learnSkill(skill: Skill) -> void:
@@ -171,7 +177,7 @@ func learnSkill(skill: Skill) -> void:
 	if(skill is DamageSkill):
 		for i in range(digimonSkills.size()):
 			if(digimonSkills[i] == null):
-				#_learned = skill.learn(self, i)
+				_learned = skill.learn(self, i)
 				break
 
 func levelUpAttributes(level: int) -> void:
@@ -192,11 +198,13 @@ func updateMaxHelth(newMaxHealth: float) -> void:
 	var proportion: float = Util.getProportion(currentHealth, maxHelth)
 	self.maxHelth = newMaxHealth
 	self.currentHealth = Util.cap(self.maxHelth*proportion)
+	tamer.HUDD.setHealth()
 
 func updateMaxMana(newMaxMana: float) -> void:
 	var proportion: float = Util.getProportion(currentMana, maxMana)
 	self.maxMana = newMaxMana
 	self.currentMana = Util.cap(self.maxMana*proportion)
+	tamer.HUDD.setMana()
 
 func heal(value: float, isMana: bool) -> void:
 	BTM.inAction()
@@ -212,7 +220,14 @@ func heal(value: float, isMana: bool) -> void:
 		else:
 			currentMana += value
 	tamer.HUDD.updateValues()
-	BTM.outAction()
+	BTM.outAction("Digimon Heal")
+
+func manaConsumption(value: float) -> void:
+	if(currentMana - value <= 0):
+		currentMana = 0
+	else:
+		currentMana -= value
+	tamer.HUDD.updateValues()
 
 func action() -> void:
 	BTM.inAction()
@@ -224,16 +239,19 @@ func action() -> void:
 		elif(actionsToGo[0] is Skill):
 			currentAction = actionsToGo[0]
 			actionsToGo.remove_at(0)
+			BM.showMessage(tr(StringName(self.digimonName)) + tr(StringName("BattleMessage3")) + tr(StringName(currentAction.skillName)))
 			self.digimonAnimator.play("action")
 	else:
-		BTM.outAction()
+		BTM.outAction("Digimon no action")
 
 func animationFinished(anim_name: String):
 	if(anim_name == "action"):
 		currentAction.effect(self)
+		self.digimonAnimator.play("Idle")
 		#implementar BTM out action ao final da ação
-	elif(anim_name == "damaged"):
-		BTM.outAction()
+	elif(anim_name == "damage"):
+		self.digimonAnimator.play("Idle")
+		BTM.outAction("Digimon finish damaged")
 
 func applyDefense(damageData: DamageData) -> void:
 	if(damageData.damageType == Enums.DamageType.PHYSICAL):
@@ -242,3 +260,7 @@ func applyDefense(damageData: DamageData) -> void:
 		damageData.damageValue *= 1 - (self.getAttribute("wis")/(100.0 + self.getAttribute("wis")))
 	else:
 		damageData.damageValue += 0
+
+func chooseAction(newAction) -> void:
+	if(newAction is Skill):
+		actionsToGo.append(newAction)

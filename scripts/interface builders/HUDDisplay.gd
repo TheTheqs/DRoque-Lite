@@ -11,17 +11,17 @@ var relatedDigimon: Digimon
 
 func _ready()-> void:
 	relatedDigimon = ownerPlayer.digimon
-	if(ownerPlayer is Enemy):
+	if(ownerPlayer.tamerName == "Enemy"):
 		health.fill_mode = ProgressBar.FILL_END_TO_BEGIN
 
 #função que estabelece valores
 func setHealth() -> void:
-	health.max_value = relatedDigimon.maxHelth
-	health.value = relatedDigimon.currentHealth
+	health.max_value = 100
+	health.value = Util.cap((relatedDigimon.currentHealth/relatedDigimon.maxHelth)*100)
 
 func setMana() -> void:
-	mana.max_value = relatedDigimon.maxMana
-	mana.value = relatedDigimon.currentMana
+	mana.max_value = 100
+	mana.value = Util.cap((relatedDigimon.currentMana/relatedDigimon.maxMana)*100)
 
 func updateValues() -> void:
 	nameAndLevel.text = "[center]" + tr(relatedDigimon.digimonName) + "\nLv. " + str(relatedDigimon.currentLevel) + "[/center]"

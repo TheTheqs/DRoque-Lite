@@ -8,9 +8,10 @@ class_name BattleManager
 @export var playerDigimon: Digimon
 @export var enemyDigimon: Digimon
 @export var changeTurnTimer: Timer
-
+@export var BM: BattleMessenger
 
 #Controle de fases
+var turn: int
 var currentPhase: Enums.BattlePhase
 var somethingIsHappening: int
 var currentDigimon: Digimon
@@ -18,27 +19,32 @@ var oppositeDigimon: Digimon
 var currentTamer: Tamer
 var oppositeTamer: Tamer
 var tamerReady: int = 0
+var choosing: bool = false
 var isPassing: bool = false
+
 #principais funções de mudança de fase
 func inAction() -> void:
-	changeTurnTimer.stop()
+	manageTimer()
 	somethingIsHappening += 1
 
-func outAction() -> void:
-	changeTurnTimer.stop()
+func outAction(location: String) -> void:
+	print(location)
+	manageTimer()
 	somethingIsHappening -= 1
 	if(somethingIsHappening <= 0):
 		somethingIsHappening = 0
-		if(currentDigimon.actionsToGo.size() > 0):
+		if(currentDigimon!= null and (currentDigimon.actionsToGo.size() > 0 or currentDigimon.effectsToGo.size() > 0)):
 			currentDigimon.action()
-		elif(oppositeDigimon.actionsToGo.size() > 0):
+		elif(oppositeDigimon!= null and (oppositeDigimon.actionsToGo.size() > 0 or oppositeDigimon.effectsToGo.size() > 0)):
 			oppositeDigimon.action()
 		else:
-			changeTurnTimer.start(0.2)
+			if(not choosing):
+				changeTurnTimer.start(0.2)
 
 func changeTurn():
 	inAction()
 	if(currentPhase == Enums.BattlePhase.BATTLESTART):
+		BM.showMessage(tr(StringName("BattleMessage0")))
 		if(enemyDigimon.getAttribute("agi") >= playerDigimon.getAttribute("agi")):
 			currentDigimon = enemyDigimon
 			currentTamer = enemy
@@ -52,32 +58,38 @@ func changeTurn():
 		triggerCheck(currentDigimon.onBattleStart, currentDigimon, "BattleStart")
 		triggerCheck(oppositeDigimon.onBattleStart, oppositeDigimon, "BattleStart")
 		currentPhase = Enums.BattlePhase.TURNSTART
-		outAction()
+		outAction("Battle Start")
 	elif(currentPhase == Enums.BattlePhase.TURNSTART):
+		BM.showMessage(tr(StringName("BattleMessage1")) + str(turn))
 		currentDigimon.tamer.actions = generateActions(currentDigimon, oppositeDigimon)
 		triggerCheck(currentDigimon.onTurnStart, currentDigimon, "TurnStart")
 		currentPhase = Enums.BattlePhase.CHOICE
-		outAction()
+		outAction("Turn Start")
 	elif(currentPhase == Enums.BattlePhase.CHOICE):
-		currentDigimon.tamer.takeTurn()
 		currentPhase = Enums.BattlePhase.ACTION
+		choosing = true
+		currentDigimon.tamer.takeTurn()
 	elif(currentPhase == Enums.BattlePhase.ACTION):
 		somethingIsHappening -= 1
+		currentPhase = Enums.BattlePhase.POSACTION
 		currentDigimon.action()
 	elif(currentPhase == Enums.BattlePhase.POSACTION):
 		currentTamer.actions -= 1
-		if(isPassing or currentTamer.actions <= 0):
-			currentTamer.actions = 0
+		if(isPassing):
 			currentPhase = Enums.BattlePhase.TURNEND
 			isPassing = false
+		elif(currentTamer.actions <= 0):
+			currentTamer.actions = 0
+			currentPhase = Enums.BattlePhase.TURNEND
 		elif(currentTamer.actions > 0):
 			currentPhase = Enums.BattlePhase.CHOICE
-		outAction()
+		outAction("Pos Action Phase")
 	elif(currentPhase == Enums.BattlePhase.TURNEND):
 		triggerCheck(currentDigimon.onTurnEnd, currentDigimon, "TurnEnd")
-		currentPhase = Enums.BattlePhase.TURNSTART
-		changeActor()
-		outAction()
+		if(currentDigimon.actionsToGo.size() == 0 and currentDigimon.effectsToGo.size() == 0 and oppositeDigimon.actionsToGo.size() == 0 and oppositeDigimon.effectsToGo.size() == 0):
+			currentPhase = Enums.BattlePhase.TURNSTART
+			changeActor()
+		outAction("Turn End")
 	elif(currentPhase == Enums.BattlePhase.BATTLEEND):
 		#ainda para ser implementado
 		pass
@@ -85,7 +97,10 @@ func changeTurn():
 func generateActions(actor: Digimon, opponent: Digimon) -> int:
 	@warning_ignore("integer_division")
 	var totalActions: int  = int(actor.getAttribute("agi")/opponent.getAttribute("agi"))
-	return totalActions
+	if(totalActions <= 1):
+		return 1
+	else:
+		return totalActions
 
 func triggerCheck(triggers: Array, digimon: Digimon, context) -> void:
 	if(triggers.size() > 0):
@@ -93,25 +108,34 @@ func triggerCheck(triggers: Array, digimon: Digimon, context) -> void:
 			trigger.triggerValidation(digimon, context)
 
 func changeActor() -> void:
+	turn += 1
 	if(currentDigimon == playerDigimon):
-		currentDigimon = oppositeDigimon
+		currentDigimon = enemyDigimon
 		currentTamer = enemy
 		oppositeDigimon = playerDigimon
 		oppositeTamer = player
 	else:
 		currentDigimon = playerDigimon
 		currentTamer = player
-		oppositeDigimon = oppositeDigimon
+		oppositeDigimon = enemyDigimon
 		oppositeTamer = enemy
-	
+	print(currentTamer.tamerName, currentDigimon.digimonName, oppositeTamer.tamerName, oppositeDigimon.digimonName)
 
 func gettingStarted() -> void:
 	tamerReady += 1
 	if(tamerReady == 2):
+		turn = 1
 		inAction()
 		currentPhase = Enums.BattlePhase.BATTLESTART
-		outAction()
+		outAction("Getting Started")
 
 func passingTurn() -> void:
+	currentPhase = Enums.BattlePhase.POSACTION
 	isPassing = true
-	outAction()
+	outAction("Passing Turn")
+
+#função criada para corrigir um bug que ficava desassociando o timer no meio da aplicação.
+func manageTimer() -> void:
+	if(changeTurnTimer == null):
+		changeTurnTimer = $ChangeTurnTimer
+	changeTurnTimer.stop()
