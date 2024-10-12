@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://bkiax0gwpx20o"]
+[gd_scene load_steps=25 format=3 uid="uid://bkiax0gwpx20o"]
 
 [ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_bmwp2"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="2_ray8e"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="3_w8qjs"]
 [ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="4_6scnb"]
+[ext_resource type="Script" path="res://scripts/interface builders/NumberSpawner.gd" id="5_nauik"]
 [ext_resource type="Texture2D" uid="uid://c8wmd2aucho2m" path="res://assets/interface/UI/EnemyFrame.png" id="6_dyeyq"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="7_5gnrb"]
 [ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="8_yj36c"]
@@ -106,7 +107,7 @@ BM = NodePath("BattleMessage")
 [node name="ChangeTurnTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM")]
+[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner")]
 script = ExtResource("2_ray8e")
 digimon = NodePath("Digimon")
 opponent = NodePath("../Player")
@@ -116,6 +117,7 @@ turnFrame = NodePath("TurnFrame")
 frameAnimator = NodePath("FrameAnimator")
 BM = NodePath("../BattleMessage")
 BTM = NodePath("..")
+numberSpawner = NodePath("NumberSpawner")
 
 [node name="Digimon" parent="Enemy" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM") instance=ExtResource("3_w8qjs")]
 position = Vector2(172, 92)
@@ -128,6 +130,10 @@ BTM = NodePath("../..")
 position = Vector2(69, 46)
 ownerPlayer = NodePath("..")
 
+[node name="NumberSpawner" type="Node2D" parent="Enemy"]
+position = Vector2(0, 130)
+script = ExtResource("5_nauik")
+
 [node name="TurnFrame" type="Sprite2D" parent="Enemy"]
 position = Vector2(135, 94)
 texture = ExtResource("6_dyeyq")
@@ -137,7 +143,7 @@ libraries = {
 "": SubResource("AnimationLibrary_ojqp8")
 }
 
-[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM")]
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner")]
 script = ExtResource("7_5gnrb")
 buttonPanel = NodePath("ButtonPanel")
 digimon = NodePath("Digimon")
@@ -148,6 +154,7 @@ turnFrame = NodePath("Turn Frame")
 frameAnimator = NodePath("Frame Animator")
 BM = NodePath("../BattleMessage")
 BTM = NodePath("..")
+numberSpawner = NodePath("NumberSpawner")
 
 [node name="Digimon" parent="Player" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM") instance=ExtResource("3_w8qjs")]
 position = Vector2(99, 264)
@@ -259,6 +266,10 @@ one_shot = true
 visible = false
 position = Vector2(144, 213)
 buttonPanel = NodePath("..")
+
+[node name="NumberSpawner" type="Node2D" parent="Player"]
+position = Vector2(0, 300)
+script = ExtResource("5_nauik")
 
 [node name="Turn Frame" type="Sprite2D" parent="Player"]
 position = Vector2(135, 266)

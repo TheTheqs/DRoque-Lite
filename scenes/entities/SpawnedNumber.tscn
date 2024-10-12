@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bosnbxt838ovh"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/SpawnedNumber.gd" id="1_ejgng"]
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="2_na5ay"]
+
+[node name="NumberDisplay" type="Node2D" node_paths=PackedStringArray("currentNumber", "outTimer")]
+script = ExtResource("1_ejgng")
+currentNumber = NodePath("CurrentNumber")
+outTimer = NodePath("OutTimer")
+
+[node name="CurrentNumber" type="RichTextLabel" parent="."]
+offset_right = 270.0
+offset_bottom = 44.0
+theme_override_fonts/normal_font = ExtResource("2_na5ay")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="OutTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="OutTimer" to="." method="outTimeOut"]

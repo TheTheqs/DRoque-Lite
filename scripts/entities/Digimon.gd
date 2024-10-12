@@ -150,8 +150,7 @@ func gotTargeted(skill: Skill) -> void:
 			var processableDamage: DamageData = Util.damageDataBuilder(skill)
 			processDamage(processableDamage)
 		else:
-			#função de mandar msg quando um ataque erra o alvo
-			pass
+			tamer.showContent(tr(StringName("Miss")))
 	BTM.outAction("Digimon Got Targeted")
 
 #Função que processa o dano recebido
@@ -163,10 +162,10 @@ func processDamage(damageData: DamageData) -> void:
 	#calculando dano
 	if(self.currentHealth - damageData.damageValue <= 0):
 		currentHealth = 0
-		digimonAnimator.play("damage")
 	else:
 		currentHealth -= damageData.damageValue
-		digimonAnimator.play("damage")
+	tamer.showContent(damageData)
+	digimonAnimator.play("damage")
 	tamer.HUDD.updateValues()
 
 #essa função está incompleta

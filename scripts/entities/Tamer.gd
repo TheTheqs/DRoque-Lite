@@ -12,6 +12,7 @@ var tamerName: String
 @export var frameAnimator: AnimationPlayer
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
+@export var numberSpawner: NumberSpawner
 
 #tamer attributes
 var tamerLevel: int = 3
@@ -27,3 +28,6 @@ func summonDigimon(index: int) -> void:
 func takeTurn() ->void:
 	opponent.turnFrame.visible = false
 	frameAnimator.play("blinkFrame")
+
+func showContent(content) -> void:
+	numberSpawner.spawnContent(content)

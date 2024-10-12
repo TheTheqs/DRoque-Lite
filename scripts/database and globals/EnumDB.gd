@@ -17,7 +17,6 @@ enum Tier {
 	ULTIMA,
 	MEGA 
 }
-#Fases de Batalha (Toalmente BackEnd)
 #Elementos 
 enum Element {
 	NEUTRAL,
@@ -55,4 +54,10 @@ enum BattlePhase {
 	POSACTION,
 	TURNEND,
 	BATTLEEND
+}
+
+#tipos de efeito
+enum StatusType {
+	BUFF,
+	DEBUFF
 }

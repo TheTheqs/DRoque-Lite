@@ -8,6 +8,8 @@
   "MenuButtonDescription": "Opens the menu. The game will not be paused.",
   "InventoryButtonTittle": "Open Inventory",
   "InventoryButtonDescription": "Opens the inventory. Using an item or equipping gear consumes one action.",
+  "Miss": "MISS",
+  "Block": "BLOCK",
   "BattleMessage0": "Starting Battle!",
   "BattleMessage1": "Starting turn ",
   "BattleMessage2a": "Your turn",
