@@ -11,12 +11,12 @@ var convertType: Dictionary = {
 }
 #type ratio
 var typeRatio: Dictionary = {
-	"02" : 2.0,
-	"20" : 0.5,
-	"21" : 2.0,
-	"12" : 0.5,
-	"10" : 2.0,
-	"01" : 0.5
+	"02" : 1.3,
+	"20" : 0.7,
+	"21" : 1.3,
+	"12" : 0.7,
+	"10" : 1.3,
+	"01" : 0.7
 }
 #element convert
 var convertElement: Dictionary = {

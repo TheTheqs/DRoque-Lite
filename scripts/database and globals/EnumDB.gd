@@ -14,7 +14,7 @@ enum Type {
 enum Tier {
 	ROOKIE,
 	CHAMPION,
-	ULTIMA,
+	ULTIMATE,
 	MEGA 
 }
 #Elementos 

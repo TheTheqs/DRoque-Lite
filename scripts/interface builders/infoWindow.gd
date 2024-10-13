@@ -5,6 +5,8 @@ class_name InfoWindow
 @export var buttonPanel: ButtonPanel
 @export var title: RichTextLabel
 @export var description: RichTextLabel
+@export var skillFrame: Sprite2D
+@export var skillIcon: Sprite2D
 
 func _ready() -> void:
 	self.visible = false
@@ -23,3 +25,12 @@ func hideWindow() -> void:
 	self.visible = false
 	buttonPanel.unBlockAllButtons()
 	buttonPanel.descWindowOn = false
+
+func showIcon(skill: Skill) -> void:
+	if(skill != null):
+		skillIcon.texture = skill.skillIcon
+		skillIcon.visible = true
+		skillFrame.visible = true
+	else:
+		skillFrame.visible = false
+		skillIcon.visible = false

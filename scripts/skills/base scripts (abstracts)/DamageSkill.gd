@@ -44,6 +44,7 @@ func setValues(digimon: Digimon) -> void:
 func effect(digimon: Digimon) -> void:
 	setValues(digimon)
 	applyCooldown()
+	digimon.manaConsumption(self.manaCost)
 	digimon.enemy.getTageted(self)
 	if(digimon.tamer is Player):
 		var player: Player = digimon.tamer

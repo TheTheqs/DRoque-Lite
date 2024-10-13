@@ -16,10 +16,6 @@ func associateSkill(skill: Skill) -> void:
 
 func updateSkills() -> void:
 	if(relatedSkill != null):
-		if(not relatedSkill.usable):
-			self.disabled = true
-		else:
-			self.disabled = false
 		if(relatedSkill.currentCooldown != 0):
 			self.text = str(relatedSkill.currentCooldown)
 		else:

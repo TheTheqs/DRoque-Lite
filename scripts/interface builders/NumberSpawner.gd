@@ -20,7 +20,7 @@ var statusColor: Dictionary = {
 	Enums.StatusType.BUFF : "FFFF00",
 	Enums.StatusType.DEBUFF : "FF4200"
 }
-
+#cura de vida: 51FF00 cura de mana: 64a5ff
 func spawnContent(content) -> void:
 	var contentToShow: String
 	if(content is DamageData):

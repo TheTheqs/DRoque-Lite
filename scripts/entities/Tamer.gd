@@ -24,7 +24,6 @@ func summonDigimon(index: int) -> void:
 	var data: DigimonData = DDB.getDigimonData(index)
 	digimon.setStats(data)
 
-#essa função deve ser substituída
 func takeTurn() ->void:
 	opponent.turnFrame.visible = false
 	frameAnimator.play("blinkFrame")

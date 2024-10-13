@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjvpe6qbtqj17"]
+[gd_scene load_steps=6 format=3 uid="uid://bjvpe6qbtqj17"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/infoWindow.gd" id="1_nahkt"]
 [ext_resource type="Texture2D" uid="uid://ctbclcwnsqn43" path="res://assets/interface/UI/infoWindow.png" id="2_ncfkr"]
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="3_n2yw0"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="3_r8tux"]
+[ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="5_k3ejj"]
 
-[node name="InfoWindow" type="Node2D" node_paths=PackedStringArray("title", "description")]
+[node name="InfoWindow" type="Node2D" node_paths=PackedStringArray("title", "description", "skillFrame", "skillIcon")]
 script = ExtResource("1_nahkt")
 title = NodePath("Title")
 description = NodePath("ScrollContainer/Description")
+skillFrame = NodePath("Frame")
+skillIcon = NodePath("Frame/Icon")
 
 [node name="Window" type="Sprite2D" parent="."]
 texture = ExtResource("2_ncfkr")
@@ -56,5 +59,11 @@ theme_override_styles/pressed_mirrored = ExtResource("3_r8tux")
 theme_override_styles/pressed = ExtResource("3_r8tux")
 theme_override_styles/normal_mirrored = ExtResource("3_r8tux")
 theme_override_styles/normal = ExtResource("3_r8tux")
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(-7, -113)
+texture = ExtResource("5_k3ejj")
+
+[node name="Icon" type="Sprite2D" parent="Frame"]
 
 [connection signal="button_down" from="CloseButton" to="." method="hideWindow"]

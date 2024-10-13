@@ -60,7 +60,6 @@ func changeTurn():
 		currentPhase = Enums.BattlePhase.TURNSTART
 		outAction("Battle Start")
 	elif(currentPhase == Enums.BattlePhase.TURNSTART):
-		BM.showMessage(tr(StringName("BattleMessage1")) + str(turn))
 		currentDigimon.tamer.actions = generateActions(currentDigimon, oppositeDigimon)
 		triggerCheck(currentDigimon.onTurnStart, currentDigimon, "TurnStart")
 		currentPhase = Enums.BattlePhase.CHOICE

@@ -30,5 +30,7 @@
   "DigimonName4": "Dorumon",
   "DigimonName5": "Betamon",
   "SkillName0": "Basic Attack",
+  "SkillName1": "Neutral Nudge",
+  "SkillDescription1": "Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie.",
   "SkillDescription0": "Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage."
 }

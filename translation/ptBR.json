@@ -30,5 +30,7 @@
   "DigimonName4": "Dorumon",
   "DigimonName5": "Betamon",
   "SkillName0": "Ataque Básico",
+  "SkillName1": "Golpe Gracioso",
+  "SkillDescription1": "Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie",
   "SkillDescription0": "Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro."
 }

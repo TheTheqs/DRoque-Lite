@@ -33,5 +33,7 @@ messages = {
 "PassingTurnButtonDescription": &"Passes the turn to the opponent. Extra actions will be preserved for the next turn.",
 "PassingTurnButtonTittle": &"Skip turn",
 "SkillDescription0": &"Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage.",
-"SkillName0": &"Basic Attack"
+"SkillDescription1": &"Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie.",
+"SkillName0": &"Basic Attack",
+"SkillName1": &"Neutral Nudge"
 }

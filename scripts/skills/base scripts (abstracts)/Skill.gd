@@ -35,11 +35,15 @@ func applyCooldown() -> void:
 		usable = false
 
 #função que vai deminuir o cooldown a cada fim de turno.
-func countCooldown() -> void:
+func countCooldown(digimon: Digimon) -> void:
 	if(currentCooldown > 0):
 		currentCooldown -= 1
-		if(currentCooldown == 0):
+		if(currentCooldown <= 0):
+			currentCooldown = 0
 			usable = true
+	if(digimon.tamer is Player):
+		var theTamer: Player = digimon.tamer
+		theTamer.buttonPanel.updateButtons()
 
 func effect(_digimon: Digimon) -> void:
 	pass
@@ -51,5 +55,3 @@ func priorityCalculation(digimon: Digimon) -> void:
 	priorityCheck(digimon)
 	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
 		self.priority = 0
-
-	

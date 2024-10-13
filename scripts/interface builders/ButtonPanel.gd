@@ -84,21 +84,32 @@ func _on_extra_skill_3_button_down():
 
 func showInfoWindow():
 	if(currentButtonToShow != null):
-		infoWindow.showWindow(tr(StringName(currentButtonToShow.buttonName)), tr(StringName(currentButtonToShow.buttonDescription)))
+		var manaCD: String = ""
+		if (currentButtonToShow in skillButtons):
+			infoWindow.showIcon(currentButtonToShow.relatedSkill)
+			if(currentButtonToShow.relatedSkill.manaCost > 0):
+				manaCD += "\n" + "\n" + "\n" + "\n" + str(currentButtonToShow.relatedSkill.manaCost) + " [outline_size=6][outline_color=#64A5FF]MP[/outline_color][/outline_size]"
+			if(currentButtonToShow.relatedSkill.cooldowm > 0):
+				manaCD += "\n" + "\n" + str(currentButtonToShow.relatedSkill.cooldowm) + " CD"
+		infoWindow.showWindow(tr(StringName(currentButtonToShow.buttonName)), tr(StringName(currentButtonToShow.buttonDescription)) + manaCD)
 
 func activateButton() -> void:
 	showDescTimer.stop()
 	if(!descWindowOn and currentButtonToShow != null and relatedPlayer.canAct == true):
 		if(currentButtonToShow in skillButtons):
 			var selectedSkill: Skill = currentButtonToShow.relatedSkill
-			if(!selectedSkill.usable):
-				BM.showMessage(tr(StringName("CantUse")))
-			elif(selectedSkill.currentCooldown > 0):
+			if(selectedSkill.currentCooldown > 0):
 				BM.showMessage(tr(StringName("NoCD")))
 			elif(selectedSkill.manaCost > relatedDigimon.currentMana):
 				BM.showMessage(tr(StringName("NoMana")))
+			elif(!selectedSkill.usable):
+				BM.showMessage(tr(StringName("CantUse")))
 			else:
 				relatedDigimon.chooseAction(selectedSkill)
 				relatedPlayer.canAct = false
 				BTM.choosing = false
 				BTM.outAction("Button Panel")
+		elif(currentButtonToShow == allButtons[0]):
+			relatedPlayer.canAct = false
+			BTM.choosing = false
+			BTM.passingTurn()

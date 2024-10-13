@@ -67,7 +67,7 @@ var currentAction: Skill
 #Triggers
 var onBattleStart: Array[Trigger]
 var onTurnStart: Array[Trigger]
-var onTurnEnd: Array[Trigger]
+var onTurnEnd: Array[Trigger] = [CoolDownTrigger.new()]
 
 #Actions Array
 var actionsToGo: Array[Skill] = []
@@ -101,7 +101,7 @@ func setStats(stats: DigimonData) -> void:
 	self.levelWIS = stats.levelWIS
 	self.levelDEX = stats.levelDEX
 	levelUpAttributes(currentLevel)
-	print(str(self.maxHelth))
+	print(str(self.maxMana))
 	setBehave()
 
 #a função abaixo vai retornar a soma de atributo base e atributo bonus, negando valores menores que 1
@@ -236,7 +236,6 @@ func action() -> void:
 		elif(actionsToGo[0] is Skill):
 			currentAction = actionsToGo[0]
 			actionsToGo.remove_at(0)
-			BM.showMessage(tr(StringName(self.digimonName)) + tr(StringName("BattleMessage3")) + tr(StringName(currentAction.skillName)))
 			self.digimonAnimator.play("action")
 	else:
 		BTM.outAction("Digimon no action")
