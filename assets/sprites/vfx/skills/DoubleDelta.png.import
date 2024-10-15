@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4nxqonmvdkyv"
-path="res://.godot/imported/tiny_thunder.png-81c115d39518a9528d41ed9cdb8246e1.ctex"
+uid="uid://ems7n2u62358"
+path="res://.godot/imported/DoubleDelta.png-088017301a63bb72c2b000dff3385201.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/skills/tiny_thunder.png"
-dest_files=["res://.godot/imported/tiny_thunder.png-81c115d39518a9528d41ed9cdb8246e1.ctex"]
+source_file="res://assets/sprites/vfx/skills/DoubleDelta.png"
+dest_files=["res://.godot/imported/DoubleDelta.png-088017301a63bb72c2b000dff3385201.ctex"]
 
 [params]
 

@@ -14,15 +14,15 @@ func _ready():
 		skillSprite.flip_h = true
 
 func spawSkill(skill: Skill) -> void:
+	skillSprite.hframes = skill.textureRange
 	relatedDigimon.BTM.inAction()
 	currentSkill = skill
 	skillSprite.texture = skill.texture
-	skillSprite.hframes = skill.textureRange
 	var animationCommand: String = "action" + str(skill.textureRange)
-	self.visible = true
 	animator.play(animationCommand)
+	self.visible = true
 
-func _onAnimationFinished(anim_name):
+func _onAnimationFinished(anim_name: String) -> void:
 	self.visible = false
 	if("action" in anim_name):
 		relatedDigimon.gotTargeted(currentSkill)

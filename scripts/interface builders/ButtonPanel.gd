@@ -75,11 +75,11 @@ func _on_extra_skill_1_button_down():
 	showDescTimer.start(0.5)
 
 func _on_extra_skill_2_button_down():
-	currentButtonToShow = skillButtons[2]
+	currentButtonToShow = skillButtons[3]
 	showDescTimer.start(0.5)
 
 func _on_extra_skill_3_button_down():
-	currentButtonToShow = skillButtons[5]
+	currentButtonToShow = skillButtons[4]
 	showDescTimer.start(0.5)
 
 func showInfoWindow():

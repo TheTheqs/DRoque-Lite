@@ -1,7 +1,7 @@
 extends DamageSkill
 
 class_name NeutralNudge
-var skillData: DamageSkillData = load("res://resources/skills/NeutralNudge.tres")
+var skillData: DamageSkillData = load("res://resources/skills/DamageSkills/NeutralNudge.tres")
 #Dicionário para cálculo de dano adicional
 var ratioDick: Dictionary = {
 	Enums.Tier.ROOKIE : 1.0,

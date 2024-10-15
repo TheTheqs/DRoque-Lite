@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://cwndr4gci4oay"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_xbbub"]
+[ext_resource type="Texture2D" uid="uid://g3mwblr6u44t" path="res://assets/interface/Icons/SkillIcons/ShadowSlice.png" id="2_aj54x"]
+[ext_resource type="Texture2D" uid="uid://d3r6ivmjd4o6b" path="res://assets/sprites/vfx/skills/ShadowSlice.png" id="3_d5br3"]
+
+[resource]
+script = ExtResource("1_xbbub")
+skillId = 9
+skillIcon = ExtResource("2_aj54x")
+staticPriority = 2
+element = 8
+damageType = 0
+damageSubType = 0
+ratio = 1.9
+manaCost = 5
+coolDown = 2
+hasEffect = false
+skillTexture = ExtResource("3_d5br3")
+textureRange = 15

@@ -1,7 +1,7 @@
 extends DamageSkill
 
 class_name FieryFlicker
-var skillData: DamageSkillData = load("res://resources/skills/FieryFlicker.tres")
+var skillData: DamageSkillData = load("res://resources/skills/DamageSkills/FieryFlicker.tres")
 var oldManaCost: int = 0
 func _init():
 	setStats(skillData)

@@ -146,7 +146,10 @@ func getTageted(skill: Skill) -> void:
 func gotTargeted(skill: Skill) -> void:
 	gotHited = false
 	if(skill is DamageSkill):
-		gotHited = Util.chance((float(skill.accuracy)/self.baseAGI)*100)
+		if(skill.accuracy == -1):
+			gotHited = true
+		else:
+			gotHited = Util.chance((float(skill.accuracy)/self.baseAGI)*100)
 		if(gotHited):
 			var processableDamage: DamageData = Util.damageDataBuilder(skill)
 			processDamage(processableDamage)

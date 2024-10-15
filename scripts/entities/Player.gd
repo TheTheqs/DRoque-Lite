@@ -9,11 +9,13 @@ func _ready() -> void:
 	self.tamerName = "Player"
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(0)
+	summonDigimon(1)
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
-	digimon.learnSkill(NeutralNudge.new())
-	digimon.learnSkill(FieryFlicker.new())
+	digimon.learnSkill(ShadowSlice.new())
+	digimon.learnSkill(RockyRumble.new())
+	digimon.learnSkill(DoubleDelta.new())
+	digimon.learnSkill(LuminousLash.new())
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()

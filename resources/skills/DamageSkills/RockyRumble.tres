@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://b8ft6gawx0b8d"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_bpcr3"]
+[ext_resource type="Texture2D" uid="uid://byorasxd0loil" path="res://assets/interface/Icons/SkillIcons/RockyRumble.png" id="2_fvlw5"]
+[ext_resource type="Texture2D" uid="uid://b3ufstg8ujrd2" path="res://assets/sprites/vfx/skills/RockyRumble.png" id="3_6swrl"]
+
+[resource]
+script = ExtResource("1_bpcr3")
+skillId = 5
+skillIcon = ExtResource("2_fvlw5")
+staticPriority = 2
+element = 5
+damageType = 0
+damageSubType = 0
+ratio = 2.0
+manaCost = 5
+coolDown = 2
+hasEffect = false
+skillTexture = ExtResource("3_6swrl")
+textureRange = 12
