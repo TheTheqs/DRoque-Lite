@@ -10,6 +10,8 @@
   "InventoryButtonDescription": "Abre o inventário. Usar um item ou equipar um equipamento consome uma ação.",
   "Miss": "ERROU",
   "Block": "BLOQUEADO",
+  "Actions": "AÇÕES:",
+  "ActionLimit": "Você atingiu o número máximo de ações acumuladas!(5)",
   "BattleMessage0": "Iniciando Batalha!",
   "BattleMessage1": "Iniciando turno ",
   "BattleMessage2a": "Sua vez!",
@@ -31,6 +33,8 @@
   "DigimonName5": "Betamon",
   "SkillName0": "Ataque Básico",
   "SkillName1": "Golpe Gracioso",
-  "SkillDescription1": "Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie",
-  "SkillDescription0": "Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro."
+  "SkillName2": "Chama Charmosa",
+  "SkillDescription0": "Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro.",
+  "SkillDescription1": "Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie. Se esta habilidade for utilizada por um Digimon do tipo Neutro, seu Tempo de Recarga é reduzido a 0.",
+  "SkillDescription2": "Inflige 180% de Dano Físico de Fogo. Se usada por um Digimon do tipo Fogo, em vez de consumir Mana, a habilidade restaura o custo gasto."
 }

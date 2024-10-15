@@ -7,6 +7,5 @@ func _init():
 	setStats(skillData)
 
 func priorityCheck(digimon: Digimon) -> void:
-	priority = staticPriority
 	if(digimon.currentMana == 0):
 		priority += 2

@@ -1,14 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://bkiax0gwpx20o"]
+[gd_scene load_steps=33 format=3 uid="uid://bkiax0gwpx20o"]
 
 [ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_bmwp2"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="2_ray8e"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="3_w8qjs"]
 [ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="4_6scnb"]
+[ext_resource type="PackedScene" uid="uid://dng007yy161aa" path="res://scenes/entities/SkillAnnouncer.tscn" id="4_wq63m"]
 [ext_resource type="Script" path="res://scripts/interface builders/NumberSpawner.gd" id="5_nauik"]
 [ext_resource type="Texture2D" uid="uid://c8wmd2aucho2m" path="res://assets/interface/UI/EnemyFrame.png" id="6_dyeyq"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="7_5gnrb"]
 [ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="8_yj36c"]
 [ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="9_elhsp"]
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="9_lgp2m"]
 [ext_resource type="Script" path="res://scripts/interface builders/ButtonDescription.gd" id="10_f05bp"]
 [ext_resource type="Texture2D" uid="uid://c674b3sx2xnuq" path="res://assets/interface/Icons/InterfaceIcons/InventoryIcon.png" id="11_j00ef"]
 [ext_resource type="Texture2D" uid="uid://c0rquotsyn4vn" path="res://assets/interface/Icons/SkillIcons/001BasicAtackframe.png" id="12_f3ht2"]
@@ -57,6 +59,44 @@ _data = {
 "blinkFrame": SubResource("Animation_7ji4s")
 }
 
+[sub_resource type="Animation" id="Animation_dsvwe"]
+resource_name = "blinkActions"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyActions:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_1wpeh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyActions:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldluy"]
+_data = {
+"RESET": SubResource("Animation_1wpeh"),
+"blinkActions": SubResource("Animation_dsvwe")
+}
+
 [sub_resource type="Animation" id="Animation_rxqqc"]
 length = 0.001
 tracks/0/type = "value"
@@ -95,6 +135,44 @@ _data = {
 "blinkFrame": SubResource("Animation_ay44l")
 }
 
+[sub_resource type="Animation" id="Animation_wh06l"]
+resource_name = "blinkActions"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerActions:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_waaw1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerActions:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15o28"]
+_data = {
+"RESET": SubResource("Animation_waaw1"),
+"blinkActions": SubResource("Animation_wh06l")
+}
+
 [node name="BattleManager" type="Node2D" node_paths=PackedStringArray("player", "enemy", "playerDigimon", "enemyDigimon", "changeTurnTimer", "BM")]
 script = ExtResource("1_bmwp2")
 player = NodePath("Player")
@@ -107,7 +185,7 @@ BM = NodePath("BattleMessage")
 [node name="ChangeTurnTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner")]
+[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
 script = ExtResource("2_ray8e")
 digimon = NodePath("Digimon")
 opponent = NodePath("../Player")
@@ -118,13 +196,19 @@ frameAnimator = NodePath("FrameAnimator")
 BM = NodePath("../BattleMessage")
 BTM = NodePath("..")
 numberSpawner = NodePath("NumberSpawner")
+actionsDisplay = NodePath("EnemyActions")
+actionAnimator = NodePath("Actions Animator")
 
-[node name="Digimon" parent="Enemy" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM") instance=ExtResource("3_w8qjs")]
+[node name="Digimon" parent="Enemy" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer") instance=ExtResource("3_w8qjs")]
 position = Vector2(172, 92)
 enemy = NodePath("../../Player/Digimon")
 tamer = NodePath("..")
 BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
+skillAnnouncer = NodePath("../SkillAnnouncer")
+
+[node name="SkillAnnouncer" parent="Enemy" instance=ExtResource("4_wq63m")]
+position = Vector2(33, 154)
 
 [node name="HUDDisplay" parent="Enemy" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("4_6scnb")]
 position = Vector2(69, 46)
@@ -138,12 +222,27 @@ script = ExtResource("5_nauik")
 position = Vector2(135, 94)
 texture = ExtResource("6_dyeyq")
 
+[node name="EnemyActions" type="Label" parent="Enemy"]
+offset_left = 165.0
+offset_top = 5.0
+offset_right = 253.0
+offset_bottom = 16.0
+theme_override_colors/font_outline_color = Color(0.580392, 0.227451, 0.227451, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_lgp2m")
+theme_override_font_sizes/font_size = 8
+
 [node name="FrameAnimator" type="AnimationPlayer" parent="Enemy"]
 libraries = {
 "": SubResource("AnimationLibrary_ojqp8")
 }
 
-[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner")]
+[node name="Actions Animator" type="AnimationPlayer" parent="Enemy"]
+libraries = {
+"": SubResource("AnimationLibrary_ldluy")
+}
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
 script = ExtResource("7_5gnrb")
 buttonPanel = NodePath("ButtonPanel")
 digimon = NodePath("Digimon")
@@ -155,13 +254,19 @@ frameAnimator = NodePath("Frame Animator")
 BM = NodePath("../BattleMessage")
 BTM = NodePath("..")
 numberSpawner = NodePath("NumberSpawner")
+actionsDisplay = NodePath("PlayerActions")
+actionAnimator = NodePath("Actions Animator")
 
-[node name="Digimon" parent="Player" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM") instance=ExtResource("3_w8qjs")]
+[node name="Digimon" parent="Player" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer") instance=ExtResource("3_w8qjs")]
 position = Vector2(99, 264)
 enemy = NodePath("../../Enemy/Digimon")
 tamer = NodePath("..")
 BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
+skillAnnouncer = NodePath("../SkillAnnouncer")
+
+[node name="SkillAnnouncer" parent="Player" instance=ExtResource("4_wq63m")]
+position = Vector2(237, 326)
 
 [node name="HUDDisplay" parent="Player" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("4_6scnb")]
 position = Vector2(200, 218)
@@ -275,9 +380,24 @@ script = ExtResource("5_nauik")
 position = Vector2(135, 266)
 texture = ExtResource("17_7lwst")
 
+[node name="PlayerActions" type="Label" parent="Player"]
+offset_left = 16.0
+offset_top = 176.0
+offset_right = 150.0
+offset_bottom = 187.0
+theme_override_colors/font_outline_color = Color(0.396078, 0.643137, 0.607843, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_lgp2m")
+theme_override_font_sizes/font_size = 8
+
 [node name="Frame Animator" type="AnimationPlayer" parent="Player"]
 libraries = {
 "": SubResource("AnimationLibrary_bjnew")
+}
+
+[node name="Actions Animator" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_15o28")
 }
 
 [node name="BattleMessage" parent="." node_paths=PackedStringArray("BTM") instance=ExtResource("18_lykkh")]
@@ -286,6 +406,7 @@ BTM = NodePath("..")
 
 [connection signal="timeout" from="ChangeTurnTimer" to="." method="changeTurn"]
 [connection signal="animation_finished" from="Enemy/FrameAnimator" to="Enemy" method="onFrameAnimation"]
+[connection signal="animation_finished" from="Enemy/Actions Animator" to="Enemy" method="actionsAnimation"]
 [connection signal="button_down" from="Player/ButtonPanel/PassTurn" to="Player/ButtonPanel" method="_on_pass_turn_button_down"]
 [connection signal="button_up" from="Player/ButtonPanel/PassTurn" to="Player/ButtonPanel" method="activateButton"]
 [connection signal="button_down" from="Player/ButtonPanel/Menu" to="Player/ButtonPanel" method="_on_menu_button_down"]
@@ -306,3 +427,4 @@ BTM = NodePath("..")
 [connection signal="button_up" from="Player/ButtonPanel/ExtraSkill3" to="Player/ButtonPanel" method="activateButton"]
 [connection signal="timeout" from="Player/ButtonPanel/ShowDescWindow" to="Player/ButtonPanel" method="showInfoWindow"]
 [connection signal="animation_finished" from="Player/Frame Animator" to="Player" method="onFrameAnimation"]
+[connection signal="animation_finished" from="Player/Actions Animator" to="Player" method="actionsAnimation"]

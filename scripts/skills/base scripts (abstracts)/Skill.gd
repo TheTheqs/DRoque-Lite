@@ -29,7 +29,7 @@ func unlearn(_unlearner: Digimon) -> void:
 	pass
 
 #função que aplica o cooldown depois do uso
-func applyCooldown() -> void:
+func applyCooldown(_digimon: Digimon) -> void:
 	currentCooldown = cooldowm
 	if(currentCooldown > 0):
 		usable = false
@@ -51,7 +51,14 @@ func effect(_digimon: Digimon) -> void:
 func priorityCheck(_digimon: Digimon) -> void:
 	pass
 
+#a função abaixo nunca deve ser sobreescrita, e sim as funções abstratas que a fragmentam
 func priorityCalculation(digimon: Digimon) -> void:
+	priority = staticPriority
+	priority += getElementalChartPriority(digimon)
 	priorityCheck(digimon)
 	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
 		self.priority = 0
+
+ #a função abaixo é criada apra ser sobreescrita nas classes DamageSkill
+func getElementalChartPriority(_digimon: Digimon) -> int:
+	return 0

@@ -20,7 +20,12 @@ var statusColor: Dictionary = {
 	Enums.StatusType.BUFF : "FFFF00",
 	Enums.StatusType.DEBUFF : "FF4200"
 }
-#cura de vida: 51FF00 cura de mana: 64a5ff
+
+var healColor: Dictionary = {
+	true: "64A5FF",
+	false: "51FF00"
+}
+
 func spawnContent(content) -> void:
 	var contentToShow: String
 	if(content is DamageData):
@@ -29,6 +34,8 @@ func spawnContent(content) -> void:
 		contentToShow = processStatus(content)
 	elif(content is String):
 		contentToShow = processString(content)
+	elif(content is HealData):
+		contentToShow = processHealData(content)
 	var newSpawn: SpawnedNumber = spawn.instantiate()
 	self.call_deferred("add_child", newSpawn)
 	newSpawn.showNumber(contentToShow)
@@ -50,4 +57,10 @@ func processStatus(statusEffect: StatusEffect) -> String:
 
 func processString(string: String) -> String:
 	var newString: String = "\n[center][outline_size=8][font_size=8][outline_color=#64A5FF]" + string + "[/outline_color][/font_size][/outline_size][/center]"
+	return newString
+
+func processHealData(healData: HealData) -> String:
+	var outlineColor: String = healColor[healData.isMana]
+	var newString: String = ""
+	newString = "\n[center][outline_size=8][font_size=16][outline_color=#" + outlineColor + "]" + str(Util.cap(healData.healValue)) + "[/outline_color][/font_size][/outline_size][/center]"
 	return newString

@@ -39,11 +39,11 @@ func setValues(digimon: Digimon) -> void:
 	if(self.isCritic):
 		self.damageValue *= 1.5
 	skillSingularity(digimon)
-#função de ataque de fato
 
+#função de ataque de fato
 func effect(digimon: Digimon) -> void:
 	setValues(digimon)
-	applyCooldown()
+	applyCooldown(digimon)
 	digimon.manaConsumption(self.manaCost)
 	digimon.enemy.getTageted(self)
 	if(digimon.tamer is Player):
@@ -56,3 +56,12 @@ func applyStats(_digimon: Digimon) -> void:
 #função abistrada que vai executar comandos específicos de cada skill caso houver
 func skillSingularity(_digimon: Digimon) -> void:
 	pass
+#essa função vai colaborar para o calculo de prioridade baseado no aumento o decremento de dano por diferença de elemento
+func getElementalChartPriority(digimon: Digimon) -> int:
+	var elementRatio: float = Util.getElementRatio(self.element, digimon.enemy.element)
+	if(elementRatio == 1.0):
+		return 0
+	elif(elementRatio < 1.0):
+		return -2
+	else:
+		return 2

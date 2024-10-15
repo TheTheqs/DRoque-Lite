@@ -17,4 +17,4 @@ manaCost = 5
 coolDown = 2
 hasEffect = false
 skillTexture = ExtResource("3_gmoy6")
-textureRange = 7
+textureRange = 10

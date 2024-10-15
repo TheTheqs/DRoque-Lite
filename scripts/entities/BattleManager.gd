@@ -60,7 +60,7 @@ func changeTurn():
 		currentPhase = Enums.BattlePhase.TURNSTART
 		outAction("Battle Start")
 	elif(currentPhase == Enums.BattlePhase.TURNSTART):
-		currentDigimon.tamer.actions = generateActions(currentDigimon, oppositeDigimon)
+		currentDigimon.tamer.getActions(generateActions(currentDigimon, oppositeDigimon))
 		triggerCheck(currentDigimon.onTurnStart, currentDigimon, "TurnStart")
 		currentPhase = Enums.BattlePhase.CHOICE
 		outAction("Turn Start")
@@ -73,7 +73,7 @@ func changeTurn():
 		currentPhase = Enums.BattlePhase.POSACTION
 		currentDigimon.action()
 	elif(currentPhase == Enums.BattlePhase.POSACTION):
-		currentTamer.actions -= 1
+		currentTamer.takeActions(1)
 		if(isPassing):
 			currentPhase = Enums.BattlePhase.TURNEND
 			isPassing = false

@@ -6,7 +6,7 @@ func _ready() -> void:
 	self.tamerName = "Enemy"
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(0)
+	summonDigimon(4)
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(NeutralNudge.new())
@@ -16,7 +16,6 @@ func _ready() -> void:
 	judge.gettingStarted()
 
 func makeAChoice() -> void:
-	print("Vindo aqui")
 	var selectedSkill = null
 	for nskill in digimon.digimonSkills:
 		if(nskill != null):
@@ -42,3 +41,11 @@ func onFrameAnimation(anim_name: String):
 	if(anim_name == "blinkFrame"):
 		BM.showMessage(tr(StringName("BattleMessage2b")))
 		makeAChoice()
+	elif(anim_name == "blinkActions"):
+		actionsDisplay.visible = true
+		print("Texto do DISPLAY: " + actionsDisplay.text)
+
+
+func actionsAnimation(anim_name: String) -> void:
+	if(anim_name == "blinkActions"):
+		actionsDisplay.visible = true

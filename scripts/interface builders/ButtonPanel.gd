@@ -88,7 +88,7 @@ func showInfoWindow():
 		if (currentButtonToShow in skillButtons):
 			infoWindow.showIcon(currentButtonToShow.relatedSkill)
 			if(currentButtonToShow.relatedSkill.manaCost > 0):
-				manaCD += "\n" + "\n" + "\n" + "\n" + str(currentButtonToShow.relatedSkill.manaCost) + " [outline_size=6][outline_color=#64A5FF]MP[/outline_color][/outline_size]"
+				manaCD += "\n" + "\n" + str(currentButtonToShow.relatedSkill.manaCost) + " [outline_size=6][outline_color=#64A5FF]MP[/outline_color][/outline_size]"
 			if(currentButtonToShow.relatedSkill.cooldowm > 0):
 				manaCD += "\n" + "\n" + str(currentButtonToShow.relatedSkill.cooldowm) + " CD"
 		infoWindow.showWindow(tr(StringName(currentButtonToShow.buttonName)), tr(StringName(currentButtonToShow.buttonDescription)) + manaCD)

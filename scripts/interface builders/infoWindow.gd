@@ -16,6 +16,10 @@ func updateDisplay(ntitle: String, ncontent: String)-> void:
 	description.text = "[center]" + ncontent + "[/center]"
 
 func showWindow(ntitle: String, ncontent: String) -> void:
+	if(buttonPanel.currentButtonToShow.relatedSkill == null):
+		skillFrame.visible = false
+	else:
+		skillFrame.visible = true
 	buttonPanel.descWindowOn = true
 	buttonPanel.blockAllsButtons()
 	updateDisplay(ntitle, ncontent)

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://dgofwg4wpnyop"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_pwfhq"]
+[ext_resource type="Texture2D" uid="uid://cw05f00vqe1ge" path="res://assets/interface/Icons/SkillIcons/FieryFlicker.png" id="2_6xl6a"]
+[ext_resource type="Texture2D" uid="uid://d0jqsnwckofbh" path="res://assets/sprites/vfx/skills/FieryFlicker.png" id="3_quc52"]
+
+[resource]
+script = ExtResource("1_pwfhq")
+skillId = 2
+skillIcon = ExtResource("2_6xl6a")
+staticPriority = 2
+element = 1
+damageType = 0
+damageSubType = 0
+ratio = 1.8
+manaCost = 5
+coolDown = 2
+hasEffect = false
+skillTexture = ExtResource("3_quc52")
+textureRange = 20

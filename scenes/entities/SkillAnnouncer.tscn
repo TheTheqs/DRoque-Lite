@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://dng007yy161aa"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/SkillAnnouncer.gd" id="1_763dh"]
+[ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="2_8sme6"]
+
+[sub_resource type="Animation" id="Animation_31i7t"]
+resource_name = "blink"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_277rl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ceb"]
+_data = {
+"RESET": SubResource("Animation_277rl"),
+"blink": SubResource("Animation_31i7t")
+}
+
+[node name="SkillAnnouncer" type="Node2D" node_paths=PackedStringArray("currentIcon", "anime", "changeIconTimer")]
+script = ExtResource("1_763dh")
+currentIcon = NodePath("Icon")
+anime = NodePath("Anime")
+changeIconTimer = NodePath("Timer")
+
+[node name="Frame" type="Sprite2D" parent="."]
+texture = ExtResource("2_8sme6")
+
+[node name="Icon" type="Sprite2D" parent="."]
+
+[node name="Anime" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f1ceb")
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="Anime" to="." method="finishBlink"]
+[connection signal="timeout" from="Timer" to="." method="changeIcon"]

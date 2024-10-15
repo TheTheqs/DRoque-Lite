@@ -2,6 +2,8 @@
 
 [resource]
 messages = {
+"ActionLimit": &"You have reached the maximum number of accumulated actions!(5)",
+"Actions": &"ACTIONS:",
 "BattleMessage0": &"Starting Battle!",
 "BattleMessage1": &"Starting turn ",
 "BattleMessage2a": &"Your turn",
@@ -33,7 +35,9 @@ messages = {
 "PassingTurnButtonDescription": &"Passes the turn to the opponent. Extra actions will be preserved for the next turn.",
 "PassingTurnButtonTittle": &"Skip turn",
 "SkillDescription0": &"Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage.",
-"SkillDescription1": &"Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie.",
+"SkillDescription1": &"Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie. If this skill is used by a Neutral-type Digimon, its cooldown is reduced to zero.",
+"SkillDescription2": &"Deals 180% Fire-type Physical Damage. If used by a Fire-type Digimon, this ability restores the Mana cost instead of consuming it.",
 "SkillName0": &"Basic Attack",
-"SkillName1": &"Neutral Nudge"
+"SkillName1": &"Neutral Nudge",
+"SkillName2": &"FieryFlicker"
 }

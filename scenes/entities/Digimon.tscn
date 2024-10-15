@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://hds32c6watad"]
+[gd_scene load_steps=14 format=3 uid="uid://hds32c6watad"]
 
 [ext_resource type="Script" path="res://scripts/entities/Digimon.gd" id="1_2rk3n"]
 [ext_resource type="Script" path="res://scripts/interface builders/SkillSpawner.gd" id="2_38vac"]
@@ -117,6 +117,23 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_yut48"]
+resource_name = "action10"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkillSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
 [sub_resource type="Animation" id="Animation_smfu3"]
 resource_name = "action13"
 length = 0.65
@@ -151,10 +168,28 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_i47nm"]
+resource_name = "action20"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkillSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ldvgu"]
 _data = {
 "RESET": SubResource("Animation_2q6i7"),
+"action10": SubResource("Animation_yut48"),
 "action13": SubResource("Animation_smfu3"),
+"action20": SubResource("Animation_i47nm"),
 "action7": SubResource("Animation_8qos4")
 }
 
@@ -183,7 +218,7 @@ skillSprite = NodePath("SkillSprite")
 animator = NodePath("Animator")
 
 [node name="SkillSprite" type="Sprite2D" parent="SkillSpawner"]
-hframes = 7
+hframes = 20
 
 [node name="Animator" type="AnimationPlayer" parent="SkillSpawner"]
 libraries = {

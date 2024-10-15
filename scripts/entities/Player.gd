@@ -13,6 +13,7 @@ func _ready() -> void:
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(NeutralNudge.new())
+	digimon.learnSkill(FieryFlicker.new())
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()
@@ -23,3 +24,7 @@ func onFrameAnimation(anim_name: String):
 	if(anim_name == "blinkFrame"):
 		self.canAct = true
 		BM.showMessage(tr(StringName("BattleMessage2a")))
+
+func actionsAnimation(anim_name: String) -> void:
+	if(anim_name == "blinkActions"):
+		actionsDisplay.visible = true

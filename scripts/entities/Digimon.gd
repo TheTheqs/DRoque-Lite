@@ -53,6 +53,7 @@ var gotHited: bool
 @export var tamer: Tamer
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
+@export var skillAnnouncer: SkillAnnouncer
 
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
@@ -216,6 +217,9 @@ func heal(value: float, isMana: bool) -> void:
 			currentHealth = maxMana
 		else:
 			currentMana += value
+	var newHealData: HealData = HealData.new()
+	newHealData.buildData(value, isMana)
+	tamer.showContent(newHealData)
 	tamer.HUDD.updateValues()
 	BTM.outAction("Digimon Heal")
 
@@ -237,6 +241,7 @@ func action() -> void:
 			currentAction = actionsToGo[0]
 			actionsToGo.remove_at(0)
 			self.digimonAnimator.play("action")
+			self.skillAnnouncer.announceSkill(currentAction.skillIcon)
 	else:
 		BTM.outAction("Digimon no action")
 
@@ -260,3 +265,6 @@ func applyDefense(damageData: DamageData) -> void:
 func chooseAction(newAction) -> void:
 	if(newAction is Skill):
 		actionsToGo.append(newAction)
+
+func getActions(nActions: int) -> void:
+	self.tamer.getActions(nActions)
