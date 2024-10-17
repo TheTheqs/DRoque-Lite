@@ -6,7 +6,7 @@ func _ready() -> void:
 	self.tamerName = "Enemy"
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(1)
+	summonDigimon(Util.random(0,5))
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(NeutralNudge.new())

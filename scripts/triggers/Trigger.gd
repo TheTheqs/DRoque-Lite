@@ -4,6 +4,7 @@ class_name Trigger
 #preencher com atributos de identificação
 var isActionTrigger: bool
 var action: Skill
+var triggerId: int
 #funções de checagem. A primeira é para ser sobreescrita.
 func checkContext(_digimon: Digimon, _context) -> bool:
 	return true

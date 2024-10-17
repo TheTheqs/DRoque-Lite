@@ -15,7 +15,7 @@ func setValues(digimon: Digimon) -> void:
 	self.atackerType = digimon.digimonType
 	self.damageValue = digimon.getSkillDamage(self.damageType)
 	self.damageValue *= ratio
-	self.accuracy = digimon.getAccuracy()
+	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	if(digimon.element == Enums.Element.WATER):
 		self.isCritic = true
 	else:

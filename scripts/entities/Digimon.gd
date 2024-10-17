@@ -43,7 +43,7 @@ var currentLevel: int
 #valores constantes de retorno.
 var totalDamage: int
 var criticalChance: int
-var currentAccuracy: int
+var currentAccuracy: float
 var gotHited: bool
 #Scene Elements
 @export var skillSpawner: SkillSpawner
@@ -58,17 +58,41 @@ var gotHited: bool
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
 var digimonSkills:Array[Skill] = [null, null, null, null, null]
-
-#Status Control
-var isDisabled: bool = false
-var isBlind: bool = false
+#status effects. Precisa ser sempre um dicinario para facilidade de consulta.
+var statusEffect: Dictionary = {
+	
+}
+var statusToRemove: Array[int]
+var isDisabled: bool
 #actions
 var currentAction: Skill
 
 #Triggers
-var onBattleStart: Array[Trigger]
-var onTurnStart: Array[Trigger]
-var onTurnEnd: Array[Trigger] = [CoolDownTrigger.new()]
+#triggers verificados pelo BattleManager
+var onBattleStart: Array[Trigger] #começo da batalha
+var onTurnStart: Array[Trigger] #começo do turno
+var onTurnEnd: Array[Trigger] = [CoolDownTrigger.new(), StatusCheckTrigger.new()] #final do turno
+var BattleEnd: Array[Trigger] # Ao fim da batalha
+#triggers verificados pela prórpia classe com o uso da função triggerCheck
+var onHealing: Array[Trigger] #Quando recebe cura (de vida e mana)
+var onGetDamage: Array[Trigger] #Quando recebe dano
+var onGetTargeted: Array[Trigger] #Quando é alvo de uma habilidade
+var onDamageCalc: Array[Trigger] #No cálculo de dano
+var onCriticalCalc: Array[Trigger] #No cálculo de chance de crítico
+var onAccuracyCalc: Array[Trigger] #No cálculo de precisão das habilidades
+var onManaConsumption: Array[Trigger] #No consumo de mana
+var onPassingTurn: Array[Trigger] #Quando o jogador passa o turno
+var onGettingActions: Array[Trigger] #No ganho de ações extras por turno
+var onLearnSkill: Array[Trigger] #Qaundo o digimon aprende uma skill APENAS DURANTE UMA BATALHA
+var onInventory: Array[Trigger] #Quando o digimon usa um item ou equipamento
+var onGotHited: Array[Trigger] #Quando uma habilidade acerta o digimon. Veja que difere pouco de quando ele é apenas alvo.
+var onEvadeDamage: Array[Trigger] #Quando o digimon se esquiva de uma damage skill
+var onEvadeStats: Array[Trigger] #Quando o digimon se esquiva da aplicação de um efeito
+var onGettingStats: Array[Trigger] #Quando um efeito é aplicado com sucesso
+var onDamageDelt: Array[Trigger] #Quando o digimon causa dano. Atenção, a chamada desse contexto deve ser feita no digimon inimigo
+var onDying: Array[Trigger] #Quando a vida do digimon chega a 0.
+var onActing: Array[Trigger] #Verificado imediatamente antes de uma ação ser atribuída a choose action
+var onEvolution: Array[Trigger] #Verificado quando o digimon evolui durante a batalha
 
 #Actions Array
 var actionsToGo: Array[Skill] = []
@@ -102,7 +126,6 @@ func setStats(stats: DigimonData) -> void:
 	self.levelWIS = stats.levelWIS
 	self.levelDEX = stats.levelDEX
 	levelUpAttributes(currentLevel)
-	print(str(self.maxMana))
 	setBehave()
 
 #a função abaixo vai retornar a soma de atributo base e atributo bonus, negando valores menores que 1
@@ -126,11 +149,15 @@ func getCriticalChance() -> int:
 	criticalChance = getAttribute("dex")
 	return criticalChance
 #retorna a precisão do digimon
-func getAccuracy() -> int:
+func getAccuracy(nobject, nemeny: Digimon) -> float:
 	currentAccuracy = 0
-	currentAccuracy = baseDEX
+	if(nobject is DamageSkill):
+		currentAccuracy = 150.0*self.baseDEX/(self.baseDEX + nemeny.baseAGI)
+	elif(nobject is StatusEffect):
+		currentAccuracy = 100.0*self.baseINT/(self.baseINT + nemeny.baseINT)
+	currentAccuracy = Util.cap(currentAccuracy)
 	return currentAccuracy
-	
+
 #calcula o dano das habilidades
 func getSkillDamage(damageType: Enums.DamageType) -> int:
 	totalDamage = 0
@@ -139,22 +166,28 @@ func getSkillDamage(damageType: Enums.DamageType) -> int:
 	elif(damageType == Enums.DamageType.MAGICAL):
 		totalDamage = getAttribute("int")
 	return totalDamage
+
 #função que chama o skill spawner para executar o vfx de uma skill usada no digimon
 func getTageted(skill: Skill) -> void:
 	skillSpawner.spawSkill(skill)
 #função que determina o acerto das habilidades.
+
 func gotTargeted(skill: Skill) -> void:
 	gotHited = false
 	if(skill is DamageSkill):
 		if(skill.accuracy == -1):
 			gotHited = true
 		else:
-			gotHited = Util.chance((float(skill.accuracy)/self.baseAGI)*100)
+			#a agilidade base é a taxa de esquiva, assim como a destreza base é a taxa de acerto
+			gotHited = Util.chance(skill.accuracy)
 		if(gotHited):
 			var processableDamage: DamageData = Util.damageDataBuilder(skill)
 			processDamage(processableDamage)
 		else:
 			tamer.showContent(tr(StringName("Miss")))
+	elif(skill is StatusSkill):
+		for nstatus : StatusEffect in skill.statusEffects:
+			self.applyStatus(nstatus)
 	BTM.outAction("Digimon Got Targeted")
 
 #Função que processa o dano recebido
@@ -163,6 +196,8 @@ func processDamage(damageData: DamageData) -> void:
 	damageData.damageValue *= Util.getTypeRatio(damageData.atackerType, self.digimonType)
 	damageData.damageValue *= Util.getElementRatio(damageData.damageElement, self.element)
 	applyDefense(damageData)
+	if(damageData.damageValue <= 0):
+		damageData.damageValue = 1.0
 	#calculando dano
 	if(self.currentHealth - damageData.damageValue <= 0):
 		currentHealth = 0
@@ -171,11 +206,47 @@ func processDamage(damageData: DamageData) -> void:
 	tamer.showContent(damageData)
 	digimonAnimator.play("damage")
 	tamer.HUDD.updateValues()
+	
+#função que processa a aplica um status effect
+func applyStatus(nstatus: StatusEffect) -> void:
+	BTM.inAction()
+	if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
+		if(statusEffect.has(nstatus.statusId)):
+			nstatus.effectOverlap(self)
+		else:
+			nstatus.applyingEffect(self)
+			if(nstatus.statusId != 41):
+				self.statusEffect[nstatus.statusId] = nstatus
+		tamer.showContent(nstatus)
+	else:
+		#a inteligência base é a taxa de acerto do atacante, mas também e a taxa de esquiva do atacado
+		nstatus.calculateChance(self)
+		gotHited = Util.chance(nstatus.schance)
+		if(gotHited):
+			if(statusEffect.has(nstatus.statusId)): #verifica se o status já está presente, chama função de sobreposição
+				nstatus.effectOverlap(self)
+			else:
+				nstatus.applyingEffect(self)
+				if(nstatus.statusId != 41):
+					self.statusEffect[nstatus.statusId] = nstatus
+			tamer.showContent(nstatus)
+		else:
+			tamer.showContent(tr(StringName("Miss")))
+	BTM.outAction("Aplying Status")
+
+#função para remover um status.
+func unapplyStatus(statusID: int) -> void:
+	if(self.statusEffect.has(statusID)):
+		var ostatusEffect: StatusEffect = self.statusEffect[statusID]
+		ostatusEffect.unapplyingEffect(self)
+		self.statusEffect.erase(statusID)
+	else:
+		print("Erro, status não encontrado no dicionário")
 
 #essa função está incompleta
 func learnSkill(skill: Skill) -> void:
 	var _learned: bool = false
-	if(skill is DamageSkill):
+	if(skill != null):
 		for i in range(digimonSkills.size()):
 			if(digimonSkills[i] == null):
 				_learned = skill.learn(self, i)
@@ -210,20 +281,22 @@ func updateMaxMana(newMaxMana: float) -> void:
 func heal(value: float, isMana: bool) -> void:
 	BTM.inAction()
 	value = Util.cap(value)
-	if(not isMana):
-		if((currentHealth + value) > maxHelth):
-			currentHealth = maxHelth
-		else:
-			currentHealth += value
-	else:
-		if((currentMana + value) > maxMana):
-			currentHealth = maxMana
-		else:
-			currentMana += value
 	var newHealData: HealData = HealData.new()
 	newHealData.buildData(value, isMana)
-	tamer.showContent(newHealData)
-	tamer.HUDD.updateValues()
+	triggerCheck(onHealing, newHealData)
+	if(newHealData.healValue != 0):
+		if(not isMana):
+			if((currentHealth + newHealData.healValue) > maxHelth):
+				currentHealth = maxHelth
+			else:
+				currentHealth += newHealData.healValue
+		else:
+			if((currentMana + newHealData.healValue) > maxMana):
+				currentHealth = maxMana
+			else:
+				currentMana += newHealData.healValue
+		tamer.showContent(newHealData)
+		tamer.HUDD.updateValues()
 	BTM.outAction("Digimon Heal")
 
 func manaConsumption(value: float) -> void:
@@ -271,3 +344,10 @@ func chooseAction(newAction) -> void:
 
 func getActions(nActions: int) -> void:
 	self.tamer.getActions(nActions)
+
+#função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
+func triggerCheck(triggersToTest: Array, context) -> void:
+	if(triggersToTest.size() > 0):
+		for trigger: Trigger in triggersToTest:
+			if(trigger != null):
+				trigger.triggerValidation(self, context)

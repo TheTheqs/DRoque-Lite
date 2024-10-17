@@ -17,7 +17,7 @@ func setValues(digimon: Digimon) -> void:
 	self.damageValue = digimon.getSkillDamage(self.damageType)
 	self.damageValue *= ratio
 	self.damageValue *= damageBonus
-	self.accuracy = digimon.getAccuracy()
+	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	self.isCritic = Util.chance(digimon.getCriticalChance())
 	if(self.isCritic):
 		self.damageValue *= 1.5

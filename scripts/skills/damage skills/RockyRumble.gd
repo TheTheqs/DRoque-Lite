@@ -18,8 +18,7 @@ func setValues(digimon: Digimon) -> void:
 	if(digimon.element == Enums.Element.EARTH):
 		self.accuracy = -1
 	else:
-		self.accuracy = digimon.getAccuracy()
-	print(accuracy)
+		self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	self.isCritic = Util.chance(digimon.getCriticalChance())
 	if(self.isCritic):
 		self.damageValue *= 1.5

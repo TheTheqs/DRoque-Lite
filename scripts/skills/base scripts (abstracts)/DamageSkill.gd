@@ -34,15 +34,15 @@ func setValues(digimon: Digimon) -> void:
 	self.atackerType = digimon.digimonType
 	self.damageValue = digimon.getSkillDamage(self.damageType)
 	self.damageValue *= ratio
-	self.accuracy = digimon.getAccuracy()
+	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	self.isCritic = Util.chance(digimon.getCriticalChance())
 	if(self.isCritic):
 		self.damageValue *= 1.5
-	skillSingularity(digimon)
 
 #função de ataque de fato
 func effect(digimon: Digimon) -> void:
 	setValues(digimon)
+	skillSingularity(digimon)
 	applyCooldown(digimon)
 	digimon.manaConsumption(self.manaCost)
 	digimon.enemy.getTageted(self)

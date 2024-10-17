@@ -1,0 +1,13 @@
+2. Conflitos e Sinergias
+Taunt vs. Charm: Você já apontou um possível conflito entre Taunt e Charm. Realmente, eles podem ser contraditórios. Você pode precisar decidir qual dos dois prevalece quando ambos estão ativos ou criar uma hierarquia de prioridades.
+
+Fury vs. Taunt/Charm: Fury força o jogador a usar apenas skills de dano, o que pode conflitar com Taunt e Charm se estiverem ativos ao mesmo tempo. Aqui também seria necessário definir qual status domina.
+
+Evade vs. Precision/Blind: Evade pode gerar conflitos com Precision ou Blind, já que precisará haver uma lógica clara de qual efeito prevalece (evitar ataque vs. precisão aumentada ou precisão reduzida). Isso pode ser interessante como uma interação estratégica entre buffs e debuffs, mas exige uma boa ordem de resolução.
+
+Sleep vs. Stun/Freeze: Todos esses desabilitam o personagem, mas em alguns jogos, efeitos como Sleep ou Stun não podem coexistir. Talvez seja interessante que ao aplicar um desses efeitos, outros debuffs que desabilitam (como Freeze ou Stun) sejam removidos.
+
+3. Possíveis Efeitos Cruciais Faltando
+Silence (Silenciar): Um debuff clássico em RPGs que impede o uso de habilidades mágicas ou skills.
+Armor Break: Um debuff que reduz temporariamente a defesa física/mágica de um personagem. Muito comum e útil em situações de bosses ou inimigos resistentes.
+Immunity: Embora tenha "Invulnerable", talvez incluir algo mais específico como Immunity to Magic ou Immunity to Physical por um curto período de tempo seja útil para mecânicas mais específicas.

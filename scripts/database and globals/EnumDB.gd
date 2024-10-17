@@ -59,5 +59,5 @@ enum BattlePhase {
 #tipos de efeito
 enum StatusType {
 	BUFF,
-	DEBUFF
+	DEBUFF,
 }

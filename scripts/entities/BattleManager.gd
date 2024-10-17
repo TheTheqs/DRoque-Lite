@@ -85,6 +85,7 @@ func changeTurn():
 		outAction("Pos Action Phase")
 	elif(currentPhase == Enums.BattlePhase.TURNEND):
 		triggerCheck(currentDigimon.onTurnEnd, currentDigimon, "TurnEnd")
+		sweepExpiredStatus(currentDigimon)
 		if(currentDigimon.actionsToGo.size() == 0 and currentDigimon.effectsToGo.size() == 0 and oppositeDigimon.actionsToGo.size() == 0 and oppositeDigimon.effectsToGo.size() == 0):
 			currentPhase = Enums.BattlePhase.TURNSTART
 			changeActor()
@@ -138,3 +139,8 @@ func manageTimer() -> void:
 	if(changeTurnTimer == null):
 		changeTurnTimer = $ChangeTurnTimer
 	changeTurnTimer.stop()
+#função complementar para remover status que tiverem seu tempo de duração zerados
+func sweepExpiredStatus(digimon: Digimon) -> void:
+	if(digimon.statusToRemove.size() > 0):
+		for statusId: int in digimon.statusToRemove:
+			digimon.unapplyStatus(statusId)

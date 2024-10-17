@@ -12,7 +12,7 @@ var manaCost: int
 var staticPriority: int
 var priority: int
 var usable: bool = true
-var accuracy : int
+var accuracy : float
 var cooldowm: int
 var currentCooldown: int = 0 #valor zero por padrão
 

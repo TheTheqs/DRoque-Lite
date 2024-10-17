@@ -1,0 +1,23 @@
+onBattleStart // Test not OK
+onTurnStart // Test not OK
+onBattleEnd // Logic not OK // Test not OK
+onHealing
+onGetDamage // Logic not OK // Test not OK
+onGetTargeted // Logic not OK // Test not OK
+onDamageCalc // Logic not OK // Test not OK
+onCriticCalc // Logic not OK // Test not OK
+onAccuracyCalc // Logic not OK // Test not OK
+onManaConsumption // Logic not OK // Test not OK
+onPassingTurn // Logic not OK // Test not OK
+onGettingActions // Logic not OK // Test not OK
+onLearnSkill // Logic not OK // Test not OK
+onInventory // Logic not OK // Test not OK
+onGotHited // Logic not OK // Test not OK
+onEvadeDamage // Logic not OK // Test not OK
+onEvadeStats // Logic not OK // Test not OK
+onGettingStats // Logic not OK // Test not OK
+onDamageDelt // Logic not OK // Test not OK
+onDying // Logic not OK // Test not OK
+onActing // Logic not OK // Test not OK
+onEvolution // Logic not OK // Test not OK
+onVictory // Logic not OK // Test not OK
