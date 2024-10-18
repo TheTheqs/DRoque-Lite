@@ -3,7 +3,6 @@ extends Trigger
 class_name SickTrigger
 #preencher com atributos de identificação
 func _init()-> void:
-	self.isActionTrigger = false
 	self.triggerId = 28
 #funções de checagem. A primeira é para ser sobreescrita.
 

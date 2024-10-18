@@ -1,7 +1,5 @@
-onBattleStart // Test not OK
 onTurnStart // Test not OK
 onBattleEnd // Logic not OK // Test not OK
-onHealing
 onGetDamage // Logic not OK // Test not OK
 onGetTargeted // Logic not OK // Test not OK
 onDamageCalc // Logic not OK // Test not OK

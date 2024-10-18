@@ -9,10 +9,13 @@ func _ready() -> void:
 	summonDigimon(Util.random(0,5))
 	#teste de habilidades.
 	digimon.learnSkill(BasicAtack.new())
-	digimon.learnSkill(NeutralNudge.new())
+	digimon.learnSkill(CureI.new())
+	digimon.learnSkill(RockyRumble.new())
+	digimon.learnSkill(DoubleDelta.new())
+	digimon.learnSkill(LuminousLash.new())
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
-	#confirma para a classe huiza que tudo está pronto para começar
+	#confirma para a classe juiza que tudo está pronto para começar
 	judge.gettingStarted()
 
 func makeAChoice() -> void:

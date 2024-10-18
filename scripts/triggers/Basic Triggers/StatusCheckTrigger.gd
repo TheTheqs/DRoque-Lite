@@ -2,9 +2,6 @@ extends Trigger
 
 class_name StatusCheckTrigger
 
-func _init() -> void:
-	self.isActionTrigger = false
-
 func checkContext(digimon: Digimon, context) -> bool:
 	if(context == "TurnEnd"):
 		for nstatus in digimon.statusEffect.values():

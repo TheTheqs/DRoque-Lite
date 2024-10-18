@@ -4,7 +4,7 @@ class_name Skill
 #Identificação
 var skillId: int
 var skillName: String
-var skillDescritption: String
+var skillDescription: String
 var skillIcon: CompressedTexture2D
 var manaCost: int
 

@@ -10,7 +10,7 @@ func setStats(stats: StatusSkillData) -> void:
 	self.skillId = stats.skillId
 	self.skillName = "SkillName" + str(self.skillId)
 	self.skillIcon = stats.skillIcon
-	self.skillDescritption = "SkillDescription" + str(self.skillId)
+	self.skillDescription = "SkillDescription" + str(self.skillId)
 	self.staticPriority = stats.staticPriority
 	self.manaCost = stats.manaCost
 	self.cooldowm = stats.coolDown

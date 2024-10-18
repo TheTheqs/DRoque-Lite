@@ -17,7 +17,7 @@ func setStats(stats: DamageSkillData) -> void:
 	self.skillId = stats.skillId
 	self.skillName = "SkillName" + str(self.skillId)
 	self.skillIcon = stats.skillIcon
-	self.skillDescritption = "SkillDescription" + str(self.skillId)
+	self.skillDescription = "SkillDescription" + str(self.skillId)
 	self.staticPriority = stats.staticPriority
 	self.element = stats.element
 	self.damageType = stats.damageType

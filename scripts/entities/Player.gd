@@ -10,12 +10,13 @@ func _ready() -> void:
 	#setando o damage shower
 	turnFrame.visible = false
 	summonDigimon(0)
-	#teste de habilidades.
+	#teste de habilidades ativas.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
 	digimon.learnSkill(RockyRumble.new())
 	digimon.learnSkill(DoubleDelta.new())
 	digimon.learnSkill(LuminousLash.new())
+	#teste de habilidades passivas
 	#teste de status effect
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()

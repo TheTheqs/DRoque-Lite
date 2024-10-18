@@ -33,9 +33,9 @@ func outAction(location: String) -> void:
 	somethingIsHappening -= 1
 	if(somethingIsHappening <= 0):
 		somethingIsHappening = 0
-		if(currentDigimon!= null and (currentDigimon.actionsToGo.size() > 0 or currentDigimon.effectsToGo.size() > 0)):
+		if(currentDigimon!= null and (currentDigimon.actionsToGo.size() > 0)):
 			currentDigimon.action()
-		elif(oppositeDigimon!= null and (oppositeDigimon.actionsToGo.size() > 0 or oppositeDigimon.effectsToGo.size() > 0)):
+		elif(oppositeDigimon!= null and (oppositeDigimon.actionsToGo.size() > 0)):
 			oppositeDigimon.action()
 		else:
 			if(not choosing):
@@ -86,7 +86,7 @@ func changeTurn():
 	elif(currentPhase == Enums.BattlePhase.TURNEND):
 		triggerCheck(currentDigimon.onTurnEnd, currentDigimon, "TurnEnd")
 		sweepExpiredStatus(currentDigimon)
-		if(currentDigimon.actionsToGo.size() == 0 and currentDigimon.effectsToGo.size() == 0 and oppositeDigimon.actionsToGo.size() == 0 and oppositeDigimon.effectsToGo.size() == 0):
+		if(currentDigimon.actionsToGo.size() == 0 and oppositeDigimon.actionsToGo.size() == 0):
 			currentPhase = Enums.BattlePhase.TURNSTART
 			changeActor()
 		outAction("Turn End")

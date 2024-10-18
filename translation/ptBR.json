@@ -12,6 +12,7 @@
   "Block": "BLOQUEADO",
   "Actions": "AÇÕES:",
   "ActionLimit": "Você atingiu o número máximo de ações acumuladas!(5)",
+  "StackLimit": "Número máximo de acúmulos atingidos!",
   "BattleMessage0": "Iniciando Batalha!",
   "BattleMessage1": "Iniciando turno ",
   "BattleMessage2a": "Sua vez!",
@@ -25,6 +26,7 @@
   "NoCD": "A habilidade está em recarga!",
   "NoMana": "A mana é insuficiente!",
   "CantUse": "Habilidade Indisponível!",
+  "AlreadyKnowSkill": "A habilidade já foi aprendida",
   "DigimonName0": "Agumon",
   "DigimonName1": "Monodramon",
   "DigimonName2": "Veemon",
@@ -42,6 +44,7 @@
   "SkillName8": "Corte Cintilante",
   "SkillName9": "Crespúsculo Cortante",
   "SkillName10": "Cura I",
+  "SkillName11": "Provisões de Emergência",
   "SkillDescription0": "Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro.",
   "SkillDescription1": "Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie. Se esta habilidade for utilizada por um Digimon do tipo Neutro, seu Tempo de Recarga é reduzido a 0.",
   "SkillDescription2": "Causa 180% de Dano Físico de Fogo. Se usada por um Digimon do tipo Fogo, em vez de consumir Mana, a habilidade restaura o custo gasto.",
@@ -52,5 +55,6 @@
   "SkillDescription7": "Causa 170% de dano físico do tipo Vento. Se um Digimon do tipo Vento usar esta habilidade, um segundo ataque será realizado, causando 80% de dano físico do tipo Vento.",
   "SkillDescription8": "Causa 190% de dano Físico do tipo Luz. O digimon do tipo Luz que usar essa habilidade recebe uma Ação Extra.",
   "SkillDescription9": "Causa 190% de dano Físico do tipo Trevas. O digimon do tipo Trevas que usar essa habilidade recebe uma Ação Extra.",
-  "SkillDescription10": "Cura o Digimon em 20% da sua vida máxima."
+  "SkillDescription10": "Cura o Digimon em 20% da sua vida máxima.",
+  "SkillDescription11": "No início da batalha: se o Digimon estiver com apenas 50% ou menos de vida, cura 30% da vida máxima."
 }

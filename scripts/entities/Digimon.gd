@@ -58,6 +58,10 @@ var gotHited: bool
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
 var digimonSkills:Array[Skill] = [null, null, null, null, null]
+var digimonPassiveSkills: Dictionary = {
+	
+}
+var digimonLearnedSkills: Array[int]
 #status effects. Precisa ser sempre um dicinario para facilidade de consulta.
 var statusEffect: Dictionary = {
 	
@@ -96,7 +100,6 @@ var onEvolution: Array[Trigger] #Verificado quando o digimon evolui durante a ba
 
 #Actions Array
 var actionsToGo: Array[Skill] = []
-var effectsToGo: Array[Trigger] = []
 
 func setBehave() -> void:
 	if(not isDisabled):
@@ -203,6 +206,7 @@ func processDamage(damageData: DamageData) -> void:
 		currentHealth = 0
 	else:
 		currentHealth -= damageData.damageValue
+	triggerCheck(self.onGetDamage, damageData)
 	tamer.showContent(damageData)
 	digimonAnimator.play("damage")
 	tamer.HUDD.updateValues()
@@ -247,10 +251,20 @@ func unapplyStatus(statusID: int) -> void:
 func learnSkill(skill: Skill) -> void:
 	var _learned: bool = false
 	if(skill != null):
-		for i in range(digimonSkills.size()):
-			if(digimonSkills[i] == null):
-				_learned = skill.learn(self, i)
-				break
+		if(skill.skillId in self.digimonLearnedSkills):
+			BM.showMessage(tr(StringName("AlreadyKnowSkill")))
+			_learned = true
+		else:
+			if(skill is PassiveSkill):
+				skill.learn(self, -1)
+				self.digimonPassiveSkills[skill.skillId] = skill
+			else:
+				for i in range(digimonSkills.size()):
+					if(digimonSkills[i] == null):
+						_learned = skill.learn(self, i)
+						break
+			self.digimonLearnedSkills.append(skill.skillId)
+
 
 func levelUpAttributes(level: int) -> void:
 	self.baseSTR += (self.levelSTR*level)
@@ -308,15 +322,11 @@ func manaConsumption(value: float) -> void:
 
 func action() -> void:
 	BTM.inAction()
-	if(actionsToGo.size() > 0 or effectsToGo.size() > 0):
-		if(effectsToGo.size() > 0):
-			effectsToGo[0].effect(self)
-			effectsToGo.remove_at(0)
-			#implementar BTM out action no final da aplicação de efeitos!!
-		elif(actionsToGo[0] is Skill):
-			currentAction = actionsToGo[0]
-			actionsToGo.remove_at(0)
-			self.digimonAnimator.play("action")
+	if(actionsToGo.size() > 0 and actionsToGo[0] is Skill):
+		currentAction = actionsToGo[0]
+		actionsToGo.remove_at(0)
+		self.digimonAnimator.play("action")
+		if(currentAction.skillIcon != null):
 			self.skillAnnouncer.announceSkill(currentAction.skillIcon)
 	else:
 		BTM.outAction("Digimon no action")

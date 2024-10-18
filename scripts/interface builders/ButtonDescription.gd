@@ -10,7 +10,7 @@ var relatedSkill: Skill
 func associateSkill(skill: Skill) -> void:
 	if(skill != null):
 		buttonName = skill.skillName
-		buttonDescription = skill.skillDescritption
+		buttonDescription = skill.skillDescription
 		relatedSkill = skill
 		self.icon = skill.skillIcon
 
