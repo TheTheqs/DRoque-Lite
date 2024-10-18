@@ -10,6 +10,7 @@
   "InventoryButtonDescription": "Opens the inventory. Using an item or equipping gear consumes one action.",
   "Miss": "MISS",
   "Block": "BLOCK",
+  "Action": "Action",
   "Actions": "ACTIONS:",
   "ActionLimit": "You have reached the maximum number of accumulated actions!(5)",
   "StackLimit": "Maximum number of stacks reached!",
@@ -46,6 +47,7 @@
   "SkillName10": "Cure I",
   "SkillName11": "Emergency Supplies",
   "SkillName12": "Scale Oneself",
+  "SkillName13": "Limiter Removal",
   "SkillDescription0": "Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage.",
   "SkillDescription1": "Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie. If this skill is used by a Neutral-type Digimon, its cooldown is reduced to zero.",
   "SkillDescription2": "Deals 180% Fire-type Physical Damage. If used by a Fire-type Digimon, this ability restores the Mana cost instead of consuming it.",
@@ -59,6 +61,9 @@
   "SkillDescription10": "Heals the Digimon by 20% of its maximum health.",
   "SkillDescription11": "At the start of the battle: if the Digimon has 50% or less of its health, it restores 30% of its maximum health.",
   "SkillDescription12": "Get Reflect + 15",
+  "SkillDescription13": "Get Haste for 3 turns.",
+  "StatusName1": "Haste",
   "StatusName29": "Reflect",
+  "StatusDescription1": "For the duration of this effect, get 1 extra action at the start of each turn.",
   "StatusDescription29": "Reflects a portion of the damage received from direct attacks. The percentage of damage reflected is equal to the number of Reflex stacks (max. 60%)."
 }

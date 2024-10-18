@@ -10,6 +10,7 @@ var statusType: Enums.StatusType
 
 #stacks e persistência
 var isExpirable: bool = false
+var canCount: bool = false
 var duration: int
 var isStackable: bool = false
 var schance: float

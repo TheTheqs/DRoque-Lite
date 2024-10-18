@@ -162,11 +162,11 @@ func getAccuracy(nobject, nemeny: Digimon) -> float:
 	return currentAccuracy
 
 #calcula o dano das habilidades
-func getSkillDamage(damageType: Enums.DamageType) -> int:
+func getSkillDamage(nskill: DamageSkill) -> int:
 	totalDamage = 0
-	if(damageType == Enums.DamageType.PHYSICAL):
+	if(nskill.damageType == Enums.DamageType.PHYSICAL):
 		totalDamage = getAttribute("str")
-	elif(damageType == Enums.DamageType.MAGICAL):
+	elif(nskill.damageType == Enums.DamageType.MAGICAL):
 		totalDamage = getAttribute("int")
 	return totalDamage
 

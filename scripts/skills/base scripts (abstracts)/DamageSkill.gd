@@ -32,7 +32,7 @@ func setStats(stats: DamageSkillData) -> void:
 #definição de status dinâmicos
 func setValues(digimon: Digimon) -> void:
 	self.atackerType = digimon.digimonType
-	self.damageValue = digimon.getSkillDamage(self.damageType)
+	self.damageValue = digimon.getSkillDamage(self)
 	self.damageValue *= ratio
 	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	self.isCritic = Util.chance(digimon.getCriticalChance())

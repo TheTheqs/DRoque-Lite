@@ -13,7 +13,7 @@ func priorityCheck(digimon: Digimon) -> void:
 #Função sobreescrita, que dobra o dano quando o digimon que sua for do tipo planta.
 func setValues(digimon: Digimon) -> void:
 	self.atackerType = digimon.digimonType
-	self.damageValue = digimon.getSkillDamage(self.damageType)
+	self.damageValue = digimon.getSkillDamage(self)
 	self.damageValue *= ratio
 	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	if(digimon.element == Enums.Element.PLANT):

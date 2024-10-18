@@ -13,7 +13,7 @@ func _ready() -> void:
 	#teste de habilidades ativas.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
-	digimon.learnSkill(RockyRumble.new())
+	digimon.learnSkill(LimiterRemoval.new())
 	digimon.learnSkill(ScaleOneself.new())
 	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas

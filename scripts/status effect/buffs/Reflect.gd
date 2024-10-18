@@ -24,3 +24,6 @@ func effectOverlap(digimon: Digimon) -> void:
 			digimon.BM.showMessage(tr(StringName("StackLimit")) + "("+tr(StringName(self.statusName)) +")")
 		else:
 			digimonReflect.stacks += self.stacks
+
+func getStatus() -> StatusEffect:
+	return Reflect.new(self.stacks)

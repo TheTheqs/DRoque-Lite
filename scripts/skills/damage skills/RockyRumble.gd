@@ -13,7 +13,7 @@ func priorityCheck(digimon: Digimon) -> void:
 #Função sobreescrita, que sempre resulta em acerto, se usada por um monstro do tipo terra.
 func setValues(digimon: Digimon) -> void:
 	self.atackerType = digimon.digimonType
-	self.damageValue = digimon.getSkillDamage(self.damageType)
+	self.damageValue = digimon.getSkillDamage(self)
 	self.damageValue *= ratio
 	if(digimon.element == Enums.Element.EARTH):
 		self.accuracy = -1

@@ -14,7 +14,7 @@ func priorityCheck(digimon: Digimon) -> void:
 #Função sobreescrita, que vai aumentar o dano causado quando o digimon for do tipo trovão
 func setValues(digimon: Digimon) -> void:
 	self.atackerType = digimon.digimonType
-	self.damageValue = digimon.getSkillDamage(self.damageType)
+	self.damageValue = digimon.getSkillDamage(self)
 	self.damageValue *= ratio
 	self.damageValue *= damageBonus
 	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
