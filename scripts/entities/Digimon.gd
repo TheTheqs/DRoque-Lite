@@ -160,6 +160,8 @@ func getAccuracy(nobject, nemeny: Digimon) -> float:
 	elif(nobject is StatusEffect):
 		currentAccuracy = 100.0*self.baseINT/(self.baseINT + nemeny.baseINT)
 	currentAccuracy = Util.cap(currentAccuracy)
+	triggerCheck(onAccuracyCalc, nobject)
+	print("Precisão: " + str(currentAccuracy))
 	return currentAccuracy
 
 #calcula o dano das habilidades

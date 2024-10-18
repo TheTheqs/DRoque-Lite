@@ -1,6 +1,4 @@
 onBattleEnd // Logic not OK // Test not OK
-onCriticCalc // Logic not OK // Test not OK
-onAccuracyCalc // Logic not OK // Test not OK
 onManaConsumption // Logic not OK // Test not OK
 onPassingTurn // Logic not OK // Test not OK
 onGettingActions // Logic not OK // Test not OK

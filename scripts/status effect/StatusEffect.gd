@@ -15,6 +15,7 @@ var duration: int
 var isStackable: bool = false
 var schance: float
 var stacks: int
+var stacksLimit: int
 var isPersistent: bool = false
 
 #triggers

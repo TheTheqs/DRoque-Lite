@@ -8,6 +8,7 @@ func _init(nstacks: int) -> void:
 	self.statusType = Enums.StatusType.BUFF
 	self.isStackable = true
 	self.stacks = nstacks
+	self.stacksLimit = 60
 	self.statusTriggers.append(ReflectTrigger.new(self))
 
 func applyingEffect(digimon: Digimon) -> void:
@@ -19,7 +20,7 @@ func unapplyingEffect(digimon: Digimon) -> void:
 func effectOverlap(digimon: Digimon) -> void:
 	if(digimon.statusEffect.has(self.statusId)):
 		var digimonReflect: Reflect = digimon.statusEffect[29]
-		if(digimonReflect.stacks + self.stacks >= 60):
+		if(digimonReflect.stacks + self.stacks >= self.stacksLimit):
 			digimonReflect.stacks = 60
 			digimon.BM.showMessage(tr(StringName("StackLimit")) + "("+tr(StringName(self.statusName)) +")")
 		else:

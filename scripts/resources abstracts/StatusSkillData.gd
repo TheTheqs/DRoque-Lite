@@ -10,6 +10,7 @@ class_name StatusSkillData
 @export var staticPriority: int
 @export var manaCost: int
 @export var coolDown: int
+@export var statusType: Enums.StatusType
 
 #elementos vfx
 @export var skillTexture: CompressedTexture2D
