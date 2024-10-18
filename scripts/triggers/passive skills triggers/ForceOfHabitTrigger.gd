@@ -1,12 +1,13 @@
 extends Trigger
 
-class_name EmergencySuppliesTrigger
+class_name ForceOfHabitTrigger
 #aqui, action vai ser a passiva que este trigger está diretamente relacionado
 func _init(relatedPassiveSkill: PassiveSkill) -> void:
 	action = relatedPassiveSkill
 
 func checkContext(digimon: Digimon, context) -> bool:
-	if(context == "BattleStart" and (Util.getProportion(digimon.currentHealth, digimon.maxHelth) <= 0.5)):
-		return true
-	else:
-		return false
+	if(context is DamageSkill):
+		if(context.skillId in digimon.digimonLearnedSkills):
+			context.damageValue /= 2
+			digimon.skillAnnouncer.announceSkill(action.skillIcon)
+	return false

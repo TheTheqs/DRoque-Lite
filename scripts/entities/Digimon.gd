@@ -80,7 +80,7 @@ var BattleEnd: Array[Trigger] # Ao fim da batalha
 #triggers verificados pela prórpia classe com o uso da função triggerCheck
 var onHealing: Array[Trigger] #Quando recebe cura (de vida e mana)
 var onGetDamage: Array[Trigger] #Quando recebe dano
-var onGetTargeted: Array[Trigger] #Quando é alvo de uma habilidade
+var onGotTargeted: Array[Trigger] #Quando é alvo de uma habilidade
 var onDamageCalc: Array[Trigger] #No cálculo de dano
 var onCriticalCalc: Array[Trigger] #No cálculo de chance de crítico
 var onAccuracyCalc: Array[Trigger] #No cálculo de precisão das habilidades
@@ -178,6 +178,7 @@ func getTageted(skill: Skill) -> void:
 func gotTargeted(skill: Skill) -> void:
 	BTM.inAction()
 	gotHited = false
+	triggerCheck(self.onGotTargeted, skill)
 	if(skill is DamageSkill):
 		if(skill.accuracy == -1):
 			gotHited = true

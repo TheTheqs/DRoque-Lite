@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=4 format=3 uid="uid://exu6kxre8bfc"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_h4mpq"]
+[ext_resource type="Texture2D" uid="uid://blryap5t5qxkr" path="res://assets/interface/Icons/SkillIcons/ForceOfHabit.png" id="2_17pjt"]
+[ext_resource type="Script" path="res://scripts/triggers/passive skills triggers/ForceOfHabitTrigger.gd" id="3_6t4ek"]
+
+[resource]
+script = ExtResource("1_h4mpq")
+skillId = 14
+skillIcon = ExtResource("2_17pjt")
+cooldown = 0
+triggers = Array[Script]([ExtResource("3_6t4ek")])
