@@ -176,6 +176,7 @@ func getTageted(skill: Skill) -> void:
 #função que determina o acerto das habilidades.
 
 func gotTargeted(skill: Skill) -> void:
+	BTM.inAction()
 	gotHited = false
 	if(skill is DamageSkill):
 		if(skill.accuracy == -1):
@@ -190,7 +191,7 @@ func gotTargeted(skill: Skill) -> void:
 			tamer.showContent(tr(StringName("Miss")))
 	elif(skill is StatusSkill):
 		for nstatus : StatusEffect in skill.statusEffects:
-			self.applyStatus(nstatus)
+			self.applyStatus(nstatus.getStatus())
 	BTM.outAction("Digimon Got Targeted")
 
 #Função que processa o dano recebido
@@ -325,9 +326,15 @@ func action() -> void:
 	if(actionsToGo.size() > 0 and actionsToGo[0] is Skill):
 		currentAction = actionsToGo[0]
 		actionsToGo.remove_at(0)
-		self.digimonAnimator.play("action")
-		if(currentAction.skillIcon != null):
-			self.skillAnnouncer.announceSkill(currentAction.skillIcon)
+		if(currentAction.needsAnimation):
+			self.digimonAnimator.play("action")
+			if(currentAction.skillIcon != null):
+				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
+		else:
+			if(currentAction.skillIcon != null):
+				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
+			currentAction.effect(self)
+			BTM.outAction("Action: no animation skill")
 	else:
 		BTM.outAction("Digimon no action")
 
@@ -335,7 +342,7 @@ func animationFinished(anim_name: String):
 	if(anim_name == "action"):
 		currentAction.effect(self)
 		self.digimonAnimator.play("Idle")
-		#implementar BTM out action ao final da ação
+		BTM.outAction("Action: animation skill")
 	elif(anim_name == "damage"):
 		self.digimonAnimator.play("Idle")
 		BTM.outAction("Digimon finish damaged")

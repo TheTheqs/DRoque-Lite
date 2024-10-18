@@ -45,6 +45,7 @@
   "SkillName9": "Crespúsculo Cortante",
   "SkillName10": "Cura I",
   "SkillName11": "Provisões de Emergência",
+  "SkillName12": "Escamar-se",
   "SkillDescription0": "Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro.",
   "SkillDescription1": "Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie. Se esta habilidade for utilizada por um Digimon do tipo Neutro, seu Tempo de Recarga é reduzido a 0.",
   "SkillDescription2": "Causa 180% de Dano Físico de Fogo. Se usada por um Digimon do tipo Fogo, em vez de consumir Mana, a habilidade restaura o custo gasto.",
@@ -56,5 +57,8 @@
   "SkillDescription8": "Causa 190% de dano Físico do tipo Luz. O digimon do tipo Luz que usar essa habilidade recebe uma Ação Extra.",
   "SkillDescription9": "Causa 190% de dano Físico do tipo Trevas. O digimon do tipo Trevas que usar essa habilidade recebe uma Ação Extra.",
   "SkillDescription10": "Cura o Digimon em 20% da sua vida máxima.",
-  "SkillDescription11": "No início da batalha: se o Digimon estiver com apenas 50% ou menos de vida, cura 30% da vida máxima."
+  "SkillDescription11": "No início da batalha: se o Digimon estiver com apenas 50% ou menos de vida, cura 30% da vida máxima.",
+  "SkillDescription12": "Recebe Reflexo + 15",
+  "StatusName29": "Reflexo",
+  "StatusDescription29": "Reflete uma parte do dano recebido de ataques diretos. A procentagem do dano refletido é igual ao número de acúmulos de Reflexo (max. 60%)"
 }

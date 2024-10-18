@@ -14,7 +14,7 @@ func _ready() -> void:
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
 	digimon.learnSkill(RockyRumble.new())
-	digimon.learnSkill(DoubleDelta.new())
+	digimon.learnSkill(ScaleOneself.new())
 	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas
 	#teste de status effect

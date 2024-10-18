@@ -31,3 +31,10 @@ func effectOverlap(_digimon: Digimon) -> void:
 
 func calculateChance(digimon: Digimon) -> void:
 	schance = digimon.getAccuracy(self, digimon.enemy)
+
+func getStatus() -> StatusEffect:
+	return self
+
+func setStats() -> void:
+	self.statusName = "StatusName" + str(self.statusId)
+	self.statusDescription = "StatusDescription" + str(self.statusId)

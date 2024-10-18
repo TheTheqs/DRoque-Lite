@@ -4,9 +4,11 @@ class_name DeflectHit
 var damageData: DamageData = DamageData.new()
 func _init()-> void:
 	damageData.buildData(Enums.DamageType.TRUE, Enums.DamageSubType.DEFLECT, Enums.Element.NEUTRAL, Enums.Type.SPECIAL, 0.0, false)
+	self.needsAnimation = false
 
 func priorityCheck(_digimon: Digimon) -> void:
 	priority = 0
 
 func effect(digimon: Digimon) -> void:
+	damageData.damageValue = self.damageValue
 	digimon.enemy.processDamage(damageData)

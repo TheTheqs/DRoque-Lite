@@ -45,6 +45,7 @@
   "SkillName9": "Shadow Slice",
   "SkillName10": "Cure I",
   "SkillName11": "Emergency Supplies",
+  "SkillName12": "Scale Oneself",
   "SkillDescription0": "Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage.",
   "SkillDescription1": "Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie. If this skill is used by a Neutral-type Digimon, its cooldown is reduced to zero.",
   "SkillDescription2": "Deals 180% Fire-type Physical Damage. If used by a Fire-type Digimon, this ability restores the Mana cost instead of consuming it.",
@@ -56,5 +57,8 @@
   "SkillDescription8": "Deals 190% Light-type Physical Damage. A Light-type Digimon that uses this ability gains an Extra Action.",
   "SkillDescription9": "Deals 190% Dark-type Physical Damage. A Dark-type Digimon that uses this ability gains an Extra Action.",
   "SkillDescription10": "Heals the Digimon by 20% of its maximum health.",
-  "SkillDescription11": "At the start of the battle: if the Digimon has 50% or less of its health, it restores 30% of its maximum health."
+  "SkillDescription11": "At the start of the battle: if the Digimon has 50% or less of its health, it restores 30% of its maximum health.",
+  "SkillDescription12": "Get Reflect + 15",
+  "StatusName29": "Reflect",
+  "StatusDescription29": "Reflects a portion of the damage received from direct attacks. The percentage of damage reflected is equal to the number of Reflex stacks (max. 60%)."
 }

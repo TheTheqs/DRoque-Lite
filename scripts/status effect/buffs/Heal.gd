@@ -13,3 +13,6 @@ func _init(newValue: float, nisMana: bool) -> void:
 
 func applyingEffect(digimon: Digimon) -> void:
 	digimon.heal(healValue, isMana)
+
+func getStatus() -> StatusEffect:
+	return Heal.new(self.healValue, self.isMana)

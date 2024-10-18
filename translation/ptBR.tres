@@ -39,6 +39,7 @@ messages = {
 "SkillDescription1": &"Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie. Se esta habilidade for utilizada por um Digimon do tipo Neutro, seu Tempo de Recarga é reduzido a 0.",
 "SkillDescription10": &"Cura o Digimon em 20% da sua vida máxima.",
 "SkillDescription11": &"No início da batalha: se o Digimon estiver com apenas 50% ou menos de vida, cura 30% da vida máxima.",
+"SkillDescription12": &"Recebe Reflexo + 15",
 "SkillDescription2": &"Causa 180% de Dano Físico de Fogo. Se usada por um Digimon do tipo Fogo, em vez de consumir Mana, a habilidade restaura o custo gasto.",
 "SkillDescription3": &"Causa 150% de dano Físico do tipo Água. Essa habilidade sempre resulta em um ataque Crítico quando usada por um Digimon do tipo Água.",
 "SkillDescription4": &"Causa 160% de dano Físico do Tipo Planta. O dano causado e o Tempo de Recarga dessa habilidade são dobrados quando usada por um digimon do tipo Planta.",
@@ -51,6 +52,7 @@ messages = {
 "SkillName1": &"Golpe Gracioso",
 "SkillName10": &"Cura I",
 "SkillName11": &"Provisões de Emergência",
+"SkillName12": &"Escamar-se",
 "SkillName2": &"Chama Charmosa",
 "SkillName3": &"Correnteza Complementar",
 "SkillName4": &"Raízes Rasteiras",
@@ -59,6 +61,8 @@ messages = {
 "SkillName7": &"Leve Lufada",
 "SkillName8": &"Corte Cintilante",
 "SkillName9": &"Crespúsculo Cortante",
-"StackLimit": &"Número máximo de acúmulos atingidos!"
+"StackLimit": &"Número máximo de acúmulos atingidos!",
+"StatusDescription29": &"Reflete uma parte do dano recebido de ataques diretos. A procentagem do dano refletido é igual ao número de acúmulos de Reflexo (max. 60%)",
+"StatusName29": &"Reflexo"
 }
 locale = "pt"

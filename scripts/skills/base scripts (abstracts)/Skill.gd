@@ -15,6 +15,7 @@ var usable: bool = true
 var accuracy : float
 var cooldowm: int
 var currentCooldown: int = 0 #valor zero por padrão
+var needsAnimation: bool = true
 
 #scene elements
 var texture: CompressedTexture2D

@@ -10,6 +10,7 @@ func setStats(stats: PassiveSkillData) -> void:
 	self.skillIcon = stats.skillIcon
 	self.skillDescription = "SkillDescription" + str(self.skillId)
 	self.cooldowm = stats.cooldown
+	self.needsAnimation = false
 	if(stats.triggers.size() > 0):
 		for ntrigger: Script in stats.triggers:
 			self.skillTriggers.append(ntrigger.new(self))

@@ -2,11 +2,12 @@ extends StatusEffect
 
 class_name Reflect
 #value
-func _init() -> void:
+func _init(nstacks: int) -> void:
 	self.statusId = 29
+	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.isStackable = true
-	self.stacks = 0
+	self.stacks = nstacks
 	self.statusTriggers.append(ReflectTrigger.new(self))
 
 func applyingEffect(digimon: Digimon) -> void:

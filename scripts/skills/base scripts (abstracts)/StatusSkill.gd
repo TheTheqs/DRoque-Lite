@@ -37,3 +37,9 @@ func applyStats(_digimon: Digimon) -> void:
 #função abistrada que vai executar comandos específicos de cada skill caso houver
 func skillSingularity(_digimon: Digimon) -> void:
 	pass
+#aqui eu reaproveitei uma função. Em habildiades de status, ela vai gerar prioridade caso o jogador tenha mais ações.
+func getElementalChartPriority(digimon: Digimon) -> int:
+	if(digimon.tamer.actions > 1):
+		return 3
+	else:
+		return 0

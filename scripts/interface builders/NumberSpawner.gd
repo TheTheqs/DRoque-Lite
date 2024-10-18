@@ -52,7 +52,7 @@ func processDamageData(damageData: DamageData) -> String:
 func processStatus(statusEffect: StatusEffect) -> String:
 	var outlineColor: String = statusColor[statusEffect.statusType]
 	var newString: String = ""
-	newString = "\n[center][outline_size=8][font_size=8][outline_color=#" + outlineColor + "]" + statusEffect.statusName + "[/outline_color][/font_size][/outline_size][/center]"
+	newString = "\n[center][outline_size=8][font_size=8][outline_color=#" + outlineColor + "]" + tr(StringName(statusEffect.statusName)) + "[/outline_color][/font_size][/outline_size][/center]"
 	return newString
 
 func processString(string: String) -> String:
