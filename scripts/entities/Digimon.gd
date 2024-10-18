@@ -41,7 +41,7 @@ var currentExp: float
 var maxExp: float
 var currentLevel: int
 #valores constantes de retorno.
-var totalDamage: int
+var totalDamage: float
 var criticalChance: int
 var currentAccuracy: float
 var gotHited: bool
@@ -155,20 +155,21 @@ func getCriticalChance() -> int:
 func getAccuracy(nobject, nemeny: Digimon) -> float:
 	currentAccuracy = 0
 	if(nobject is DamageSkill):
-		currentAccuracy = 150.0*self.baseDEX/(self.baseDEX + nemeny.baseAGI)
+		currentAccuracy = 250.0*self.baseDEX/(self.baseDEX + nemeny.baseAGI)
 	elif(nobject is StatusEffect):
 		currentAccuracy = 100.0*self.baseINT/(self.baseINT + nemeny.baseINT)
 	currentAccuracy = Util.cap(currentAccuracy)
 	return currentAccuracy
 
 #calcula o dano das habilidades
-func getSkillDamage(nskill: DamageSkill) -> int:
+func getSkillDamage(nskill: DamageSkill) -> float:
 	totalDamage = 0
 	if(nskill.damageType == Enums.DamageType.PHYSICAL):
-		totalDamage = getAttribute("str")
+		totalDamage = float(getAttribute("str"))
 	elif(nskill.damageType == Enums.DamageType.MAGICAL):
-		totalDamage = getAttribute("int")
-	return totalDamage
+		totalDamage = float(getAttribute("int"))
+	triggerCheck(self.onDamageCalc, nskill)
+	return Util.cap(totalDamage)
 
 #função que chama o skill spawner para executar o vfx de uma skill usada no digimon
 func getTageted(skill: Skill) -> void:
@@ -188,6 +189,8 @@ func gotTargeted(skill: Skill) -> void:
 		if(gotHited):
 			var processableDamage: DamageData = Util.damageDataBuilder(skill)
 			processDamage(processableDamage)
+			if(skill.hasEffect):
+				skill.applyStats(self)
 		else:
 			tamer.showContent(tr(StringName("Miss")))
 	elif(skill is StatusSkill):

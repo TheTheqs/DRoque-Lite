@@ -214,9 +214,10 @@ position = Vector2(33, 154)
 position = Vector2(69, 46)
 ownerPlayer = NodePath("..")
 
-[node name="NumberSpawner" type="Node2D" parent="Enemy"]
+[node name="NumberSpawner" type="Node2D" parent="Enemy" node_paths=PackedStringArray("relatedTamer")]
 position = Vector2(0, 130)
 script = ExtResource("5_nauik")
+relatedTamer = NodePath("..")
 
 [node name="TurnFrame" type="Sprite2D" parent="Enemy"]
 position = Vector2(135, 94)
@@ -372,9 +373,10 @@ visible = false
 position = Vector2(144, 213)
 buttonPanel = NodePath("..")
 
-[node name="NumberSpawner" type="Node2D" parent="Player"]
+[node name="NumberSpawner" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedTamer")]
 position = Vector2(0, 300)
 script = ExtResource("5_nauik")
+relatedTamer = NodePath("..")
 
 [node name="Turn Frame" type="Sprite2D" parent="Player"]
 position = Vector2(135, 266)

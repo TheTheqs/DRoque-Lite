@@ -15,9 +15,8 @@ func _ready() -> void:
 	digimon.learnSkill(CureI.new())
 	digimon.learnSkill(RockyRumble.new())
 	digimon.learnSkill(DoubleDelta.new())
-	digimon.learnSkill(LuminousLash.new())
+	digimon.learnSkill(OpressTheWeak.new())
 	#teste de habilidades passivas
-	digimon.learnSkill(ForceOfHabit.new())
 	#teste de status effect
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()

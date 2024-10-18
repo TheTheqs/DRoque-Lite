@@ -1,18 +1,18 @@
 extends StatusEffect
 
-class_name Sick
+class_name Exhaust
 #construtora
 func _init() -> void:
-	self.statusId = 28
+	self.statusId = 30
 	self.setStats()
 	self.statusType = Enums.StatusType.DEBUFF
-	self.statusTriggers.append(SickTrigger.new())
+	self.statusTriggers.append(ExhaustTrigger.new())
 
 func applyingEffect(digimon: Digimon) -> void:
-	digimon.onHealing.append(self.statusTriggers[0])
+	digimon.onDamageCalc.append(self.statusTriggers[0])
 
 func unapplyingEffect(digimon: Digimon) -> void:
-	digimon.onHealing.erase(self.statusTriggers[0])
+	digimon.onDamageCalc.erase(self.statusTriggers[0])
 
 func getStatus() -> StatusEffect:
-	return Sick.new()
+	return Exhaust.new()

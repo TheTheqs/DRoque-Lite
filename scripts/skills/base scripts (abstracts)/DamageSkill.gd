@@ -7,6 +7,7 @@ var ratio: float
 var isCritic: bool
 var damageValue: float
 var hasEffect: bool
+var statusEffects: Array[StatusEffect]
 var element: Enums.Element
 var atackerType: Enums.Type
 var damageType: Enums.DamageType

@@ -10,7 +10,9 @@ class_name SpawnedNumber
 var limitPosition: int = 60
 var currentPosition: int = 0
 var velocity: int = 2
-var moduleRatio: float = 0.008
+var moduleRatio: float = 0.016
+#variável de callback
+var numberSpawner: NumberSpawner
 
 func _process(_delta):
 	if(currentPosition < limitPosition):
@@ -24,11 +26,13 @@ func _process(_delta):
 		outTimer.start(0.2)
 		set_process(false)
 
-func showNumber(number: String) -> void:
+func showNumber(number: String, nnumber: NumberSpawner) -> void:
+	self.numberSpawner = nnumber
 	self.modulate.a = 1
 	currentNumber.text = number
 	set_process(true)
 
 
 func outTimeOut():
+	numberSpawner.sweepQueue()
 	self.queue_free()
