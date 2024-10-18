@@ -1,6 +1,4 @@
 onBattleEnd // Logic not OK // Test not OK
-onGetTargeted // Logic not OK // Test not OK
-onDamageCalc // Logic not OK // Test not OK
 onCriticCalc // Logic not OK // Test not OK
 onAccuracyCalc // Logic not OK // Test not OK
 onManaConsumption // Logic not OK // Test not OK
@@ -16,4 +14,3 @@ onDamageDelt // Logic not OK // Test not OK
 onDying // Logic not OK // Test not OK
 onActing // Logic not OK // Test not OK
 onEvolution // Logic not OK // Test not OK
-onVictory // Logic not OK // Test not OK

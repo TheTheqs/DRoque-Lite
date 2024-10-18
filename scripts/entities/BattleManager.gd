@@ -27,8 +27,8 @@ func inAction() -> void:
 	manageTimer()
 	somethingIsHappening += 1
 
-func outAction(location: String) -> void:
-	print(location)
+func outAction(_location: String) -> void:
+	#print(_location)
 	manageTimer()
 	somethingIsHappening -= 1
 	if(somethingIsHappening <= 0):

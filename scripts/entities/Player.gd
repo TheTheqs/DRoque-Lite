@@ -13,9 +13,9 @@ func _ready() -> void:
 	#teste de habilidades ativas.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
-	digimon.learnSkill(RockyRumble.new())
-	digimon.learnSkill(DoubleDelta.new())
-	digimon.learnSkill(OpressTheWeak.new())
+	digimon.learnSkill(TrueVision.new())
+	digimon.learnSkill(LimiterRemoval.new())
+	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas
 	#teste de status effect
 	#atualização da interface. Sempre a última coisa a se fazer!

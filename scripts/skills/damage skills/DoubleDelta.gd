@@ -19,7 +19,7 @@ func setValues(digimon: Digimon) -> void:
 	if(digimon.element == Enums.Element.WATER):
 		self.isCritic = true
 	else:
-		self.isCritic = Util.chance(digimon.getCriticalChance())
+		self.isCritic = Util.chance(digimon.getCriticalChance(self))
 	if(self.isCritic):
 		self.damageValue *= 1.5
 	skillSingularity(digimon)

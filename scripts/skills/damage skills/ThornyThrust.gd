@@ -18,7 +18,7 @@ func setValues(digimon: Digimon) -> void:
 	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	if(digimon.element == Enums.Element.PLANT):
 		self.damageValue *= 2
-	self.isCritic = Util.chance(digimon.getCriticalChance())
+	self.isCritic = Util.chance(digimon.getCriticalChance(self))
 	if(self.isCritic):
 		self.damageValue *= 1.5
 	skillSingularity(digimon)

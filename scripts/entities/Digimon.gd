@@ -42,7 +42,7 @@ var maxExp: float
 var currentLevel: int
 #valores constantes de retorno.
 var totalDamage: float
-var criticalChance: int
+var criticalChance: float
 var currentAccuracy: float
 var gotHited: bool
 #Scene Elements
@@ -147,9 +147,10 @@ func getAttribute(att: String) -> int:
 	else:
 		return 1
 #retorna a chance de crítico no cálculo de habilidades
-func getCriticalChance() -> int:
+func getCriticalChance(damageSkill: DamageSkill) -> float:
 	criticalChance = 0
-	criticalChance = getAttribute("dex")
+	criticalChance = float(getAttribute("dex"))
+	triggerCheck(onCriticalCalc, damageSkill)
 	return criticalChance
 #retorna a precisão do digimon
 func getAccuracy(nobject, nemeny: Digimon) -> float:
@@ -249,6 +250,7 @@ func unapplyStatus(statusID: int) -> void:
 		var ostatusEffect: StatusEffect = self.statusEffect[statusID]
 		ostatusEffect.unapplyingEffect(self)
 		self.statusEffect.erase(statusID)
+		tamer.showContent("-" + tr(StringName(ostatusEffect.statusName)))
 	else:
 		print("Erro, status não encontrado no dicionário")
 
