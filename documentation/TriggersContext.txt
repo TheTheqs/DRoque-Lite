@@ -7,7 +7,6 @@ onInventory // Logic not OK // Test not OK
 onGotHited // Logic not OK // Test not OK
 onEvadeDamage // Logic not OK // Test not OK
 onEvadeStats // Logic not OK // Test not OK
-onGettingStats // Logic not OK // Test not OK
 onDamageDelt // Logic not OK // Test not OK
 onDying // Logic not OK // Test not OK
 onActing // Logic not OK // Test not OK

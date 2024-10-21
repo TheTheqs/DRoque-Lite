@@ -6,7 +6,7 @@ func _init() -> void:
 	self.statusId = 23
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
-	#self.statusTriggers.append(FocusTrigger0.new(self))
+	self.statusTriggers.append(PrecisionTrigger.new())
 
 func applyingEffect(digimon: Digimon) -> void:
 	if(digimon.statusEffect.has(12)):
@@ -16,7 +16,6 @@ func applyingEffect(digimon: Digimon) -> void:
 
 func unapplyingEffect(digimon: Digimon) -> void:
 	digimon.onAccuracyCalc.erase(statusTriggers[0])
-
 
 func getStatus() -> StatusEffect:
 	return Precision.new()

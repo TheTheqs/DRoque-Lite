@@ -24,6 +24,7 @@ func spawSkill(skill: Skill) -> void:
 
 func _onAnimationFinished(anim_name: String) -> void:
 	self.visible = false
+	skillSprite.hframes = 1
 	if("action" in anim_name):
 		relatedDigimon.gotTargeted(currentSkill)
 	relatedDigimon.BTM.outAction("Skill Spawner")

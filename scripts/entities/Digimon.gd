@@ -66,6 +66,8 @@ var digimonLearnedSkills: Array[int]
 var statusEffect: Dictionary = {
 	
 }
+var statusImunity: Array[int]
+var elementalImunity:Array[Enums.Element]
 var statusToRemove: Array[int]
 var isDisabled: bool
 #actions
@@ -204,46 +206,54 @@ func gotTargeted(skill: Skill) -> void:
 #Função que processa o dano recebido
 func processDamage(damageData: DamageData) -> void:
 	BTM.inAction()
-	damageData.damageValue *= Util.getTypeRatio(damageData.atackerType, self.digimonType)
-	damageData.damageValue *= Util.getElementRatio(damageData.damageElement, self.element)
-	applyDefense(damageData)
-	if(damageData.damageValue <= 0):
-		damageData.damageValue = 1.0
-	#calculando dano
-	if(self.currentHealth - damageData.damageValue <= 0):
-		currentHealth = 0
+	if(damageData.damageElement in self.elementalImunity):
+		tamer.showContent(tr(StringName("Immunity")))
 	else:
-		currentHealth -= damageData.damageValue
-	triggerCheck(self.onGetDamage, damageData)
-	tamer.showContent(damageData)
-	digimonAnimator.play("damage")
-	tamer.HUDD.updateValues()
+		damageData.damageValue *= Util.getTypeRatio(damageData.atackerType, self.digimonType)
+		damageData.damageValue *= Util.getElementRatio(damageData.damageElement, self.element)
+		applyDefense(damageData)
+		if(damageData.damageValue <= 0):
+			damageData.damageValue = 1.0
+		#calculando dano
+		if(self.currentHealth - damageData.damageValue <= 0):
+			currentHealth = 0
+		else:
+			currentHealth -= damageData.damageValue
+		triggerCheck(self.onGetDamage, damageData)
+		tamer.showContent(damageData)
+		digimonAnimator.play("damage")
+		tamer.HUDD.updateValues()
 	
 #função que processa a aplica um status effect
 func applyStatus(nstatus: StatusEffect) -> void:
 	BTM.inAction()
-	if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
-		if(statusEffect.has(nstatus.statusId)):
-			nstatus.effectOverlap(self)
-		else:
-			nstatus.applyingEffect(self)
-			if(nstatus.statusId != 41):
-				self.statusEffect[nstatus.statusId] = nstatus
-		tamer.showContent(nstatus)
+	if(nstatus.statusId in self.statusImunity):
+		tamer.showContent(tr(StringName("Immunity")))
 	else:
-		#a inteligência base é a taxa de acerto do atacante, mas também e a taxa de esquiva do atacado
-		nstatus.calculateChance(self)
-		gotHited = Util.chance(nstatus.schance)
-		if(gotHited):
-			if(statusEffect.has(nstatus.statusId)): #verifica se o status já está presente, chama função de sobreposição
+		if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
+			if(statusEffect.has(nstatus.statusId)):
 				nstatus.effectOverlap(self)
 			else:
 				nstatus.applyingEffect(self)
 				if(nstatus.statusId != 41):
 					self.statusEffect[nstatus.statusId] = nstatus
 			tamer.showContent(nstatus)
+			triggerCheck(self.onGettingStats, nstatus)
 		else:
-			tamer.showContent(tr(StringName("Miss")))
+			#a inteligência base é a taxa de acerto do atacante, mas também e a taxa de esquiva do atacado
+			nstatus.calculateChance(self)
+			gotHited = Util.chance(nstatus.schance)
+			if(gotHited):
+				if(statusEffect.has(nstatus.statusId)): #verifica se o status já está presente, chama função de sobreposição
+					nstatus.effectOverlap(self)
+				else:
+					nstatus.applyingEffect(self)
+					if(nstatus.statusId != 41):
+						self.statusEffect[nstatus.statusId] = nstatus
+				tamer.showContent(nstatus)
+				triggerCheck(self.onGettingStats, nstatus)
+			else:
+				tamer.showContent(tr(StringName("Miss")))
 	BTM.outAction("Aplying Status")
 
 #função para remover um status.
