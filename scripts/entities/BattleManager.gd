@@ -84,11 +84,11 @@ func changeTurn():
 			currentPhase = Enums.BattlePhase.CHOICE
 		outAction("Pos Action Phase")
 	elif(currentPhase == Enums.BattlePhase.TURNEND):
-		triggerCheck(currentDigimon.onTurnEnd, currentDigimon, "TurnEnd")
-		sweepExpiredStatus(currentDigimon)
 		if(currentDigimon.actionsToGo.size() == 0 and oppositeDigimon.actionsToGo.size() == 0):
-			currentPhase = Enums.BattlePhase.TURNSTART
+			triggerCheck(currentDigimon.onTurnEnd, currentDigimon, "TurnEnd")
+			sweepExpiredStatus(currentDigimon)
 			changeActor()
+			currentPhase = Enums.BattlePhase.TURNSTART
 		outAction("Turn End")
 	elif(currentPhase == Enums.BattlePhase.BATTLEEND):
 		#ainda para ser implementado
@@ -130,6 +130,7 @@ func gettingStarted() -> void:
 		outAction("Getting Started")
 
 func passingTurn() -> void:
+	triggerCheck(currentDigimon.onPassingTurn, currentDigimon, "PassingTurn")
 	currentPhase = Enums.BattlePhase.POSACTION
 	isPassing = true
 	outAction("Passing Turn")

@@ -17,6 +17,7 @@ func _ready() -> void:
 	digimon.learnSkill(LimiterRemoval.new())
 	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas
+	digimon.learnSkill(SlowAntibodies.new())
 	digimon.learnSkill(EfficientCasting.new())
 	#teste de status effect
 	#atualização da interface. Sempre a última coisa a se fazer!
