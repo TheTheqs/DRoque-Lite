@@ -19,6 +19,11 @@ func spawSkill(skill: Skill) -> void:
 	currentSkill = skill
 	skillSprite.texture = skill.texture
 	var animationCommand: String = "action" + str(skill.textureRange)
+	#manipulação do speed scale para algumas habilidade que ficam melhores quando lentas
+	if(skill.isSlow):
+		animator.speed_scale = 1.0
+	else:
+		animator.speed_scale = 2.0
 	animator.play(animationCommand)
 	self.visible = true
 

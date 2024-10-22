@@ -13,10 +13,11 @@ func _ready() -> void:
 	#teste de habilidades ativas.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
-	digimon.learnSkill(WillfullIgnorance.new())
+	digimon.learnSkill(PoisonMaw.new())
 	digimon.learnSkill(LimiterRemoval.new())
 	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas
+	digimon.learnSkill(EfficientCasting.new())
 	#teste de status effect
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()

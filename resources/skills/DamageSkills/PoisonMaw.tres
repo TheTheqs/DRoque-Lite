@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://ciu480f4husbv"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_wr3d3"]
+[ext_resource type="Texture2D" uid="uid://desbe5mbptisb" path="res://assets/interface/Icons/SkillIcons/PoisonMaw.png" id="2_rtnlq"]
+[ext_resource type="Texture2D" uid="uid://c8mge478q6iyv" path="res://assets/sprites/vfx/skills/PoisonMaw.png" id="3_4gy0i"]
+
+[resource]
+script = ExtResource("1_wr3d3")
+skillId = 20
+skillIcon = ExtResource("2_rtnlq")
+staticPriority = 2
+element = 0
+damageType = 0
+damageSubType = 0
+ratio = 1.2
+manaCost = 10
+coolDown = 3
+hasEffect = true
+skillTexture = ExtResource("3_4gy0i")
+textureRange = 16

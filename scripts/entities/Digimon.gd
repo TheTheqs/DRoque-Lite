@@ -44,6 +44,7 @@ var currentLevel: int
 var totalDamage: float
 var criticalChance: float
 var currentAccuracy: float
+var consumedMana: float
 var gotHited: bool
 #Scene Elements
 @export var skillSpawner: SkillSpawner
@@ -163,7 +164,6 @@ func getAccuracy(nobject, nemeny: Digimon) -> float:
 		currentAccuracy = 100.0*self.baseINT/(self.baseINT + nemeny.baseINT)
 	currentAccuracy = Util.cap(currentAccuracy)
 	triggerCheck(onAccuracyCalc, nobject)
-	print("Precisão: " + str(currentAccuracy))
 	return currentAccuracy
 
 #calcula o dano das habilidades
@@ -264,7 +264,7 @@ func unapplyStatus(statusID: int) -> void:
 		self.statusEffect.erase(statusID)
 		tamer.showContent("-" + tr(StringName(ostatusEffect.statusName)))
 	else:
-		print("Erro, status não encontrado no dicionário")
+		print("Erro, status não encontrado no dicionário. Skill ID = ", str(statusID))
 
 #essa função está incompleta
 func learnSkill(skill: Skill) -> void:
@@ -333,10 +333,12 @@ func heal(value: float, isMana: bool) -> void:
 	BTM.outAction("Digimon Heal")
 
 func manaConsumption(value: float) -> void:
-	if(currentMana - value <= 0):
+	self.consumedMana = value
+	self.triggerCheck(onManaConsumption, consumedMana)
+	if(currentMana - consumedMana <= 0):
 		currentMana = 0
 	else:
-		currentMana -= value
+		currentMana -= consumedMana
 	tamer.HUDD.updateValues()
 
 func action() -> void:

@@ -28,7 +28,7 @@ func inAction() -> void:
 	somethingIsHappening += 1
 
 func outAction(_location: String) -> void:
-	#print(_location)
+	print(_location)
 	manageTimer()
 	somethingIsHappening -= 1
 	if(somethingIsHappening <= 0):
@@ -144,3 +144,4 @@ func sweepExpiredStatus(digimon: Digimon) -> void:
 	if(digimon.statusToRemove.size() > 0):
 		for statusId: int in digimon.statusToRemove:
 			digimon.unapplyStatus(statusId)
+		digimon.statusToRemove.clear()

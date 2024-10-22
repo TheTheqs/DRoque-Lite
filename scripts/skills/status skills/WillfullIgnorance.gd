@@ -5,6 +5,7 @@ var stats: StatusSkillData = load("res://resources/skills/status skills/Willfull
 
 func _init() ->void:
 	setStats(stats)
+	self.isSlow = true
 	self.statusEffects.append(Blind.new())
 
 func priorityCheck(digimon: Digimon) -> void:
