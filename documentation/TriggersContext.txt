@@ -1,5 +1,4 @@
 onBattleEnd // Logic not OK // Test not OK
-onGettingActions // Logic not OK // Test not OK
 onLearnSkill // Logic not OK // Test not OK
 onInventory // Logic not OK // Test not OK
 onGotHited // Logic not OK // Test not OK

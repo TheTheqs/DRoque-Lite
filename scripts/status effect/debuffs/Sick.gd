@@ -15,4 +15,6 @@ func unapplyingEffect(digimon: Digimon) -> void:
 	digimon.onHealing.erase(self.statusTriggers[0])
 
 func getStatus() -> StatusEffect:
-	return Sick.new()
+	var newSick: Sick = Sick.new()
+	newSick.schance = self.schance
+	return newSick

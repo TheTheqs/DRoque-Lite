@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="3_w8qjs"]
 [ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="4_6scnb"]
 [ext_resource type="PackedScene" uid="uid://dng007yy161aa" path="res://scenes/entities/SkillAnnouncer.tscn" id="4_wq63m"]
-[ext_resource type="Script" path="res://scripts/interface builders/NumberSpawner.gd" id="5_nauik"]
 [ext_resource type="Texture2D" uid="uid://c8wmd2aucho2m" path="res://assets/interface/UI/EnemyFrame.png" id="6_dyeyq"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="7_5gnrb"]
+[ext_resource type="PackedScene" uid="uid://dna82yfhjhyqf" path="res://scenes/entities/NumberSpawner.tscn" id="7_y75di"]
 [ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="8_yj36c"]
 [ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="9_elhsp"]
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="9_lgp2m"]
@@ -214,14 +214,13 @@ position = Vector2(33, 154)
 position = Vector2(69, 46)
 ownerPlayer = NodePath("..")
 
-[node name="NumberSpawner" type="Node2D" parent="Enemy" node_paths=PackedStringArray("relatedTamer")]
-position = Vector2(0, 130)
-script = ExtResource("5_nauik")
-relatedTamer = NodePath("..")
-
 [node name="TurnFrame" type="Sprite2D" parent="Enemy"]
 position = Vector2(135, 94)
 texture = ExtResource("6_dyeyq")
+
+[node name="NumberSpawner" parent="Enemy" node_paths=PackedStringArray("relatedTamer") instance=ExtResource("7_y75di")]
+position = Vector2(0, 134)
+relatedTamer = NodePath("..")
 
 [node name="EnemyActions" type="Label" parent="Enemy"]
 offset_left = 165.0
@@ -373,14 +372,12 @@ visible = false
 position = Vector2(144, 213)
 buttonPanel = NodePath("..")
 
-[node name="NumberSpawner" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedTamer")]
-position = Vector2(0, 300)
-script = ExtResource("5_nauik")
-relatedTamer = NodePath("..")
-
 [node name="Turn Frame" type="Sprite2D" parent="Player"]
 position = Vector2(135, 266)
 texture = ExtResource("17_7lwst")
+
+[node name="NumberSpawner" parent="Player" node_paths=PackedStringArray("relatedTamer") instance=ExtResource("7_y75di")]
+relatedTamer = NodePath("..")
 
 [node name="PlayerActions" type="Label" parent="Player"]
 offset_left = 16.0

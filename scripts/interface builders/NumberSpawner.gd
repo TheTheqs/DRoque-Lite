@@ -7,6 +7,7 @@ var contentQueue: Array[String]
 var onShowing: bool
 #Tmer relacionado para manipulação inAction/outAction
 @export var relatedTamer: Tamer
+@export var spawTimer: Timer
 var elementColor: Dictionary = {
 	Enums.Element.NEUTRAL : "A5A5A5",
 	Enums.Element.FIRE : "E60000",
@@ -77,8 +78,9 @@ func sweepQueue() -> void:
 	if(contentQueue.size() > 0):
 		var newSpawn: SpawnedNumber = spawn.instantiate()
 		self.call_deferred("add_child", newSpawn)
-		newSpawn.showNumber(contentQueue[0], self)
+		newSpawn.showNumber(contentQueue[0])
 		contentQueue.remove_at(0)
+		spawTimer.start(0.5)
 	else:
 		onShowing = false
 		relatedTamer.BTM.outAction("Content Spawner")

@@ -26,13 +26,11 @@ func _process(_delta):
 		outTimer.start(0.2)
 		set_process(false)
 
-func showNumber(number: String, nnumber: NumberSpawner) -> void:
-	self.numberSpawner = nnumber
+func showNumber(number: String) -> void:
 	self.modulate.a = 1
 	currentNumber.text = number
 	set_process(true)
 
 
 func outTimeOut():
-	numberSpawner.sweepQueue()
 	self.queue_free()

@@ -15,4 +15,6 @@ func unapplyingEffect(digimon: Digimon) -> void:
 	digimon.onTurnEnd.erase(self.statusTriggers[0])
 
 func getStatus() -> StatusEffect:
-	return Poison.new()
+	var newPoison: Poison  = Poison.new()
+	newPoison.schance = self.schance
+	return newPoison

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusSkillData" load_steps=4 format=3 uid="uid://b6g541dai001j"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/StatusSkillData.gd" id="1_amv64"]
+[ext_resource type="Texture2D" uid="uid://bjgtk1td5hcdd" path="res://assets/interface/Icons/SkillIcons/LimiterOverload.png" id="2_v7iw3"]
+[ext_resource type="Texture2D" uid="uid://c2naj355cwlg8" path="res://assets/sprites/vfx/skills/LimiterOverload.png" id="3_mm522"]
+
+[resource]
+script = ExtResource("1_amv64")
+skillId = 22
+skillIcon = ExtResource("2_v7iw3")
+staticPriority = 1
+manaCost = 9
+coolDown = 3
+statusType = 1
+skillTexture = ExtResource("3_mm522")
+textureRange = 12

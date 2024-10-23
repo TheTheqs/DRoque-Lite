@@ -15,4 +15,6 @@ func unapplyingEffect(digimon: Digimon) -> void:
 	digimon.onDamageCalc.erase(self.statusTriggers[0])
 
 func getStatus() -> StatusEffect:
-	return Exhaust.new()
+	var newExhaust: Exhaust = Exhaust.new()
+	newExhaust.schance = self.schance
+	return newExhaust

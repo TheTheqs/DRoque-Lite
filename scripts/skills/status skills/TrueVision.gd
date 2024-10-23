@@ -5,6 +5,7 @@ var stats: StatusSkillData = load("res://resources/skills/status skills/TrueVisi
 
 func _init() ->void:
 	setStats(stats)
+	self.isSlow = true
 	self.statusEffects.append(Focus.new())
 
 func priorityCheck(digimon: Digimon) -> void:

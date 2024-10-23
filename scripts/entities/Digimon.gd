@@ -45,6 +45,7 @@ var totalDamage: float
 var criticalChance: float
 var currentAccuracy: float
 var consumedMana: float
+var gainActions: int
 var gotHited: bool
 #Scene Elements
 @export var skillSpawner: SkillSpawner
@@ -380,7 +381,9 @@ func chooseAction(newAction) -> void:
 		actionsToGo.append(newAction)
 
 func getActions(nActions: int) -> void:
-	self.tamer.getActions(nActions)
+	gainActions = nActions
+	triggerCheck(self.onGettingActions, gainActions)
+	self.tamer.getActions(gainActions)
 
 #função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
 func triggerCheck(triggersToTest: Array, context) -> void:

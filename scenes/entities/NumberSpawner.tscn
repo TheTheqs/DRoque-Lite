@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dna82yfhjhyqf"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/NumberSpawner.gd" id="1_sm04q"]
+
+[node name="NumberSpawner" type="Node2D" node_paths=PackedStringArray("spawTimer")]
+position = Vector2(0, 300)
+script = ExtResource("1_sm04q")
+spawTimer = NodePath("SpawnTimer")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="sweepQueue"]

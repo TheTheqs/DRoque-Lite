@@ -17,4 +17,6 @@ func unapplyingEffect(digimon: Digimon) -> void:
 	digimon.onAccuracyCalc.erase(self.statusTriggers[0])
 
 func getStatus() -> StatusEffect:
-	return Blind.new()
+	var newBlind: Blind = Blind.new()
+	newBlind.schance = self.schance
+	return newBlind
