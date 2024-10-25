@@ -14,13 +14,12 @@ func _ready() -> void:
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
 	digimon.learnSkill(LimiterOverload.new())
-	digimon.learnSkill(DimensionalBarrier.new())
-	digimon.learnSkill(LuminousLash.new())
+	digimon.learnSkill(OpressTheWeak.new())
+	digimon.learnSkill(WillfullIgnorance.new())
 	#teste de habilidades passivas
 	digimon.learnSkill(EfficientCasting.new())
-	digimon.learnSkill(MarkingDodge.new())
+	digimon.learnSkill(CounterMagic.new())
 	#teste de status effect
-	digimon.applyStatus(Evade.new())
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()

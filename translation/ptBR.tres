@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3]
+[gd_resource type="Translation" format=3 uid="uid://qdhmk32mmvdr"]
 
 [resource]
 messages = {
@@ -45,8 +45,8 @@ messages = {
 "SkillDescription12": &"Recebe Reflexo + 15",
 "SkillDescription13": &"Recebe Aceleração por 3 turnos",
 "SkillDescription14": &"Quando o oponente usar uma Habilidade Ofensiva: se você também possuir essa habilidade, reduz o dano em 50%",
-"SkillDescription15": &"Causa 140% de dano Mágico do tipo Trevas. Aplica Exaustão se essa habilidade reduzir a vida do oponente à 40% ou menos.",
-"SkillDescription16": &"Recebe Foco",
+"SkillDescription15": &"Causa 140% de dano Mágico do tipo Trevas. Chance de causar Exaustão.",
+"SkillDescription16": &"Recebe Foco.",
 "SkillDescription17": &"Tenta aplicar Cegueira no oponente",
 "SkillDescription18": &"Uma vez por batalha, quando for afetado por Cegueira: recebe Precisão.",
 "SkillDescription19": &"Ao usar uma habilidade com 70% ou mais da mana máxima: reduz o custo de mana da habilidade em 50%.",
@@ -57,6 +57,7 @@ messages = {
 "SkillDescription23": &"Recebe Barreira + 2.",
 "SkillDescription24": &"Uma vez por batalha, ganha Evasão ao sofrer dano que reduz a vida para 40% ou menos.",
 "SkillDescription25": &"Aplica marcado no oponente sempre que se esquivar de um ataque direto.",
+"SkillDescription26": &"Quando um efeito negativo falha ao ser aplicado no digimon: tenta aplicar o mesmo efeito no oponente.",
 "SkillDescription3": &"Causa 150% de dano Físico do tipo Água. Essa habilidade sempre resulta em um ataque Crítico quando usada por um Digimon do tipo Água.",
 "SkillDescription4": &"Causa 160% de dano Físico do Tipo Planta. O dano causado e o Tempo de Recarga dessa habilidade são dobrados quando usada por um digimon do tipo Planta.",
 "SkillDescription5": &"Causa 200% de dano Físico do tipo Terra. Essa habilidade nunca erra o alvo quando usado por um Digimon do tipo Terra.",
@@ -83,6 +84,7 @@ messages = {
 "SkillName23": &"Barreira Dimensional",
 "SkillName24": &"Evasão Instintiva",
 "SkillName25": &"Esquiva Marcante",
+"SkillName26": &"Contra Magia",
 "SkillName3": &"Correnteza Complementar",
 "SkillName4": &"Raízes Rasteiras",
 "SkillName5": &"Pedra Perigosa",

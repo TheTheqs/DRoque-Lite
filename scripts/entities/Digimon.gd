@@ -267,6 +267,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 				triggerCheck(self.onGettingStats, nstatus)
 			else:
 				tamer.showContent(tr(StringName("Miss")))
+				triggerCheck(self.onEvadeStats, nstatus)
 	BTM.outAction("Aplying Status")
 
 #função para remover um status.
