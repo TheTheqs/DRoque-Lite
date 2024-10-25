@@ -46,7 +46,8 @@ var criticalChance: float
 var currentAccuracy: float
 var consumedMana: float
 var gainActions: int
-var gotHited: bool
+var gotHited: bool #esse bool verifica se uma habilidade acertou ou não
+var getHited: bool #esse verifica antes de fazer a animação das habilidades
 #Scene Elements
 @export var skillSpawner: SkillSpawner
 @export var enemy: Digimon
@@ -179,13 +180,17 @@ func getSkillDamage(nskill: DamageSkill) -> float:
 
 #função que chama o skill spawner para executar o vfx de uma skill usada no digimon
 func getTageted(skill: Skill) -> void:
-	skillSpawner.spawSkill(skill)
+	BTM.inAction()
+	getHited = true
+	triggerCheck(self.onGotTargeted, skill)
+	if(getHited):
+		skillSpawner.spawSkill(skill)
+	BTM.outAction("Digimon getTargeted")
 #função que determina o acerto das habilidades.
 
 func gotTargeted(skill: Skill) -> void:
 	BTM.inAction()
 	gotHited = false
-	triggerCheck(self.onGotTargeted, skill)
 	if(skill is DamageSkill):
 		if(skill.accuracy == -1):
 			gotHited = true

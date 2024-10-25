@@ -27,4 +27,5 @@ func effectOverlap(digimon: Digimon) -> void:
 			digimonReflect.stacks += self.stacks
 
 func getStatus() -> StatusEffect:
-	return Reflect.new(self.stacks)
+	var newReflect: Reflect = Reflect.new(self.stacks)
+	return newReflect

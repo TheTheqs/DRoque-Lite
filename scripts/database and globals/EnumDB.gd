@@ -42,6 +42,7 @@ enum DamageSubType {
 	DIRECT,
 	OVERTIME,
 	DEFLECT,
+	AUTO,
 	SPECIAL
 }
 

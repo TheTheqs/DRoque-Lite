@@ -9,12 +9,12 @@ func _ready() -> void:
 	self.tamerName = "Player"
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(0)
+	summonDigimon(1)
 	#teste de habilidades ativas.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
 	digimon.learnSkill(LimiterOverload.new())
-	digimon.learnSkill(LimiterRemoval.new())
+	digimon.learnSkill(DimensionalBarrier.new())
 	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas
 	digimon.learnSkill(SlowAntibodies.new())
