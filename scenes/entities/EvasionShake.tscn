@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlnh42xsef6qo"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/EvasionShake.gd" id="1_mbcae"]
+
+[node name="EvasionShake" type="Node2D"]
+script = ExtResource("1_mbcae")

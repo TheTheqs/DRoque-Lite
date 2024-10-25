@@ -20,6 +20,7 @@ func _ready() -> void:
 	digimon.learnSkill(SlowAntibodies.new())
 	digimon.learnSkill(EfficientCasting.new())
 	#teste de status effect
+	digimon.applyStatus(Evade.new())
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()

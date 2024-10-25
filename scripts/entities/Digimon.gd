@@ -46,7 +46,7 @@ var criticalChance: float
 var currentAccuracy: float
 var consumedMana: float
 var gainActions: int
-var gotHited: bool #esse bool verifica se uma habilidade acertou ou não
+var gotHited: bool #esse bool verifica se uma habilidade acertou ou não depois da animação.
 var getHited: bool #esse verifica antes de fazer a animação das habilidades
 #Scene Elements
 @export var skillSpawner: SkillSpawner
@@ -197,6 +197,7 @@ func gotTargeted(skill: Skill) -> void:
 		else:
 			#a agilidade base é a taxa de esquiva, assim como a destreza base é a taxa de acerto
 			gotHited = Util.chance(skill.accuracy)
+		triggerCheck(onGotHited, skill)
 		if(gotHited):
 			var processableDamage: DamageData = Util.damageDataBuilder(skill)
 			processDamage(processableDamage)
@@ -249,6 +250,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 			#a inteligência base é a taxa de acerto do atacante, mas também e a taxa de esquiva do atacado
 			nstatus.calculateChance(self)
 			gotHited = Util.chance(nstatus.schance)
+			triggerCheck(onGotHited, nstatus)
 			if(gotHited):
 				if(statusEffect.has(nstatus.statusId)): #verifica se o status já está presente, chama função de sobreposição
 					nstatus.effectOverlap(self)
