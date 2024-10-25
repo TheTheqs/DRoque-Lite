@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=4 format=3 uid="uid://b6asowtjwu1m5"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_vly7a"]
+[ext_resource type="Texture2D" uid="uid://c6x1lhrp5un7n" path="res://assets/interface/Icons/SkillIcons/MarkingDodge.png" id="2_tdtet"]
+[ext_resource type="Script" path="res://scripts/triggers/passive skills triggers/MarkingDodgeTrigger.gd" id="3_s0ob6"]
+
+[resource]
+script = ExtResource("1_vly7a")
+skillId = 25
+skillIcon = ExtResource("2_tdtet")
+cooldown = 0
+triggers = Array[Script]([ExtResource("3_s0ob6")])

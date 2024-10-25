@@ -9,7 +9,7 @@ func _ready() -> void:
 	self.tamerName = "Player"
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(1)
+	summonDigimon(Util.random(0,5))
 	#teste de habilidades ativas.
 	digimon.learnSkill(BasicAtack.new())
 	digimon.learnSkill(CureI.new())
@@ -17,8 +17,8 @@ func _ready() -> void:
 	digimon.learnSkill(DimensionalBarrier.new())
 	digimon.learnSkill(LuminousLash.new())
 	#teste de habilidades passivas
-	digimon.learnSkill(SlowAntibodies.new())
 	digimon.learnSkill(EfficientCasting.new())
+	digimon.learnSkill(MarkingDodge.new())
 	#teste de status effect
 	digimon.applyStatus(Evade.new())
 	#atualização da interface. Sempre a última coisa a se fazer!

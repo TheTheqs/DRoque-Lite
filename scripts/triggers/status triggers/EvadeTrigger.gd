@@ -9,13 +9,7 @@ func _init(nEvade: Evade) -> void:
 
 #funções de checagem. A primeira é para ser sobreescrita.
 func checkContext(digimon: Digimon, context) -> bool:
-	if(digimon.gotHited and self.isMark(context) == false):
+	if(digimon.gotHited and context is DamageSkill and context.damageSubType == Enums.DamageSubType.DIRECT):
 		digimon.gotHited = false
 		digimon.unapplyStatus(relatedEvade.statusId)
 	return false
-
-func isMark(element) -> bool:
-	if(element is StatusEffect and element.statusId == 18):
-		return true
-	else:
-		return false

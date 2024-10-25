@@ -16,4 +16,4 @@ func restartAnimation() -> void:
 func animeFinished(animName) -> void:
 	if(animName == "action"):
 		barrier.visible = false
-		restart.start(1.5)
+		restart.start(1.1)

@@ -48,6 +48,7 @@ var consumedMana: float
 var gainActions: int
 var gotHited: bool #esse bool verifica se uma habilidade acertou ou não depois da animação.
 var getHited: bool #esse verifica antes de fazer a animação das habilidades
+var gettingStatus: bool #para verificação de status
 #Scene Elements
 @export var skillSpawner: SkillSpawner
 @export var enemy: Digimon
@@ -205,6 +206,7 @@ func gotTargeted(skill: Skill) -> void:
 				skill.applyStats(self)
 		else:
 			tamer.showContent(tr(StringName("Miss")))
+			triggerCheck(self.onEvadeDamage, skill)
 	elif(skill is StatusSkill):
 		for nstatus : StatusEffect in skill.statusEffects:
 			self.applyStatus(nstatus.getStatus())
@@ -235,7 +237,10 @@ func processDamage(damageData: DamageData) -> void:
 func applyStatus(nstatus: StatusEffect) -> void:
 	BTM.inAction()
 	if(nstatus.statusId in self.statusImunity):
-		tamer.showContent(tr(StringName("Immunity")))
+		if(nstatus.statusType == Enums.StatusType.DEBUFF):
+			tamer.showContent(tr(StringName(nstatus.statusName)) + " " + tr(StringName("Immunity")))
+		else:
+			tamer.showContent(tr(StringName(nstatus.statusName)) + " " + tr(StringName("Denied")))
 	else:
 		if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
 			if(statusEffect.has(nstatus.statusId)):

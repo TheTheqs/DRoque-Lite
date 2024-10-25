@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=4 format=3 uid="uid://dh0x0tja6mk2p"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_or6nc"]
+[ext_resource type="Texture2D" uid="uid://cvow8q3ehfmr6" path="res://assets/interface/Icons/SkillIcons/InstinctiveEvasion.png" id="2_5adsr"]
+[ext_resource type="Script" path="res://scripts/triggers/passive skills triggers/InstinctiveEvasionTrigger.gd" id="3_kprtl"]
+
+[resource]
+script = ExtResource("1_or6nc")
+skillId = 24
+skillIcon = ExtResource("2_5adsr")
+cooldown = 0
+triggers = Array[Script]([ExtResource("3_kprtl")])

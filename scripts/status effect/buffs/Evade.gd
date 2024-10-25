@@ -15,10 +15,12 @@ func applyingEffect(digimon: Digimon) -> void:
 	digimon.onGotHited.append(statusTriggers[0])
 	shakeInstance = shakeAnimationScene.instantiate()
 	digimon.call_deferred("add_child", shakeInstance)
+	digimon.digimonSprite.modulate.a = 0.6
 	shakeInstance.startEffect(digimon.digimonSprite)
 	
 
 func unapplyingEffect(digimon: Digimon) -> void:
+	digimon.digimonSprite.modulate.a = 1.0
 	digimon.onGotHited.erase(statusTriggers[0])
 	if shakeInstance != null and shakeInstance.is_inside_tree():
 		shakeInstance.queue_free()
