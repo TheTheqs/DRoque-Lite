@@ -16,6 +16,10 @@ func _ready() -> void:
 	#teste de habilidades passivas
 	digimon.learnSkill(EfficientCasting.new())
 	digimon.learnSkill(CounterMagic.new())
+	#teste de status effect
+	var freeze: Freeze = Freeze.new()
+	freeze.schance = -1
+	digimon.applyStatus(freeze)
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar

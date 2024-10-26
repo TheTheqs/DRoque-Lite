@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3 uid="uid://qdhmk32mmvdr"]
+[gd_resource type="Translation" format=3 uid="uid://bbp5u1pshqxrd"]
 
 [resource]
 messages = {
@@ -22,6 +22,7 @@ messages = {
 "CompanionButtonDescription": &"Selecione um Digimon Companheiro (se possrui um) para tomar o seu lugar na batalha.",
 "CompanionButtonTittle": &"Trocar de lugar com o Companheiro.",
 "Denied": &"NEGADO",
+"Desabled": &"Incapacitado",
 "DigimonName0": &"Agumon",
 "DigimonName1": &"Monodramon",
 "DigimonName2": &"Veemon",
@@ -57,7 +58,7 @@ messages = {
 "SkillDescription23": &"Recebe Barreira + 2.",
 "SkillDescription24": &"Uma vez por batalha, ganha Evasão ao sofrer dano que reduz a vida para 40% ou menos.",
 "SkillDescription25": &"Aplica marcado no oponente sempre que se esquivar de um ataque direto.",
-"SkillDescription26": &"Quando um efeito negativo falha ao ser aplicado no digimon: tenta aplicar o mesmo efeito no oponente.",
+"SkillDescription26": &"Uma vez por turno, quando um efeito negativo falha ao ser aplicado no digimon: tenta aplicar o mesmo efeito no oponente.",
 "SkillDescription3": &"Causa 150% de dano Físico do tipo Água. Essa habilidade sempre resulta em um ataque Crítico quando usada por um Digimon do tipo Água.",
 "SkillDescription4": &"Causa 160% de dano Físico do Tipo Planta. O dano causado e o Tempo de Recarga dessa habilidade são dobrados quando usada por um digimon do tipo Planta.",
 "SkillDescription5": &"Causa 200% de dano Físico do tipo Terra. Essa habilidade nunca erra o alvo quando usado por um Digimon do tipo Terra.",
@@ -105,6 +106,7 @@ messages = {
 "StatusDescription29": &"Reflete uma parte do dano recebido de ataques diretos. A procentagem do dano refletido é igual ao número de acúmulos de Reflexo (max. 60%)",
 "StatusDescription30": &"Reduz o dano das Habilidades em 30%.",
 "StatusDescription35": &"Todos os ataques são críticos. No entanto, sempre que sofrer dano de qualquer tipo, há uma chance de 50% de perder esse efeito.",
+"StatusDescription6": &"Remove todas as ações extras e deixa o Digimon incapacitado, não podendo agir ou se esquivar de ataques e efeitos.",
 "StatusName0": &"Envenenamento",
 "StatusName1": &"Aceleração",
 "StatusName12": &"Cegueira",
@@ -116,6 +118,7 @@ messages = {
 "StatusName28": &"Doente",
 "StatusName29": &"Reflexo",
 "StatusName30": &"Exaustão",
-"StatusName35": &"Foco"
+"StatusName35": &"Foco",
+"StatusName6": &"Congelamento"
 }
 locale = "pt"

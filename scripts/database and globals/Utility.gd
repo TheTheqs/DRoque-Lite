@@ -64,7 +64,7 @@ func cap(value: float) -> float:
 #cria um damage data baseado em uma skill
 func damageDataBuilder(damageSkill: DamageSkill) -> DamageData:
 	var newDamageData : DamageData = DamageData.new()
-	newDamageData.buildData(damageSkill.damageType, damageSkill.damageSubType, damageSkill.element, damageSkill.atackerType, damageSkill.damageValue, damageSkill.isCritic)
+	newDamageData.buildData(damageSkill, damageSkill.damageType, damageSkill.damageSubType, damageSkill.element, damageSkill.atackerType, damageSkill.damageValue, damageSkill.isCritic)
 	return newDamageData
 
 func getProportion(portion: float, whole: float) -> float:

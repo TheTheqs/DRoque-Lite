@@ -9,9 +9,11 @@ class_name BattleManager
 @export var enemyDigimon: Digimon
 @export var changeTurnTimer: Timer
 @export var BM: BattleMessenger
+@export var turnLabel: Label
 
 #Controle de fases
-var turn: int
+var upgradeTurn: bool = false
+var turn: int = 1
 var currentPhase: Enums.BattlePhase
 var somethingIsHappening: int
 var currentDigimon: Digimon
@@ -42,6 +44,7 @@ func outAction(_location: String) -> void:
 				changeTurnTimer.start(0.2)
 
 func changeTurn():
+	changeTurnTimer.stop()
 	inAction()
 	if(currentPhase == Enums.BattlePhase.BATTLESTART):
 		BM.showMessage(tr(StringName("BattleMessage0")))
@@ -65,9 +68,15 @@ func changeTurn():
 		currentPhase = Enums.BattlePhase.CHOICE
 		outAction("Turn Start")
 	elif(currentPhase == Enums.BattlePhase.CHOICE):
-		currentPhase = Enums.BattlePhase.ACTION
-		choosing = true
-		currentDigimon.tamer.takeTurn()
+		if(currentDigimon.isDisabled):
+			currentTamer.takeActions(1)
+			BM.showMessage(tr(StringName(currentDigimon.digimonName)) + " " + tr(StringName("Disabled")))
+			currentPhase = Enums.BattlePhase.TURNEND
+			outAction("Disabled Digimon")
+		else:
+			currentPhase = Enums.BattlePhase.ACTION
+			choosing = true
+			currentDigimon.tamer.takeTurn()
 	elif(currentPhase == Enums.BattlePhase.ACTION):
 		somethingIsHappening -= 1
 		currentPhase = Enums.BattlePhase.POSACTION
@@ -108,7 +117,7 @@ func triggerCheck(triggers: Array, digimon: Digimon, context) -> void:
 			trigger.triggerValidation(digimon, context)
 
 func changeActor() -> void:
-	turn += 1
+	updateTurn()
 	if(currentDigimon == playerDigimon):
 		currentDigimon = enemyDigimon
 		currentTamer = enemy
@@ -119,12 +128,11 @@ func changeActor() -> void:
 		currentTamer = player
 		oppositeDigimon = enemyDigimon
 		oppositeTamer = enemy
-	
 
 func gettingStarted() -> void:
 	tamerReady += 1
 	if(tamerReady == 2):
-		turn = 1
+		turnLabel.text = str(turn)
 		inAction()
 		currentPhase = Enums.BattlePhase.BATTLESTART
 		outAction("Getting Started")
@@ -146,3 +154,11 @@ func sweepExpiredStatus(digimon: Digimon) -> void:
 		for statusId: int in digimon.statusToRemove:
 			digimon.unapplyStatus(statusId)
 		digimon.statusToRemove.clear()
+
+func updateTurn() -> void:
+	if(upgradeTurn):
+		upgradeTurn = false
+		turn += 1
+		self.turnLabel.text = str(turn)
+	else:
+		upgradeTurn = true

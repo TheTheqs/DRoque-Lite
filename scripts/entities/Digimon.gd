@@ -73,7 +73,7 @@ var statusEffect: Dictionary = {
 var statusImunity: Array[int]
 var elementalImunity:Array[Enums.Element]
 var statusToRemove: Array[int]
-var isDisabled: bool
+var isDisabled: bool = false
 #actions
 var currentAction: Skill
 
@@ -99,6 +99,7 @@ var onGotHited: Array[Trigger] #Quando uma habilidade acerta o digimon. Veja que
 var onEvadeDamage: Array[Trigger] #Quando o digimon se esquiva de uma damage skill
 var onEvadeStats: Array[Trigger] #Quando o digimon se esquiva da aplicação de um efeito
 var onGettingStats: Array[Trigger] #Quando um efeito é aplicado com sucesso
+var onUnapplyStatus: Array[Trigger] #Qaundo um status termina ou é removido.
 var onDamageDelt: Array[Trigger] #Quando o digimon causa dano. Atenção, a chamada desse contexto deve ser feita no digimon inimigo
 var onDying: Array[Trigger] #Quando a vida do digimon chega a 0.
 var onActing: Array[Trigger] #Verificado imediatamente antes de uma ação ser atribuída a choose action
@@ -187,12 +188,14 @@ func getTageted(skill: Skill) -> void:
 	if(getHited):
 		skillSpawner.spawSkill(skill)
 	BTM.outAction("Digimon getTargeted")
-#função que determina o acerto das habilidades.
 
+#função que determina o acerto das habilidades.
 func gotTargeted(skill: Skill) -> void:
 	BTM.inAction()
 	gotHited = false
 	if(skill is DamageSkill):
+		if(self.isDisabled):
+			skill.accuracy = -1
 		if(skill.accuracy == -1):
 			gotHited = true
 		else:
@@ -242,6 +245,8 @@ func applyStatus(nstatus: StatusEffect) -> void:
 		else:
 			tamer.showContent(tr(StringName(nstatus.statusName)) + " " + tr(StringName("Denied")))
 	else:
+		if(self.isDisabled):
+			nstatus.schance = -1
 		if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
 			if(statusEffect.has(nstatus.statusId)):
 				nstatus.effectOverlap(self)
@@ -360,19 +365,22 @@ func action() -> void:
 	if(actionsToGo.size() > 0 and actionsToGo[0] is Skill):
 		currentAction = actionsToGo[0]
 		actionsToGo.remove_at(0)
-		if(currentAction.needsAnimation):
-			self.digimonAnimator.play("action")
-			if(currentAction.skillIcon != null):
-				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
-		else:
+		if(currentAction.needsAnimation == false):
 			if(currentAction.skillIcon != null):
 				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
 			currentAction.effect(self)
 			BTM.outAction("Action: no animation skill")
+		elif(currentAction.needsAnimation == true and isDisabled == false):
+			self.digimonAnimator.play("action")
+			if(currentAction.skillIcon != null):
+				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
+		else:
+			self.tamer.showContent(tr(StringName("Denied"))+"("+tr(StringName(currentAction.skillName))+")")
+			BTM.outAction("Disabled")
 	else:
 		BTM.outAction("Digimon no action")
 
-func animationFinished(anim_name: String):
+func animationFinished(anim_name: String) -> void:
 	if(anim_name == "action"):
 		currentAction.effect(self)
 		self.digimonAnimator.play("Idle")
@@ -380,6 +388,8 @@ func animationFinished(anim_name: String):
 	elif(anim_name == "damage"):
 		self.digimonAnimator.play("Idle")
 		BTM.outAction("Digimon finish damaged")
+	else:
+		pass
 
 func applyDefense(damageData: DamageData) -> void:
 	if(damageData.damageType == Enums.DamageType.PHYSICAL):
