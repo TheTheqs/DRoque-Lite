@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusSkillData" load_steps=4 format=3 uid="uid://dj2fgu76ne2av"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/StatusSkillData.gd" id="1_f8b7j"]
+[ext_resource type="Texture2D" uid="uid://h4dj4gxf6w1d" path="res://assets/interface/Icons/SkillIcons/LifeStealHeal.png" id="2_w1r68"]
+[ext_resource type="Texture2D" uid="uid://cgvwwm5h708g8" path="res://assets/sprites/vfx/skills/LifeStealHeal.png" id="3_ot34e"]
+
+[resource]
+script = ExtResource("1_f8b7j")
+skillId = -1
+skillIcon = ExtResource("2_w1r68")
+staticPriority = 0
+manaCost = 0
+coolDown = 0
+statusType = 0
+skillTexture = ExtResource("3_ot34e")
+textureRange = 9

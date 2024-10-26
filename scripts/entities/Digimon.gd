@@ -236,6 +236,7 @@ func processDamage(damageData: DamageData) -> void:
 		else:
 			currentHealth -= damageData.damageValue
 		triggerCheck(self.onGetDamage, damageData)
+		enemy.triggerCheck(enemy.onDamageDelt, damageData)
 		tamer.showContent(damageData)
 		addAnimation("damage")
 		tamer.HUDD.updateValues()

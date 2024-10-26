@@ -19,7 +19,7 @@ func _ready() -> void:
 	#teste de habilidades passivas
 	digimon.learnSkill(EfficientCasting.new())
 	digimon.learnSkill(AGlacialHeart.new())
-	#teste de status effect)
+	#teste de status effect
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()

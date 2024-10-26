@@ -108,6 +108,7 @@
   "StatusName28": "Sick",
   "StatusName29": "Reflect",
   "StatusName30": "Exhaust",
+  "StatusName33": "Life Steal",
   "StatusName35": "Focus",
   "StatusDescription0": "Deals Neutral-type Damage Over Time. The value is random and based on the target's maximum health (min 5%, max 20%).",
   "StatusDescription1": "For the duration of this effect, get 1 extra action at the start of each turn (as long as not Disabled).",
@@ -122,5 +123,6 @@
   "StatusDescription28": "Reduces healing by 50%",
   "StatusDescription29": "Reflects a portion of the damage received from direct attacks. The percentage of damage reflected is equal to the number of Reflex stacks (max. 60%).",
   "StatusDescription30": "Reduces skill damage by 30%.",
+  "StatusDescription33": "Heals upon dealing damage with direct attacks, with the healing amount equal to the stack percentage (up to a maximum of 100%).",
   "StatusDescription35": "All attacks are critical hits. However, whenever you take damage of any kind, there's a 50% chance to lose this effect."
 }

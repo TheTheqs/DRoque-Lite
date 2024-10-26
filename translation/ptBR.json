@@ -108,6 +108,7 @@
   "StatusName28": "Doente",
   "StatusName29": "Reflexo",
   "StatusName30": "Exaustão",
+  "StatusName33": "Roubo de Vida",
   "StatusName35": "Foco",
   "StatusDescription0": "Causa Dano ao Longo do Tempo do tipo Neutro. O valor é aleatório e baseado na vida máxima do alvo (min 5%, max 20%).",
   "StatusDescription1": "Pelo tempo que durar este efeito, recebe 1 ação extra no início de cada turno (desde que não esteja Incapacitado).",
@@ -122,5 +123,6 @@
   "StatusDescription28": "Reduz a cura recebido em 50%.",
   "StatusDescription29": "Reflete uma parte do dano recebido de ataques diretos. A procentagem do dano refletido é igual ao número de acúmulos de Reflexo (max. 60%)",
   "StatusDescription30": "Reduz o dano das Habilidades em 30%.",
+  "StatusDescription33": "Recupera vida ao causar dano com ataques diretos, com a cura equivalente ao percentual de acúmulos (até um máximo de 100%).",
   "StatusDescription35": "Todos os ataques são críticos. No entanto, sempre que sofrer dano de qualquer tipo, há uma chance de 50% de perder esse efeito."
 }
