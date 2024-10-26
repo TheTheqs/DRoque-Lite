@@ -7,9 +7,9 @@ class_name SpawnedNumber
 @export var outTimer: Timer
 
 #Variável de controle de posição
-var limitPosition: int = 60
-var currentPosition: int = 0
-var velocity: int = 2
+var limitPosition: int = 50
+var currentPosition: float = 0
+var velocity: float = 1.5
 var moduleRatio: float = 0.016
 #variável de callback
 var numberSpawner: NumberSpawner

@@ -75,7 +75,10 @@ var elementalImunity:Array[Enums.Element]
 var statusToRemove: Array[int]
 var isDisabled: bool = false
 #actions
+var selectedSkill: Skill = null
 var currentAction: Skill
+var animationQueue: Array[String]
+var currentAnimation: String
 
 #Triggers
 #triggers verificados pelo BattleManager
@@ -111,6 +114,7 @@ var actionsToGo: Array[Skill] = []
 func setBehave() -> void:
 	if(not isDisabled):
 		digimonAnimator.play("Idle")
+		currentAnimation = "Idle"
 	if(self.position.x < 140):
 		digimonSprite.flip_h = true
 		if(self.digimonTier == Enums.Tier.ROOKIE):
@@ -233,7 +237,7 @@ func processDamage(damageData: DamageData) -> void:
 			currentHealth -= damageData.damageValue
 		triggerCheck(self.onGetDamage, damageData)
 		tamer.showContent(damageData)
-		digimonAnimator.play("damage")
+		addAnimation("damage")
 		tamer.HUDD.updateValues()
 	
 #função que processa a aplica um status effect
@@ -282,6 +286,7 @@ func unapplyStatus(statusID: int) -> void:
 		ostatusEffect.unapplyingEffect(self)
 		self.statusEffect.erase(statusID)
 		tamer.showContent("-" + tr(StringName(ostatusEffect.statusName)))
+		triggerCheck(self.onUnapplyStatus, statusID)
 	else:
 		print("Erro, status não encontrado no dicionário. Skill ID = ", str(statusID))
 
@@ -362,6 +367,9 @@ func manaConsumption(value: float) -> void:
 
 func action() -> void:
 	BTM.inAction()
+	if(selectedSkill != null):
+		actionsToGo.append(selectedSkill)
+		selectedSkill = null
 	if(actionsToGo.size() > 0 and actionsToGo[0] is Skill):
 		currentAction = actionsToGo[0]
 		actionsToGo.remove_at(0)
@@ -371,7 +379,7 @@ func action() -> void:
 			currentAction.effect(self)
 			BTM.outAction("Action: no animation skill")
 		elif(currentAction.needsAnimation == true and isDisabled == false):
-			self.digimonAnimator.play("action")
+			addAnimation("action")
 			if(currentAction.skillIcon != null):
 				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
 		else:
@@ -383,13 +391,16 @@ func action() -> void:
 func animationFinished(anim_name: String) -> void:
 	if(anim_name == "action"):
 		currentAction.effect(self)
-		self.digimonAnimator.play("Idle")
+		addAnimation(currentAnimation)
 		BTM.outAction("Action: animation skill")
 	elif(anim_name == "damage"):
-		self.digimonAnimator.play("Idle")
+		addAnimation(currentAnimation)
 		BTM.outAction("Digimon finish damaged")
-	else:
-		pass
+	elif(anim_name == "freeze"):
+		currentAnimation = anim_name
+	if(animationQueue.size() > 0):
+		self.digimonAnimator.play(animationQueue[0])
+		self.animationQueue.remove_at(0)
 
 func applyDefense(damageData: DamageData) -> void:
 	if(damageData.damageType == Enums.DamageType.PHYSICAL):
@@ -401,7 +412,7 @@ func applyDefense(damageData: DamageData) -> void:
 
 func chooseAction(newAction) -> void:
 	if(newAction is Skill):
-		actionsToGo.append(newAction)
+		selectedSkill = newAction
 
 func getActions(nActions: int) -> void:
 	gainActions = nActions
@@ -414,3 +425,9 @@ func triggerCheck(triggersToTest: Array, context) -> void:
 		for trigger: Trigger in triggersToTest:
 			if(trigger != null):
 				trigger.triggerValidation(self, context)
+
+func addAnimation(animeName: String) -> void:
+	if(self.digimonAnimator.current_animation != "Idle" and digimonAnimator.is_playing()):
+		animationQueue.append(animeName)
+	else:
+		digimonAnimator.play(animeName)

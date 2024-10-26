@@ -9,7 +9,7 @@ func _init(nHaste: Haste) -> void:
 #funções de checagem. A primeira é para ser sobreescrita.
 
 func checkContext(digimon: Digimon, context) -> bool:
-	if(context == "TurnStart"):
+	if(context == "TurnStart" and digimon.isDisabled == false):
 		digimon.tamer.showContent("+1 " + tr(StringName("Action")))
 		digimon.getActions(1)
 	return false

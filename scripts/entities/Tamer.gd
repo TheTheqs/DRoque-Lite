@@ -45,6 +45,8 @@ func getActions(nactions: int) -> void:
 
 func takeActions(nactions: int) -> void:
 	self.actions -= nactions
+	if(self.actions <= 0):
+		self.actions = 0
 	actionAnimator.play("blinkActions")
 	actionsDisplay.text = tr(StringName("Actions")) + str(self.actions)
 	

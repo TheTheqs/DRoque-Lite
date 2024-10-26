@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3 uid="uid://bbp5u1pshqxrd"]
+[gd_resource type="Translation" format=3 uid="uid://bnbkcv3jssg4"]
 
 [resource]
 messages = {
@@ -59,6 +59,8 @@ messages = {
 "SkillDescription24": &"Uma vez por batalha, ganha Evasão ao sofrer dano que reduz a vida para 40% ou menos.",
 "SkillDescription25": &"Aplica marcado no oponente sempre que se esquivar de um ataque direto.",
 "SkillDescription26": &"Uma vez por turno, quando um efeito negativo falha ao ser aplicado no digimon: tenta aplicar o mesmo efeito no oponente.",
+"SkillDescription27": &"Aplica Congelamento no oponente.",
+"SkillDescription28": &"Ao receber Congelamento: cura 20% da vida máxima. Quando o Congelamento é removido, recebe Imparável por 3 turnos.",
 "SkillDescription3": &"Causa 150% de dano Físico do tipo Água. Essa habilidade sempre resulta em um ataque Crítico quando usada por um Digimon do tipo Água.",
 "SkillDescription4": &"Causa 160% de dano Físico do Tipo Planta. O dano causado e o Tempo de Recarga dessa habilidade são dobrados quando usada por um digimon do tipo Planta.",
 "SkillDescription5": &"Causa 200% de dano Físico do tipo Terra. Essa habilidade nunca erra o alvo quando usado por um Digimon do tipo Terra.",
@@ -86,6 +88,8 @@ messages = {
 "SkillName24": &"Evasão Instintiva",
 "SkillName25": &"Esquiva Marcante",
 "SkillName26": &"Contra Magia",
+"SkillName27": &"Ventos Sobre a Barreira de Gelo",
+"SkillName28": &"Coração Glacial",
 "SkillName3": &"Correnteza Complementar",
 "SkillName4": &"Raízes Rasteiras",
 "SkillName5": &"Pedra Perigosa",
@@ -95,8 +99,9 @@ messages = {
 "SkillName9": &"Crespúsculo Cortante",
 "StackLimit": &"Número máximo de acúmulos atingidos!",
 "StatusDescription0": &"Causa Dano ao Longo do Tempo do tipo Neutro. O valor é aleatório e baseado na vida máxima do alvo (min 5%, max 20%).",
-"StatusDescription1": &"Pelo tempo que durar este efeito, recebe 1 ação extra no início de cada turno.",
-"StatusDescription12": &"Romeve o efeito Precisão e reduz a taxa de acerto das habilidades em 50%",
+"StatusDescription1": &"Pelo tempo que durar este efeito, recebe 1 ação extra no início de cada turno (desde que não esteja Incapacitado).",
+"StatusDescription12": &"Remove o efeito Precisão e reduz a taxa de acerto das habilidades em 50%",
+"StatusDescription15": &"O Digimon fica imune a Congelamento, Atordoamento, Sono e Petrificação.",
 "StatusDescription18": &"Remove o efeito de Evasão, impedindo o digimon de recebê-lo novamente.",
 "StatusDescription19": &"O próximo ataque direto que acertaria o alvo será um erro. O efeito é perdido após o uso.",
 "StatusDescription20": &"Uma vez por turno, quando o digimon deveria receber ações extras: reduz as ações ganhas a 0.",
@@ -106,10 +111,11 @@ messages = {
 "StatusDescription29": &"Reflete uma parte do dano recebido de ataques diretos. A procentagem do dano refletido é igual ao número de acúmulos de Reflexo (max. 60%)",
 "StatusDescription30": &"Reduz o dano das Habilidades em 30%.",
 "StatusDescription35": &"Todos os ataques são críticos. No entanto, sempre que sofrer dano de qualquer tipo, há uma chance de 50% de perder esse efeito.",
-"StatusDescription6": &"Remove todas as ações extras e deixa o Digimon incapacitado, não podendo agir ou se esquivar de ataques e efeitos.",
+"StatusDescription6": &"Remove todas as ações extras e deixa o Digimon incapacitado, não podendo agir ou se esquivar de ataques e efeitos por 1 turno.",
 "StatusName0": &"Envenenamento",
 "StatusName1": &"Aceleração",
 "StatusName12": &"Cegueira",
+"StatusName15": &"Imparável",
 "StatusName18": &"Marcado",
 "StatusName19": &"Evasão",
 "StatusName20": &"Lentidão",

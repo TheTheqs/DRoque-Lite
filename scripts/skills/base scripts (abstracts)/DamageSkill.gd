@@ -59,6 +59,7 @@ func skillSingularity(_digimon: Digimon) -> void:
 	pass
 #essa função vai colaborar para o calculo de prioridade baseado no aumento o decremento de dano por diferença de elemento
 func getElementalChartPriority(digimon: Digimon) -> int:
+	consideringEffect(digimon)
 	var elementRatio: float = Util.getElementRatio(self.element, digimon.enemy.element)
 	if(elementRatio == 1.0):
 		return 0
@@ -66,3 +67,9 @@ func getElementalChartPriority(digimon: Digimon) -> int:
 		return -2
 	else:
 		return 2
+
+func consideringEffect(digimon: Digimon) -> void:
+	if(self.hasEffect and statusEffects.size() > 0):
+		for nStats in statusEffects:
+			if(digimon.enemy.statusImunity.has(nStats.statusId)):
+				priority -= 1
