@@ -386,6 +386,7 @@ func action() -> void:
 		else:
 			self.tamer.showContent(tr(StringName("Denied"))+"("+tr(StringName(currentAction.skillName))+")")
 			BTM.outAction("Disabled")
+		triggerCheck(self.onActing, self.currentAction)
 	else:
 		BTM.outAction("Digimon no action")
 

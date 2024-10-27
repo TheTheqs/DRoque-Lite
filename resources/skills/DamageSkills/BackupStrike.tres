@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://c4jfxaj5uwe3i"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_6jm18"]
+[ext_resource type="Texture2D" uid="uid://byahb8x4r0b3m" path="res://assets/interface/Icons/SkillIcons/BackupStrike.png" id="2_owul0"]
+[ext_resource type="Texture2D" uid="uid://d2mvicln3a0sm" path="res://assets/sprites/vfx/skills/BackupStrike.png" id="3_w6bkv"]
+
+[resource]
+script = ExtResource("1_6jm18")
+skillId = 29
+skillIcon = ExtResource("2_owul0")
+staticPriority = 1
+element = 0
+damageType = 0
+damageSubType = 0
+ratio = 1.2
+manaCost = 5
+coolDown = 0
+hasEffect = false
+skillTexture = ExtResource("3_w6bkv")
+textureRange = 24
