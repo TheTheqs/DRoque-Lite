@@ -8,7 +8,7 @@
 script = ExtResource("1_1v0in")
 skillId = 15
 skillIcon = ExtResource("2_5hwdg")
-staticPriority = 1
+staticPriority = 2
 element = 8
 damageType = 1
 damageSubType = 0

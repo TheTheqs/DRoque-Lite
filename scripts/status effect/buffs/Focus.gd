@@ -4,6 +4,7 @@ class_name Focus
 #value
 func _init() -> void:
 	self.statusId = 35
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Focus.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.statusTriggers.append(FocusTrigger0.new(self))

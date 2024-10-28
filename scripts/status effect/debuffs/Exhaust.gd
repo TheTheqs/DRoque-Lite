@@ -4,6 +4,7 @@ class_name Exhaust
 #construtora
 func _init() -> void:
 	self.statusId = 30
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Exhaust.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.DEBUFF
 	self.statusTriggers.append(ExhaustTrigger.new())

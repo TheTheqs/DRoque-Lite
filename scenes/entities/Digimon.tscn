@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://hds32c6watad"]
+[gd_scene load_steps=26 format=3 uid="uid://hds32c6watad"]
 
 [ext_resource type="Script" path="res://scripts/entities/Digimon.gd" id="1_2rk3n"]
 [ext_resource type="Script" path="res://scripts/interface builders/SkillSpawner.gd" id="2_38vac"]
+[ext_resource type="PackedScene" uid="uid://lw3aaanr022m" path="res://scenes/entities/StatusDisplay.tscn" id="4_gfyqm"]
 
 [sub_resource type="Animation" id="Animation_6xc4h"]
 resource_name = "Idle"
@@ -392,11 +393,12 @@ _data = {
 "action9": SubResource("Animation_jwu1j")
 }
 
-[node name="Digimon" type="Node2D" node_paths=PackedStringArray("skillSpawner", "digimonSprite", "digimonAnimator")]
+[node name="Digimon" type="Node2D" node_paths=PackedStringArray("skillSpawner", "digimonSprite", "digimonAnimator", "statusDisplay")]
 script = ExtResource("1_2rk3n")
 skillSpawner = NodePath("SkillSpawner")
 digimonSprite = NodePath("DigimonSprite")
 digimonAnimator = NodePath("Animator")
+statusDisplay = NodePath("StatusDisplay")
 
 [node name="DigimonSprite" type="Sprite2D" parent="."]
 texture_filter = 2
@@ -422,6 +424,10 @@ hframes = 24
 libraries = {
 "": SubResource("AnimationLibrary_ldvgu")
 }
+
+[node name="StatusDisplay" parent="." node_paths=PackedStringArray("currentDigimon") instance=ExtResource("4_gfyqm")]
+position = Vector2(0, -40)
+currentDigimon = NodePath("..")
 
 [connection signal="animation_finished" from="Animator" to="." method="animationFinished"]
 [connection signal="animation_finished" from="SkillSpawner/Animator" to="SkillSpawner" method="_onAnimationFinished"]

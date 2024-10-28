@@ -4,6 +4,7 @@ class_name Reflect
 #value
 func _init(nstacks: int) -> void:
 	self.statusId = 29
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Reflect.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.isStackable = true

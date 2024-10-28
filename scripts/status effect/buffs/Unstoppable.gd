@@ -4,6 +4,7 @@ class_name Unstoppable
 var blockedStatus: Array[int] = [6, 8, 22, 16]
 func _init(nDuration: int) -> void:
 	self.statusId = 15
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Unstoppable.png")
 	self.isExpirable = true
 	self.duration = nDuration
 	self.setStats()

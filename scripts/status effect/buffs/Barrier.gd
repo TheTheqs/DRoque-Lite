@@ -7,6 +7,7 @@ var barrierInstance: Node = null
 #value
 func _init(nstacks: int) -> void:
 	self.statusId = 25
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Barrier.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.isStackable = true

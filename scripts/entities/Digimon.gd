@@ -58,6 +58,7 @@ var gettingStatus: bool #para verificação de status
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
 @export var skillAnnouncer: SkillAnnouncer
+@export var statusDisplay: StatusDisplay
 
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
@@ -259,6 +260,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 				nstatus.applyingEffect(self)
 				if(nstatus.statusId != 41):
 					self.statusEffect[nstatus.statusId] = nstatus
+					self.statusDisplay.addStatus(nstatus)
 			tamer.showContent(nstatus)
 			triggerCheck(self.onGettingStats, nstatus)
 		else:
@@ -273,6 +275,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 					nstatus.applyingEffect(self)
 					if(nstatus.statusId != 41):
 						self.statusEffect[nstatus.statusId] = nstatus
+						self.statusDisplay.addStatus(nstatus)
 				tamer.showContent(nstatus)
 				triggerCheck(self.onGettingStats, nstatus)
 			else:
@@ -287,6 +290,7 @@ func unapplyStatus(statusID: int) -> void:
 		ostatusEffect.unapplyingEffect(self)
 		self.statusEffect.erase(statusID)
 		tamer.showContent("-" + tr(StringName(ostatusEffect.statusName)))
+		self.statusDisplay.removeStatus(ostatusEffect)
 		triggerCheck(self.onUnapplyStatus, statusID)
 	else:
 		print("Erro, status não encontrado no dicionário. Skill ID = ", str(statusID))

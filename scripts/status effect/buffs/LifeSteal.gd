@@ -4,6 +4,7 @@ class_name LifeSteal
 #value
 func _init(nstacks: int) -> void:
 	self.statusId = 33
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/LifeSteal.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.isStackable = true

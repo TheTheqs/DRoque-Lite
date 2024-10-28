@@ -4,6 +4,7 @@ class_name Haste
 #value
 func _init(nDuration: int) -> void:
 	self.statusId = 1
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Haste.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.isExpirable = true

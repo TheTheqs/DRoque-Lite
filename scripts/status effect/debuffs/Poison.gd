@@ -4,6 +4,7 @@ class_name Poison
 #construtora
 func _init() -> void:
 	self.statusId = 0
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Poison.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.DEBUFF
 	self.statusTriggers.append(PoisonTrigger.new())

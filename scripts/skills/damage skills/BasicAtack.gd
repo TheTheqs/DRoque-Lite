@@ -9,3 +9,5 @@ func _init():
 func priorityCheck(digimon: Digimon) -> void:
 	if(digimon.currentMana == 0):
 		priority += 2
+	if(digimon.digimonLearnedSkills.has(29) and digimon.tamer.actions > 1):
+		priority += 4

@@ -7,6 +7,7 @@ var shakeInstance: EvasionShake = null
 
 func _init() -> void:
 	self.statusId = 19
+	self.statusIcon = preload("res://assets/interface/Icons/InterfaceIcons/status effect icons/Evade.png")
 	self.setStats()
 	self.statusType = Enums.StatusType.BUFF
 	self.statusTriggers.append(EvadeTrigger.new(self))
