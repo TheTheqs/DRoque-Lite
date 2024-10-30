@@ -1,7 +1,8 @@
-[gd_resource type="Translation" format=3]
+[gd_resource type="Translation" format=3 uid="uid://c0mvtpxhayvk0"]
 
 [resource]
 messages = {
+"AGI": &"AGI",
 "Action": &"Ação",
 "ActionLimit": &"Você atingiu o número máximo de ações acumuladas!(5)",
 "Actions": &"AÇÕES:",
@@ -21,6 +22,7 @@ messages = {
 "ChangeLanguage": &"Mudar idioma",
 "CompanionButtonDescription": &"Selecione um Digimon Companheiro (se possrui um) para tomar o seu lugar na batalha.",
 "CompanionButtonTittle": &"Trocar de lugar com o Companheiro.",
+"DEX": &"DES",
 "Denied": &"NEGADO",
 "Desabled": &"Incapacitado",
 "DigimonName0": &"Agumon",
@@ -29,6 +31,7 @@ messages = {
 "DigimonName3": &"Guilmon",
 "DigimonName4": &"Dorumon",
 "DigimonName5": &"Betamon",
+"INT": &"INT",
 "Immunity": &"IMUNE",
 "InventoryButtonDescription": &"Abre o inventário. Usar um item ou equipar um equipamento consome uma ação.",
 "InventoryButtonTittle": &"Abir Inventário",
@@ -39,6 +42,7 @@ messages = {
 "NoMana": &"A mana é insuficiente!",
 "PassingTurnButtonDescription": &"Passa o turno para o oponente. Ações extras serão preservadas para o próximo turno.",
 "PassingTurnButtonTittle": &"Passar turno",
+"STR": &"FOR",
 "SkillDescription0": &"Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro.",
 "SkillDescription1": &"Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie. Se esta habilidade for utilizada por um Digimon do tipo Neutro, seu Tempo de Recarga é reduzido a 0.",
 "SkillDescription10": &"Cura o Digimon em 20% da sua vida máxima.",
@@ -63,6 +67,7 @@ messages = {
 "SkillDescription28": &"Ao receber Congelamento: cura 20% da vida máxima. Quando o Congelamento é removido, recebe Imparável por 3 turnos.",
 "SkillDescription29": &"Causa 120% de dano Físico do tipo Neutro. Se durante um único turno, essa habilidade for utilizada depois de um ataque básico: gera 1 ação extra.",
 "SkillDescription3": &"Causa 150% de dano Físico do tipo Água. Essa habilidade sempre resulta em um ataque Crítico quando usada por um Digimon do tipo Água.",
+"SkillDescription30": &"No começo do Turno: recebe INT + 1. O número de vezes que essa habilidade pode ser ativada por batalha é igual ao nível do Digimon.",
 "SkillDescription4": &"Causa 160% de dano Físico do Tipo Planta. O dano causado e o Tempo de Recarga dessa habilidade são dobrados quando usada por um digimon do tipo Planta.",
 "SkillDescription5": &"Causa 200% de dano Físico do tipo Terra. Essa habilidade nunca erra o alvo quando usado por um Digimon do tipo Terra.",
 "SkillDescription6": &"Causa 150% de dano físico do tipo Trovão. O dano dessa habilidade aumenta em 50% sempre que for utilizada por um Digimon do tipo Trovão (max. 150%).",
@@ -93,6 +98,7 @@ messages = {
 "SkillName28": &"Coração Glacial",
 "SkillName29": &"Assalto Auxiliar",
 "SkillName3": &"Correnteza Complementar",
+"SkillName30": &"Contando!",
 "SkillName4": &"Raízes Rasteiras",
 "SkillName5": &"Pedra Perigosa",
 "SkillName6": &"Contato Carregado",
@@ -106,7 +112,7 @@ messages = {
 "StatusDescription15": &"O Digimon fica imune a Congelamento, Atordoamento, Sono e Petrificação.",
 "StatusDescription18": &"Remove o efeito de Evasão, impedindo o digimon de recebê-lo novamente.",
 "StatusDescription19": &"O próximo ataque direto que acertaria o alvo será um erro. O efeito é perdido após o uso.",
-"StatusDescription20": &"Uma vez por turno, quando o digimon deveria receber ações extras: reduz as ações ganhas a 0.",
+"StatusDescription20": &"Diminui a Agilidade total pela metade. Uma vez por turno, quando o digimon deveria receber ações extras: reduz as ações ganhas a 0.",
 "StatusDescription23": &"Remove o efeito Cegueira e aumenta a taxa de acerto das habilidades em 50%",
 "StatusDescription25": &"Consome um acúmulo para bloquear uma habilidade ofensiva. O efeito é perdido quando o número de acúmulos chega a zero. (Não bloqueia dano ao longo do tempo, dano de flagelo ou dano refletido.)",
 "StatusDescription28": &"Reduz a cura recebido em 50%.",
@@ -114,6 +120,8 @@ messages = {
 "StatusDescription30": &"Reduz o dano das Habilidades em 30%.",
 "StatusDescription33": &"Recupera vida ao causar dano com ataques diretos, com a cura equivalente ao percentual de acúmulos (até um máximo de 100%).",
 "StatusDescription35": &"Todos os ataques são críticos. No entanto, sempre que sofrer dano de qualquer tipo, há uma chance de 50% de perder esse efeito.",
+"StatusDescription44": &"Aumenta a Inteligência.",
+"StatusDescription45": &"Diminui a Inteligência.",
 "StatusDescription6": &"Remove todas as ações extras e deixa o Digimon incapacitado, não podendo agir ou se esquivar de ataques e efeitos por 1 turno.",
 "StatusName0": &"Envenenamento",
 "StatusName1": &"Aceleração",
@@ -129,6 +137,10 @@ messages = {
 "StatusName30": &"Exaustão",
 "StatusName33": &"Roubo de Vida",
 "StatusName35": &"Foco",
-"StatusName6": &"Congelamento"
+"StatusName44": &"INT +",
+"StatusName45": &"INT -",
+"StatusName6": &"Congelamento",
+"VIT": &"VIT",
+"WIS": &"SAB"
 }
 locale = "pt"

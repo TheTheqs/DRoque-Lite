@@ -5,6 +5,7 @@ class_name DigimonDisplay
 var currentDigimon: Digimon
 @export var buttonPanel: ButtonPanel
 @export var iconName: IconName
+@export var attributes: AttributesDisplay
 
 func _ready() -> void:
 	self.visible = false
@@ -13,6 +14,8 @@ func _ready() -> void:
 func showDisplay(digimon: Digimon) -> void:
 #Nome, ícone, tipo e elemento
 	iconName.showContent(digimon)
+#atributos
+	attributes.showContent(digimon)
 #Função que exibe a janela
 func toggleDisplay() -> void:
 	if(currentDigimon != null):

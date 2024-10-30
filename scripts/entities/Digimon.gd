@@ -59,6 +59,7 @@ var gettingStatus: bool #para verificação de status
 @export var BTM: BattleManager
 @export var skillAnnouncer: SkillAnnouncer
 @export var statusDisplay: StatusDisplay
+@export var digimonDisplay: DigimonDisplay
 
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
@@ -260,8 +261,9 @@ func applyStatus(nstatus: StatusEffect) -> void:
 			else:
 				nstatus.applyingEffect(self)
 				if(nstatus.statusId != 41):
-					self.statusEffect[nstatus.statusId] = nstatus
-					self.statusDisplay.addStatus(nstatus)
+					if(nstatus.showIcon):
+						self.statusDisplay.addStatus(nstatus)
+						self.statusEffect[nstatus.statusId] = nstatus
 			tamer.showContent(nstatus)
 			triggerCheck(self.onGettingStats, nstatus)
 		else:
@@ -275,8 +277,9 @@ func applyStatus(nstatus: StatusEffect) -> void:
 				else:
 					nstatus.applyingEffect(self)
 					if(nstatus.statusId != 41):
-						self.statusEffect[nstatus.statusId] = nstatus
-						self.statusDisplay.addStatus(nstatus)
+						if(nstatus.showIcon):
+							self.statusDisplay.addStatus(nstatus)
+							self.statusEffect[nstatus.statusId] = nstatus
 				tamer.showContent(nstatus)
 				triggerCheck(self.onGettingStats, nstatus)
 			else:
@@ -438,3 +441,21 @@ func addAnimation(animeName: String) -> void:
 		animationQueue.append(animeName)
 	else:
 		digimonAnimator.play(animeName)
+
+func changeBonusAttribute(att: String, value: int) -> void:
+	var attributes = {
+		"str": "bonusSTR",
+		"int": "bonusINT",
+		"agi": "bonusAGI",
+		"vit": "bonusVIT",
+		"wis": "bonusWIS",
+		"dex": "bonusDEX"
+	}
+	
+	if att in attributes:
+		self.set(attributes[att], self.get(attributes[att]) + value)
+	else:
+		print("ERRO: invalid bônus value")
+	if(self.digimonDisplay.currentDigimon == self):
+		self.digimonDisplay.attributes.showContent(self)
+	# implementar função de atualização da interface de atributos (futuramente)e)

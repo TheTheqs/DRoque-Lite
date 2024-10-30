@@ -20,7 +20,7 @@ func unapplyingEffect(digimon: Digimon) -> void:
 
 func effectOverlap(digimon: Digimon) -> void:
 	if(digimon.statusEffect.has(self.statusId)):
-		var digimonStatus: Reflect = digimon.statusEffect[self.statusId]
+		var digimonStatus: LifeSteal = digimon.statusEffect[self.statusId]
 		if(digimonStatus.stacks + self.stacks >= self.stacksLimit):
 			digimonStatus.stacks = stacksLimit
 			digimon.BM.showMessage(tr(StringName("StackLimit")) + "("+tr(StringName(self.statusName)) +")")

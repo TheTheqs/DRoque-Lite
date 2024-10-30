@@ -17,6 +17,7 @@ var schance: float
 var stacks: int
 var stacksLimit: int
 var isPersistent: bool = false
+var showIcon: bool = true
 
 #triggers
 var statusTriggers: Array[Trigger]

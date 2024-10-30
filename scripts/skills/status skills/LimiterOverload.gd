@@ -15,4 +15,3 @@ func priorityCheck(digimon: Digimon) -> void:
 func skillSingularity(digimon: Digimon) -> void:
 	if(digimon.enemy.statusEffect.has(1)):
 		self.statusEffects[0].schance = -1
-		print("Schance mudada!")
