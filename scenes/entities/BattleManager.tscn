@@ -1,10 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://bkiax0gwpx20o"]
+[gd_scene load_steps=35 format=3 uid="uid://bkiax0gwpx20o"]
 
 [ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_bmwp2"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="2_ray8e"]
 [ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="3_w8qjs"]
 [ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="4_6scnb"]
 [ext_resource type="PackedScene" uid="uid://dng007yy161aa" path="res://scenes/entities/SkillAnnouncer.tscn" id="4_wq63m"]
+[ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="5_2kpnn"]
 [ext_resource type="Texture2D" uid="uid://c8wmd2aucho2m" path="res://assets/interface/UI/EnemyFrame.png" id="6_dyeyq"]
 [ext_resource type="Script" path="res://scripts/entities/Player.gd" id="7_5gnrb"]
 [ext_resource type="PackedScene" uid="uid://dna82yfhjhyqf" path="res://scenes/entities/NumberSpawner.tscn" id="7_y75di"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bjvpe6qbtqj17" path="res://scenes/entities/infoWindow.tscn" id="16_me3ba"]
 [ext_resource type="Texture2D" uid="uid://dn8yuwipg3voi" path="res://assets/interface/UI/PlayerFrame.png" id="17_7lwst"]
 [ext_resource type="PackedScene" uid="uid://dkgpmujw3pmp1" path="res://scenes/entities/BattleMessage.tscn" id="18_lykkh"]
+[ext_resource type="PackedScene" uid="uid://debtssae0t2f1" path="res://scenes/digimon display/DigimonDisplay.tscn" id="21_ymo66"]
 
 [sub_resource type="Animation" id="Animation_6wmh1"]
 length = 0.001
@@ -188,6 +190,8 @@ offset_left = 1.0
 offset_top = 170.0
 offset_right = 270.0
 offset_bottom = 193.0
+theme_override_colors/font_outline_color = Color(1, 0.905882, 0.772549, 1)
+theme_override_constants/outline_size = 1
 theme_override_fonts/font = ExtResource("9_lgp2m")
 theme_override_font_sizes/font_size = 16
 text = "0"
@@ -218,6 +222,24 @@ tamer = NodePath("..")
 BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
 skillAnnouncer = NodePath("../SkillAnnouncer")
+
+[node name="DisplayButton" type="Button" parent="Enemy/Digimon"]
+offset_left = -25.0
+offset_top = -27.0
+offset_right = 25.0
+offset_bottom = 29.0
+theme_override_styles/focus = ExtResource("5_2kpnn")
+theme_override_styles/disabled_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/disabled = ExtResource("5_2kpnn")
+theme_override_styles/hover_pressed_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/hover_pressed = ExtResource("5_2kpnn")
+theme_override_styles/hover_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/hover = ExtResource("5_2kpnn")
+theme_override_styles/pressed_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/pressed = ExtResource("5_2kpnn")
+theme_override_styles/normal_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/normal = ExtResource("5_2kpnn")
+script = ExtResource("10_f05bp")
 
 [node name="SkillAnnouncer" parent="Enemy" instance=ExtResource("4_wq63m")]
 position = Vector2(33, 154)
@@ -277,6 +299,24 @@ BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
 skillAnnouncer = NodePath("../SkillAnnouncer")
 
+[node name="DisplayButton" type="Button" parent="Player/Digimon"]
+offset_left = -25.0
+offset_top = -27.0
+offset_right = 25.0
+offset_bottom = 29.0
+theme_override_styles/focus = ExtResource("5_2kpnn")
+theme_override_styles/disabled_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/disabled = ExtResource("5_2kpnn")
+theme_override_styles/hover_pressed_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/hover_pressed = ExtResource("5_2kpnn")
+theme_override_styles/hover_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/hover = ExtResource("5_2kpnn")
+theme_override_styles/pressed_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/pressed = ExtResource("5_2kpnn")
+theme_override_styles/normal_mirrored = ExtResource("5_2kpnn")
+theme_override_styles/normal = ExtResource("5_2kpnn")
+script = ExtResource("10_f05bp")
+
 [node name="SkillAnnouncer" parent="Player" instance=ExtResource("4_wq63m")]
 position = Vector2(237, 326)
 
@@ -284,11 +324,12 @@ position = Vector2(237, 326)
 position = Vector2(200, 218)
 ownerPlayer = NodePath("..")
 
-[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "BM", "BTM")]
+[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "BM", "BTM")]
 script = ExtResource("8_yj36c")
 relatedPlayer = NodePath("..")
 relatedDigimon = NodePath("../Digimon")
-allButtons = [NodePath("PassTurn"), NodePath("Menu"), NodePath("Inventory"), NodePath("Companion"), NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
+displayWindow = NodePath("../../Digimon Display")
+allButtons = [NodePath("PassTurn"), NodePath("Menu"), NodePath("Inventory"), NodePath("Companion"), NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3"), NodePath("../Digimon/DisplayButton"), NodePath("../../Enemy/Digimon/DisplayButton")]
 skillButtons = [NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
 showDescTimer = NodePath("ShowDescWindow")
 infoWindow = NodePath("InfoWindow")
@@ -415,9 +456,15 @@ libraries = {
 z_index = 1
 BTM = NodePath("..")
 
+[node name="Digimon Display" parent="." node_paths=PackedStringArray("buttonPanel") instance=ExtResource("21_ymo66")]
+z_index = 1
+buttonPanel = NodePath("../Player/ButtonPanel")
+
 [connection signal="timeout" from="ChangeTurnTimer" to="." method="changeTurn"]
+[connection signal="button_down" from="Enemy/Digimon/DisplayButton" to="Player/ButtonPanel" method="enemyDisplay"]
 [connection signal="animation_finished" from="Enemy/FrameAnimator" to="Enemy" method="onFrameAnimation"]
 [connection signal="animation_finished" from="Enemy/Actions Animator" to="Enemy" method="actionsAnimation"]
+[connection signal="button_down" from="Player/Digimon/DisplayButton" to="Player/ButtonPanel" method="playerDisplay"]
 [connection signal="button_down" from="Player/ButtonPanel/PassTurn" to="Player/ButtonPanel" method="_on_pass_turn_button_down"]
 [connection signal="button_up" from="Player/ButtonPanel/PassTurn" to="Player/ButtonPanel" method="activateButton"]
 [connection signal="button_down" from="Player/ButtonPanel/Menu" to="Player/ButtonPanel" method="_on_menu_button_down"]

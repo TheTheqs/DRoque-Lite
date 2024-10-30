@@ -17,15 +17,6 @@ func _ready() -> void:
 	digimon.learnSkill(EfficientCasting.new())
 	digimon.learnSkill(AGlacialHeart.new())
 	#teste de status effect
-	var statusToTest: Array[StatusEffect] = [Precision.new(), Mark.new(), Reflect.new(30), ]
-	var testDuration: Array[int] = [2, 2, 2]
-	var i: int = 0
-	for durantion: int in testDuration:
-		statusToTest[i].isExpirable = true
-		statusToTest[i].duration = durantion
-		statusToTest[i].schance = -1
-		digimon.applyStatus(statusToTest[i])
-		i += 1
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar

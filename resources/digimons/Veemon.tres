@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://8yyeuykpisur"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://8yyeuykpisur"]
 
+[ext_resource type="Texture2D" uid="uid://dkqd43vj67tss" path="res://assets/interface/Icons/digimons/Veemon.png" id="1_gyav1"]
 [ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_nfy50"]
 [ext_resource type="Texture2D" uid="uid://dojmdynklk6tl" path="res://assets/sprites/creatures/Veemon.png" id="2_xdc5f"]
 
 [resource]
 script = ExtResource("1_nfy50")
 digimonId = 2
+digimonIcon = ExtResource("1_gyav1")
 digimonTier = 0
 digimonType = 3
 element = 0

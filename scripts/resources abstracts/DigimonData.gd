@@ -3,6 +3,7 @@ extends Resource
 class_name DigimonData
 #identificação
 @export var digimonId: int
+@export var digimonIcon: CompressedTexture2D
 @export var digimonTier: Enums.Tier
 @export var digimonType: Enums.Type
 @export var element: Enums.Element

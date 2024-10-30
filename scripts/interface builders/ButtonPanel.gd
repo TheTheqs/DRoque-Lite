@@ -4,6 +4,7 @@ class_name ButtonPanel
 #Elementos da Cena
 @export var relatedPlayer: Player
 @export var relatedDigimon: Digimon
+@export var displayWindow: DigimonDisplay
 #Botões
 @export var allButtons: Array[ButtonDescription]
 @export var skillButtons: Array[ButtonDescription]
@@ -23,6 +24,8 @@ func _ready() -> void:
 	allButtons[2].buttonDescription = "InventoryButtonDescription"
 	allButtons[3].buttonName = "CompanionButtonTittle"
 	allButtons[3].buttonDescription = "CompanionButtonDescription"
+	allButtons[9].buttonName = "PlayerDisplay"
+	allButtons[10].buttonName = "EnemyDisplay"
 #função que relaciona cada skill com um botão
 func setButtons() -> void:
 	for i in range(relatedDigimon.digimonSkills.size()):
@@ -113,3 +116,12 @@ func activateButton() -> void:
 			relatedPlayer.canAct = false
 			BTM.choosing = false
 			BTM.passingTurn()
+#funções de exibição da tela de informações de digimon
+func showDisplay(digimon: Digimon) -> void:
+	displayWindow.currentDigimon = digimon
+	displayWindow.toggleDisplay()
+
+func enemyDisplay() -> void:
+	showDisplay(relatedDigimon.enemy)
+func playerDisplay() -> void:
+	showDisplay(relatedDigimon)

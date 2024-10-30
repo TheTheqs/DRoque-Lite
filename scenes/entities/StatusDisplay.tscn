@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://lw3aaanr022m"]
+[gd_scene load_steps=3 format=3 uid="uid://lw3aaanr022m"]
 
 [ext_resource type="Script" path="res://scripts/entities/StatusDisplay.gd" id="1_tkfks"]
-[ext_resource type="Texture2D" uid="uid://ckigqse7t570p" path="res://assets/interface/Icons/InterfaceIcons/BuffBaloon.png" id="2_b1m12"]
-[ext_resource type="Texture2D" uid="uid://irv3awdm0a75" path="res://assets/interface/Icons/InterfaceIcons/status effect icons/Haste.png" id="3_edrcn"]
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_33gt2"]
 
 [node name="StatusDisplay" type="Node2D" node_paths=PackedStringArray("baseIcon", "statusIcon", "stacks", "changeIconTimer")]
@@ -13,11 +11,9 @@ stacks = NodePath("BaseIcon/Stacks")
 changeIconTimer = NodePath("ChangeIcon")
 
 [node name="BaseIcon" type="Sprite2D" parent="."]
-texture = ExtResource("2_b1m12")
 
 [node name="StatusIcon" type="Sprite2D" parent="BaseIcon"]
 position = Vector2(1, 0)
-texture = ExtResource("3_edrcn")
 
 [node name="Stacks" type="Label" parent="BaseIcon"]
 offset_top = -15.0

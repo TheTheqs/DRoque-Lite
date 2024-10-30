@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=3 format=3 uid="uid://dd2tio1thduuc"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://dd2tio1thduuc"]
 
 [ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_jjidd"]
+[ext_resource type="Texture2D" uid="uid://bgmlkuwyg186a" path="res://assets/interface/Icons/digimons/Monodramon.png" id="1_wm38i"]
 [ext_resource type="Texture2D" uid="uid://bq3tew0u55knk" path="res://assets/sprites/creatures/Monodramon.png" id="2_a5hrq"]
 
 [resource]
 script = ExtResource("1_jjidd")
 digimonId = 1
+digimonIcon = ExtResource("1_wm38i")
 digimonTier = 0
 digimonType = 2
 element = 0

@@ -128,6 +128,7 @@ func setBehave() -> void:
 
 func setStats(stats: DigimonData) -> void:
 	self.digimonId = stats.digimonId
+	self.digimonIcon = stats.digimonIcon
 	self.digimonName ="DigimonName" + str(self.digimonId)
 	self.digimonSprite.texture = stats.texture
 	self.element = stats.element
