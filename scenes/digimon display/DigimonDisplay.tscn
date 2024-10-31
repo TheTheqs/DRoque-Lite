@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://debtssae0t2f1"]
+[gd_scene load_steps=11 format=3 uid="uid://debtssae0t2f1"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/DigimonDisplay.gd" id="1_flnho"]
 [ext_resource type="Texture2D" uid="uid://caj4tngi52c0d" path="res://assets/interface/UI/DigimonInfoDisplay.png" id="2_vvv61"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/PassivesDisplay.gd" id="6_00gts"]
 [ext_resource type="PackedScene" uid="uid://bfjl4jmao6ynj" path="res://scenes/entities/QuickInfo.tscn" id="7_2ouq4"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="7_eqxg7"]
+[ext_resource type="Script" path="res://scenes/digimon display/StatusEffectDisplay.gd" id="7_ioen4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tno0g"]
 content_margin_left = 0.0
@@ -15,13 +16,15 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
-[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes", "quickWindow", "passives", "closeButton")]
+[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes", "quickWindow", "passives", "status", "closeButton")]
+visible = false
 position = Vector2(135, 240)
 script = ExtResource("1_flnho")
 iconName = NodePath("IconName")
 attributes = NodePath("AttributesDisplay")
 quickWindow = NodePath("QuickInfo")
 passives = NodePath("Passives")
+status = NodePath("StatusEffect")
 closeButton = NodePath("CloseButton")
 
 [node name="Display" type="Sprite2D" parent="."]
@@ -90,6 +93,31 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
 [node name="PassiveList" type="BoxContainer" parent="Passives/ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(112, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 1
+vertical = true
+
+[node name="StatusEffect" type="Node2D" parent="." node_paths=PackedStringArray("display", "statusList")]
+script = ExtResource("7_ioen4")
+display = NodePath("..")
+statusList = NodePath("ScrollContainer/StatusList")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="StatusEffect"]
+offset_left = 8.0
+offset_top = 13.0
+offset_right = 120.0
+offset_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tno0g")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="StatusList" type="BoxContainer" parent="StatusEffect/ScrollContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(112, 0)
 layout_mode = 2

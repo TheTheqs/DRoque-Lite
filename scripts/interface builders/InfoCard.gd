@@ -5,6 +5,7 @@ class_name InfoCard
 @export var icon: Sprite2D
 @export var title: Label
 @export var button: Button
+@export var frame: Sprite2D
 #elementos de informação
 var infoCardId: int
 var iconTexture: CompressedTexture2D
@@ -29,7 +30,7 @@ func closeWindow() -> void:
 		print("ERRO: Invalid card font")
 
 #função "construtora"
-func buildCard(nicon: CompressedTexture2D, ntitle: String, ncontent: String, ncardFont) -> void:
+func buildCard(nicon: CompressedTexture2D, ntitle: String, ncontent: String, ncardFont, needFrame: bool) -> void:
 	iconTexture = nicon
 	icon.texture = nicon
 	titleText = ntitle
@@ -37,3 +38,7 @@ func buildCard(nicon: CompressedTexture2D, ntitle: String, ncontent: String, nca
 	cardDescription = ncontent
 	cardFont = ncardFont
 	quickWindow = ncardFont.quickWindow
+	if(needFrame):
+		frame.visible = true
+	else:
+		frame.visible = false

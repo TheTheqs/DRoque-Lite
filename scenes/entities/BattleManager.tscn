@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkiax0gwpx20o"]
+[gd_scene load_steps=36 format=3 uid="uid://bkiax0gwpx20o"]
 
 [ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_bmwp2"]
 [ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="2_ray8e"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bjvpe6qbtqj17" path="res://scenes/entities/infoWindow.tscn" id="16_me3ba"]
 [ext_resource type="Texture2D" uid="uid://dn8yuwipg3voi" path="res://assets/interface/UI/PlayerFrame.png" id="17_7lwst"]
 [ext_resource type="PackedScene" uid="uid://dkgpmujw3pmp1" path="res://scenes/entities/BattleMessage.tscn" id="18_lykkh"]
+[ext_resource type="PackedScene" uid="uid://dm6giwusbglv8" path="res://scenes/entities/Inventory.tscn" id="21_yb4p1"]
 [ext_resource type="PackedScene" uid="uid://debtssae0t2f1" path="res://scenes/digimon display/DigimonDisplay.tscn" id="21_ymo66"]
 
 [sub_resource type="Animation" id="Animation_6wmh1"]
@@ -326,7 +327,7 @@ position = Vector2(237, 326)
 position = Vector2(200, 218)
 ownerPlayer = NodePath("..")
 
-[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "BM", "BTM")]
+[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "inventoryDisplay", "BM", "BTM")]
 script = ExtResource("8_yj36c")
 relatedPlayer = NodePath("..")
 relatedDigimon = NodePath("../Digimon")
@@ -335,6 +336,7 @@ allButtons = [NodePath("PassTurn"), NodePath("Menu"), NodePath("Inventory"), Nod
 skillButtons = [NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
 showDescTimer = NodePath("ShowDescWindow")
 infoWindow = NodePath("InfoWindow")
+inventoryDisplay = NodePath("../Inventory")
 BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
 
@@ -453,6 +455,9 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_15o28")
 }
+
+[node name="Inventory" parent="Player" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("21_yb4p1")]
+buttonPanel = NodePath("../ButtonPanel")
 
 [node name="BattleMessage" parent="." node_paths=PackedStringArray("BTM") instance=ExtResource("18_lykkh")]
 z_index = 1

@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="2_pe4ty"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="3_ej374"]
 
-[node name="InfoCard" type="Control" node_paths=PackedStringArray("icon", "title", "button")]
+[node name="InfoCard" type="Control" node_paths=PackedStringArray("icon", "title", "button", "frame")]
 clip_contents = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 3
@@ -20,8 +20,9 @@ script = ExtResource("1_5kngu")
 icon = NodePath("Icon")
 title = NodePath("Title")
 button = NodePath("Button")
+frame = NodePath("Frame")
 
-[node name="SkillFrame" type="Sprite2D" parent="."]
+[node name="Frame" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
 texture = ExtResource("2_40gii")
 

@@ -10,6 +10,7 @@ class_name ButtonPanel
 @export var skillButtons: Array[ButtonDescription]
 @export var showDescTimer: Timer
 @export var infoWindow: InfoWindow
+@export var inventoryDisplay: InventoryDisplay
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
 var descWindowOn: bool = false
@@ -116,6 +117,8 @@ func activateButton() -> void:
 			relatedPlayer.canAct = false
 			BTM.choosing = false
 			BTM.passingTurn()
+		elif(currentButtonToShow == allButtons[2]):
+			inventoryDisplay.opening()
 #funções de exibição da tela de informações de digimon
 func showDisplay(digimon: Digimon) -> void:
 	displayWindow.currentDigimon = digimon

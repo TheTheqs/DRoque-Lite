@@ -16,7 +16,7 @@ func addPass(newPassive: PassiveSkill) -> void:
 		return
 	else:
 		var newCard: InfoCard = staticInfoCard.instantiate()
-		newCard.buildCard(newPassive.skillIcon, tr(StringName(newPassive.skillName)), tr(StringName(newPassive.skillDescription)), display)
+		newCard.buildCard(newPassive.skillIcon, tr(StringName(newPassive.skillName)), tr(StringName(newPassive.skillDescription)), display, true)
 		currentPassives[newPassive.skillId] = newCard
 		passiveList.call_deferred("add_child", newCard)
 		display.allButtons.append(newCard.button)

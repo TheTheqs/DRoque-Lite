@@ -8,6 +8,7 @@ var currentDigimon: Digimon
 @export var attributes: AttributesDisplay
 @export var quickWindow: QuickInfo
 @export var passives: PassivesDisplay
+@export var status: StatusEffectDisplay
 @export var closeButton: Button
 #controle de botões
 var allButtons: Array[Button] = []
@@ -22,9 +23,12 @@ func showDisplay(digimon: Digimon) -> void:
 	iconName.showContent(digimon)
 #atributos
 	attributes.showContent(digimon)
-#passivas
+#passives
 	var passList: Array = digimon.digimonPassiveSkills.values()
 	passives.resetPassList(passList)
+#status
+	var statsList: Array = digimon.statusEffect.values()
+	status.resetStatusList(statsList)
 #Função que exibe a janela
 func toggleDisplay() -> void:
 	if(currentDigimon != null):

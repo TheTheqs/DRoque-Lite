@@ -7,6 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="6_qprut"]
 
 [node name="QuickInfo" type="Node2D" node_paths=PackedStringArray("closeButton", "icon", "content", "title")]
+z_index = 2
 script = ExtResource("1_mjhq2")
 closeButton = NodePath("CloseButton")
 icon = NodePath("Icon")

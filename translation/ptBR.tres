@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3 uid="uid://c0mvtpxhayvk0"]
+[gd_resource type="Translation" format=3]
 
 [resource]
 messages = {
@@ -33,6 +33,7 @@ messages = {
 "DigimonName5": &"Betamon",
 "INT": &"INT",
 "Immunity": &"IMUNE",
+"Inventory": &"Inventário",
 "InventoryButtonDescription": &"Abre o inventário. Usar um item ou equipar um equipamento consome uma ação.",
 "InventoryButtonTittle": &"Abir Inventário",
 "MenuButtonDescription": &"Abre o menu. O jogo não será pausado.",

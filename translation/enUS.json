@@ -6,6 +6,7 @@
   "CompanionButtonDescription": "Select a Companion Digimon (if you have one) to take your place in battle.",
   "MenuButtonTittle": "Open menu",
   "MenuButtonDescription": "Opens the menu. The game will not be paused.",
+  "Inventory": "Inventory",
   "InventoryButtonTittle": "Open Inventory",
   "InventoryButtonDescription": "Opens the inventory. Using an item or equipping gear consumes one action.",
   "STR": "STR",

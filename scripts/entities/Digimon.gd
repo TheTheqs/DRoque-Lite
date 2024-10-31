@@ -285,6 +285,10 @@ func applyStatus(nstatus: StatusEffect) -> void:
 			else:
 				tamer.showContent(tr(StringName("Miss")))
 				triggerCheck(self.onEvadeStats, nstatus)
+	#atualização do display
+	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+		var statsList: Array = self.statusEffect.values()
+		digimonDisplay.status.resetStatusList(statsList)
 	BTM.outAction("Aplying Status")
 
 #função para remover um status.
@@ -296,6 +300,10 @@ func unapplyStatus(statusID: int) -> void:
 		tamer.showContent("-" + tr(StringName(ostatusEffect.statusName)))
 		self.statusDisplay.removeStatus(ostatusEffect)
 		triggerCheck(self.onUnapplyStatus, statusID)
+		#atualização do display
+		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+			var statsList: Array = self.statusEffect.values()
+			digimonDisplay.status.resetStatusList(statsList)
 	else:
 		print("Erro, status não encontrado no dicionário. Skill ID = ", str(statusID))
 
@@ -318,6 +326,7 @@ func learnSkill(skill: Skill) -> void:
 						_learned = skill.learn(self, i)
 						break
 			self.digimonLearnedSkills.append(skill.skillId)
+
 
 func unlearnSkill(skill: Skill) -> void:
 	if(skill.skillId in digimonLearnedSkills):
