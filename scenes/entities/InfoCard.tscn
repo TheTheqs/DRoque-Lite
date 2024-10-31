@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://cff3xh8bsjyr6"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/InfoCard.gd" id="1_5kngu"]
+[ext_resource type="Texture2D" uid="uid://p3bvfg0erke1" path="res://assets/interface/Icons/SkillIcons/004PassiveSkillIcon.png" id="2_40gii"]
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="2_pe4ty"]
+[ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="3_ej374"]
+
+[node name="InfoCard" type="Control" node_paths=PackedStringArray("icon", "title", "button")]
+clip_contents = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_right = -21.0
+offset_bottom = 32.0
+grow_horizontal = 2
+script = ExtResource("1_5kngu")
+icon = NodePath("Icon")
+title = NodePath("Title")
+button = NodePath("Button")
+
+[node name="SkillFrame" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+texture = ExtResource("2_40gii")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 114.0
+offset_bottom = 32.0
+theme_override_colors/font_outline_color = Color(1, 0.905882, 0.772549, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_pe4ty")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 112.0
+offset_bottom = 30.0
+theme_override_styles/focus = ExtResource("3_ej374")
+theme_override_styles/disabled = ExtResource("3_ej374")
+theme_override_styles/hover = ExtResource("3_ej374")
+theme_override_styles/pressed = ExtResource("3_ej374")
+theme_override_styles/normal = ExtResource("3_ej374")
+
+[connection signal="button_down" from="Button" to="." method="popWindow"]

@@ -308,14 +308,33 @@ func learnSkill(skill: Skill) -> void:
 			_learned = true
 		else:
 			if(skill is PassiveSkill):
-				skill.learn(self, -1)
+				skill.learn(self, -1) #esse menos um é figurativo
 				self.digimonPassiveSkills[skill.skillId] = skill
+				if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+					self.digimonDisplay.passives.addPass(skill)
 			else:
 				for i in range(digimonSkills.size()):
 					if(digimonSkills[i] == null):
 						_learned = skill.learn(self, i)
 						break
 			self.digimonLearnedSkills.append(skill.skillId)
+
+func unlearnSkill(skill: Skill) -> void:
+	if(skill.skillId in digimonLearnedSkills):
+		if(skill is PassiveSkill):
+			var oldSkill: PassiveSkill = self.digimonPassiveSkills[skill.skillId]
+			oldSkill.unlearn(self)
+			digimonLearnedSkills.erase(skill.skillId)
+			digimonPassiveSkills.erase(skill.skillId)
+			if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+				self.digimonDisplay.passives.removePass(skill.skillId)
+		else:
+			var skillIndex: int = self.digimonSkills.find(skill)
+			skill.unlearn(self)
+			self.digimonSkills[skillIndex] = null
+			digimonLearnedSkills.erase(skill.skillId)
+	else:
+		print("ERROR: Skill not known")
 
 
 func levelUpAttributes(level: int) -> void:
@@ -456,6 +475,6 @@ func changeBonusAttribute(att: String, value: int) -> void:
 		self.set(attributes[att], self.get(attributes[att]) + value)
 	else:
 		print("ERRO: invalid bônus value")
-	if(self.digimonDisplay.currentDigimon == self):
+	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 		self.digimonDisplay.attributes.showContent(self)
 	# implementar função de atualização da interface de atributos (futuramente)e)

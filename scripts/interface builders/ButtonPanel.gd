@@ -38,7 +38,7 @@ func updateButtons() -> void:
 	for nbutton: ButtonDescription in skillButtons:
 		nbutton.updateSkills()
 
-func blockAllsButtons() -> void:
+func blockAllButtons() -> void:
 	for cbutton in allButtons:
 		cbutton.visible = false
 

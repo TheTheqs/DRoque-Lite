@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfjl4jmao6ynj"]
+
+[ext_resource type="Texture2D" uid="uid://0ofgmktoiaft" path="res://assets/interface/UI/QuickWindow.png" id="1_1llc3"]
+[ext_resource type="Script" path="res://scripts/interface builders/QuickInfo.gd" id="1_mjhq2"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="3_sx4uf"]
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="3_uln3s"]
+[ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="6_qprut"]
+
+[node name="QuickInfo" type="Node2D" node_paths=PackedStringArray("closeButton", "icon", "content", "title")]
+script = ExtResource("1_mjhq2")
+closeButton = NodePath("CloseButton")
+icon = NodePath("Icon")
+content = NodePath("ScrollContainer/Description")
+title = NodePath("Label")
+
+[node name="Window" type="Sprite2D" parent="."]
+texture = ExtResource("1_1llc3")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-91, -41)
+
+[node name="Label" parent="." instance=ExtResource("3_sx4uf")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = -107.0
+offset_top = -17.0
+offset_right = 89.0
+offset_bottom = 77.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="Description" type="RichTextLabel" parent="ScrollContainer"]
+custom_minimum_size = Vector2(196, 94)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(1, 0.905882, 0.772549, 1)
+theme_override_constants/outline_size = 1
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("3_uln3s")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+
+[node name="CloseButton" type="Button" parent="."]
+offset_left = 88.0
+offset_top = -81.0
+offset_right = 110.0
+offset_bottom = -59.0
+theme_override_styles/focus = ExtResource("6_qprut")
+theme_override_styles/disabled_mirrored = ExtResource("6_qprut")
+theme_override_styles/disabled = ExtResource("6_qprut")
+theme_override_styles/hover_pressed_mirrored = ExtResource("6_qprut")
+theme_override_styles/hover_pressed = ExtResource("6_qprut")
+theme_override_styles/hover_mirrored = ExtResource("6_qprut")
+theme_override_styles/hover = ExtResource("6_qprut")
+theme_override_styles/pressed_mirrored = ExtResource("6_qprut")
+theme_override_styles/pressed = ExtResource("6_qprut")
+theme_override_styles/normal_mirrored = ExtResource("6_qprut")
+theme_override_styles/normal = ExtResource("6_qprut")
+
+[connection signal="button_down" from="CloseButton" to="." method="closeWindow"]

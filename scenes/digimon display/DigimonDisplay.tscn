@@ -1,18 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://debtssae0t2f1"]
+[gd_scene load_steps=10 format=3 uid="uid://debtssae0t2f1"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/DigimonDisplay.gd" id="1_flnho"]
 [ext_resource type="Texture2D" uid="uid://caj4tngi52c0d" path="res://assets/interface/UI/DigimonInfoDisplay.png" id="2_vvv61"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/IconName.gd" id="3_p0f8t"]
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_65k5o"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/AttributesDisplay.gd" id="5_8b084"]
+[ext_resource type="Script" path="res://scripts/interface builders/digimon display/PassivesDisplay.gd" id="6_00gts"]
+[ext_resource type="PackedScene" uid="uid://bfjl4jmao6ynj" path="res://scenes/entities/QuickInfo.tscn" id="7_2ouq4"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="7_eqxg7"]
 
-[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes")]
-visible = false
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tno0g"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes", "quickWindow", "passives", "closeButton")]
 position = Vector2(135, 240)
 script = ExtResource("1_flnho")
 iconName = NodePath("IconName")
 attributes = NodePath("AttributesDisplay")
+quickWindow = NodePath("QuickInfo")
+passives = NodePath("Passives")
+closeButton = NodePath("CloseButton")
 
 [node name="Display" type="Sprite2D" parent="."]
 texture = ExtResource("2_vvv61")
@@ -51,7 +61,7 @@ script = ExtResource("5_8b084")
 attributes = NodePath("Attributes")
 
 [node name="Attributes" type="Label" parent="AttributesDisplay"]
-offset_left = -119.0
+offset_left = -120.0
 offset_top = -95.0
 offset_right = -7.0
 offset_bottom = 1.0
@@ -63,6 +73,31 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Passives" type="Node2D" parent="." node_paths=PackedStringArray("display", "passiveList")]
+script = ExtResource("6_00gts")
+display = NodePath("..")
+passiveList = NodePath("ScrollContainer/PassiveList")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Passives"]
+offset_left = -119.0
+offset_top = 13.0
+offset_right = -7.0
+offset_bottom = 145.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tno0g")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="PassiveList" type="BoxContainer" parent="Passives/ScrollContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(112, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 1
+vertical = true
+
 [node name="CloseButton" type="Button" parent="."]
 offset_left = 99.0
 offset_top = -149.0
@@ -73,5 +108,8 @@ theme_override_styles/disabled = ExtResource("7_eqxg7")
 theme_override_styles/hover = ExtResource("7_eqxg7")
 theme_override_styles/pressed = ExtResource("7_eqxg7")
 theme_override_styles/normal = ExtResource("7_eqxg7")
+
+[node name="QuickInfo" parent="." instance=ExtResource("7_2ouq4")]
+visible = false
 
 [connection signal="button_down" from="CloseButton" to="." method="toggleDisplay"]

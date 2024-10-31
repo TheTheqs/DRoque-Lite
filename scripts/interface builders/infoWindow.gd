@@ -3,7 +3,7 @@ extends Node2D
 class_name InfoWindow
 
 @export var buttonPanel: ButtonPanel
-@export var title: RichTextLabel
+@export var title: Label
 @export var description: RichTextLabel
 @export var skillFrame: Sprite2D
 @export var skillIcon: Sprite2D
@@ -12,7 +12,7 @@ func _ready() -> void:
 	self.visible = false
 
 func updateDisplay(ntitle: String, ncontent: String)-> void:
-	title.text = "[center]" + ntitle + "[/center]"
+	title.text = ntitle
 	description.text = "[center]" + ncontent + "[/center]"
 
 func showWindow(ntitle: String, ncontent: String) -> void:
@@ -21,7 +21,7 @@ func showWindow(ntitle: String, ncontent: String) -> void:
 	else:
 		skillFrame.visible = true
 	buttonPanel.descWindowOn = true
-	buttonPanel.blockAllsButtons()
+	buttonPanel.blockAllButtons()
 	updateDisplay(ntitle, ncontent)
 	self.visible = true
 

@@ -17,6 +17,8 @@ func _ready() -> void:
 	digimon.learnSkill(Counting.new())
 	digimon.learnSkill(EfficientCasting.new())
 	digimon.learnSkill(AGlacialHeart.new())
+	digimon.learnSkill(CounterMagic.new())
+	digimon.learnSkill(InstinctiveEvasion.new())
 	#teste de status effect
 	digimon.applyStatus(IntMinus.new(2))
 	#atualização da interface. Sempre a última coisa a se fazer!

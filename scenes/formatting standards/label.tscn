@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy7ro4867yebk"]
+
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_ejhkm"]
+
+[node name="Label" type="Label"]
+offset_left = -75.0
+offset_top = -57.0
+offset_right = 88.0
+offset_bottom = -25.0
+theme_override_colors/font_outline_color = Color(1, 0.905882, 0.772549, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("1_ejhkm")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

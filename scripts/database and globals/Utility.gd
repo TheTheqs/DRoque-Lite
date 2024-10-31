@@ -87,3 +87,8 @@ func getTypeRatio(atacker: Enums.Type, defender: Enums.Type) -> float:
 func pickOne(options: Array) -> Object:
 	var selectedIndex: int = random(0, (options.size() -1))
 	return options[selectedIndex]
+
+func clearChildren(node: Node) -> void:
+	if(node.get_child_count() > 0):
+		for child in node.get_children():
+			child.queue_free()
