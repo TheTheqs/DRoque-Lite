@@ -117,8 +117,8 @@ func activateButton() -> void:
 			relatedPlayer.canAct = false
 			BTM.choosing = false
 			BTM.passingTurn()
-		elif(currentButtonToShow == allButtons[2]):
-			inventoryDisplay.opening()
+	if(currentButtonToShow == allButtons[2]):
+		inventoryDisplay.opening()
 #funções de exibição da tela de informações de digimon
 func showDisplay(digimon: Digimon) -> void:
 	displayWindow.currentDigimon = digimon

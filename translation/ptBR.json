@@ -9,6 +9,7 @@
   "Inventory": "Inventário",
   "InventoryButtonTittle": "Abir Inventário",
   "InventoryButtonDescription": "Abre o inventário. Usar um item ou equipar um equipamento consome uma ação.",
+  "CantUseItem": "O Digimon não pode usar itens!",
   "STR": "FOR",
   "INT": "INT",
   "AGI": "AGI",
@@ -139,5 +140,7 @@
   "StatusDescription33": "Recupera vida ao causar dano com ataques diretos, com a cura equivalente ao percentual de acúmulos (até um máximo de 100%).",
   "StatusDescription35": "Todos os ataques são críticos. No entanto, sempre que sofrer dano de qualquer tipo, há uma chance de 50% de perder esse efeito.",
   "StatusDescription44": "Aumenta a Inteligência.",
-  "StatusDescription45": "Diminui a Inteligência."
+  "StatusDescription45": "Diminui a Inteligência.",
+  "ItemName0": "Poção Vermelha",
+  "ItemDescription0": "Cura 50% da vida máxima."
 }

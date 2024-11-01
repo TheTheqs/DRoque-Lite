@@ -4,8 +4,10 @@ class_name StatusEffectDisplay
 #elementos de cena
 @export var display: DigimonDisplay
 @export var statusList: BoxContainer
+@export var builtTimer: Timer
 #elemento de instância
 var staticInfoCard: PackedScene = preload("res://scenes/entities/InfoCard.tscn")
+var newStatusE: Array = []
 #dicionário de cards ativos
 var currentStatus: Dictionary = {
 	
@@ -21,12 +23,17 @@ func addStatus(newStatus: StatusEffect) -> void:
 		statusList.call_deferred("add_child", newCard)
 		display.allButtons.append(newCard.button)
 
-func resetStatusList(newStatus: Array) -> void:
+func resetStatusList(newCards: Array) -> void:
 	if(currentStatus.size() > 0):
 		for statusId in currentStatus:
 			display.allButtons.erase(currentStatus[statusId].button)
 		Util.clearChildren(statusList)
 		currentStatus.clear()
-	if(newStatus.size() > 0):
-		for newStat : StatusEffect in newStatus:
+	newStatusE.clear()
+	newStatusE = newCards
+	builtTimer.call_deferred("start", 0.1)
+
+func buildList() -> void:
+	if(newStatusE.size() > 0):
+		for newStat : StatusEffect in newStatusE:
 			addStatus(newStat)

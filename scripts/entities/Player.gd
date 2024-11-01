@@ -4,7 +4,7 @@ class_name Player
 
 #scene elements
 @export var buttonPanel : ButtonPanel
-
+@export var inventoyDisplay: InventoryDisplay
 func _ready() -> void:
 	self.tamerName = "Player"
 	#setando o damage shower
@@ -23,6 +23,9 @@ func _ready() -> void:
 	digimon.learnSkill(NaturalLens.new())
 	#teste de status effect
 	digimon.applyStatus(IntMinus.new(1))
+	#teste de inventário
+	self.inventory.addItem(ItemDB.getUsableItem(0), 3)
+	digimon.currentHealth = Util.cap(digimon.maxHelth/2)
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()

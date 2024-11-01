@@ -19,7 +19,7 @@ var quickWindow: QuickInfo
 func popWindow() -> void:
 	if(cardFont.has_method("blockAllButtons")):
 		cardFont.blockAllButtons()
-		quickWindow.popWindow(iconTexture, titleText, cardDescription, self)
+		quickWindow.popWindow(iconTexture, titleText, cardDescription, cardFont)
 	else:
 		print("ERRO: Invalid card font")
 

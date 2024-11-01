@@ -9,6 +9,7 @@
   "Inventory": "Inventory",
   "InventoryButtonTittle": "Open Inventory",
   "InventoryButtonDescription": "Opens the inventory. Using an item or equipping gear consumes one action.",
+  "CantUseItem": "The Digimon Can not use Items!",
   "STR": "STR",
   "INT": "INT",
   "AGI": "AGI",
@@ -139,5 +140,7 @@
   "StatusDescription33": "Heals upon dealing damage with direct attacks, with the healing amount equal to the stack percentage (up to a maximum of 100%).",
   "StatusDescription35": "All attacks are critical hits. However, whenever you take damage of any kind, there's a 50% chance to lose this effect.",
   "StatusDescription44": "Increase Intelligence.",
-  "StatusDescription45": "Decrease Intelligence."
+  "StatusDescription45": "Decrease Intelligence.",
+  "ItemName0": "Red Potion",
+  "ItemDescription0": "Heals 50% of max health."
 }

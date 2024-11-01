@@ -7,19 +7,22 @@ class_name QuickInfo
 @export var content: RichTextLabel
 @export var title: Label
 #variável de controle fechar/abrir
-var infoCard: InfoCard
+var cardFont
 
 func _ready() -> void:
 	self.visible = false
 
 #funções de exibição e encerramento
-func popWindow(nicon: CompressedTexture2D, ntitle: String, ncontent: String, ninfoCard: InfoCard) -> void:
+func popWindow(nicon: CompressedTexture2D, ntitle: String, ncontent: String, ninfoCard) -> void:
 	icon.texture = nicon
 	content.text = "[center]" + ncontent + "[/center]"
-	infoCard = ninfoCard
+	cardFont = ninfoCard
 	title.text = ntitle
 	self.visible = true
 
 func closeWindow() -> void:
-	self.visible = false
-	infoCard.closeWindow()
+	if(cardFont.has_method("unblockAllButtons")):
+		cardFont.unblockAllButtons()
+		self.visible = false
+	else:
+		print("ERRO: Invalid card font")

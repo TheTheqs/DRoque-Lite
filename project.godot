@@ -21,6 +21,7 @@ DDB="*res://scripts/database and globals/DigimonDB.gd"
 Util="*res://scripts/database and globals/Utility.gd"
 EnumDB="*res://scripts/database and globals/EnumDB.gd"
 TTR="*res://translation/Translator.gd"
+ItemDB="*res://scripts/database and globals/ItemDB.gd"
 
 [display]
 

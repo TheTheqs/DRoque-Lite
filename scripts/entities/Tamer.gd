@@ -20,7 +20,7 @@ var tamerName: String
 var tamerLevel: int = 3
 var actions: int
 var canAct: bool = false
-
+var inventory: Inventory = Inventory.new(self)
 #Sumoning Digimon
 func summonDigimon(index: int) -> void:
 	var data: DigimonData = DDB.getDigimonData(index)

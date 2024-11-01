@@ -4,8 +4,10 @@ class_name PassivesDisplay
 #elementos de cena
 @export var display: DigimonDisplay
 @export var passiveList: BoxContainer
+@export var buildTimer: Timer
 #elemento de instância
 var staticInfoCard: PackedScene = preload("res://scenes/entities/InfoCard.tscn")
+var newPassives: Array = []
 #dicionário de cards ativos
 var currentPassives: Dictionary = {
 	
@@ -29,12 +31,17 @@ func removePass(passId: int) -> void:
 	else:
 		print("ERROR: Id not found")
 
-func resetPassList(newPassives: Array) -> void:
+func resetPassList(newCards: Array) -> void:
 	if(currentPassives.size() > 0):
 		for passId in currentPassives:
 			display.allButtons.erase(currentPassives[passId].button)
 		Util.clearChildren(passiveList)
 		currentPassives.clear()
+	newPassives.clear()
+	newPassives = newCards
+	buildTimer.call_deferred("start", 0.1)
+
+func buildList() -> void:
 	if(newPassives.size() > 0):
 		for newPassive : PassiveSkill in newPassives:
 			addPass(newPassive)

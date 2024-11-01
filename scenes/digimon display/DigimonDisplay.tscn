@@ -76,10 +76,11 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Passives" type="Node2D" parent="." node_paths=PackedStringArray("display", "passiveList")]
+[node name="Passives" type="Node2D" parent="." node_paths=PackedStringArray("display", "passiveList", "buildTimer")]
 script = ExtResource("6_00gts")
 display = NodePath("..")
 passiveList = NodePath("ScrollContainer/PassiveList")
+buildTimer = NodePath("BuildTimer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Passives"]
 offset_left = -119.0
@@ -101,10 +102,13 @@ size_flags_vertical = 2
 theme_override_constants/separation = 1
 vertical = true
 
-[node name="StatusEffect" type="Node2D" parent="." node_paths=PackedStringArray("display", "statusList")]
+[node name="BuildTimer" type="Timer" parent="Passives"]
+
+[node name="StatusEffect" type="Node2D" parent="." node_paths=PackedStringArray("display", "statusList", "builtTimer")]
 script = ExtResource("7_ioen4")
 display = NodePath("..")
 statusList = NodePath("ScrollContainer/StatusList")
+builtTimer = NodePath("BuildTimer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="StatusEffect"]
 offset_left = 8.0
@@ -126,6 +130,8 @@ size_flags_vertical = 2
 theme_override_constants/separation = 1
 vertical = true
 
+[node name="BuildTimer" type="Timer" parent="StatusEffect"]
+
 [node name="CloseButton" type="Button" parent="."]
 offset_left = 99.0
 offset_top = -149.0
@@ -140,4 +146,6 @@ theme_override_styles/normal = ExtResource("7_eqxg7")
 [node name="QuickInfo" parent="." instance=ExtResource("7_2ouq4")]
 visible = false
 
+[connection signal="timeout" from="Passives/BuildTimer" to="Passives" method="buildList"]
+[connection signal="timeout" from="StatusEffect/BuildTimer" to="StatusEffect" method="buildList"]
 [connection signal="button_down" from="CloseButton" to="." method="toggleDisplay"]

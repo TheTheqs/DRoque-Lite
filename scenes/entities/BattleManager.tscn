@@ -226,10 +226,10 @@ skillAnnouncer = NodePath("../SkillAnnouncer")
 digimonDisplay = NodePath("../../Digimon Display")
 
 [node name="DisplayButton" type="Button" parent="Enemy/Digimon"]
-offset_left = -25.0
-offset_top = -27.0
-offset_right = 55.0
-offset_bottom = 53.0
+offset_left = -40.0
+offset_top = -41.0
+offset_right = 40.0
+offset_bottom = 39.0
 theme_override_styles/focus = ExtResource("5_2kpnn")
 theme_override_styles/disabled_mirrored = ExtResource("5_2kpnn")
 theme_override_styles/disabled = ExtResource("5_2kpnn")
@@ -278,9 +278,10 @@ libraries = {
 "": SubResource("AnimationLibrary_ldluy")
 }
 
-[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("buttonPanel", "inventoyDisplay", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
 script = ExtResource("7_5gnrb")
 buttonPanel = NodePath("ButtonPanel")
+inventoyDisplay = NodePath("Inventory")
 digimon = NodePath("Digimon")
 opponent = NodePath("../Enemy")
 HUDD = NodePath("HUDDisplay")
@@ -303,10 +304,10 @@ skillAnnouncer = NodePath("../SkillAnnouncer")
 digimonDisplay = NodePath("../../Digimon Display")
 
 [node name="DisplayButton" type="Button" parent="Player/Digimon"]
-offset_left = -25.0
-offset_top = -27.0
-offset_right = 55.0
-offset_bottom = 53.0
+offset_left = -32.0
+offset_top = -38.0
+offset_right = 48.0
+offset_bottom = 42.0
 theme_override_styles/focus = ExtResource("5_2kpnn")
 theme_override_styles/disabled_mirrored = ExtResource("5_2kpnn")
 theme_override_styles/disabled = ExtResource("5_2kpnn")
@@ -456,8 +457,9 @@ libraries = {
 "": SubResource("AnimationLibrary_15o28")
 }
 
-[node name="Inventory" parent="Player" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("21_yb4p1")]
+[node name="Inventory" parent="Player" node_paths=PackedStringArray("buttonPanel", "relatedPlayer") instance=ExtResource("21_yb4p1")]
 buttonPanel = NodePath("../ButtonPanel")
+relatedPlayer = NodePath("..")
 
 [node name="BattleMessage" parent="." node_paths=PackedStringArray("BTM") instance=ExtResource("18_lykkh")]
 z_index = 1

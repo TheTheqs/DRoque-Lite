@@ -1,25 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm6giwusbglv8"]
+[gd_scene load_steps=6 format=3 uid="uid://dm6giwusbglv8"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/inventory/InventoryDisplay.gd" id="1_gyk8p"]
 [ext_resource type="Texture2D" uid="uid://b8kbb7nxl25ri" path="res://assets/interface/UI/Inventory.png" id="1_w6jnx"]
 [ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="2_8jrjf"]
 [ext_resource type="PackedScene" uid="uid://dqw2q55o530pr" path="res://scenes/formatting standards/closeButton.tscn" id="4_oq76i"]
+[ext_resource type="PackedScene" uid="uid://bfjl4jmao6ynj" path="res://scenes/entities/QuickInfo.tscn" id="5_r55wv"]
 
-[node name="Inventory" type="Node2D" node_paths=PackedStringArray("title", "closeButton")]
+[node name="Inventory" type="Node2D" node_paths=PackedStringArray("title", "closeButton", "buildTimer", "itemList", "infoWindow")]
 position = Vector2(145, 200)
 script = ExtResource("1_gyk8p")
 title = NodePath("Label")
 closeButton = NodePath("CloseButton")
+buildTimer = NodePath("BuildTimer")
+itemList = NodePath("InventoryWindow/ItemList")
+infoWindow = NodePath("QuickInfo")
 
 [node name="Window" type="Sprite2D" parent="."]
+position = Vector2(1, -4)
 texture = ExtResource("1_w6jnx")
 
 [node name="Label" parent="." instance=ExtResource("2_8jrjf")]
-offset_left = -107.0
-offset_top = -82.0
-offset_right = 89.0
-offset_bottom = -59.0
+offset_left = -92.0
+offset_top = -86.0
+offset_right = 76.0
+offset_bottom = -63.0
+
+[node name="InventoryWindow" type="ScrollContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -59.0
+offset_right = 76.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="ItemList" type="GridContainer" parent="InventoryWindow"]
+custom_minimum_size = Vector2(168, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 5
 
 [node name="CloseButton" parent="." instance=ExtResource("4_oq76i")]
+offset_left = 76.0
+offset_top = -107.0
+offset_right = 98.0
+offset_bottom = -85.0
+
+[node name="BuildTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="QuickInfo" parent="." instance=ExtResource("5_r55wv")]
 
 [connection signal="button_down" from="CloseButton" to="." method="closing"]
+[connection signal="timeout" from="BuildTimer" to="." method="buildList"]

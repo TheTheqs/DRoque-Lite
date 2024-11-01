@@ -76,6 +76,7 @@ var statusImunity: Array[int]
 var elementalImunity:Array[Enums.Element]
 var statusToRemove: Array[int]
 var isDisabled: bool = false
+var canUseItem: bool = true
 #actions
 var selectedSkill: Skill = null
 var currentAction: Skill
@@ -479,7 +480,6 @@ func changeBonusAttribute(att: String, value: int) -> void:
 		"wis": "bonusWIS",
 		"dex": "bonusDEX"
 	}
-	
 	if att in attributes:
 		self.set(attributes[att], self.get(attributes[att]) + value)
 	else:
