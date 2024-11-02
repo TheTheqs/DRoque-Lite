@@ -49,6 +49,7 @@ func removeItem(oldItem: Item, quantity) -> void:
 	itemToBeRemoved.quantity -= quantity
 	if(itemToBeRemoved.quantity <= 0):
 		relatedPocket.erase(oldItem.itemId)
+		
 
 func getInventory() -> Array:
 	var fullInventory: Array = usableItems.values() + miscItems.values()

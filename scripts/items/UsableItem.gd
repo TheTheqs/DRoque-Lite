@@ -25,4 +25,5 @@ func itemEffect(digimon: Digimon) -> void:
 
 #função de cálculo de prioridade para uso do item. 
 func priorityCalculation(digimon: Digimon) -> int:
+	print("Vindo aqui")
 	return self.iEffect.priorityCalc(digimon)

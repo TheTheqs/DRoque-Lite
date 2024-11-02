@@ -1,6 +1,8 @@
 extends Tamer
 
 class_name Enemy
+#array com uso possível de itens
+var possibleItemActions: Array[Skill]
 
 func _ready() -> void:
 	self.tamerName = "Enemy"
@@ -21,14 +23,20 @@ func _ready() -> void:
 	digimon.learnSkill(InstinctiveEvasion.new())
 	#teste de status effect
 	digimon.applyStatus(IntMinus.new(2))
+	#teste de inventário
+	self.inventory.addItem(ItemDB.getUsableItem(0), 1)
+	digimon.currentHealth = Util.cap(digimon.maxHelth/2)
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar
 	judge.gettingStarted()
 
 func makeAChoice() -> void:
+	buildItemArray()
 	var selectedSkill = null
-	for nskill in digimon.digimonSkills:
+	var possibleActios: Array[Skill] = self.digimon.digimonSkills.duplicate()
+	possibleActios.append_array(possibleItemActions)
+	for nskill in possibleActios:
 		if(nskill != null):
 			nskill.priorityCalculation(digimon)
 			if(selectedSkill == null):
@@ -47,7 +55,6 @@ func makeAChoice() -> void:
 		BTM.passingTurn()
 	
 
-
 func onFrameAnimation(anim_name: String):
 	if(anim_name == "blinkFrame"):
 		BM.showMessage(tr(StringName("BattleMessage2b")))
@@ -56,7 +63,13 @@ func onFrameAnimation(anim_name: String):
 		actionsDisplay.visible = true
 		print("Texto do DISPLAY: " + actionsDisplay.text)
 
-
 func actionsAnimation(anim_name: String) -> void:
 	if(anim_name == "blinkActions"):
 		actionsDisplay.visible = true
+
+func buildItemArray() -> void:
+	self.possibleItemActions.clear()
+	var allUsables: Array = self.inventory.usableItems.values()
+	if(allUsables.size() > 0):
+		for item: UsableItem in allUsables:
+			possibleItemActions.append(ItemUser.new(item))

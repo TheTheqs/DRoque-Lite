@@ -18,7 +18,6 @@ func _init(newItem: UsableItem) -> void:
 	self.statusEffects.append(UseItem.new(relatedItem))
 
 #função de ataque de fato
-#função de ataque de fato
 func effect(digimon: Digimon) -> void:
 	skillSingularity(digimon)
 	applyCooldown(digimon)
@@ -30,10 +29,19 @@ func effect(digimon: Digimon) -> void:
 	if(digimon.tamer is Player):
 		var player: Player = digimon.tamer
 		player.buttonPanel.updateButtons()
+	else:
+		var enemy: Enemy = digimon.tamer
+		if(relatedItem in enemy.inventory.usableItems.values()):
+			print("Vindo aqui")
+			enemy.inventory.removeItem(relatedItem, 1)
 		
 #a função abaixo apenas precisa retornar 0 para nao atrapalhar o cálculo de prioridade do item
 func getElementalChartPriority(_digimon: Digimon) -> int:
 	return 0
 #cálculo de prioridade <3
-func modifyPriority(digimon: Digimon) -> int:
-	return relatedItem.priorityCalculation(digimon)
+func priorityCalculation(digimon: Digimon) -> void:
+	priority = staticPriority
+	priority += relatedItem.iEffect.priorityCalc(digimon)
+	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
+		self.priority = 0
+	print(tr(StringName(self.skillName)), " prioridade: ", str(self.priority))

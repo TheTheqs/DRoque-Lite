@@ -11,7 +11,7 @@ func priorityCalc(digimon: Digimon) -> int:
 	var thresholds = [80, 60, 40, 20]
 	var increments = [1, 1, 1, 2]
 	for i in range(thresholds.size()):
-		if healthProp >= thresholds[i]:
+		if healthProp <= thresholds[i]:
 			priority += increments[i]
 	if(healthProp > 80):
 		priority = 0

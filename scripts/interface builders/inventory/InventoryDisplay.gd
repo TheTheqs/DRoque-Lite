@@ -23,7 +23,7 @@ func opening() -> void:
 	title.text = tr(StringName("Inventory"))
 	resetInventory()
 	self.visible = true
-	print(str(currentInventory.getInventory().size()))
+
 
 func closing() -> void:
 	self.visible = false

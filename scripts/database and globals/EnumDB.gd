@@ -62,3 +62,11 @@ enum StatusType {
 	BUFF,
 	DEBUFF,
 }
+#tipo de equipamentos
+enum EquipmentType {
+	WEAPON,
+	SECONDHAND,
+	HEAD,
+	ARMOR,
+	ACESSORY
+}

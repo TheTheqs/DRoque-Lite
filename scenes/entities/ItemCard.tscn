@@ -32,6 +32,7 @@ position = Vector2(16, 16)
 position = Vector2(16, 16)
 
 [node name="Quantity" parent="." instance=ExtResource("3_s2l2s")]
+layout_mode = 0
 offset_left = 23.0
 offset_top = 24.0
 offset_right = 41.0
