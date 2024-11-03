@@ -6,6 +6,7 @@ var currentDigimon: Digimon
 @export var buttonPanel: ButtonPanel
 @export var iconName: IconName
 @export var attributes: AttributesDisplay
+@export var armory: ArmoryDisplay
 @export var quickWindow: QuickInfo
 @export var passives: PassivesDisplay
 @export var status: StatusEffectDisplay
@@ -23,6 +24,8 @@ func showDisplay(digimon: Digimon) -> void:
 	iconName.showContent(digimon)
 #atributos
 	attributes.showContent(digimon)
+#armory/equipaments
+	armory.buildIcons(digimon.armory)
 #passives
 	var passList: Array = digimon.digimonPassiveSkills.values()
 	passives.resetPassList(passList)
@@ -49,3 +52,7 @@ func unblockAllButtons() -> void:
 	if(allButtons.size() > 0):
 		for butt : Button in allButtons:
 			butt.disabled = false
+
+func showEquipWindow(equip: Equipment) -> void:
+	blockAllButtons()
+	quickWindow.popEquipWindow(equip, self)

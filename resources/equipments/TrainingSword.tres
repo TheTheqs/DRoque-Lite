@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=6 format=3 uid="uid://dbwjj5a2msvbn"]
+
+[ext_resource type="Texture2D" uid="uid://5ge14rjbt7ar" path="res://assets/interface/Icons/item icons/Equipments/TrainingSword.png" id="1_v2l82"]
+[ext_resource type="Script" path="res://scripts/skills/passive skills/EfficientCasting.gd" id="2_d2uxf"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/EquipmentData.gd" id="2_dayoe"]
+[ext_resource type="Texture2D" uid="uid://dnuq07eockhqw" path="res://assets/sprites/vfx/skills/SwordAtack.png" id="3_38c0u"]
+[ext_resource type="Script" path="res://scripts/skills/passive skills/InstinctiveEvasion.gd" id="3_f76cp"]
+
+[resource]
+script = ExtResource("2_dayoe")
+itemId = 1
+itemIcon = ExtResource("1_v2l82")
+itemEquipmentType = 0
+equipmentTier = 0
+buffedAttributes = Array[String](["str", "dex"])
+itemPassives = Array[Script]([ExtResource("2_d2uxf"), ExtResource("3_f76cp")])
+isWeapon = true
+weaponTexture = ExtResource("3_38c0u")
+textureRange = 6

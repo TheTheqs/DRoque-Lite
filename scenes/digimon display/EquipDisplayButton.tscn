@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyphwmpgqb0es"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/digimon display/EquipDisplayButton.gd" id="1_y6iii"]
+[ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="2_7ekjg"]
+[ext_resource type="Texture2D" uid="uid://dno3n4pt36yrk" path="res://assets/interface/Icons/item icons/EquipmentFrame.png" id="3_6x3rf"]
+
+[node name="EquipDisplayButton" type="Control" node_paths=PackedStringArray("icon")]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y6iii")
+icon = NodePath("Icon")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/focus = ExtResource("2_7ekjg")
+theme_override_styles/disabled_mirrored = ExtResource("2_7ekjg")
+theme_override_styles/disabled = ExtResource("2_7ekjg")
+theme_override_styles/hover_pressed_mirrored = ExtResource("2_7ekjg")
+theme_override_styles/hover_pressed = ExtResource("2_7ekjg")
+theme_override_styles/hover_mirrored = ExtResource("2_7ekjg")
+theme_override_styles/hover = ExtResource("2_7ekjg")
+theme_override_styles/pressed_mirrored = ExtResource("2_7ekjg")
+theme_override_styles/pressed = ExtResource("2_7ekjg")
+theme_override_styles/normal_mirrored = ExtResource("2_7ekjg")
+theme_override_styles/normal = ExtResource("2_7ekjg")
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(23, 23)
+texture = ExtResource("3_6x3rf")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(23, 23)
+
+[connection signal="button_down" from="Button" to="." method="showInfo"]

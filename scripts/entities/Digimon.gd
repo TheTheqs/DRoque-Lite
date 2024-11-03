@@ -60,11 +60,22 @@ var gettingStatus: bool #para verificação de status
 @export var skillAnnouncer: SkillAnnouncer
 @export var statusDisplay: StatusDisplay
 @export var digimonDisplay: DigimonDisplay
-
+#Equipamentos #ATENÇÃO!!!!!! nunca usar erase no array abaixo, seu size() precisa ser sempre 4 ¬¬
+var armory: Array[Equipment] = [null, null, null, null]
+#[0] é para arma, [1] é para offhand, [2] é para armor e [3] é para acessório.
+var armoryIndex: Dictionary = {
+	Enums.EquipmentType.WEAPON: 0,
+	Enums.EquipmentType.OFFHAND: 1,
+	Enums.EquipmentType.ARMOR: 2,
+	Enums.EquipmentType.ACESSORY: 3,
+}
 #Battle Skills
 #o array abaixo precisa sempre ter esse tamanho (5) para evitar conflitos. Nunca use erase nesse array, e sim [index] = null
 var digimonSkills:Array[Skill] = [null, null, null, null, null]
 var digimonPassiveSkills: Dictionary = {
+	
+}
+var passiveCount: Dictionary = {
 	
 }
 var digimonLearnedSkills: Array[int]
@@ -194,7 +205,10 @@ func getTageted(skill: Skill) -> void:
 	getHited = true
 	triggerCheck(self.onGotTargeted, skill)
 	if(getHited):
-		skillSpawner.spawSkill(skill)
+		if(skill.needsAnimation):
+			skillSpawner.spawSkill(skill)
+		else:
+			gotTargeted(skill)
 	BTM.outAction("Digimon getTargeted")
 
 #função que determina o acerto das habilidades.
@@ -308,20 +322,23 @@ func unapplyStatus(statusID: int) -> void:
 	else:
 		print("Erro, status não encontrado no dicionário. Skill ID = ", str(statusID))
 
-#essa função está incompleta
+#essa função está incompleta (é necessário criar um código para quando não houver espaço para novas habilidades)
 func learnSkill(skill: Skill) -> void:
 	var _learned: bool = false
 	if(skill != null):
 		if(skill.skillId in self.digimonLearnedSkills):
 			BM.showMessage(tr(StringName("AlreadyKnowSkill")))
 			_learned = true
+			if(passiveCount.has(skill.skillId)):
+				passiveCount[skill.skillId] += 1 #incrementa as fontas da habilidade passiva caso haja mais de uma
 		else:
 			if(skill is PassiveSkill):
 				skill.learn(self, -1) #esse menos um é figurativo
 				self.digimonPassiveSkills[skill.skillId] = skill
+				self.passiveCount[skill.skillId] = 1 #cria uma contagem de passivas, para evitar remoção indevida
 				if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 					self.digimonDisplay.passives.addPass(skill)
-			else:
+			else:#código abaixo é para habilidades ativas.
 				for i in range(digimonSkills.size()):
 					if(digimonSkills[i] == null):
 						_learned = skill.learn(self, i)
@@ -332,12 +349,18 @@ func learnSkill(skill: Skill) -> void:
 func unlearnSkill(skill: Skill) -> void:
 	if(skill.skillId in digimonLearnedSkills):
 		if(skill is PassiveSkill):
-			var oldSkill: PassiveSkill = self.digimonPassiveSkills[skill.skillId]
-			oldSkill.unlearn(self)
-			digimonLearnedSkills.erase(skill.skillId)
-			digimonPassiveSkills.erase(skill.skillId)
-			if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
-				self.digimonDisplay.passives.removePass(skill.skillId)
+			if(passiveCount.has(skill.skillId)):
+				passiveCount[skill.skillId] -= 1
+				if(passiveCount[skill.skillId] == 0):
+					var oldSkill: PassiveSkill = self.digimonPassiveSkills[skill.skillId]
+					oldSkill.unlearn(self)
+					digimonLearnedSkills.erase(skill.skillId)
+					digimonPassiveSkills.erase(skill.skillId)
+					if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+						self.digimonDisplay.passives.removePass(skill.skillId)
+					passiveCount.erase(skill.skillId)
+			else:
+				print("ERROR: Skill not known")
 		else:
 			var skillIndex: int = self.digimonSkills.find(skill)
 			skill.unlearn(self)
@@ -487,3 +510,43 @@ func changeBonusAttribute(att: String, value: int) -> void:
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 		self.digimonDisplay.attributes.showContent(self)
 	# implementar função de atualização da interface de atributos (futuramente)e)
+
+func equipItem(equip: Equipment) -> void:
+	var armorIndex: int = armoryIndex[equip.equipType]
+	if(armory[armorIndex] != null):
+		self.unequipItem(armorIndex)
+	armory[armorIndex] = equip
+	for i : int in range(equip.attBuffs.size()):
+		if(equip.attBuffs[i] != 0):
+			self.changeBonusAttribute(equip.buffAdress[i], equip.attBuffs[i])
+	if(equip.itemPassives.size() > 0):
+		for newPassive: PassiveSkill in equip.itemPassives:
+			self.learnSkill(newPassive)
+	if(equip.isWeapon):
+		self.digimonSkills[0].texture = equip.weaponTexture
+		self.digimonSkills[0].skillIcon = equip.itemIcon
+		self.digimonSkills[0].textureRange = equip.textureRange
+		if(self.tamer is Player):
+			self.tamer.buttonPanel.setButtons()
+	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+		digimonDisplay.armory.buildIcons(self.armory)
+
+func unequipItem(equipIndex: int) -> void:
+	if(armory[equipIndex] != null):
+		var equip: Equipment = armory[equipIndex]
+		for i : int in range(equip.attBuffs.size()):
+			if(equip.attBuffs[i] != 0):
+				self.changeBonusAttribute(equip.buffAdress[i], -1*equip.attBuffs[i])
+		if(equip.itemPassives.size() > 0):
+			for oldPassive: PassiveSkill in equip.itemPassives:
+				self.unlearnSkill(oldPassive)
+		armory[equipIndex] = null
+		self.tamer.inventory.addItem(equip, 1)
+		if(equip.isWeapon):
+			self.digimonSkills[0].texture = preload("res://assets/sprites/vfx/skills/BasicAtack.png")
+			self.digimonSkills[0].skillIcon = preload("res://assets/interface/Icons/SkillIcons/BasicAtack.png")
+			self.digimonSkills[0].textureRange = 13
+		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
+			digimonDisplay.armory.buildIcons(self.armory)
+	else:
+		print("ERROR: no equip to be removed!")

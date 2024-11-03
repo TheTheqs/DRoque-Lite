@@ -59,9 +59,13 @@ func unblockAllButtons() -> void:
 func useItem(item: Item) -> void:
 	if(relatedPlayer.canAct and relatedPlayer.digimon.canUseItem):
 		relatedPlayer.canAct = false
-		if(item is UsableItem):
+		if(item != null):
 			relatedPlayer.digimon.chooseAction(ItemUser.new(item))
 			relatedPlayer.BTM.choosing = false
 			relatedPlayer.BTM.outAction("Inventory")
 			currentInventory.removeItem(item, 1)
 			self.closing()
+
+func showEquipWindow(equip: Equipment) -> void:
+	blockAllButtons()
+	infoWindow.popEquipWindow(equip, self)

@@ -1,19 +1,23 @@
 extends StatusSkill
 
 class_name ItemUser
-var relatedItem: UsableItem
+var relatedItem: Item
 #transferência de dados estáticos baseados no item fornecido
-func _init(newItem: UsableItem) -> void:
+func _init(newItem: Item) -> void:
 	self.skillId = -1
 	self.skillName = "ItemName" + str(newItem.itemId)
 	self.skillIcon = newItem.itemIcon
 	self.skillDescription = "ItemDescription" + str(newItem.itemId)
-	self.statusType = newItem.itemOrientation
-	self.staticPriority = newItem.itemPriority
 	self.manaCost = 0
 	self.cooldowm = 0
-	self.texture = newItem.itemTexture
-	self.textureRange = newItem.itemTextureRange
+	if(newItem is UsableItem):
+		self.texture = newItem.itemTexture
+		self.textureRange = newItem.itemTextureRange
+		self.statusType = newItem.itemOrientation
+		self.staticPriority = newItem.itemPriority
+	elif(newItem is Equipment):
+		self.needsAnimation = false
+		self.statusType = Enums.StatusType.BUFF
 	self.relatedItem = newItem
 	self.statusEffects.append(UseItem.new(relatedItem))
 
@@ -32,7 +36,6 @@ func effect(digimon: Digimon) -> void:
 	else:
 		var enemy: Enemy = digimon.tamer
 		if(relatedItem in enemy.inventory.usableItems.values()):
-			print("Vindo aqui")
 			enemy.inventory.removeItem(relatedItem, 1)
 		
 #a função abaixo apenas precisa retornar 0 para nao atrapalhar o cálculo de prioridade do item
@@ -44,4 +47,3 @@ func priorityCalculation(digimon: Digimon) -> void:
 	priority += relatedItem.iEffect.priorityCalc(digimon)
 	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
 		self.priority = 0
-	print(tr(StringName(self.skillName)), " prioridade: ", str(self.priority))

@@ -26,3 +26,19 @@ func closeWindow() -> void:
 		self.visible = false
 	else:
 		print("ERRO: Invalid card font")
+
+func popEquipWindow(equip: Equipment, ninfocard) -> void:
+	var equipDescription: String = tr(StringName(equip.itemDescription))
+	for i in range(equip.attBuffs.size()):
+		if(equip.attBuffs[i] > 0):
+			var addString: String = "\n" + tr(StringName(equip.buffAdress[i].to_upper())) + ": +" + str(equip.attBuffs[i])
+			equipDescription += addString
+		elif(equip.attBuffs[i] < 0):
+			var addString: String = "\n" + tr(StringName(equip.buffAdress[i].to_upper())) + ": " + str(equip.attBuffs[i])
+			equipDescription += addString
+	if(equip.itemPassives.size() > 0):
+		equipDescription += "\n" + tr(StringName("Passives:"))
+		for newPassive: PassiveSkill in equip.itemPassives:
+			var addString: String = "\n" + tr(StringName(newPassive.skillName))
+			equipDescription += addString
+	popWindow(equip.itemIcon, tr(equip.itemName), equipDescription, ninfocard)

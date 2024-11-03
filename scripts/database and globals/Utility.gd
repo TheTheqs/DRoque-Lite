@@ -84,9 +84,13 @@ func getTypeRatio(atacker: Enums.Type, defender: Enums.Type) -> float:
 	else:
 		return 1.0
 
-func pickOne(options: Array) -> Object:
-	var selectedIndex: int = random(0, (options.size() -1))
-	return options[selectedIndex]
+func pickOne(options: Array) -> Variant:
+	if(options.size() > 0):
+		var selectedIndex: int = random(0, (options.size() -1))
+		return options[selectedIndex]
+	else:
+		print("ERROR: Invalid options!")
+		return null
 
 func clearChildren(node: Node) -> void:
 	if(node.get_child_count() > 0):

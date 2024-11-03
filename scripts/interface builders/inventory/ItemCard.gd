@@ -31,6 +31,8 @@ func buildCard(item: Item, inventory: InventoryDisplay) -> void:
 		itemFrame.texture = frames[2]
 	elif(item is UsableItem):
 		itemFrame.texture = frames[0]
+	elif(item is Equipment):
+		itemFrame.texture = frames[1]
 	icon.texture = item.itemIcon
 	quantity.text = str(item.quantity)
 	self.visible = true
@@ -40,7 +42,10 @@ func startDescTimer() -> void:
 	showDesc.start(0.5)
 
 func showDescription() -> void:
-	relatedInventory.showItemDescription(nicon, ntitle, ncontent)
+	if(relatedItem is Equipment):
+		relatedInventory.showEquipWindow(relatedItem)
+	else:
+		relatedInventory.showItemDescription(nicon, ntitle, ncontent)
 
 func buttonUp() -> void:
 	if(!showDesc.is_stopped()):

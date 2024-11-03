@@ -2,15 +2,21 @@ extends StatusEffect
 
 class_name UseItem
 #value
-var relatedItem: UsableItem
+var relatedItem: Item
 
-func _init(item: UsableItem) -> void:
+func _init(item: Item) -> void:
 	self.statusId = 41
 	relatedItem = item
-	self.statusType = item.itemOrientation
+	if(item is UsableItem):
+		self.statusType = item.itemOrientation
+	else:
+		self.statusType = Enums.StatusType.BUFF
 
 func applyingEffect(digimon: Digimon) -> void:
-	relatedItem.itemEffect(digimon)
+	if(relatedItem is UsableItem):
+		relatedItem.itemEffect(digimon)
+	elif(relatedItem is Equipment):
+		digimon.equipItem(relatedItem)
 
 func getStatus() -> StatusEffect:
 	return UseItem.new(relatedItem)

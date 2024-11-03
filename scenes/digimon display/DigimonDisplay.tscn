@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://debtssae0t2f1"]
+[gd_scene load_steps=13 format=3 uid="uid://debtssae0t2f1"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/DigimonDisplay.gd" id="1_flnho"]
 [ext_resource type="Texture2D" uid="uid://caj4tngi52c0d" path="res://assets/interface/UI/DigimonInfoDisplay.png" id="2_vvv61"]
@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_65k5o"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/AttributesDisplay.gd" id="5_8b084"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/PassivesDisplay.gd" id="6_00gts"]
+[ext_resource type="Script" path="res://scripts/interface builders/digimon display/ArmoryDisplay.gd" id="6_qae38"]
 [ext_resource type="PackedScene" uid="uid://bfjl4jmao6ynj" path="res://scenes/entities/QuickInfo.tscn" id="7_2ouq4"]
+[ext_resource type="PackedScene" uid="uid://dyphwmpgqb0es" path="res://scenes/digimon display/EquipDisplayButton.tscn" id="7_awx54"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="7_eqxg7"]
 [ext_resource type="Script" path="res://scenes/digimon display/StatusEffectDisplay.gd" id="7_ioen4"]
 
@@ -16,12 +18,12 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
-[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes", "quickWindow", "passives", "status", "closeButton")]
-visible = false
+[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes", "armory", "quickWindow", "passives", "status", "closeButton")]
 position = Vector2(135, 240)
 script = ExtResource("1_flnho")
 iconName = NodePath("IconName")
 attributes = NodePath("AttributesDisplay")
+armory = NodePath("Armory")
 quickWindow = NodePath("QuickInfo")
 passives = NodePath("Passives")
 status = NodePath("StatusEffect")
@@ -75,6 +77,36 @@ theme_override_fonts/font = ExtResource("4_65k5o")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Armory" type="Node2D" parent="." node_paths=PackedStringArray("equipmentButtons")]
+script = ExtResource("6_qae38")
+equipmentButtons = [NodePath("GridContainer/Weapon"), NodePath("GridContainer/OffHand"), NodePath("GridContainer/Armor"), NodePath("GridContainer/Acessory")]
+
+[node name="GridContainer" type="GridContainer" parent="Armory"]
+custom_minimum_size = Vector2(92, 92)
+offset_left = 18.0
+offset_top = -93.0
+offset_right = 110.0
+offset_bottom = -1.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="Weapon" parent="Armory/GridContainer" node_paths=PackedStringArray("display") instance=ExtResource("7_awx54")]
+layout_mode = 2
+display = NodePath("../../..")
+
+[node name="OffHand" parent="Armory/GridContainer" node_paths=PackedStringArray("display") instance=ExtResource("7_awx54")]
+layout_mode = 2
+display = NodePath("../../..")
+
+[node name="Armor" parent="Armory/GridContainer" node_paths=PackedStringArray("display") instance=ExtResource("7_awx54")]
+layout_mode = 2
+display = NodePath("../../..")
+
+[node name="Acessory" parent="Armory/GridContainer" node_paths=PackedStringArray("display") instance=ExtResource("7_awx54")]
+layout_mode = 2
+display = NodePath("../../..")
 
 [node name="Passives" type="Node2D" parent="." node_paths=PackedStringArray("display", "passiveList", "buildTimer")]
 script = ExtResource("6_00gts")

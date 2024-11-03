@@ -65,8 +65,14 @@ enum StatusType {
 #tipo de equipamentos
 enum EquipmentType {
 	WEAPON,
-	SECONDHAND,
-	HEAD,
+	OFFHAND,
 	ARMOR,
 	ACESSORY
+}
+
+enum EquipmentTier {
+	COMMON,
+	RARE,
+	EPIC,
+	LEGENDARY
 }

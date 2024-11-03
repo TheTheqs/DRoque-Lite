@@ -16,16 +16,12 @@ func _ready() -> void:
 	digimon.learnSkill(OpressTheWeak.new())
 	digimon.learnSkill(LimiterRemoval.new())
 	#teste de habilidades passivas
-	digimon.learnSkill(Counting.new())
-	digimon.learnSkill(EfficientCasting.new())
-	digimon.learnSkill(AGlacialHeart.new())
-	digimon.learnSkill(CounterMagic.new())
-	digimon.learnSkill(InstinctiveEvasion.new())
 	#teste de status effect
-	digimon.applyStatus(IntMinus.new(2))
 	#teste de inventário
 	self.inventory.addItem(ItemDB.getUsableItem(0), 1)
 	digimon.currentHealth = Util.cap(digimon.maxHelth/2)
+	#teste de equipamento
+	digimon.equipItem(ItemDB.getEquipment(1))
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar

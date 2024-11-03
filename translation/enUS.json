@@ -9,6 +9,11 @@
   "Inventory": "Inventory",
   "InventoryButtonTittle": "Open Inventory",
   "InventoryButtonDescription": "Opens the inventory. Using an item or equipping gear consumes one action.",
+  "Unequiped": "Unequiped",
+  "NoWeapon": "No weapon equipped.",
+  "NoOffHand": "No ammo/secondary weapon equipped.",
+  "NoArmor": "No armor equipped.",
+  "NoAccessory": "No accessory equipped.",
   "CantUseItem": "The Digimon Can not use Items!",
   "STR": "STR",
   "INT": "INT",
@@ -38,6 +43,7 @@
   "NoCD": "The skill is on cooldown!",
   "NoMana": "Insufficient mana!",
   "CantUse": "Skill Unavailable!",
+  "Passives": "Passives: ",
   "AlreadyKnowSkill": "The skill has already been learned!",
   "DigimonName0": "Agumon",
   "DigimonName1": "Monodramon",
@@ -142,5 +148,9 @@
   "StatusDescription44": "Increase Intelligence.",
   "StatusDescription45": "Decrease Intelligence.",
   "ItemName0": "Red Potion",
-  "ItemDescription0": "Heals 50% of max health."
+  "ItemName1": "Training Sword",
+  "ItemName2": "Wooden Club",
+  "ItemDescription0": "Heals 50% of max health.",
+  "ItemDescription1": "A sword designed for friendly practice, but it may prove useful in combat when the situation turns desperate.",
+  "ItemDescription2": "A rudimentary club made of sturdy wood. Simple but effective in close combat."
 }

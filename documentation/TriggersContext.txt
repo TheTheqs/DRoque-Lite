@@ -1,8 +1,8 @@
 *onBattleEnd // Logic not OK // Test not OK
 *onLearnSkill // Logic not OK // Test not OK
-*onInventory // Logic not OK // Test not OK
+onUsingItem // Logic not OK // Test not OK
+*onEquiping // Logic not OK // Test not OK
 *onDying // Logic not OK // Test not OK
-onActing // Logic not OK // Test not OK
 *onEvolution // Logic not OK // Test not OK
 
 *Cannot be tested right now.

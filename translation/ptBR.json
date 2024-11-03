@@ -9,6 +9,11 @@
   "Inventory": "Inventário",
   "InventoryButtonTittle": "Abir Inventário",
   "InventoryButtonDescription": "Abre o inventário. Usar um item ou equipar um equipamento consome uma ação.",
+  "Unequiped": "Desequipado",
+  "NoWeapon": "Nenhuma arma equipada.",
+  "NoOffHand": "Nenhuma munição/arma secundária equipada.",
+  "NoArmor": "Nenhuma Armadura equipada.",
+  "NoAccessory": "Nenhum acessório equipado",
   "CantUseItem": "O Digimon não pode usar itens!",
   "STR": "FOR",
   "INT": "INT",
@@ -38,6 +43,7 @@
   "NoCD": "A habilidade está em recarga!",
   "NoMana": "A mana é insuficiente!",
   "CantUse": "Habilidade Indisponível!",
+  "Passives": "Passivas: ",
   "AlreadyKnowSkill": "A habilidade já foi aprendida",
   "DigimonName0": "Agumon",
   "DigimonName1": "Monodramon",
@@ -142,5 +148,9 @@
   "StatusDescription44": "Aumenta a Inteligência.",
   "StatusDescription45": "Diminui a Inteligência.",
   "ItemName0": "Poção Vermelha",
-  "ItemDescription0": "Cura 50% da vida máxima."
+  "ItemName1": "Espada de Treino",
+  "ItemName2": "Tacape",
+  "ItemDescription0": "Cura 50% da vida máxima.",
+  "ItemDescription1": "Uma espada projetada para treinos amistosos, mas que pode se mostrar útil em combate quando a situação se torna desesperadora.",
+  "ItemDescription2": "Uma clava rudimentar feita de madeira resistente. Simples, mas eficaz em combates corpo a corpo."
 }

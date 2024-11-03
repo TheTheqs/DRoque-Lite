@@ -60,7 +60,6 @@ func priorityCalculation(digimon: Digimon) -> void:
 	priorityCheck(digimon)
 	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
 		self.priority = 0
-	print(tr(StringName(self.skillName)), " prioridade: ", str(self.priority))
 
  #a função abaixo é criada apra ser sobreescrita nas classes DamageSkill
 func getElementalChartPriority(_digimon: Digimon) -> int:
