@@ -1,6 +1,11 @@
 extends Node
 
 class_name ItemDataBase
+var usablesIds: Array[int] = [0]
+var weapons: Array[int] = [1, 2]
+var armors: Array[int] = [3, 4]
+var offHands : Array[int] = [5, 6]
+var accessories: Array[int] = [7, 8]
 #dictionaries
 var itemDataBase: Dictionary = {
 	0 : load("res://resources/usable items/RedPotion.tres"),

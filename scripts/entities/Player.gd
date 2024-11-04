@@ -6,33 +6,50 @@ class_name Player
 @export var buttonPanel : ButtonPanel
 @export var inventoyDisplay: InventoryDisplay
 func _ready() -> void:
+	Campaign.loadContent()
+	var choice: int = Campaign.playerCurrentChoice
 	self.tamerName = "Player"
 	self.tamerLevel = Campaign.playerLevel
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(Util.random(0,5))
-	#teste de habilidades ativas.
-	digimon.learnSkill(BasicAtack.new())
-	digimon.learnSkill(LimiterOverload.new())
-	digimon.learnSkill(BackupStrike.new())
-	digimon.learnSkill(OpressTheWeak.new())
-	digimon.learnSkill(LimiterRemoval.new())
-	#teste de habilidades passivas
-	#teste de status effect
-	#teste de inventário
-	self.inventory.addItem(ItemDB.getUsableItem(0), 3)
-	self.inventory.addItem(ItemDB.getEquipment(4), 1)
-	self.inventory.addItem(ItemDB.getEquipment(7), 1)
-	self.inventory.addItem(ItemDB.getEquipment(5), 1)
-	#teste de equipamento
-	digimon.equipItem(ItemDB.getEquipment(2))
-	digimon.equipItem(ItemDB.getEquipment(3))
-	digimon.equipItem(ItemDB.getEquipment(6))
-	digimon.equipItem(ItemDB.getEquipment(8))
+	#colcoando o mostro escolhido em cena
+	summonDigimon(Campaign.playerParty[choice])
+	digimon.onChanging = true
+	#aplicando as habilidade ativas.
+	if(Util.checkArray(Campaign.digimonActiveSkills[choice])):
+		var activeSkill: Array = Campaign.digimonActiveSkills[choice]
+		for skill: Skill in activeSkill:
+			if(skill != null):
+				self.digimon.learnSkill(skill)
+	#applicação de habilidades passivas
+	if(Util.checkArray(Campaign.fixedPassives[choice])):
+		var passiveSkill: Array = Campaign.fixedPassives[choice]
+		for skill: Skill in passiveSkill:
+			if(skill != null):
+				self.digimon.learnSkill(skill)
+	#applicação de status effect
+	if(Util.checkArray(Campaign.currentStatus[choice])):
+		var statusToApply: Array = Campaign.currentStatus[choice]
+		for status: StatusEffect in statusToApply:
+			if(status != null):
+				self.digimon.applyStatus(status)
+	#aplicação de equipamento
+	if(Util.checkArray(Campaign.currentEquipments[choice])):
+		var equipments: Array = Campaign.currentEquipments[choice]
+		for equip: Equipment in equipments:
+			if(equip != null):
+				self.digimon.equipItem(equip)
+	if(Util.checkArray(Campaign.playerInventory)):
+		var nInventory: Array = Campaign.playerInventory
+		for item: Item in nInventory:
+			self.inventory.addItem(item, item.quantity)
+	#atualização da vida do Digimon
+	self.digimon.currentHealth = Util.cap(self.digimon.maxHelth*Campaign.currentHealth[choice])
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()
 	buttonPanel.updateButtons()
+	digimon.onChanging = false
 	judge.gettingStarted()
 
 func onFrameAnimation(anim_name: String):

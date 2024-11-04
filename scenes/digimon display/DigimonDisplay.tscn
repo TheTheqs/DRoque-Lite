@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://debtssae0t2f1"]
+[gd_scene load_steps=17 format=3 uid="uid://debtssae0t2f1"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/DigimonDisplay.gd" id="1_flnho"]
 [ext_resource type="Texture2D" uid="uid://caj4tngi52c0d" path="res://assets/interface/UI/DigimonInfoDisplay.png" id="2_vvv61"]
+[ext_resource type="Script" path="res://scripts/interface builders/digimon display/HealthMana.gd" id="3_mbmt7"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/IconName.gd" id="3_p0f8t"]
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="4_65k5o"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="4_adkpj"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/AttributesDisplay.gd" id="5_8b084"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/PassivesDisplay.gd" id="6_00gts"]
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/ArmoryDisplay.gd" id="6_qae38"]
@@ -12,15 +14,22 @@
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="7_eqxg7"]
 [ext_resource type="Script" path="res://scenes/digimon display/StatusEffectDisplay.gd" id="7_ioen4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcok8"]
+bg_color = Color(0.317647, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjogq"]
+bg_color = Color(0.392157, 0.647059, 1, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tno0g"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
-[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("iconName", "attributes", "armory", "quickWindow", "passives", "status", "closeButton")]
+[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("healthMana", "iconName", "attributes", "armory", "quickWindow", "passives", "status", "closeButton")]
 position = Vector2(135, 240)
 script = ExtResource("1_flnho")
+healthMana = NodePath("HealthMana")
 iconName = NodePath("IconName")
 attributes = NodePath("AttributesDisplay")
 armory = NodePath("Armory")
@@ -30,7 +39,45 @@ status = NodePath("StatusEffect")
 closeButton = NodePath("CloseButton")
 
 [node name="Display" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
 texture = ExtResource("2_vvv61")
+
+[node name="HealthMana" type="Node2D" parent="." node_paths=PackedStringArray("healthBar", "healthValue", "manaBar", "manaValue")]
+script = ExtResource("3_mbmt7")
+healthBar = NodePath("Health")
+healthValue = NodePath("HP")
+manaBar = NodePath("Mana")
+manaValue = NodePath("MN")
+
+[node name="Health" type="ProgressBar" parent="HealthMana"]
+offset_left = -52.0
+offset_top = -209.0
+offset_right = 52.0
+offset_bottom = -205.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_tcok8")
+value = 100.0
+show_percentage = false
+
+[node name="HP" parent="HealthMana" instance=ExtResource("4_adkpj")]
+offset_left = -52.0
+offset_top = -203.0
+offset_right = 52.0
+offset_bottom = -190.0
+
+[node name="Mana" type="ProgressBar" parent="HealthMana"]
+offset_left = -52.0
+offset_top = -182.0
+offset_right = 52.0
+offset_bottom = -178.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_tjogq")
+value = 100.0
+show_percentage = false
+
+[node name="MN" parent="HealthMana" instance=ExtResource("4_adkpj")]
+offset_left = -52.0
+offset_top = -175.0
+offset_right = 52.0
+offset_bottom = -163.0
 
 [node name="IconName" type="Node2D" parent="." node_paths=PackedStringArray("digimonIcon", "typeIcon", "elementIcon", "digimonName")]
 position = Vector2(0, -127)

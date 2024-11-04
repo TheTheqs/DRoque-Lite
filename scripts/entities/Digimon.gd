@@ -88,6 +88,7 @@ var elementalImunity:Array[Enums.Element]
 var statusToRemove: Array[int]
 var isDisabled: bool = false
 var canUseItem: bool = true
+var onChanging: bool = false
 #actions
 var selectedSkill: Skill = null
 var currentAction: Skill
@@ -110,8 +111,9 @@ var onAccuracyCalc: Array[Trigger] #No cálculo de precisão das habilidades
 var onManaConsumption: Array[Trigger] #No consumo de mana
 var onPassingTurn: Array[Trigger] #Quando o jogador passa o turno
 var onGettingActions: Array[Trigger] #No ganho de ações extras por turno
-var onLearnSkill: Array[Trigger] #Qaundo o digimon aprende uma skill APENAS DURANTE UMA BATALHA
-var onInventory: Array[Trigger] #Quando o digimon usa um item ou equipamento
+var onLearnSkill: Array[Trigger] #Quando o digimon aprende uma skill APENAS DURANTE UMA BATALHA
+var onEquipingItem: Array[Trigger] #Quando o digimon equipa um item
+var onUnequipingItem: Array[Trigger] #Quando o digimon desequipa um item
 var onGotHited: Array[Trigger] #Quando uma habilidade acerta o digimon. Veja que difere pouco de quando ele é apenas alvo.
 var onEvadeDamage: Array[Trigger] #Quando o digimon se esquiva de uma damage skill
 var onEvadeStats: Array[Trigger] #Quando o digimon se esquiva da aplicação de um efeito
@@ -300,7 +302,6 @@ func applyStatus(nstatus: StatusEffect) -> void:
 				tamer.showContent(nstatus)
 				triggerCheck(self.onGettingStats, nstatus)
 			else:
-				tamer.showContent(tr(StringName("Miss")) + "(" + tr(StringName(nstatus.statusName)) + ")")
 				triggerCheck(self.onEvadeStats, nstatus)
 	#atualização do display
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
@@ -485,10 +486,13 @@ func getActions(nActions: int) -> void:
 
 #função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
 func triggerCheck(triggersToTest: Array, context) -> void:
-	if(triggersToTest.size() > 0):
-		for trigger: Trigger in triggersToTest:
-			if(trigger != null):
-				trigger.triggerValidation(self, context)
+	if(self.onChanging):
+		return
+	else:
+		if(triggersToTest.size() > 0):
+			for trigger: Trigger in triggersToTest:
+				if(trigger != null):
+					trigger.triggerValidation(self, context)
 
 func addAnimation(animeName: String) -> void:
 	if(self.digimonAnimator.current_animation != "Idle" and digimonAnimator.is_playing()):
@@ -534,6 +538,7 @@ func equipItem(equip: Equipment) -> void:
 		self.tamer.buttonPanel.setButtons()
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 		digimonDisplay.armory.buildIcons(self.armory)
+	tamer.showContent(tr(StringName("Equiped")) + "("+ tr(StringName(equip.itemName))+")")
 
 func unequipItem(equipIndex: int) -> void:
 	if(armory[equipIndex] != null):
@@ -548,5 +553,6 @@ func unequipItem(equipIndex: int) -> void:
 		self.tamer.inventory.addItem(equip, 1)
 		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 			digimonDisplay.armory.buildIcons(self.armory)
+		tamer.showContent(tr(StringName("Unequiped")) + "("+ tr(StringName(equip.itemName))+")")
 	else:
 		print("ERROR: no equip to be removed!")

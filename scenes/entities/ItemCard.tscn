@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://tkrflwxphc4h"]
+[gd_scene load_steps=5 format=3 uid="uid://tkrflwxphc4h"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/inventory/ItemCard.gd" id="1_7xdgj"]
+[ext_resource type="Texture2D" uid="uid://dno3n4pt36yrk" path="res://assets/interface/Icons/item icons/EquipmentFrame.png" id="2_hrbns"]
 [ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="3_s2l2s"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="4_yg40r"]
 
@@ -27,16 +28,18 @@ showDesc = NodePath("ShowDescTimer")
 
 [node name="Frame" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
+texture = ExtResource("2_hrbns")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
 
 [node name="Quantity" parent="." instance=ExtResource("3_s2l2s")]
 layout_mode = 0
-offset_left = 23.0
+offset_left = 7.0
 offset_top = 24.0
-offset_right = 41.0
+offset_right = 25.0
 offset_bottom = 38.0
+text = "1"
 
 [node name="ItemButton" type="Button" parent="."]
 layout_mode = 0

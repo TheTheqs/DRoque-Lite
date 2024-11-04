@@ -27,3 +27,5 @@ func updateValues() -> void:
 	nameAndLevel.text = "[center]" + tr(relatedDigimon.digimonName) + "\nLv. " + str(relatedDigimon.currentLevel) + "[/center]"
 	setHealth()
 	setMana()
+	if(relatedDigimon.digimonDisplay.currentDigimon == relatedDigimon and relatedDigimon.digimonDisplay.visible):
+		relatedDigimon.digimonDisplay.healthMana.showDisplay(relatedDigimon)

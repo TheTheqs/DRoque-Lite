@@ -328,11 +328,13 @@ position = Vector2(237, 326)
 position = Vector2(200, 218)
 ownerPlayer = NodePath("..")
 
-[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "inventoryDisplay", "BM", "BTM")]
+[node name="ButtonPanel" type="Node2D" parent="Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "playerHUDD", "enemyHUDD", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "inventoryDisplay", "BM", "BTM")]
 script = ExtResource("8_yj36c")
 relatedPlayer = NodePath("..")
 relatedDigimon = NodePath("../Digimon")
 displayWindow = NodePath("../../Digimon Display")
+playerHUDD = NodePath("../HUDDisplay")
+enemyHUDD = NodePath("../../Enemy/HUDDisplay")
 allButtons = [NodePath("PassTurn"), NodePath("Menu"), NodePath("Inventory"), NodePath("Companion"), NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3"), NodePath("../Digimon/DisplayButton"), NodePath("../../Enemy/Digimon/DisplayButton")]
 skillButtons = [NodePath("BasicAtack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
 showDescTimer = NodePath("ShowDescWindow")
@@ -467,6 +469,7 @@ BTM = NodePath("..")
 
 [node name="Digimon Display" parent="." node_paths=PackedStringArray("buttonPanel") instance=ExtResource("21_ymo66")]
 z_index = 1
+position = Vector2(135, 255)
 buttonPanel = NodePath("../Player/ButtonPanel")
 
 [connection signal="timeout" from="ChangeTurnTimer" to="." method="changeTurn"]

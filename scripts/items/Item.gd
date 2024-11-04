@@ -8,7 +8,7 @@ var itemDescription: String
 var itemIcon: CompressedTexture2D
 var isMisc: bool
 #elementos dinâmicos
-var quantity: int
+var quantity: int = 1
 
 #função para constução de itens misc (não interativos)
 func buildMisc(stats: MiscItemData) -> void:

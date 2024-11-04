@@ -31,22 +31,25 @@ var healColor: Dictionary = {
 }
 
 func spawnContent(content) -> void:
-	var contentToShow: String
-	if(content is DamageData):
-		contentToShow = processDamageData(content)
-	elif(content is StatusEffect):
-		contentToShow = processStatus(content)
-	elif(content is String):
-		contentToShow = processString(content)
-	elif(content is HealData):
-		contentToShow = processHealData(content)
-	if(not onShowing):
-		onShowing = true
-		relatedTamer.BTM.inAction()
-		contentQueue.append(contentToShow)
-		sweepQueue()
+	if(relatedTamer.digimon.onChanging):
+		return
 	else:
-		contentQueue.append(contentToShow)
+		var contentToShow: String
+		if(content is DamageData):
+			contentToShow = processDamageData(content)
+		elif(content is StatusEffect):
+			contentToShow = processStatus(content)
+		elif(content is String):
+			contentToShow = processString(content)
+		elif(content is HealData):
+			contentToShow = processHealData(content)
+		if(not onShowing):
+			onShowing = true
+			relatedTamer.BTM.inAction()
+			contentQueue.append(contentToShow)
+			sweepQueue()
+		else:
+			contentQueue.append(contentToShow)
 	
 
 func processDamageData(damageData: DamageData) -> String:

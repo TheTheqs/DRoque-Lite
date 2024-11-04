@@ -21,10 +21,12 @@ func _ready() -> void:
 	#teste de inventário
 	self.inventory.addItem(ItemDB.getUsableItem(0), 1)
 	#teste de equipamento
+	digimon.onChanging = true
 	digimon.equipItem(ItemDB.getEquipment(1))
 	digimon.equipItem(ItemDB.getEquipment(4))
 	digimon.equipItem(ItemDB.getEquipment(5))
 	digimon.equipItem(ItemDB.getEquipment(7))
+	digimon.onChanging = false
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar

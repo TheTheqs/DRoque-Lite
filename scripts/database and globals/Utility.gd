@@ -60,6 +60,9 @@ func chance(nchance: float) -> bool:
 #função que capa números float, para que eles tenham apenas 2 casa decimais
 func cap(value: float) -> float:
 	return round(value*100)/100
+#função que capa números float, para que eles tenham apenas 2 casa decimais
+func hardCap(value: float) -> float:
+	return round(value*10)/10
 
 #cria um damage data baseado em uma skill
 func damageDataBuilder(damageSkill: DamageSkill) -> DamageData:
@@ -113,3 +116,9 @@ func updateMaxHealthMana(digimon: Digimon, value: float, isMana: bool) -> void:
 		else:
 			digimon.maxHelth += value
 			digimon.currentHealth = self.cap(digimon.maxHelth*currentDigimonProportion)
+#função que verifica se um array é válido para uso
+func checkArray(array: Array) -> bool:
+	if(array != null and array.size() > 0):
+		return true
+	else:
+		return false

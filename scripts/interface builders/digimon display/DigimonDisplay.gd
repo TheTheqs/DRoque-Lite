@@ -4,6 +4,7 @@ class_name DigimonDisplay
 #Elementos de cena
 var currentDigimon: Digimon
 @export var buttonPanel: ButtonPanel
+@export var healthMana: HealthMana
 @export var iconName: IconName
 @export var attributes: AttributesDisplay
 @export var armory: ArmoryDisplay
@@ -23,6 +24,8 @@ func _ready() -> void:
 
 #principal função, que atualiza as interfaces
 func showDisplay(digimon: Digimon) -> void:
+#Exibir Vida e Mana
+	healthMana.showDisplay(digimon)
 #Nome, ícone, tipo e elemento
 	iconName.showContent(digimon)
 #atributos

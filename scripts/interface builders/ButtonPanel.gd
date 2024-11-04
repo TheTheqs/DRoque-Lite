@@ -5,6 +5,8 @@ class_name ButtonPanel
 @export var relatedPlayer: Player
 @export var relatedDigimon: Digimon
 @export var displayWindow: DigimonDisplay
+@export var playerHUDD: HUDDisplay
+@export var enemyHUDD: HUDDisplay 
 #Botões
 @export var allButtons: Array[ButtonDescription]
 @export var skillButtons: Array[ButtonDescription]
@@ -49,6 +51,7 @@ func unBlockAllButtons() -> void:
 		cbutton.visible = true
 	setButtons()
 	updateButtons()
+	toggleDisplay(false)
 
 func _on_pass_turn_button_down():
 	currentButtonToShow = allButtons[0]
@@ -126,5 +129,16 @@ func showDisplay(digimon: Digimon) -> void:
 
 func enemyDisplay() -> void:
 	showDisplay(relatedDigimon.enemy)
+	toggleDisplay(true)
 func playerDisplay() -> void:
 	showDisplay(relatedDigimon)
+	toggleDisplay(true)
+
+func toggleDisplay(hide: bool) -> void:
+	if(hide):
+		playerHUDD.modulate.a = 0.1
+		enemyHUDD.modulate.a = 0.1
+	else:
+		playerHUDD.modulate.a = 1
+		enemyHUDD.modulate.a = 1
+	
