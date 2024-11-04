@@ -6,6 +6,7 @@ var possibleItemActions: Array[Skill]
 
 func _ready() -> void:
 	self.tamerName = "Enemy"
+	self.tamerLevel = Campaign.campaignLevel
 	#setando o damage shower
 	turnFrame.visible = false
 	summonDigimon(Util.random(0,5))
@@ -14,14 +15,16 @@ func _ready() -> void:
 	digimon.learnSkill(CureI.new())
 	digimon.learnSkill(BackupStrike.new())
 	digimon.learnSkill(OpressTheWeak.new())
-	digimon.learnSkill(LimiterRemoval.new())
+	digimon.learnSkill(ChargedContact.new())
 	#teste de habilidades passivas
 	#teste de status effect
 	#teste de inventário
 	self.inventory.addItem(ItemDB.getUsableItem(0), 1)
-	digimon.currentHealth = Util.cap(digimon.maxHelth/2)
 	#teste de equipamento
 	digimon.equipItem(ItemDB.getEquipment(1))
+	digimon.equipItem(ItemDB.getEquipment(4))
+	digimon.equipItem(ItemDB.getEquipment(5))
+	digimon.equipItem(ItemDB.getEquipment(7))
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar

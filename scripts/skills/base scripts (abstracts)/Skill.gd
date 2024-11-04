@@ -16,6 +16,7 @@ var accuracy : float
 var cooldowm: int
 var currentCooldown: int = 0 #valor zero por padrão
 var needsAnimation: bool = true
+var hasAnimation: bool = true
 var isSlow: bool = false
 
 #scene elements

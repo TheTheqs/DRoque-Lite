@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://btv07mqhvjhk5"]
+
+[ext_resource type="Texture2D" uid="uid://d2uueavl0fw4m" path="res://assets/interface/Icons/item icons/Equipments/IronNecklace.png" id="1_2ewqh"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/EquipmentData.gd" id="2_a2sd1"]
+
+[resource]
+script = ExtResource("2_a2sd1")
+itemId = 7
+itemIcon = ExtResource("1_2ewqh")
+itemEquipmentType = 3
+equipmentTier = 0
+buffedAttributes = Array[String](["int", "agi"])
+itemPassives = Array[Script]([])

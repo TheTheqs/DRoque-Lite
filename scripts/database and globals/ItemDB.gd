@@ -5,7 +5,13 @@ class_name ItemDataBase
 var itemDataBase: Dictionary = {
 	0 : load("res://resources/usable items/RedPotion.tres"),
 	1 : load("res://resources/equipments/TrainingSword.tres"),
-	2 : load("res://resources/equipments/WoodenClub.tres")
+	2 : load("res://resources/equipments/WoodenClub.tres"),
+	3 : load("res://resources/equipments/BasicShirt.tres"),
+	4 : load("res://resources/equipments/Zucchetto.tres"),
+	5 : load("res://resources/equipments/Torch.tres"),
+	6 : load("res://resources/equipments/BasicShield.tres"),
+	7 : load("res://resources/equipments/IronNecklace.tres"),
+	8 : load("res://resources/equipments/RubyRing.tres"),
 }
 
 #funções de retorno

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://b6lel7np75loh"]
+
+[ext_resource type="Texture2D" uid="uid://jsxyorgijicp" path="res://assets/interface/Icons/item icons/Equipments/RubyRing.png" id="1_fegtm"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/EquipmentData.gd" id="2_5jbll"]
+
+[resource]
+script = ExtResource("2_5jbll")
+itemId = 8
+itemIcon = ExtResource("1_fegtm")
+itemEquipmentType = 3
+equipmentTier = 0
+buffedAttributes = Array[String](["str", "wis"])
+itemPassives = Array[Script]([])

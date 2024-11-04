@@ -4,8 +4,8 @@ class_name Equipment
 #variáveis de equipamento
 var equipType: Enums.EquipmentType
 var equipTier: Enums.EquipmentTier
-var attBuffs: Array[int] = [0, 0, 0, 0, 0, 0]
-var buffAdress: Array[String] = ["str", "int", "agi", "vit", "wis", "dex"]
+var attBuffs: Array[int] = [0, 0, 0, 0, 0, 0, 0, 0]
+var buffAdress: Array[String] = ["str", "int", "agi", "vit", "wis", "dex", "maxHealth", "maxMana"]
 var maxBuffs: int
 var buffedAttributes: Array[String]
 var itemPassives: Array[PassiveSkill]
@@ -31,10 +31,6 @@ func buildEquipment(stats: EquipmentData) -> void:
 	self.buffedAttributes = stats.buffedAttributes.duplicate()
 	self.buildBuffs()
 	self.isMisc = false
-	if(stats.isWeapon):
-		self.isWeapon = true
-		self.weaponTexture = stats.weaponTexture
-		self.textureRange = stats.textureRange
 	if(stats.itemPassives.size() > 0):
 		for passive: Script in stats.itemPassives:
 			itemPassives.append(passive.new())
@@ -46,5 +42,8 @@ func buildBuffs() -> void:
 		var randomAttribute = Util.pickOne(buffedAttributes)
 		var index = buffAdress.find(randomAttribute)
 		var buffValue = Util.random(1, min(remainingBuffs, 3))
-		attBuffs[index] += buffValue
+		if(index < 6):
+			attBuffs[index] += buffValue
+		else:
+			attBuffs[index] += buffValue * 4
 		remainingBuffs -= buffValue

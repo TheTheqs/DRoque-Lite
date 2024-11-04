@@ -16,7 +16,7 @@ func _init(newItem: Item) -> void:
 		self.statusType = newItem.itemOrientation
 		self.staticPriority = newItem.itemPriority
 	elif(newItem is Equipment):
-		self.needsAnimation = false
+		self.hasAnimation = false
 		self.statusType = Enums.StatusType.BUFF
 	self.relatedItem = newItem
 	self.statusEffects.append(UseItem.new(relatedItem))

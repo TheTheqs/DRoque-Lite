@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://cewq7f0r3huge"]
+
+[ext_resource type="Texture2D" uid="uid://cgflibt5nbcoq" path="res://assets/interface/Icons/item icons/Equipments/BasicShirt.png" id="1_3kv0q"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/EquipmentData.gd" id="2_67o82"]
+
+[resource]
+script = ExtResource("2_67o82")
+itemId = 3
+itemIcon = ExtResource("1_3kv0q")
+itemEquipmentType = 2
+equipmentTier = 0
+buffedAttributes = Array[String](["maxHealth", "agi"])
+itemPassives = Array[Script]([])

@@ -7,6 +7,7 @@ class_name Player
 @export var inventoyDisplay: InventoryDisplay
 func _ready() -> void:
 	self.tamerName = "Player"
+	self.tamerLevel = Campaign.playerLevel
 	#setando o damage shower
 	turnFrame.visible = false
 	summonDigimon(Util.random(0,5))
@@ -20,10 +21,14 @@ func _ready() -> void:
 	#teste de status effect
 	#teste de inventário
 	self.inventory.addItem(ItemDB.getUsableItem(0), 3)
-	self.inventory.addItem(ItemDB.getEquipment(2), 1)
-	digimon.currentHealth = Util.cap(digimon.maxHelth/2)
+	self.inventory.addItem(ItemDB.getEquipment(4), 1)
+	self.inventory.addItem(ItemDB.getEquipment(7), 1)
+	self.inventory.addItem(ItemDB.getEquipment(5), 1)
 	#teste de equipamento
-	digimon.equipItem(ItemDB.getEquipment(1))
+	digimon.equipItem(ItemDB.getEquipment(2))
+	digimon.equipItem(ItemDB.getEquipment(3))
+	digimon.equipItem(ItemDB.getEquipment(6))
+	digimon.equipItem(ItemDB.getEquipment(8))
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	buttonPanel.setButtons()

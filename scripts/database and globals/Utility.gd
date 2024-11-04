@@ -96,3 +96,20 @@ func clearChildren(node: Node) -> void:
 	if(node.get_child_count() > 0):
 		for child in node.get_children():
 			child.queue_free()
+
+func updateMaxHealthMana(digimon: Digimon, value: float, isMana: bool) -> void:
+	var currentDigimonProportion: float 
+	if(isMana):
+		currentDigimonProportion = self.getProportion(digimon.currentMana, digimon.maxMana)
+		if(digimon.maxMana + value <= 0):
+			print("ERROR: Negative max helth")
+		else:
+			digimon.maxMana += value
+			digimon.currentMana = digimon.maxMana*currentDigimonProportion
+	else:
+		currentDigimonProportion = self.getProportion(digimon.currentHealth, digimon.maxHelth)
+		if(digimon.maxHelth + value <= 0):
+			print("ERROR: Negative max helth")
+		else:
+			digimon.maxHelth += value
+			digimon.currentHealth = self.cap(digimon.maxHelth*currentDigimonProportion)

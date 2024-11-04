@@ -205,7 +205,7 @@ func getTageted(skill: Skill) -> void:
 	getHited = true
 	triggerCheck(self.onGotTargeted, skill)
 	if(getHited):
-		if(skill.needsAnimation):
+		if(skill.hasAnimation):
 			skillSpawner.spawSkill(skill)
 		else:
 			gotTargeted(skill)
@@ -273,6 +273,8 @@ func applyStatus(nstatus: StatusEffect) -> void:
 		if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
 			if(statusEffect.has(nstatus.statusId)):
 				nstatus.effectOverlap(self)
+				if(self.statusEffect.has(nstatus.statusId)):
+					self.statusDisplay.changeIcon(self.statusEffect[nstatus.statusId])
 			else:
 				nstatus.applyingEffect(self)
 				if(nstatus.statusId != 41):
@@ -298,7 +300,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 				tamer.showContent(nstatus)
 				triggerCheck(self.onGettingStats, nstatus)
 			else:
-				tamer.showContent(tr(StringName("Miss")))
+				tamer.showContent(tr(StringName("Miss")) + "(" + tr(StringName(nstatus.statusName)) + ")")
 				triggerCheck(self.onEvadeStats, nstatus)
 	#atualização do display
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
@@ -495,7 +497,7 @@ func addAnimation(animeName: String) -> void:
 		digimonAnimator.play(animeName)
 
 func changeBonusAttribute(att: String, value: int) -> void:
-	var attributes = {
+	var attributes: Dictionary = {
 		"str": "bonusSTR",
 		"int": "bonusINT",
 		"agi": "bonusAGI",
@@ -503,8 +505,14 @@ func changeBonusAttribute(att: String, value: int) -> void:
 		"wis": "bonusWIS",
 		"dex": "bonusDEX"
 	}
+	var healthMana: Dictionary = {
+		"maxHealth" : false,
+		"maxMana" : true
+	}
 	if att in attributes:
 		self.set(attributes[att], self.get(attributes[att]) + value)
+	elif(att in healthMana):
+		Util.updateMaxHealthMana(self, value, healthMana[att])
 	else:
 		print("ERRO: invalid bônus value")
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
@@ -522,12 +530,8 @@ func equipItem(equip: Equipment) -> void:
 	if(equip.itemPassives.size() > 0):
 		for newPassive: PassiveSkill in equip.itemPassives:
 			self.learnSkill(newPassive)
-	if(equip.isWeapon):
-		self.digimonSkills[0].texture = equip.weaponTexture
-		self.digimonSkills[0].skillIcon = equip.itemIcon
-		self.digimonSkills[0].textureRange = equip.textureRange
-		if(self.tamer is Player):
-			self.tamer.buttonPanel.setButtons()
+	if(self.tamer is Player):
+		self.tamer.buttonPanel.setButtons()
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 		digimonDisplay.armory.buildIcons(self.armory)
 
@@ -542,10 +546,6 @@ func unequipItem(equipIndex: int) -> void:
 				self.unlearnSkill(oldPassive)
 		armory[equipIndex] = null
 		self.tamer.inventory.addItem(equip, 1)
-		if(equip.isWeapon):
-			self.digimonSkills[0].texture = preload("res://assets/sprites/vfx/skills/BasicAtack.png")
-			self.digimonSkills[0].skillIcon = preload("res://assets/interface/Icons/SkillIcons/BasicAtack.png")
-			self.digimonSkills[0].textureRange = 13
 		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 			digimonDisplay.armory.buildIcons(self.armory)
 	else:

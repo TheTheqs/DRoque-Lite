@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://i4s880lokaj2"]
+
+[ext_resource type="Texture2D" uid="uid://pqp5donblqsv" path="res://assets/interface/Icons/item icons/Equipments/Torch.png" id="1_f5gvo"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/EquipmentData.gd" id="2_pimca"]
+
+[resource]
+script = ExtResource("2_pimca")
+itemId = 5
+itemIcon = ExtResource("1_f5gvo")
+itemEquipmentType = 1
+equipmentTier = 0
+buffedAttributes = Array[String](["agi", "dex"])
+itemPassives = Array[Script]([])

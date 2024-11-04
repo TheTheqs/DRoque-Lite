@@ -17,7 +17,7 @@ var tamerName: String
 @export var actionAnimator: AnimationPlayer
 
 #tamer attributes
-var tamerLevel: int = 3
+var tamerLevel: int
 var actions: int
 var canAct: bool = false
 var inventory: Inventory = Inventory.new(self)

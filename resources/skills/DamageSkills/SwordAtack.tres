@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://bjwf5ux7bryaa"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_q3war"]
+[ext_resource type="Texture2D" uid="uid://b3uendvdgms68" path="res://assets/interface/Icons/SkillIcons/SwordAtack.png" id="2_nefoh"]
+[ext_resource type="Texture2D" uid="uid://dnuq07eockhqw" path="res://assets/sprites/vfx/skills/SwordAtack.png" id="3_16iio"]
+
+[resource]
+script = ExtResource("1_q3war")
+skillId = 31
+skillIcon = ExtResource("2_nefoh")
+staticPriority = 1
+element = 0
+damageType = 0
+damageSubType = 0
+ratio = 1.0
+manaCost = 0
+coolDown = 0
+hasEffect = true
+skillTexture = ExtResource("3_16iio")
+textureRange = 6

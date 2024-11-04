@@ -8,6 +8,3 @@ class_name EquipmentData
 @export var equipmentTier: Enums.EquipmentTier
 @export var buffedAttributes: Array[String]
 @export var itemPassives: Array[Script]
-@export var isWeapon: bool
-@export var weaponTexture: CompressedTexture2D
-@export var textureRange: int

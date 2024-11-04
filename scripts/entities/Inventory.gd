@@ -6,9 +6,7 @@ var relatedTamer: Tamer
 var usableItems: Dictionary = {
 	
 }
-var equipments: Dictionary = {
-	
-}
+var equipments: Array[Equipment] = []
 var miscItems: Dictionary = {
 	
 }
@@ -36,13 +34,7 @@ func addItem(newItem: Item, quantity: int) -> void:
 			else:
 				usableItems[newItem.itemId] = newItem
 		elif(newItem is Equipment):
-			if(equipments.has(newItem.itemId)):
-				if(equipments[newItem.itemId].quantity + newItem.quantity > 99):
-					equipments[newItem.itemId].quantity = 99
-				else:
-					equipments[newItem.itemId].quantity += newItem.quantity
-			else:
-				equipments[newItem.itemId] = newItem
+			equipments.append(newItem)
 	else:
 		print("ERROR: Invalid quantity!")
 
@@ -55,9 +47,9 @@ func removeItem(oldItem: Item, quantity) -> void:
 	elif(oldItem is UsableItem and usableItems.has(oldItem.itemId)):
 		itemToBeRemoved = usableItems[oldItem.itemId]
 		relatedPocket = usableItems
-	elif(oldItem is Equipment and equipments.has(oldItem.itemId)):
-		itemToBeRemoved = equipments[oldItem.itemId]
-		relatedPocket = equipments
+	elif(oldItem is Equipment and oldItem in equipments):
+		equipments.erase(oldItem)
+		return
 	else:
 		print("ERROR: Item not found!")
 	itemToBeRemoved.quantity -= quantity
@@ -66,5 +58,5 @@ func removeItem(oldItem: Item, quantity) -> void:
 		
 
 func getInventory() -> Array:
-	var fullInventory: Array = usableItems.values() + equipments.values() + miscItems.values()
+	var fullInventory: Array = usableItems.values() + equipments + miscItems.values()
 	return fullInventory

@@ -4,15 +4,17 @@
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="2_7ekjg"]
 [ext_resource type="Texture2D" uid="uid://dno3n4pt36yrk" path="res://assets/interface/Icons/item icons/EquipmentFrame.png" id="3_6x3rf"]
 
-[node name="EquipDisplayButton" type="Control" node_paths=PackedStringArray("icon")]
+[node name="EquipDisplayButton" type="Control" node_paths=PackedStringArray("icon", "button")]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_y6iii")
 icon = NodePath("Icon")
+button = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 theme_override_styles/focus = ExtResource("2_7ekjg")

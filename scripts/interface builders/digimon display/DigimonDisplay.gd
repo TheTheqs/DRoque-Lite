@@ -15,8 +15,11 @@ var currentDigimon: Digimon
 var allButtons: Array[Button] = []
 
 func _ready() -> void:
-	allButtons.append(closeButton)
 	self.visible = false
+	allButtons.append(closeButton)
+	for nbutton: EquipDisplayButton in armory.equipmentButtons:
+		allButtons.append(nbutton.button)
+
 
 #principal função, que atualiza as interfaces
 func showDisplay(digimon: Digimon) -> void:

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=3 format=3 uid="uid://6s4jghxjp6bj"]
+
+[ext_resource type="Texture2D" uid="uid://cmwq8uw3e12py" path="res://assets/interface/Icons/item icons/Equipments/Zucchetto.png" id="1_gukis"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/EquipmentData.gd" id="2_cfd6a"]
+
+[resource]
+script = ExtResource("2_cfd6a")
+itemId = 4
+itemIcon = ExtResource("1_gukis")
+itemEquipmentType = 2
+equipmentTier = 0
+buffedAttributes = Array[String](["maxMana", "wis", "int"])
+itemPassives = Array[Script]([])

@@ -5,6 +5,7 @@ class_name EquipDisplayButton
 var relatedEquipment : Equipment = null
 @export var display: DigimonDisplay
 @export var icon: Sprite2D
+@export var button: Button
 #dicionário de descrição
 var descDic : Dictionary = {
 	0 : "NoWeapon",

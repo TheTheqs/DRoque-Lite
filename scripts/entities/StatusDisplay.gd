@@ -61,6 +61,7 @@ func changeIcon(nStatusEffect: StatusEffect) -> void:
 		stacks.visible = false
 	self.baseIcon.texture = selectBase[nStatusEffect.statusType]
 	self.statusIcon.texture = nStatusEffect.statusIcon
+	changeIconTimer.start(1.0)
 
 #função gerente que atulaiza o ícone
 func showing() -> void:
@@ -68,12 +69,11 @@ func showing() -> void:
 		changeIcon(statusToShow[currentShowing])
 	else:
 		currentShowing = 0
-	changeIconTimer.start(1.0)
+		changeIconTimer.start(1.0)
+
 
 #função do timer, principal responsável pela alternância dos ícones
 func nextIcon():
-	if(statusToShow.size() == 1):
-		return
 	if(currentShowing < statusToShow.size() - 1):
 		currentShowing += 1
 	else:

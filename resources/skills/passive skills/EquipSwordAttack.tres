@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=3 format=3 uid="uid://5exaqs0fv6na"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_ikydb"]
+[ext_resource type="Texture2D" uid="uid://b3uendvdgms68" path="res://assets/interface/Icons/SkillIcons/SwordAtack.png" id="2_iw2hh"]
+
+[resource]
+script = ExtResource("1_ikydb")
+skillId = 32
+skillIcon = ExtResource("2_iw2hh")
+cooldown = 0
+triggers = Array[Script]([])
