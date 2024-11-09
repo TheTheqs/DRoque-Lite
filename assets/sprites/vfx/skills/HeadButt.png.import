@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y2pv7fiholb3"
-path="res://.godot/imported/dark_burst.png-e450934c905a3e6129a357a145646b8e.ctex"
+uid="uid://4p4c0s61vbkv"
+path="res://.godot/imported/HeadButt.png-8c912aadadb4de3094c64dd32d8c990c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/skills/dark_burst.png"
-dest_files=["res://.godot/imported/dark_burst.png-e450934c905a3e6129a357a145646b8e.ctex"]
+source_file="res://assets/sprites/vfx/skills/HeadButt.png"
+dest_files=["res://.godot/imported/HeadButt.png-8c912aadadb4de3094c64dd32d8c990c.ctex"]
 
 [params]
 

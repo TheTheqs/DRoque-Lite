@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://ddjvvggkmmex3"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_ipl8g"]
+[ext_resource type="Texture2D" uid="uid://dtild8nq32fst" path="res://assets/interface/Icons/SkillIcons/NativeActives/KnucklePunch.png" id="2_hcjwo"]
+[ext_resource type="Texture2D" uid="uid://curcb27bc2buo" path="res://assets/sprites/vfx/skills/KnucklePunch.png" id="3_cpl54"]
+
+[resource]
+script = ExtResource("1_ipl8g")
+skillId = 38
+skillIcon = ExtResource("2_hcjwo")
+staticPriority = 2
+element = 0
+damageType = 0
+damageSubType = 0
+ratio = 1.5
+manaCost = 5
+coolDown = 2
+hasEffect = false
+skillTexture = ExtResource("3_cpl54")
+textureRange = 13

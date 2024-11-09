@@ -1,8 +1,181 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhb81icqdvpux"]
+[gd_scene load_steps=37 format=3 uid="uid://b8cljij0hnlgg"]
 
-[ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_ekq6u"]
-[ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_0qchd"]
-[ext_resource type="PackedScene" uid="uid://bkiax0gwpx20o" path="res://scenes/entities/BattleManager.tscn" id="3_bw8k2"]
+[ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_0d28g"]
+[ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_vipw6"]
+[ext_resource type="Texture2D" uid="uid://1m0l1yjxyt0l" path="res://assets/interface/backgrounds/TestStage.png" id="2_iquy3"]
+[ext_resource type="Script" path="res://scripts/entities/Enemy.gd" id="4_r5xd6"]
+[ext_resource type="PackedScene" uid="uid://hds32c6watad" path="res://scenes/entities/Digimon.tscn" id="5_lo720"]
+[ext_resource type="Script" path="res://scripts/entities/Player.gd" id="5_m5koo"]
+[ext_resource type="PackedScene" uid="uid://dng007yy161aa" path="res://scenes/entities/SkillAnnouncer.tscn" id="6_d7sc6"]
+[ext_resource type="PackedScene" uid="uid://b6dge8ry0m430" path="res://scenes/entities/HUDDisplay.tscn" id="6_ii0lc"]
+[ext_resource type="Texture2D" uid="uid://c8wmd2aucho2m" path="res://assets/interface/UI/EnemyFrame.png" id="7_ewuuo"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="7_xujfq"]
+[ext_resource type="PackedScene" uid="uid://dkgpmujw3pmp1" path="res://scenes/entities/BattleMessage.tscn" id="8_6j5va"]
+[ext_resource type="PackedScene" uid="uid://ch1sknkiikv05" path="res://scenes/entities/ContentSpawner.tscn" id="8_hw5na"]
+[ext_resource type="PackedScene" uid="uid://dm6giwusbglv8" path="res://scenes/entities/Inventory.tscn" id="12_l57nx"]
+[ext_resource type="Texture2D" uid="uid://dn8yuwipg3voi" path="res://assets/interface/UI/PlayerFrame.png" id="13_12jqj"]
+[ext_resource type="PackedScene" uid="uid://debtssae0t2f1" path="res://scenes/digimon display/DigimonDisplay.tscn" id="13_1817j"]
+[ext_resource type="Script" path="res://scripts/interface builders/ButtonPanel.gd" id="14_eg1gf"]
+[ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="15_xx4hw"]
+[ext_resource type="Script" path="res://scripts/interface builders/ButtonDescription.gd" id="16_muyoq"]
+[ext_resource type="Texture2D" uid="uid://c674b3sx2xnuq" path="res://assets/interface/Icons/InterfaceIcons/InventoryIcon.png" id="17_5fq1g"]
+[ext_resource type="PackedScene" uid="uid://bjvpe6qbtqj17" path="res://scenes/entities/infoWindow.tscn" id="17_st51s"]
+[ext_resource type="Texture2D" uid="uid://c0rquotsyn4vn" path="res://assets/interface/Icons/SkillIcons/001BasicAtackframe.png" id="18_fojcj"]
+[ext_resource type="Texture2D" uid="uid://bf62rogblcndj" path="res://assets/interface/Icons/InterfaceIcons/DigimonCompanionChange.png" id="19_6u4ur"]
+[ext_resource type="Texture2D" uid="uid://ffkyibueeglu" path="res://assets/interface/Icons/SkillIcons/002SignatureSkillFrame.png" id="20_2kfkd"]
+[ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="21_6cti3"]
+
+[sub_resource type="Animation" id="Animation_spino"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/TurnFrame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6vgi5"]
+resource_name = "blinkFrame"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/TurnFrame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wnukf"]
+_data = {
+"RESET": SubResource("Animation_spino"),
+"blinkFrame": SubResource("Animation_6vgi5")
+}
+
+[sub_resource type="Animation" id="Animation_wcmu1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions Display:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0to84"]
+resource_name = "blinkActions"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions Display:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6d66"]
+_data = {
+"RESET": SubResource("Animation_wcmu1"),
+"blinkActions": SubResource("Animation_0to84")
+}
+
+[sub_resource type="Animation" id="Animation_dotnw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TurnFrame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kd0o6"]
+resource_name = "blinkFrame"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TurnFrame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqq52"]
+_data = {
+"RESET": SubResource("Animation_dotnw"),
+"blinkFrame": SubResource("Animation_kd0o6")
+}
+
+[sub_resource type="Animation" id="Animation_brgw0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bapvf"]
+resource_name = "blinkActions"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_120a3"]
+_data = {
+"RESET": SubResource("Animation_brgw0"),
+"blinkActions": SubResource("Animation_bapvf")
+}
 
 [node name="BattleScene" type="Node2D"]
 
@@ -10,10 +183,301 @@
 
 [node name="UserUI" type="Sprite2D" parent="Interface"]
 position = Vector2(135, 420)
-texture = ExtResource("1_ekq6u")
+texture = ExtResource("1_vipw6")
 
 [node name="BackGround" type="Sprite2D" parent="Interface"]
-position = Vector2(135, 180)
-texture = ExtResource("2_0qchd")
+position = Vector2(136, 180)
+texture = ExtResource("2_iquy3")
 
-[node name="BattleManager" parent="." instance=ExtResource("3_bw8k2")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("player", "enemy", "playerDigimon", "enemyDigimon", "changeTurnTimer", "BM", "turnLabel")]
+script = ExtResource("1_0d28g")
+player = NodePath("Player")
+enemy = NodePath("Enemy")
+playerDigimon = NodePath("Player/Digimon")
+enemyDigimon = NodePath("Enemy/Digimon")
+changeTurnTimer = NodePath("ChangeTurn")
+BM = NodePath("BattleMessage")
+turnLabel = NodePath("Turn")
+
+[node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
+script = ExtResource("4_r5xd6")
+digimon = NodePath("Digimon")
+opponent = NodePath("../Player")
+HUDD = NodePath("HUDDisplay")
+judge = NodePath("..")
+turnFrame = NodePath("TurnFrame")
+frameAnimator = NodePath("TurnAnimator")
+BM = NodePath("../BattleMessage")
+BTM = NodePath("..")
+numberSpawner = NodePath("ContentSpawner")
+actionsDisplay = NodePath("Actions Display")
+actionAnimator = NodePath("Actions Animator")
+
+[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer", "digimonDisplay") instance=ExtResource("5_lo720")]
+position = Vector2(173, 92)
+enemy = NodePath("../../Player/Digimon")
+tamer = NodePath("..")
+BM = NodePath("../../BattleMessage")
+BTM = NodePath("../..")
+skillAnnouncer = NodePath("../SkillAnnouncer")
+digimonDisplay = NodePath("../../Digimon Display")
+
+[node name="SkillAnnouncer" parent="BattleManager/Enemy" instance=ExtResource("6_d7sc6")]
+position = Vector2(33, 155)
+
+[node name="HUDDisplay" parent="BattleManager/Enemy" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("6_ii0lc")]
+position = Vector2(70, 45)
+ownerPlayer = NodePath("..")
+
+[node name="TurnFrame" type="Sprite2D" parent="BattleManager/Enemy"]
+position = Vector2(136, 94)
+texture = ExtResource("7_ewuuo")
+
+[node name="TurnAnimator" type="AnimationPlayer" parent="BattleManager/Enemy"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_wnukf")
+}
+
+[node name="ContentSpawner" parent="BattleManager/Enemy" node_paths=PackedStringArray("relatedTamer") instance=ExtResource("8_hw5na")]
+position = Vector2(0, 134)
+relatedTamer = NodePath("..")
+
+[node name="Actions Display" parent="BattleManager/Enemy" instance=ExtResource("7_xujfq")]
+offset_left = 160.0
+offset_top = -1.0
+offset_right = 254.0
+offset_bottom = 17.0
+theme_override_colors/font_outline_color = Color(1, 0.258824, 0, 1)
+text = "Actions:0"
+
+[node name="Actions Animator" type="AnimationPlayer" parent="BattleManager/Enemy"]
+libraries = {
+"": SubResource("AnimationLibrary_l6d66")
+}
+
+[node name="Player" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "inventoyDisplay", "digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
+script = ExtResource("5_m5koo")
+buttonPanel = NodePath("ButtonPanel")
+inventoyDisplay = NodePath("Inventory")
+digimon = NodePath("Digimon")
+opponent = NodePath("../Enemy")
+HUDD = NodePath("HUDDisplay")
+judge = NodePath("..")
+turnFrame = NodePath("TurnFrame")
+frameAnimator = NodePath("TurnAnimator")
+BM = NodePath("../BattleMessage")
+BTM = NodePath("..")
+numberSpawner = NodePath("ContentSpawner")
+actionsDisplay = NodePath("Actions")
+actionAnimator = NodePath("Actions Animator")
+
+[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer", "digimonDisplay") instance=ExtResource("5_lo720")]
+position = Vector2(101, 264)
+enemy = NodePath("../../Enemy/Digimon")
+tamer = NodePath("..")
+BM = NodePath("../../BattleMessage")
+BTM = NodePath("../..")
+skillAnnouncer = NodePath("../SkillAnnouncer")
+digimonDisplay = NodePath("../../Digimon Display")
+
+[node name="SkillAnnouncer" parent="BattleManager/Player" instance=ExtResource("6_d7sc6")]
+position = Vector2(238, 327)
+
+[node name="ContentSpawner" parent="BattleManager/Player" node_paths=PackedStringArray("relatedTamer") instance=ExtResource("8_hw5na")]
+position = Vector2(0, 300)
+relatedTamer = NodePath("..")
+
+[node name="HUDDisplay" parent="BattleManager/Player" node_paths=PackedStringArray("ownerPlayer") instance=ExtResource("6_ii0lc")]
+position = Vector2(202, 216)
+ownerPlayer = NodePath("..")
+
+[node name="Inventory" parent="BattleManager/Player" node_paths=PackedStringArray("buttonPanel", "relatedPlayer") instance=ExtResource("12_l57nx")]
+visible = false
+z_index = 3
+buttonPanel = NodePath("../ButtonPanel")
+relatedPlayer = NodePath("..")
+
+[node name="TurnFrame" type="Sprite2D" parent="BattleManager/Player"]
+position = Vector2(136, 266)
+texture = ExtResource("13_12jqj")
+
+[node name="TurnAnimator" type="AnimationPlayer" parent="BattleManager/Player"]
+libraries = {
+"": SubResource("AnimationLibrary_fqq52")
+}
+
+[node name="Actions" parent="BattleManager/Player" instance=ExtResource("7_xujfq")]
+offset_left = 17.0
+offset_top = 174.0
+offset_right = 103.0
+offset_bottom = 187.0
+theme_override_colors/font_outline_color = Color(0.482353, 1, 0.188235, 1)
+text = "Actions:0"
+
+[node name="Actions Animator" type="AnimationPlayer" parent="BattleManager/Player"]
+libraries = {
+"": SubResource("AnimationLibrary_120a3")
+}
+
+[node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "playerHUDD", "enemyHUDD", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "inventoryDisplay", "BM", "BTM")]
+script = ExtResource("14_eg1gf")
+relatedPlayer = NodePath("..")
+relatedDigimon = NodePath("../Digimon")
+displayWindow = NodePath("../../Digimon Display")
+playerHUDD = NodePath("../HUDDisplay")
+enemyHUDD = NodePath("../../Enemy/HUDDisplay")
+allButtons = [NodePath("PassTurnButton"), NodePath("MenuButton"), NodePath("InvenotyButton"), NodePath("ChangeButton"), NodePath("BasicAttack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3"), NodePath("PlayerDisplay"), NodePath("EnemyDisplay")]
+skillButtons = [NodePath("BasicAttack"), NodePath("SignatureSkill"), NodePath("ExtraSkill1"), NodePath("ExtraSkill2"), NodePath("ExtraSkill3")]
+showDescTimer = NodePath("DescTimer")
+infoWindow = NodePath("../../InfoWindow")
+inventoryDisplay = NodePath("../Inventory")
+BM = NodePath("../../BattleMessage")
+BTM = NodePath("../..")
+
+[node name="DescTimer" type="Timer" parent="BattleManager/Player/ButtonPanel"]
+one_shot = true
+
+[node name="PlayerDisplay" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 21.0
+offset_top = 224.0
+offset_right = 139.0
+offset_bottom = 339.0
+script = ExtResource("16_muyoq")
+
+[node name="EnemyDisplay" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 135.0
+offset_top = 54.0
+offset_right = 253.0
+offset_bottom = 169.0
+script = ExtResource("16_muyoq")
+
+[node name="PassTurnButton" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 8.0
+offset_top = 406.0
+offset_right = 30.0
+offset_bottom = 428.0
+script = ExtResource("16_muyoq")
+
+[node name="MenuButton" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+custom_minimum_size = Vector2(20, 20)
+offset_left = 237.0
+offset_top = 407.0
+offset_right = 261.0
+offset_bottom = 430.0
+script = ExtResource("16_muyoq")
+
+[node name="InvenotyButton" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 58.0
+offset_right = 90.0
+icon = ExtResource("17_5fq1g")
+script = ExtResource("16_muyoq")
+
+[node name="BasicAttack" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 118.0
+offset_right = 150.0
+script = ExtResource("16_muyoq")
+
+[node name="Frame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/BasicAttack"]
+position = Vector2(16, 16)
+texture = ExtResource("18_fojcj")
+
+[node name="ChangeButton" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 178.0
+offset_right = 210.0
+icon = ExtResource("19_6u4ur")
+script = ExtResource("16_muyoq")
+
+[node name="SignatureSkill" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 29.0
+offset_top = 441.0
+offset_right = 61.0
+offset_bottom = 473.0
+script = ExtResource("16_muyoq")
+
+[node name="Frame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/SignatureSkill"]
+position = Vector2(16, 16)
+texture = ExtResource("20_2kfkd")
+
+[node name="ExtraSkill1" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 89.0
+offset_top = 441.0
+offset_right = 121.0
+offset_bottom = 473.0
+script = ExtResource("16_muyoq")
+
+[node name="Frame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill1"]
+position = Vector2(16, 16)
+texture = ExtResource("21_6cti3")
+
+[node name="ExtraSkill2" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 149.0
+offset_top = 441.0
+offset_right = 181.0
+offset_bottom = 473.0
+script = ExtResource("16_muyoq")
+
+[node name="Frame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill2"]
+position = Vector2(16, 16)
+texture = ExtResource("21_6cti3")
+
+[node name="ExtraSkill3" parent="BattleManager/Player/ButtonPanel" instance=ExtResource("15_xx4hw")]
+offset_left = 209.0
+offset_top = 441.0
+offset_right = 241.0
+offset_bottom = 473.0
+script = ExtResource("16_muyoq")
+
+[node name="Frame" type="Sprite2D" parent="BattleManager/Player/ButtonPanel/ExtraSkill3"]
+position = Vector2(16, 16)
+texture = ExtResource("21_6cti3")
+
+[node name="ChangeTurn" type="Timer" parent="BattleManager"]
+one_shot = true
+
+[node name="Turn" parent="BattleManager" instance=ExtResource("7_xujfq")]
+offset_left = 17.0
+offset_top = 167.0
+offset_right = 255.0
+offset_bottom = 195.0
+theme_override_font_sizes/font_size = 16
+
+[node name="BattleMessage" parent="BattleManager" node_paths=PackedStringArray("BTM") instance=ExtResource("8_6j5va")]
+BTM = NodePath("..")
+
+[node name="Digimon Display" parent="BattleManager" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("13_1817j")]
+visible = false
+buttonPanel = NodePath("../Player/ButtonPanel")
+
+[node name="InfoWindow" parent="BattleManager" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("17_st51s")]
+visible = false
+position = Vector2(140, 200)
+buttonPanel = NodePath("../Player/ButtonPanel")
+
+[connection signal="animation_finished" from="BattleManager/Enemy/TurnAnimator" to="BattleManager/Enemy" method="onFrameAnimation"]
+[connection signal="animation_finished" from="BattleManager/Enemy/Actions Animator" to="BattleManager/Enemy" method="actionsAnimation"]
+[connection signal="animation_finished" from="BattleManager/Player/TurnAnimator" to="BattleManager/Player" method="onFrameAnimation"]
+[connection signal="animation_finished" from="BattleManager/Player/Actions Animator" to="BattleManager/Player" method="actionsAnimation"]
+[connection signal="timeout" from="BattleManager/Player/ButtonPanel/DescTimer" to="BattleManager/Player/ButtonPanel" method="showInfoWindow"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/PlayerDisplay" to="BattleManager/Player/ButtonPanel" method="playerDisplay"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/EnemyDisplay" to="BattleManager/Player/ButtonPanel" method="enemyDisplay"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/PassTurnButton" to="BattleManager/Player/ButtonPanel" method="_on_pass_turn_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/PassTurnButton" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/MenuButton" to="BattleManager/Player/ButtonPanel" method="_on_menu_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/MenuButton" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/InvenotyButton" to="BattleManager/Player/ButtonPanel" method="_on_inventory_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/InvenotyButton" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/BasicAttack" to="BattleManager/Player/ButtonPanel" method="_on_basic_atack_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/BasicAttack" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/ChangeButton" to="BattleManager/Player/ButtonPanel" method="_on_companion_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/ChangeButton" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/SignatureSkill" to="BattleManager/Player/ButtonPanel" method="_on_signature_skill_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/SignatureSkill" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/ExtraSkill1" to="BattleManager/Player/ButtonPanel" method="_on_extra_skill_1_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/ExtraSkill1" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/ExtraSkill2" to="BattleManager/Player/ButtonPanel" method="_on_extra_skill_2_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/ExtraSkill2" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="button_down" from="BattleManager/Player/ButtonPanel/ExtraSkill3" to="BattleManager/Player/ButtonPanel" method="_on_extra_skill_3_button_down"]
+[connection signal="button_up" from="BattleManager/Player/ButtonPanel/ExtraSkill3" to="BattleManager/Player/ButtonPanel" method="activateButton"]
+[connection signal="timeout" from="BattleManager/ChangeTurn" to="BattleManager" method="changeTurn"]

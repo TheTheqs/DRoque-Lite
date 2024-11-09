@@ -48,3 +48,11 @@ func effectOverlap(digimon: Digimon) -> void:
 func getStatus() -> StatusEffect:
 	var intPlus: IntPlus = IntPlus.new(self.stacks)
 	return intPlus
+
+func getAditionalDescription() -> String:
+	var newString: String = ""
+	if(self.isStackable):
+		newString += "\n" + tr(StringName("INT")) + " +" + str(self.stacks)
+	if(self.isExpirable):
+		newString += "\n" + tr(StringName("Duration")) + ": " + str(self.duration)
+	return newString

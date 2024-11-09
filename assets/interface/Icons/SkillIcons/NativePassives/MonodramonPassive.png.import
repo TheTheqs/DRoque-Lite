@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfh45xmjc2xbj"
-path="res://.godot/imported/knuckle_punch.png-11f81144c6d7ee4ac2c150a3d57d75c5.ctex"
+uid="uid://bsvya52xkimio"
+path="res://.godot/imported/MonodramonPassive.png-81dd67e08bb3a10bad1341fc01e86f8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/skills/knuckle_punch.png"
-dest_files=["res://.godot/imported/knuckle_punch.png-11f81144c6d7ee4ac2c150a3d57d75c5.ctex"]
+source_file="res://assets/interface/Icons/SkillIcons/NativePassives/MonodramonPassive.png"
+dest_files=["res://.godot/imported/MonodramonPassive.png-81dd67e08bb3a10bad1341fc01e86f8f.ctex"]
 
 [params]
 

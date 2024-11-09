@@ -13,15 +13,15 @@ var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	2 : null
 	}
 var digimonActiveSkills: Dictionary = {
-	0 : [BasicAtack.new()], #esses arrays precisam ter de prefencia size fixo em 5
-	1 : [BasicAtack.new()],
-	2 : [BasicAtack.new()],
-}
-var fixedPassives: Dictionary = { #Habilidades passivas de cada digimon
-	0 : [],
+	0 : [], #esses arrays precisam ter de prefencia size fixo em 3
 	1 : [],
-	2 : []
+	2 : [],
 	}
+#passivas comuns do grupo
+var fixedPassives: Dictionary = { #a chave vai ser o id da passiva, o valor vai ser um array de tamanho 2, o primeiro é a skill o segundo é contagem dela
+	
+}
+
 var currentEquipments: Dictionary = { #equipamento de cada digimon
 	0 : [],
 	1 : [],
@@ -33,64 +33,50 @@ var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
 	2 : []
 }
 
-var currentHealth: Dictionary = { #proporção da vida de cada digimon 
-	0 : 0.67,
-	1 : 0.33,
-	2 : 1.0
+var currentHealthMana: Dictionary = { #proporção da vida de cada digimon 
+	0 : [0.76, 1],
+	1 : [1, 1],
+	2 : [1, 1]
 }
 #função init para teste
 func loadContent() -> void:
-	#pegando ids aleatórios do banco de dados para preencher a party
-	playerParty[0] = Util.random(0, 5)
-	playerParty[1] = Util.random(0, 5)
-	playerParty[2] = Util.random(0, 5)
-	#completando as skills ativas com 4 skills adicionais para cada digimon
-	var activeSkillsID: Array = SkillDB.activeSkillsID
-	for skillId: int in generateUniqueArray(activeSkillsID):
-		digimonActiveSkills[0].append(SkillDB.getSkill(skillId))
-	for skillId: int in generateUniqueArray(activeSkillsID):
-		digimonActiveSkills[1].append(SkillDB.getSkill(skillId))
-	for skillId: int in generateUniqueArray(activeSkillsID):
-		digimonActiveSkills[2].append(SkillDB.getSkill(skillId))
-	#pegando 4 skills passivas para cada digimon
-	var passiveIDS: Array = SkillDB.passiveSkillsID
-	for skillId: int in generateUniqueArray(passiveIDS):
-		fixedPassives[0].append(SkillDB.getSkill(skillId))
-	for skillId: int in generateUniqueArray(passiveIDS):
-		fixedPassives[1].append(SkillDB.getSkill(skillId))
-	for skillId: int in generateUniqueArray(passiveIDS):
-		fixedPassives[2].append(SkillDB.getSkill(skillId))
-	#escolha de equipamentos
-	currentEquipments[0] = getFullSet()
-	currentEquipments[1] = getFullSet()
-	currentEquipments[2] = getFullSet()
+	#teste: gerando grupo de tamanho aleatório aleatório.
+	self.addToParty(5) #escolah aleatória do id de um digimon
+	#selecionando 3 skills para cada digimon no grupo
+	for key: int in self.playerParty:
+		if(playerParty[key] != null):
+			digimonActiveSkills[key] = SkillDB.getRandomSkills(Util.random(1, 3))
+	#teste: gerando equipamentos.
+	self.currentEquipments[0].append(ItemDB.getEquipment(2))
 	#teste de inventário
-	playerInventory.append(ItemDB.getUsableItem(0))
-	playerInventory.append(ItemDB.getUsableItem(0))
-	playerInventory.append(ItemDB.getUsableItem(0))
-	playerInventory.append(ItemDB.getEquipment(3))
-	playerInventory.append(ItemDB.getEquipment(5))
-	playerInventory.append(ItemDB.getEquipment(2))
 	playerInventory.append(ItemDB.getEquipment(1))
+	#teste status effect
+
+#Função que adiciona um digimon ao grupo
+func addToParty(digimonId: int) -> bool:
+	var sucess: bool = false
+	for key: int in playerParty:
+		if(playerParty[key] == null):
+			playerParty[key] = digimonId
+			var passiveSkill: PassiveSkill = SkillDB.getNative(digimonId, 0)
+			if(self.fixedPassives.has(passiveSkill.skillId)):
+				self.fixedPassives[passiveSkill.skillId][1] += 1
+			else:
+				self.fixedPassives[passiveSkill.skillId] = [SkillDB.getNative(digimonId, 0), 1]
+			sucess = true
+	return sucess
+#função que remove digimon da party
+func removeFromParty(index: int) -> void:
+	var removedId: int = playerParty[index]
+	if(self.fixedPassives.has(removedId)):
+		self.fixedPassives[removedId][1] -= 1
+		if(self.fixedPassives[removedId][1] <= 0):
+			self.fixedPassives.erase(removedId)
+	else:
+		print("ERROR: No Skill found!")
 
 #função de teste que gera arrays com valores únicos
-func generateUniqueArray(sourcePick: Array) -> Array:
-	var selectedIds: Array[int] = []
-	var id1: int = Util.pickOne(sourcePick)
-	selectedIds.append(id1)
-	var id2: int = Util.pickOne(sourcePick)
-	while(id2 in selectedIds):
-		id2 = Util.pickOne(sourcePick)
-	selectedIds.append(id2)
-	var id3: int = Util.pickOne(sourcePick)
-	while(id3 in selectedIds):
-		id3 = Util.pickOne(sourcePick)
-	selectedIds.append(id3)
-	var id4: int = Util.pickOne(sourcePick)
-	while(id4 in selectedIds):
-		id4 = Util.pickOne(sourcePick)
-	selectedIds.append(id4)
-	return selectedIds
+
 #função de teste que gera um full set para o Digimon
 func getFullSet() -> Array:
 	return [ItemDB.getEquipment(Util.pickOne(ItemDB.weapons)), ItemDB.getEquipment(Util.pickOne(ItemDB.offHands)), ItemDB.getEquipment(Util.pickOne(ItemDB.armors)), ItemDB.getEquipment(Util.pickOne(ItemDB.accessories))]

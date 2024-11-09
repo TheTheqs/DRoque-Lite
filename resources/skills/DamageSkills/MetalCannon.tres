@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://s3wtoaxafald"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_s1hm3"]
+[ext_resource type="Texture2D" uid="uid://c0nen2pfah6rg" path="res://assets/interface/Icons/SkillIcons/NativeActives/MetalCannon.png" id="2_xdsdx"]
+[ext_resource type="Texture2D" uid="uid://bj6cpxqd8vkbn" path="res://assets/sprites/vfx/skills/MetalCannon.png" id="3_nm8eq"]
+
+[resource]
+script = ExtResource("1_s1hm3")
+skillId = 44
+skillIcon = ExtResource("2_xdsdx")
+staticPriority = 2
+element = 0
+damageType = 1
+damageSubType = 0
+ratio = 1.1
+manaCost = 5
+coolDown = 2
+hasEffect = true
+skillTexture = ExtResource("3_nm8eq")
+textureRange = 15

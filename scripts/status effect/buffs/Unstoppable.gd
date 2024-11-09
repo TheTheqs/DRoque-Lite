@@ -15,11 +15,11 @@ func applyingEffect(digimon: Digimon) -> void:
 	for nId : int in blockedStatus:
 		if(digimon.statusEffect.has(nId)):
 			digimon.unapplyStatus(nId)
-		digimon.statusImunity.append(nId)
+			digimon.addImmunity(digimon.statusImunity, nId)
 
 func unapplyingEffect(digimon: Digimon) -> void:
 	for nId : int in blockedStatus:
-		digimon.statusImunity.erase(nId)
+		digimon.removeImmunity(digimon.statusImunity, nId)
 
 func getStatus() -> StatusEffect:
 	return Unstoppable.new(self.duration)

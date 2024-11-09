@@ -19,12 +19,9 @@ var tamerName: String
 #tamer attributes
 var tamerLevel: int
 var actions: int
+var tamerReference
 var canAct: bool = false
 var inventory: Inventory = Inventory.new(self)
-#Sumoning Digimon
-func summonDigimon(index: int) -> void:
-	var data: DigimonData = DDB.getDigimonData(index)
-	digimon.setStats(data)
 
 func takeTurn() ->void:
 	opponent.turnFrame.visible = false
@@ -50,3 +47,5 @@ func takeActions(nactions: int) -> void:
 	actionAnimator.play("blinkActions")
 	actionsDisplay.text = tr(StringName("Actions")) + str(self.actions)
 	
+func getDigimonStats(choice: int) -> DigimonData:
+	return DDB.getDigimonData(tamerReference.playerParty[choice])

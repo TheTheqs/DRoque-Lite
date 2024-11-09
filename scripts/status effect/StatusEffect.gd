@@ -41,3 +41,11 @@ func getStatus() -> StatusEffect:
 func setStats() -> void:
 	self.statusName = "StatusName" + str(self.statusId)
 	self.statusDescription = "StatusDescription" + str(self.statusId)
+
+func getAditionalDescription() -> String:
+	var newString: String = ""
+	if(self.isStackable):
+		newString += "\n" + tr(StringName("Stacks")) + ": " + str(self.stacks)
+	if(self.isExpirable):
+		newString += "\n" + tr(StringName("Duration")) + ": " + str(self.duration) + " " + tr("Turn")
+	return newString

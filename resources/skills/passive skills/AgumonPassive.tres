@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=4 format=3 uid="uid://dmntntefmv4io"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_3j5of"]
+[ext_resource type="Texture2D" uid="uid://b4yniq1dyeitf" path="res://assets/interface/Icons/SkillIcons/NativePassives/AgumonPassive.png" id="2_wly74"]
+[ext_resource type="Script" path="res://scripts/triggers/passive skills triggers/BabyDragonRoar.gd" id="3_uogrm"]
+
+[resource]
+script = ExtResource("1_3j5of")
+skillId = 36
+skillIcon = ExtResource("2_wly74")
+cooldown = 0
+triggers = Array[Script]([ExtResource("3_uogrm")])

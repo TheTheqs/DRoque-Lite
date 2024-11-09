@@ -5,28 +5,19 @@ class_name Enemy
 var possibleItemActions: Array[Skill]
 
 func _ready() -> void:
+	EnemyGen.loadContent()
+	self.tamerReference = EnemyGen
+	var choice: int = EnemyGen.playerCurrentChoice
 	self.tamerName = "Enemy"
-	self.tamerLevel = Campaign.campaignLevel
+	self.tamerLevel = EnemyGen.playerLevel
 	#setando o damage shower
 	turnFrame.visible = false
-	summonDigimon(Util.random(0,5))
-	#teste de habilidades.
-	digimon.learnSkill(BasicAtack.new())
-	digimon.learnSkill(CureI.new())
-	digimon.learnSkill(BackupStrike.new())
-	digimon.learnSkill(OpressTheWeak.new())
-	digimon.learnSkill(ChargedContact.new())
-	#teste de habilidades passivas
-	#teste de status effect
-	#teste de inventário
-	self.inventory.addItem(ItemDB.getUsableItem(0), 1)
-	#teste de equipamento
-	digimon.onChanging = true
-	digimon.equipItem(ItemDB.getEquipment(1))
-	digimon.equipItem(ItemDB.getEquipment(4))
-	digimon.equipItem(ItemDB.getEquipment(5))
-	digimon.equipItem(ItemDB.getEquipment(7))
-	digimon.onChanging = false
+	#colcoando o mostro escolhido em cena
+	self.digimon.setStats(choice)
+	#adicionando inventário
+	if(Util.checkArray(EnemyGen.playerInventory)):
+		for item: Item in EnemyGen.playerInventory:
+			self.inventory.addItem(item, item.quantity)
 	#atualização da interface. Sempre a última coisa a se fazer!
 	HUDD.updateValues()
 	#confirma para a classe juiza que tudo está pronto para começar
@@ -62,7 +53,6 @@ func onFrameAnimation(anim_name: String):
 		makeAChoice()
 	elif(anim_name == "blinkActions"):
 		actionsDisplay.visible = true
-		print("Texto do DISPLAY: " + actionsDisplay.text)
 
 func actionsAnimation(anim_name: String) -> void:
 	if(anim_name == "blinkActions"):

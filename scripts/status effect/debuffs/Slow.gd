@@ -26,3 +26,7 @@ func getStatus() -> StatusEffect:
 	var newSlow: Slow = Slow.new()
 	newSlow.schance = self.schance
 	return newSlow
+
+func getAditionalDescription() -> String:
+	var newString: String = "\n" + tr(StringName("AGI")) + " " + str(agiDebuff)
+	return newString

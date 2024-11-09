@@ -1,0 +1,3 @@
+Monodramon:
+*União Justiceira: Existe uma chance de ganhar um turno extra quando trocar de Digimon. A chance é de 5% para cada digimon no grupo.
+*não pode ser implementado no momento

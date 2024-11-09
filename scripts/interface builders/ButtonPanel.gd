@@ -21,7 +21,7 @@ var currentButtonToShow: ButtonDescription
 func _ready() -> void:
 	allButtons[0].buttonName = "PassingTurnButtonTittle"
 	allButtons[0].buttonDescription = "PassingTurnButtonDescription"
-	allButtons[1].buttonName = "MenuButtonTittle"
+	allButtons[1].buttonName = "MenuButtonTitle"
 	allButtons[1].buttonDescription = "MenuButtonDescription"
 	allButtons[2].buttonName = "InventoryButtonTittle"
 	allButtons[2].buttonDescription = "InventoryButtonDescription"
@@ -120,7 +120,7 @@ func activateButton() -> void:
 			relatedPlayer.canAct = false
 			BTM.choosing = false
 			BTM.passingTurn()
-	if(currentButtonToShow == allButtons[2]):
+	if(currentButtonToShow == allButtons[2] and !descWindowOn):
 		inventoryDisplay.opening()
 #funções de exibição da tela de informações de digimon
 func showDisplay(digimon: Digimon) -> void:

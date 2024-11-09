@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3rd4okecqmc0"
-path="res://.godot/imported/pepper_breath.png-7a45e029d74247655b16a199bed4368c.ctex"
+uid="uid://bhqkhpe70phgb"
+path="res://.godot/imported/Disarm.png-4821186eafeb80a4b4f5edd07345518f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/skills/pepper_breath.png"
-dest_files=["res://.godot/imported/pepper_breath.png-7a45e029d74247655b16a199bed4368c.ctex"]
+source_file="res://assets/interface/Icons/InterfaceIcons/status effect icons/Disarm.png"
+dest_files=["res://.godot/imported/Disarm.png-4821186eafeb80a4b4f5edd07345518f.ctex"]
 
 [params]
 

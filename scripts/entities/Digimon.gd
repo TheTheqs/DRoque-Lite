@@ -83,8 +83,12 @@ var digimonLearnedSkills: Array[int]
 var statusEffect: Dictionary = {
 	
 }
-var statusImunity: Array[int]
-var elementalImunity:Array[Enums.Element]
+var statusImunity: Dictionary = {
+	
+}
+var elementalImunity: Dictionary = {
+	
+}
 var statusToRemove: Array[int]
 var isDisabled: bool = false
 var canUseItem: bool = true
@@ -117,6 +121,7 @@ var onUnequipingItem: Array[Trigger] #Quando o digimon desequipa um item
 var onGotHited: Array[Trigger] #Quando uma habilidade acerta o digimon. Veja que difere pouco de quando ele é apenas alvo.
 var onEvadeDamage: Array[Trigger] #Quando o digimon se esquiva de uma damage skill
 var onEvadeStats: Array[Trigger] #Quando o digimon se esquiva da aplicação de um efeito
+var onBeforeGettingStats: Array[Trigger] #para quando há a atentativa de aplicação de um efeito no digimon
 var onGettingStats: Array[Trigger] #Quando um efeito é aplicado com sucesso
 var onUnapplyStatus: Array[Trigger] #Qaundo um status termina ou é removido.
 var onDamageDelt: Array[Trigger] #Quando o digimon causa dano. Atenção, a chamada desse contexto deve ser feita no digimon inimigo
@@ -141,7 +146,23 @@ func setBehave() -> void:
 			self.position.x += 40
 			self.position.y += 30
 
-func setStats(stats: DigimonData) -> void:
+func setStats(index: int) -> void:
+	self.onChanging = true
+	var reference = tamer.tamerReference
+	var stats: DigimonData = tamer.getDigimonStats(index)
+	self.setBasics(stats)
+	self.setAttributes(stats)
+	self.levelUpAttributes(currentLevel)
+	self.setSkills(reference.digimonActiveSkills[index], reference.fixedPassives.values())
+	self.setEquips(reference.currentEquipments[index])
+	self.setPermanentStatus(reference.currentStatus[index])
+	self.currentHealth = self.maxHelth*reference.currentHealthMana[index][0]
+	self.currentMana = self.maxMana*reference.currentHealthMana[index][1]
+	self.onChanging = false
+	self.setBehave()
+
+#função que seta os elementos visuais e descritivos do digimon
+func setBasics(stats: DigimonData) -> void:
 	self.digimonId = stats.digimonId
 	self.digimonIcon = stats.digimonIcon
 	self.digimonName ="DigimonName" + str(self.digimonId)
@@ -149,6 +170,8 @@ func setStats(stats: DigimonData) -> void:
 	self.element = stats.element
 	self.digimonTier = stats.digimonTier
 	self.digimonType = stats.digimonType
+#função que seta os atirbutos, vida máxima e mana.
+func setAttributes(stats: DigimonData) -> void:
 	self.currentLevel = tamer.tamerLevel
 	self.levelSTR = stats.levelSTR
 	self.levelINT = stats.levelINT
@@ -156,8 +179,32 @@ func setStats(stats: DigimonData) -> void:
 	self.levelVIT = stats.levelVIT
 	self.levelWIS = stats.levelWIS
 	self.levelDEX = stats.levelDEX
-	levelUpAttributes(currentLevel)
-	setBehave()
+#função para setar as habilidades (passivas e ativas) baseado na variável global de campanha
+func setSkills(skills: Array, passives: Array) -> void:
+	self.digimonSkills = [null, null, null, null, null]
+	self.learnSkill(BasicAtack.new())
+	self.learnSkill(SkillDB.getNative(self.digimonId, 1))
+	if(Util.checkArray(skills) and skills.size() <= 3):
+		for skill: Skill in skills:
+			self.learnSkill(skill)
+	#verificação de passivas
+	for nPassive: Array in passives:
+		if(nPassive[0] is PassiveSkill):
+			self.learnSkill(nPassive[0])
+
+#função que busca os equipamentos na referência
+func setEquips(equips: Array) -> void:
+	if(Util.checkArray(equips) and equips.size() <= 4):
+		for equip: Equipment in equips:
+			if(equip != null):
+				self.equipItem(equip)
+
+#função que busca os status fixos e aplica-os no digimon
+func setPermanentStatus(statuses: Array) -> void:
+	if(Util.checkArray(statuses)):
+		for nStatus: StatusEffect in statuses:
+			nStatus.schance = -1
+			self.applyStatus(nStatus)
 
 #a função abaixo vai retornar a soma de atributo base e atributo bonus, negando valores menores que 1
 func getAttribute(att: String) -> int:
@@ -242,7 +289,7 @@ func gotTargeted(skill: Skill) -> void:
 #Função que processa o dano recebido
 func processDamage(damageData: DamageData) -> void:
 	BTM.inAction()
-	if(damageData.damageElement in self.elementalImunity):
+	if(self.elementalImunity.has(damageData.damageElement)):
 		tamer.showContent(tr(StringName("Immunity")))
 	else:
 		damageData.damageValue *= Util.getTypeRatio(damageData.atackerType, self.digimonType)
@@ -264,7 +311,7 @@ func processDamage(damageData: DamageData) -> void:
 #função que processa a aplica um status effect
 func applyStatus(nstatus: StatusEffect) -> void:
 	BTM.inAction()
-	if(nstatus.statusId in self.statusImunity):
+	if(statusImunity.has(nstatus.statusId)):
 		if(nstatus.statusType == Enums.StatusType.DEBUFF):
 			tamer.showContent(tr(StringName(nstatus.statusName)) + " " + tr(StringName("Immunity")))
 		else:
@@ -272,6 +319,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 	else:
 		if(self.isDisabled):
 			nstatus.schance = -1
+		triggerCheck(onBeforeGettingStats, nstatus) #checagem de trigger antes de ativar o status
 		if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
 			if(statusEffect.has(nstatus.statusId)):
 				nstatus.effectOverlap(self)
@@ -486,7 +534,7 @@ func getActions(nActions: int) -> void:
 
 #função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
 func triggerCheck(triggersToTest: Array, context) -> void:
-	if(self.onChanging):
+	if(self.onChanging and triggersToTest != self.onLearnSkill):
 		return
 	else:
 		if(triggersToTest.size() > 0):
@@ -556,3 +604,17 @@ func unequipItem(equipIndex: int) -> void:
 		tamer.showContent(tr(StringName("Unequiped")) + "("+ tr(StringName(equip.itemName))+")")
 	else:
 		print("ERROR: no equip to be removed!")
+
+func addImmunity(dicCount: Dictionary, key: int) -> void:
+	if(dicCount.has(key)):
+		dicCount[key] += 1
+	else:
+		dicCount[key] = 1
+
+func removeImmunity(dicCount: Dictionary, key: int) -> void:
+	if(dicCount.has(key)):
+		dicCount[key] -= 1
+		if(dicCount[key] <= 0):
+			dicCount.erase(key)
+	else:
+		print("ERROR: Immunnity does not exist!")

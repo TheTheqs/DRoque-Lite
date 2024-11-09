@@ -24,6 +24,7 @@ TTR="*res://translation/Translator.gd"
 ItemDB="*res://scripts/database and globals/ItemDB.gd"
 SkillDB="*res://scripts/database and globals/SkillsDB.gd"
 Campaign="*res://scripts/database and globals/CampaignData.gd"
+EnemyGen="*res://scripts/database and globals/EnemyGenerator.gd"
 
 [display]
 

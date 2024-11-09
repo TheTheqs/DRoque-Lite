@@ -18,7 +18,7 @@ func addStatus(newStatus: StatusEffect) -> void:
 		return
 	else:
 		var newCard: InfoCard = staticInfoCard.instantiate()
-		newCard.buildCard(newStatus.statusIcon, tr(StringName(newStatus.statusName)), tr(StringName(newStatus.statusDescription)), display, false)
+		newCard.buildCard(newStatus.statusIcon, tr(StringName(newStatus.statusName)), (tr(StringName(newStatus.statusDescription)) + newStatus.getAditionalDescription()), display, false)
 		currentStatus[newStatus.statusId] = newCard
 		statusList.call_deferred("add_child", newCard)
 		display.allButtons.append(newCard.button)

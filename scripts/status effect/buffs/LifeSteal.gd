@@ -30,3 +30,11 @@ func effectOverlap(digimon: Digimon) -> void:
 func getStatus() -> StatusEffect:
 	var newLifeSteal: LifeSteal = LifeSteal.new(self.stacks)
 	return newLifeSteal
+
+func getAditionalDescription() -> String:
+	var newString: String = ""
+	if(self.isStackable):
+		newString += "\n" + tr(StringName("LifeSteal")) + str(self.stacks) + "%"
+	if(self.isExpirable):
+		newString += "\n" + tr(StringName("Duration")) + ": " + str(self.duration)
+	return newString

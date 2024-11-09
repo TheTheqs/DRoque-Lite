@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6qqlnhr3jesq"
-path="res://.godot/imported/biomon_skill.png-f262f91a25a0b71ff8509e7fb28227df.ctex"
+uid="uid://bj6cpxqd8vkbn"
+path="res://.godot/imported/MetalCannon.png-3f838ba9bd7be20084792b3184a10522.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/skills/biomon_skill.png"
-dest_files=["res://.godot/imported/biomon_skill.png-f262f91a25a0b71ff8509e7fb28227df.ctex"]
+source_file="res://assets/sprites/vfx/skills/MetalCannon.png"
+dest_files=["res://.godot/imported/MetalCannon.png-3f838ba9bd7be20084792b3184a10522.ctex"]
 
 [params]
 

@@ -7,6 +7,7 @@ var itemName: String
 var itemDescription: String
 var itemIcon: CompressedTexture2D
 var isMisc: bool
+var canUse: bool = true
 #elementos dinâmicos
 var quantity: int = 1
 

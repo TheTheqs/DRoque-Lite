@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcqqoq7b6gp2o"
-path="res://.godot/imported/electric_shock.png-58bfce33b706dce6db71a8f32380d0c1.ctex"
+uid="uid://curcb27bc2buo"
+path="res://.godot/imported/KnucklePunch.png-37775b00ce20fa92248c6da2e0beb864.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/skills/electric_shock.png"
-dest_files=["res://.godot/imported/electric_shock.png-58bfce33b706dce6db71a8f32380d0c1.ctex"]
+source_file="res://assets/sprites/vfx/skills/KnucklePunch.png"
+dest_files=["res://.godot/imported/KnucklePunch.png-37775b00ce20fa92248c6da2e0beb864.ctex"]
 
 [params]
 

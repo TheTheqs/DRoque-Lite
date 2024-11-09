@@ -30,3 +30,11 @@ func effectOverlap(digimon: Digimon) -> void:
 func getStatus() -> StatusEffect:
 	var newReflect: Reflect = Reflect.new(self.stacks)
 	return newReflect
+
+func getAditionalDescription() -> String:
+	var newString: String = ""
+	if(self.isStackable):
+		newString += "\n" + tr(StringName("Reflect")) + str(self.stacks) + "%"
+	if(self.isExpirable):
+		newString += "\n" + tr(StringName("Duration")) + ": " + str(self.duration)
+	return newString

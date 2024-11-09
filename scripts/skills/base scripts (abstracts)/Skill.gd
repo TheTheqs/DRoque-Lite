@@ -11,6 +11,7 @@ var manaCost: int
 #elementos de controle
 var staticPriority: int
 var priority: int
+var bonusPriority: int = 0
 var usable: bool = true
 var accuracy : float
 var cooldowm: int
@@ -58,6 +59,7 @@ func priorityCheck(_digimon: Digimon) -> void:
 func priorityCalculation(digimon: Digimon) -> void:
 	priority = staticPriority
 	priority += getElementalChartPriority(digimon)
+	priority += bonusPriority
 	priorityCheck(digimon)
 	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
 		self.priority = 0

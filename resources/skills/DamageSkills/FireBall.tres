@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://dgnbdhwkmnb6s"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_nwo4v"]
+[ext_resource type="Texture2D" uid="uid://lvak1wxl8d5h" path="res://assets/interface/Icons/SkillIcons/NativeActives/FireBall.png" id="2_af7w2"]
+[ext_resource type="Texture2D" uid="uid://lwr4440dvl3x" path="res://assets/sprites/vfx/skills/FireBall.png" id="3_t3lm3"]
+
+[resource]
+script = ExtResource("1_nwo4v")
+skillId = 42
+skillIcon = ExtResource("2_af7w2")
+staticPriority = 3
+element = 0
+damageType = 1
+damageSubType = 0
+ratio = 1.35
+manaCost = 5
+coolDown = 2
+hasEffect = false
+skillTexture = ExtResource("3_t3lm3")
+textureRange = 13
