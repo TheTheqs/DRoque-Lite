@@ -66,3 +66,6 @@ func showEquipWindow(equip: Equipment) -> void:
 func forcedClose() -> void:
 	self.quickWindow.visible = false
 	self.visible = false
+
+func resetEquips() -> void:
+	self.armory.resetEquipButtons()

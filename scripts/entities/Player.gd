@@ -58,8 +58,8 @@ func replaceDigimon() -> void:
 	self.digimon.digimonSprite.visible = true
 	Campaign.playerCurrentChoice = newerChoice
 	#atualização da interface. Sempre a última coisa a se fazer!
-	HUDD.updateValues()
-	buttonPanel.setButtons()
-	buttonPanel.updateButtons()
+	self.HUDD.updateValues()
+	self.buttonPanel.setButtons()
+	self.buttonPanel.updateButtons()
 	self.buttonPanel.unBlockAllButtons()
-	BTM.outAction("Changing")
+	self.BTM.outAction("Changing")

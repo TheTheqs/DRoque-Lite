@@ -18,3 +18,7 @@ func buildIcons(armory: Array) -> void:
 		else:
 			equipmentButtons[i].icon.texture = blanckIcons[i]
 		equipmentButtons[i].selfDesc = i
+
+func resetEquipButtons() -> void:
+	for equipBut : EquipDisplayButton in equipmentButtons:
+		equipBut.relatedEquipment = null

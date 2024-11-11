@@ -218,6 +218,12 @@ func setAttributes(stats: DigimonData) -> void:
 	self.baseVIT = 0
 	self.baseWIS = 0
 	self.baseDEX = 0
+	self.bonusSTR = 0
+	self.bonusINT = 0
+	self.bonusAGI = 0
+	self.bonusVIT = 0
+	self.bonusWIS = 0
+	self.bonusDEX = 0
 	self.currentLevel = tamer.tamerLevel
 	self.levelSTR = stats.levelSTR
 	self.levelINT = stats.levelINT
@@ -647,7 +653,8 @@ func unequipItem(equipIndex: int) -> void:
 			for oldPassive: PassiveSkill in equip.itemPassives:
 				self.unlearnSkill(oldPassive)
 		armory[equipIndex] = null
-		self.tamer.inventory.addItem(equip, 1)
+		if(not self.onChanging):
+			self.tamer.inventory.addItem(equip, 1)
 		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 			digimonDisplay.armory.buildIcons(self.armory)
 		tamer.showContent(tr(StringName("Unequiped")) + "("+ tr(StringName(equip.itemName))+")")
@@ -674,6 +681,7 @@ func resetTriggers() -> void:
 		self.unapplyStatus(self.statusEffect[key].statusId)
 	for triggerArray in allTriggers:
 		triggerArray.clear()
+	self.digimonDisplay.resetEquips()
 	self.onTurnEnd = [CoolDownTrigger.new(), StatusCheckTrigger.new()]
 	self.onChanging = false
 #a função abaixo é feita para integrar a animação de troca de digimon <3

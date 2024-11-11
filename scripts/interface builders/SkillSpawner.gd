@@ -42,4 +42,5 @@ func exchangeAnimation() -> void:
 	self.skillSprite.hframes = 5
 	self.skillSprite.vframes = 4
 	self.visible = true
+	animator.speed_scale = 1.0
 	self.animator.play("Exchange")
