@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3 uid="uid://bnip6uuqbo0xy"]
+[gd_resource type="Translation" format=3]
 
 [resource]
 messages = {
@@ -67,9 +67,11 @@ messages = {
 "NoAccessory": &"Nenhum acessório equipado",
 "NoArmor": &"Nenhuma Armadura equipada.",
 "NoCD": &"A habilidade está em recarga!",
+"NoCompanion": &"Você não possui nenhum Digimon Companheiro no momento!",
 "NoMana": &"A mana é insuficiente!",
 "NoOffHand": &"Nenhuma munição/arma secundária equipada.",
 "NoWeapon": &"Nenhuma arma equipada.",
+"Party": &"Grupo",
 "PassingTurnButtonDescription": &"Passa o turno para o oponente. Ações extras serão preservadas para o próximo turno.",
 "PassingTurnButtonTittle": &"Passar turno",
 "Passives": &"Passivas: ",

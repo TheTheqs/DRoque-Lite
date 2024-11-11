@@ -49,6 +49,7 @@ var gainActions: int
 var gotHited: bool #esse bool verifica se uma habilidade acertou ou não depois da animação.
 var getHited: bool #esse verifica antes de fazer a animação das habilidades
 var gettingStatus: bool #para verificação de status
+var positionSet: bool = false
 #Scene Elements
 @export var skillSpawner: SkillSpawner
 @export var enemy: Digimon
@@ -128,7 +129,44 @@ var onDamageDelt: Array[Trigger] #Quando o digimon causa dano. Atenção, a cham
 var onDying: Array[Trigger] #Quando a vida do digimon chega a 0.
 var onActing: Array[Trigger] #Verificado imediatamente antes de uma ação ser atribuída a choose action
 var onEvolution: Array[Trigger] #Verificado quando o digimon evolui durante a batalha
-
+#esse array enorme abaixo contém todos os arrays de triggers, ele é essencial para a realização de troca de digimons
+var allTriggers: Array = [
+	#arrays
+	onBattleStart,
+	onTurnStart,
+	onTurnEnd,
+	BattleEnd,
+	onHealing,
+	onGetDamage,
+	onGotTargeted,
+	onDamageCalc,
+	onCriticalCalc,
+	onAccuracyCalc,
+	onManaConsumption,
+	onPassingTurn,
+	onGettingActions,
+	onLearnSkill,
+	onEquipingItem,
+	onUnequipingItem,
+	onGotHited,
+	onEvadeDamage,
+	onEvadeStats,
+	onBeforeGettingStats,
+	onGettingStats,
+	onUnapplyStatus,
+	onDamageDelt,
+	onDying,
+	onActing,
+	onEvolution,
+	digimonLearnedSkills,
+	statusToRemove,
+	actionsToGo,
+	#dicionários
+	passiveCount,
+	statusEffect,
+	statusImunity,
+	elementalImunity
+]
 #Actions Array
 var actionsToGo: Array[Skill] = []
 
@@ -136,15 +174,17 @@ func setBehave() -> void:
 	if(not isDisabled):
 		digimonAnimator.play("Idle")
 		currentAnimation = "Idle"
-	if(self.position.x < 140):
-		digimonSprite.flip_h = true
-		if(self.digimonTier == Enums.Tier.ROOKIE):
-			self.position.x -= 40
-			self.position.y += 30
-	else:
-		if(self.digimonTier == Enums.Tier.ROOKIE):
-			self.position.x += 40
-			self.position.y += 30
+	if(not self.positionSet):
+		self.positionSet = true
+		if(self.position.x < 140):
+			digimonSprite.flip_h = true
+			if(self.digimonTier == Enums.Tier.ROOKIE):
+				self.position.x -= 40
+				self.position.y += 30
+		else:
+			if(self.digimonTier == Enums.Tier.ROOKIE):
+				self.position.x += 40
+				self.position.y += 30
 
 func setStats(index: int) -> void:
 	self.onChanging = true
@@ -172,6 +212,12 @@ func setBasics(stats: DigimonData) -> void:
 	self.digimonType = stats.digimonType
 #função que seta os atirbutos, vida máxima e mana.
 func setAttributes(stats: DigimonData) -> void:
+	self.baseSTR = 0
+	self.baseINT = 0
+	self.baseAGI = 0
+	self.baseVIT = 0
+	self.baseWIS = 0
+	self.baseDEX = 0
 	self.currentLevel = tamer.tamerLevel
 	self.levelSTR = stats.levelSTR
 	self.levelINT = stats.levelINT
@@ -182,6 +228,7 @@ func setAttributes(stats: DigimonData) -> void:
 #função para setar as habilidades (passivas e ativas) baseado na variável global de campanha
 func setSkills(skills: Array, passives: Array) -> void:
 	self.digimonSkills = [null, null, null, null, null]
+	self.digimonPassiveSkills.clear()
 	self.learnSkill(BasicAtack.new())
 	self.learnSkill(SkillDB.getNative(self.digimonId, 1))
 	if(Util.checkArray(skills) and skills.size() <= 3):
@@ -194,6 +241,7 @@ func setSkills(skills: Array, passives: Array) -> void:
 
 #função que busca os equipamentos na referência
 func setEquips(equips: Array) -> void:
+	self.armory = [null, null, null, null]
 	if(Util.checkArray(equips) and equips.size() <= 4):
 		for equip: Equipment in equips:
 			if(equip != null):
@@ -201,6 +249,7 @@ func setEquips(equips: Array) -> void:
 
 #função que busca os status fixos e aplica-os no digimon
 func setPermanentStatus(statuses: Array) -> void:
+	self.statusEffect.clear()
 	if(Util.checkArray(statuses)):
 		for nStatus: StatusEffect in statuses:
 			nStatus.schance = -1
@@ -618,3 +667,15 @@ func removeImmunity(dicCount: Dictionary, key: int) -> void:
 			dicCount.erase(key)
 	else:
 		print("ERROR: Immunnity does not exist!")
+#função que reseta todos os arrays, essencial para a troca de digmons
+func resetTriggers() -> void:
+	self.onChanging = true
+	for key in self.statusEffect:
+		self.unapplyStatus(self.statusEffect[key].statusId)
+	for triggerArray in allTriggers:
+		triggerArray.clear()
+	self.onTurnEnd = [CoolDownTrigger.new(), StatusCheckTrigger.new()]
+	self.onChanging = false
+#a função abaixo é feita para integrar a animação de troca de digimon <3
+func callReplace() -> void:
+	self.tamer.replaceDigimon()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb3ndvwln3k38"
-path="res://.godot/imported/pipo-btleffect206_192.png-9fd47eaf13e66734f2ff447feacbb73f.ctex"
+uid="uid://dsr3ckriufony"
+path="res://.godot/imported/ChangeDigimonWindow.png-edf5a843e28746c650fdc9229ea82674.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/vfx/special effects/test special effects/pipo-btleffect206_192.png"
-dest_files=["res://.godot/imported/pipo-btleffect206_192.png-9fd47eaf13e66734f2ff447feacbb73f.ctex"]
+source_file="res://assets/interface/UI/ChangeDigimonWindow.png"
+dest_files=["res://.godot/imported/ChangeDigimonWindow.png-edf5a843e28746c650fdc9229ea82674.ctex"]
 
 [params]
 

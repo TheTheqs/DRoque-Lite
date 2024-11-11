@@ -109,3 +109,8 @@ func setBehave() -> void:
 	else:
 		self.visible = false
 		set_process(false)
+
+func stopShowing() -> void:
+	self.changeIconTimer.stop()
+	self.statusToShow.clear()
+	self.setBehave()

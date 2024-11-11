@@ -23,7 +23,7 @@ func speak() -> void:
 	if(messageQueue.size() > 0):
 		changeText(messageQueue[0])
 		messageQueue.remove_at(0)
-		changeMessageTimer.start(0.7)
+		changeMessageTimer.start(1.0)
 
 func onChangeMessageTimeout():
 	if(messageQueue.size() > 0):

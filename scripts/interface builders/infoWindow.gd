@@ -38,3 +38,6 @@ func showIcon(skill: Skill) -> void:
 	else:
 		skillFrame.visible = false
 		skillIcon.visible = false
+
+func forcedClose() -> void:
+	self.visible = false

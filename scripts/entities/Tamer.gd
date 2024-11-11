@@ -49,3 +49,12 @@ func takeActions(nactions: int) -> void:
 	
 func getDigimonStats(choice: int) -> DigimonData:
 	return DDB.getDigimonData(tamerReference.playerParty[choice])
+
+func saveDigimon(_digimon: Digimon) -> void:
+	pass
+
+func changeDigimon(_newChoice: int) -> void:
+	pass
+
+func replaceDigimon() -> void:
+	pass

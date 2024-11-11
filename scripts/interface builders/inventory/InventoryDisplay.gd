@@ -69,3 +69,7 @@ func useItem(item: Item) -> void:
 func showEquipWindow(equip: Equipment) -> void:
 	blockAllButtons()
 	infoWindow.popEquipWindow(equip, self)
+
+func forcedClose() -> void:
+	self.infoWindow.visible = false
+	self.visible = false

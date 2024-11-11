@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceq7x1pcl0rt3"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/DigimonCard.gd" id="1_b7hmq"]
+[ext_resource type="Texture2D" uid="uid://d1l8dgdem602" path="res://assets/interface/UI/DigimonCard.png" id="1_e0m7v"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="3_5rccw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc8yr"]
+bg_color = Color(0.317647, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gk36n"]
+bg_color = Color(0.392157, 0.647059, 1, 1)
+
+[node name="DigimonCard" type="Node2D" node_paths=PackedStringArray("digimonIcon", "digimonName", "health", "mana")]
+script = ExtResource("1_b7hmq")
+digimonIcon = NodePath("Icon")
+digimonName = NodePath("Label")
+health = NodePath("Health")
+mana = NodePath("Mana")
+
+[node name="Card" type="Sprite2D" parent="."]
+texture = ExtResource("1_e0m7v")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-51, 0)
+
+[node name="Label" parent="." instance=ExtResource("3_5rccw")]
+offset_left = -34.0
+offset_top = -16.0
+offset_right = 73.0
+offset_bottom = -5.0
+
+[node name="Health" type="ProgressBar" parent="."]
+offset_left = -26.0
+offset_right = 65.0
+offset_bottom = 4.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_yc8yr")
+value = 100.0
+show_percentage = false
+
+[node name="Mana" type="ProgressBar" parent="."]
+offset_left = -26.0
+offset_top = 9.0
+offset_right = 65.0
+offset_bottom = 13.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_gk36n")
+value = 100.0
+show_percentage = false

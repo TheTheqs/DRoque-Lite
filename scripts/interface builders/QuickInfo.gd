@@ -37,7 +37,7 @@ func popEquipWindow(equip: Equipment, ninfocard) -> void:
 			var addString: String = "\n" + tr(StringName(equip.buffAdress[i].to_upper())) + ": " + str(equip.attBuffs[i])
 			equipDescription += addString
 	if(equip.itemPassives.size() > 0):
-		equipDescription += "\n" + tr(StringName("Passives:"))
+		equipDescription += "\n" + tr(StringName("Passives"))
 		for newPassive: PassiveSkill in equip.itemPassives:
 			var addString: String = "\n" + tr(StringName(newPassive.skillName))
 			equipDescription += addString

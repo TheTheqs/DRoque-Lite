@@ -34,14 +34,16 @@ var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
 }
 
 var currentHealthMana: Dictionary = { #proporção da vida de cada digimon 
-	0 : [0.76, 1],
+	0 : [1, 1],
 	1 : [1, 1],
 	2 : [1, 1]
 }
 #função init para teste
 func loadContent() -> void:
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(5) #escolah aleatória do id de um digimon
+	self.addToParty(Util.random(0,5)) 
+	self.addToParty(Util.random(0,5))
+	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
 	for key: int in self.playerParty:
 		if(playerParty[key] != null):
@@ -64,6 +66,7 @@ func addToParty(digimonId: int) -> bool:
 			else:
 				self.fixedPassives[passiveSkill.skillId] = [SkillDB.getNative(digimonId, 0), 1]
 			sucess = true
+			break
 	return sucess
 #função que remove digimon da party
 func removeFromParty(index: int) -> void:

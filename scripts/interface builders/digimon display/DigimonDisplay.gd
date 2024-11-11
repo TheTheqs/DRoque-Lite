@@ -62,3 +62,7 @@ func unblockAllButtons() -> void:
 func showEquipWindow(equip: Equipment) -> void:
 	blockAllButtons()
 	quickWindow.popEquipWindow(equip, self)
+
+func forcedClose() -> void:
+	self.quickWindow.visible = false
+	self.visible = false

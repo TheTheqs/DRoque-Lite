@@ -10,7 +10,8 @@ class_name BattleManager
 @export var changeTurnTimer: Timer
 @export var BM: BattleMessenger
 @export var turnLabel: Label
-
+#Possíveis janelas da tela
+@export var allWindows: Array[Node2D]
 #Controle de fases
 var upgradeTurn: bool = false
 var turn: int = 1
@@ -164,3 +165,8 @@ func updateTurn() -> void:
 		self.turnLabel.text = str(turn)
 	else:
 		upgradeTurn = true
+
+func closeAllWindows() -> void: #função usada para forçar que todas as janelas sejam fechadas. Ainda nao inclui menu por ainda nao estar implementado
+	for window in allWindows:
+		if (window.visible):
+			window.forcedClose()

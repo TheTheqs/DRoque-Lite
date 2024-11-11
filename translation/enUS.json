@@ -13,6 +13,8 @@
   "Duration": "Duration",
   "Stacks": "Stacks",
   "Turn": "Turn(s)",
+  "Party": "Party",
+  "NoCompanion": "You don't have any Digimon companion at the moment!",
   "Unequiped": "Unequiped",
   "CantEquip": "Can't equip!",
   "NoWeapon": "No weapon equipped.",

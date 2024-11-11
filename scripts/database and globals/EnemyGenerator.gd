@@ -33,7 +33,7 @@ var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
 }
 
 var currentHealthMana: Dictionary = { #proporção da vida de cada digimon 
-	0 : [0.5, 1],
+	0 : [1, 1],
 	1 : [1, 1],
 	2 : [1, 1]
 }
@@ -41,7 +41,8 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 func loadContent() -> void:
 	self.playerLevel = self.calculateLevel()
 	#teste de grupo
-	self.addToParty(5) 
+	self.addToParty(Util.random(0,5))
+	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
 	for key: int in self.playerParty:
 		if(playerParty[key] != null):
@@ -59,7 +60,6 @@ func addToParty(digimonId: int) -> bool:
 			playerParty[key] = digimonId
 			var passiveSkill: PassiveSkill = SkillDB.getNative(digimonId, 0)
 			if(self.fixedPassives.has(passiveSkill.skillId)):
-				print("Veio aqui ¬¬")
 				self.fixedPassives[passiveSkill.skillId][1] += 1
 			else:
 				self.fixedPassives[passiveSkill.skillId] = [SkillDB.getNative(digimonId, 0), 1]

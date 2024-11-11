@@ -71,7 +71,7 @@ func damageDataBuilder(damageSkill: DamageSkill) -> DamageData:
 	return newDamageData
 
 func getProportion(portion: float, whole: float) -> float:
-	return portion/whole
+	return self.cap(portion/whole)
 
 func getElementRatio(atacker: Enums.Element, defender: Enums.Element) -> float:
 	var elementConvert: String = str(convertElement[atacker] + convertElement[defender])
