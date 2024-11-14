@@ -41,7 +41,7 @@ var skills: Dictionary = {
 
 var nativeSkills: Dictionary = {
 	0 : ["res://scripts/skills/passive skill (native)/BabyDragonRoar.gd", "res://scripts/skills/damage skills (native)/PepperBreath.gd"],
-	1 : ["res://scripts/skills/passive skill (native)/Keen.gd", "res://scripts/skills/damage skills (native)/KucklePunch.gd"],
+	1 : ["res://scripts/skills/passive skill (native)/AvengersPact.gd", "res://scripts/skills/damage skills (native)/KucklePunch.gd"],
 	2 : ["res://scripts/skills/passive skill (native)/DragonGrumble.gd", "res://scripts/skills/damage skills (native)/VeemonHeadbutt.gd"],
 	3 : ["res://scripts/skills/passive skill (native)/RelentlessAgression.gd", "res://scripts/skills/damage skills (native)/FireBall.gd"],
 	4 : ["res://scripts/skills/passive skill (native)/Keen.gd", "res://scripts/skills/damage skills (native)/MetalCannon.gd"],

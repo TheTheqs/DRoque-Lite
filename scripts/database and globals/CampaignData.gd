@@ -7,6 +7,7 @@ var playerLevel: int = 3 #define a força do personagem
 var playerCurrentChoice: int = 0 #define o digimon que o jogador está no momento
 var playerInventory: Array[Item] #array que será inserido no inventário do jogador.
 var playerKarma: Enums.Karma
+var partySize: int
 #Dicionários do grupo
 var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	0 : null,
@@ -43,7 +44,7 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.RUTHLESS
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(Util.random(0,5)) 
+	self.addToParty(1) 
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
@@ -68,6 +69,7 @@ func addToParty(digimonId: int) -> bool:
 			else:
 				self.fixedPassives[passiveSkill.skillId] = [SkillDB.getNative(digimonId, 0), 1]
 			sucess = true
+			self.partySize += 1
 			break
 	return sucess
 #função que remove digimon da party
@@ -77,6 +79,7 @@ func removeFromParty(index: int) -> void:
 		self.fixedPassives[removedId][1] -= 1
 		if(self.fixedPassives[removedId][1] <= 0):
 			self.fixedPassives.erase(removedId)
+		self.partySize -= 1
 	else:
 		print("ERROR: No Skill found!")
 

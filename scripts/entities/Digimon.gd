@@ -128,6 +128,7 @@ var onUnapplyStatus: Array[Trigger] #Qaundo um status termina ou é removido.
 var onDamageDelt: Array[Trigger] #Quando o digimon causa dano. Atenção, a chamada desse contexto deve ser feita no digimon inimigo
 var onDying: Array[Trigger] #Quando a vida do digimon chega a 0.
 var onActing: Array[Trigger] #Verificado imediatamente antes de uma ação ser atribuída a choose action
+var onChange: Array[Trigger] #Verificado após realizada uma troca
 var onEvolution: Array[Trigger] #Verificado quando o digimon evolui durante a batalha
 #esse array enorme abaixo contém todos os arrays de triggers, ele é essencial para a realização de troca de digimons
 var allTriggers: Array = [
@@ -157,6 +158,7 @@ var allTriggers: Array = [
 	onDamageDelt,
 	onDying,
 	onActing,
+	onChange,
 	onEvolution,
 	digimonLearnedSkills,
 	statusToRemove,
@@ -218,12 +220,13 @@ func setAttributes(stats: DigimonData) -> void:
 	self.baseVIT = 0
 	self.baseWIS = 0
 	self.baseDEX = 0
-	self.bonusSTR = 0
-	self.bonusINT = 0
-	self.bonusAGI = 0
-	self.bonusVIT = 0
-	self.bonusWIS = 0
-	self.bonusDEX = 0
+	if(self.onChanging):
+		self.bonusSTR = 0
+		self.bonusINT = 0
+		self.bonusAGI = 0
+		self.bonusVIT = 0
+		self.bonusWIS = 0
+		self.bonusDEX = 0
 	self.currentLevel = tamer.tamerLevel
 	self.levelSTR = stats.levelSTR
 	self.levelINT = stats.levelINT

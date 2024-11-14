@@ -64,3 +64,4 @@ func replaceDigimon() -> void:
 	self.buttonPanel.updateButtons()
 	self.buttonPanel.unBlockAllButtons()
 	self.BTM.outAction("Changing")
+	self.digimon.triggerCheck(self.digimon.onChange, "Changing")
