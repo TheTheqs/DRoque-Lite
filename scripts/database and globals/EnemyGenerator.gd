@@ -5,6 +5,7 @@ class_name EnemyGenerator
 var playerLevel: int
 var playerCurrentChoice: int = 0 #define o digimon que o jogador está no momento
 var playerInventory: Array[Item] #array que será inserido no inventário do jogador.
+var playerKarma: Enums.Karma
 #Dicionários do grupo
 var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	0 : null,
@@ -40,6 +41,7 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 #função init para teste
 func loadContent() -> void:
 	self.playerLevel = self.calculateLevel()
+	self.playerKarma = Enums.Karma.TREACHEROUS
 	#teste de grupo
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))

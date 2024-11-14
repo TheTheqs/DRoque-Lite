@@ -20,6 +20,7 @@ var tamerName: String
 var tamerLevel: int
 var actions: int
 var tamerReference
+var tamerKarma: Enums.Karma
 var canAct: bool = false
 var inventory: Inventory = Inventory.new(self)
 

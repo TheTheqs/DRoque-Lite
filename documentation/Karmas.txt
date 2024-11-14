@@ -1,0 +1,51 @@
+Lista Completa de Karmas e Seus Efeitos
+Karmas Bons
+Corajoso
+
+Vantagens: Um inimigo a mais aparece no mapa, sendo mais forte e dando mais recompensas.
+Desvantagens: Obrigatório eliminar o inimigo extra para avançar.
+Gentil
+
+Vantagens: Mais recompensas ao poupar inimigos derrotados.
+Desvantagens: Não pode executar inimigos.
+Amigável
+
+Vantagens: Maior chance de sucesso no recrutamento de novos membros.
+Desvantagens: Algumas ações "ruins" ficam bloqueadas.
+Altruísta
+
+Vantagens: Desbloqueia missões especiais com NPCs que trazem recompensas exclusivas.
+Desvantagens: Necessário completar um certo número de missões para desbloquear a luta contra o chefe do mapa; interações hostis com NPCs ficam bloqueadas.
+Leal
+
+Vantagens: Companheiros derrotados retornam com 50% da vida após a batalha, caso o jogador sobreviva.
+Desvantagens: Não é possível trocar membros da equipe.
+Honrado
+
+Vantagens: Imune aos efeitos negativos de salas enquanto não executar ações hostis, traiçoeiras ou enganadoras.
+Desvantagens: Não pode agir de forma desonrosa.
+Karmas Ruins
+Covarde
+
+Vantagens: Pode se mover sem ser visto e se move mais rápido pelo mapa.
+Desvantagens: Apenas 1 membro adicional pode ser recrutado.
+Hostil
+
+Vantagens: Melhor recompensa ao eliminar todos os monstros do mapa antes de sair.
+Desvantagens: Não pode interagir com alguns NPCs específicos.
+Cruel
+
+Vantagens: Pode escolher a recompensa ao finalizar inimigos e recebe uma recompensa extra.
+Desvantagens: Ações "boas" ficam restritas.
+Avarento
+
+Vantagens: Sabe o resultado de certas escolhas e o que está atrás de algumas portas.
+Desvantagens: Não compartilha itens com a equipe; itens só podem ser usados/equipados em batalha, consumindo ações.
+Impiedoso
+
+Vantagens: Executar inimigos gera experiência bônus e cura o grupo.
+Desvantagens: Chances de sucesso no recrutamento de novos membros são drasticamente reduzidas.
+Traiçoeiro
+
+Vantagens: Desbloqueia interações para enganar NPCs e obter recompensas específicas.
+Desvantagens: Caso falhe em certas interações, bloqueia as interações com NPCs até trocar de mapa.

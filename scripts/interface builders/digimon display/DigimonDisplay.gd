@@ -12,6 +12,7 @@ var currentDigimon: Digimon
 @export var passives: PassivesDisplay
 @export var status: StatusEffectDisplay
 @export var closeButton: Button
+@export var karma: KarmaDisplay
 #controle de botões
 var allButtons: Array[Button] = []
 
@@ -38,6 +39,8 @@ func showDisplay(digimon: Digimon) -> void:
 #status
 	var statsList: Array = digimon.statusEffect.values()
 	status.resetStatusList(statsList)
+#karma
+	karma.editText(digimon.tamer.tamerKarma)
 #Função que exibe a janela
 func toggleDisplay() -> void:
 	if(currentDigimon != null):

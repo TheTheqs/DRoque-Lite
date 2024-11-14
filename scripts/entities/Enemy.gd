@@ -10,6 +10,7 @@ func _ready() -> void:
 	var choice: int = EnemyGen.playerCurrentChoice
 	self.tamerName = "Enemy"
 	self.tamerLevel = EnemyGen.playerLevel
+	self.tamerKarma = EnemyGen.playerKarma
 	#setando o damage shower
 	turnFrame.visible = false
 	#colcoando o mostro escolhido em cena

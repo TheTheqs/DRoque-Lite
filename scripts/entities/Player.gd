@@ -12,6 +12,7 @@ func _ready() -> void:
 	self.tamerName = "Player"
 	self.tamerReference = Campaign
 	self.tamerLevel = Campaign.playerLevel
+	self.tamerKarma = Campaign.playerKarma
 	turnFrame.visible = false
 	#adicionando inventário
 	if(Util.checkArray(Campaign.playerInventory)):

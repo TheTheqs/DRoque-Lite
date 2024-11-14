@@ -6,6 +6,7 @@ var campaignLevel: int = 3 #Define o nível dos inimigos e as recomenpensas
 var playerLevel: int = 3 #define a força do personagem 
 var playerCurrentChoice: int = 0 #define o digimon que o jogador está no momento
 var playerInventory: Array[Item] #array que será inserido no inventário do jogador.
+var playerKarma: Enums.Karma
 #Dicionários do grupo
 var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	0 : null,
@@ -28,7 +29,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [],
+	0 : [Barrier.new(5)],
 	1 : [],
 	2 : []
 }
@@ -40,6 +41,7 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 }
 #função init para teste
 func loadContent() -> void:
+	self.playerKarma = Enums.Karma.RUTHLESS
 	#teste: gerando grupo de tamanho aleatório aleatório.
 	self.addToParty(Util.random(0,5)) 
 	self.addToParty(Util.random(0,5))

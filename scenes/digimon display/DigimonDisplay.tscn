@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://debtssae0t2f1"]
+[gd_scene load_steps=18 format=3 uid="uid://debtssae0t2f1"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/digimon display/DigimonDisplay.gd" id="1_flnho"]
 [ext_resource type="Texture2D" uid="uid://caj4tngi52c0d" path="res://assets/interface/UI/DigimonInfoDisplay.png" id="2_vvv61"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dyphwmpgqb0es" path="res://scenes/digimon display/EquipDisplayButton.tscn" id="7_awx54"]
 [ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="7_eqxg7"]
 [ext_resource type="Script" path="res://scenes/digimon display/StatusEffectDisplay.gd" id="7_ioen4"]
+[ext_resource type="Script" path="res://scripts/interface builders/digimon display/KarmaDisplay.gd" id="12_06ptn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcok8"]
 bg_color = Color(0.317647, 1, 0, 1)
@@ -26,7 +27,7 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
-[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("healthMana", "iconName", "attributes", "armory", "quickWindow", "passives", "status", "closeButton")]
+[node name="Digimon Display" type="Node2D" node_paths=PackedStringArray("healthMana", "iconName", "attributes", "armory", "quickWindow", "passives", "status", "closeButton", "karma")]
 position = Vector2(135, 240)
 script = ExtResource("1_flnho")
 healthMana = NodePath("HealthMana")
@@ -37,12 +38,14 @@ quickWindow = NodePath("QuickInfo")
 passives = NodePath("Passives")
 status = NodePath("StatusEffect")
 closeButton = NodePath("CloseButton")
+karma = NodePath("Karma")
 
 [node name="Display" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
 texture = ExtResource("2_vvv61")
 
 [node name="HealthMana" type="Node2D" parent="." node_paths=PackedStringArray("healthBar", "healthValue", "manaBar", "manaValue")]
+position = Vector2(71, 0)
 script = ExtResource("3_mbmt7")
 healthBar = NodePath("Health")
 healthValue = NodePath("HP")
@@ -210,6 +213,21 @@ theme_override_constants/separation = 1
 vertical = true
 
 [node name="BuildTimer" type="Timer" parent="StatusEffect"]
+
+[node name="Karma" type="Node2D" parent="." node_paths=PackedStringArray("karmText")]
+script = ExtResource("12_06ptn")
+karmText = NodePath("KarmaTitle")
+
+[node name="KarmaTitle" type="RichTextLabel" parent="Karma"]
+offset_left = -125.0
+offset_top = -162.0
+offset_right = -33.0
+offset_bottom = -154.0
+theme_override_fonts/normal_font = ExtResource("4_65k5o")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="CloseButton" type="Button" parent="."]
 offset_left = 99.0

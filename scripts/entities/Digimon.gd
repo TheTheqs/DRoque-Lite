@@ -677,6 +677,7 @@ func removeImmunity(dicCount: Dictionary, key: int) -> void:
 #função que reseta todos os arrays, essencial para a troca de digmons
 func resetTriggers() -> void:
 	self.onChanging = true
+	self.cleanChildren()
 	for key in self.statusEffect:
 		self.unapplyStatus(self.statusEffect[key].statusId)
 	for triggerArray in allTriggers:
@@ -687,3 +688,8 @@ func resetTriggers() -> void:
 #a função abaixo é feita para integrar a animação de troca de digimon <3
 func callReplace() -> void:
 	self.tamer.replaceDigimon()
+
+func cleanChildren() -> void:
+	if(self.statusEffect.has(25)):
+		var instance: Barrier = self.statusEffect[25]
+		instance.barrierInstance.queue_free()
