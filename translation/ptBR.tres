@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3]
+[gd_resource type="Translation" format=3 uid="uid://duyppoe436ki5"]
 
 [resource]
 messages = {
@@ -33,8 +33,10 @@ messages = {
 "DigimonName3": &"Guilmon",
 "DigimonName4": &"Dorumon",
 "DigimonName5": &"Betamon",
+"DigimonName86": &"Greymon",
 "Duration": &"Duração",
 "Equiped": &"Equipado",
+"Fail": &"Falha",
 "INT": &"INT",
 "Immunity": &"IMUNE",
 "Inventory": &"Inventário",
@@ -49,6 +51,7 @@ messages = {
 "ItemDescription6": &"Um escudo feito a partir de uma peça redonda. Ele é tão ordinário que qualquer coisa redonda é capaz de fazer o mesmo.",
 "ItemDescription7": &"Por mais que o ferro seja pesado, esse colar faz você se sentir um pocuo mais leve, e um pouco presidiário também.",
 "ItemDescription8": &"O fabricante disse que esse anel realmente foi feito de Rubi. Ele é o único que afirma tal absurdo.",
+"ItemDescription9": &"Força a evolução do digimon. O item resulta em falha caso o Digimon não possua nível mínimo.",
 "ItemName0": &"Poção Vermelha",
 "ItemName1": &"Espada de Treino",
 "ItemName2": &"Tacape",
@@ -58,6 +61,7 @@ messages = {
 "ItemName6": &"Escudo Redondo",
 "ItemName7": &"Colar de Ferro",
 "ItemName8": &"Anel de \"Rubi\"",
+"ItemName9": &"Upgrade I",
 "Karma": &"Karma",
 "Karma0": &"Corajoso",
 "Karma1": &"Gentil",
@@ -130,9 +134,11 @@ messages = {
 "SkillDescription42": &"Causa 135% de dano Físico do tipo Fogo.",
 "SkillDescription43": &"Aumenta a chance de Crítico em 15%",
 "SkillDescription44": &"Causa 110% de dano Mágico do tipo Neutro. Pode deixar o oponente Desarmado.",
-"SkillDescription45": &"Um vez por batalha: Quando for alvo de uma Efeito de redução de atributo, reduz a chance de sucesso do efeito a zero.",
+"SkillDescription45": &"Uma vez por batalha: Quando for alvo de uma Efeito de redução de atributo, reduz a chance de sucesso do efeito a zero.",
 "SkillDescription46": &"Causa 100% de dano Físico do tipo Trovão. Se o Digimon possuir o Efeito Adrenalina, o dano é dobrado.",
 "SkillDescription47": &"Ao trocar de Digimon durante a batalha, há uma pequena chance de receber uma ação bônus. Essa chance é de 5% para cada Digimon presente no grupo.",
+"SkillDescription48": &"Causa 160% de dano Físico do tipo Fogo. Se o Digimon estiver queimando: remove o efeito Queimadura e aumenta do dano da habilidade em 50%.",
+"SkillDescription49": &"Aumenta o dano de Fogo de ataques diretos em 30%.",
 "SkillDescription5": &"Causa 200% de dano Físico do tipo Terra. Essa habilidade nunca erra o alvo quando usado por um Digimon do tipo Terra.",
 "SkillDescription6": &"Causa 150% de dano Físico do tipo Trovão. O dano dessa habilidade aumenta em 50% sempre que for utilizada por um Digimon do tipo Trovão (max. 150%).",
 "SkillDescription7": &"Causa 170% de dano Físico do tipo Vento. Se um Digimon do tipo Vento usar esta habilidade, um segundo ataque será realizado, causando 80% de dano físico do tipo Vento.",
@@ -181,6 +187,8 @@ messages = {
 "SkillName45": &"Escama Mística",
 "SkillName46": &"Eletrochoque",
 "SkillName47": &"Pacto dos Vingadores",
+"SkillName48": &"Chama Mega!",
+"SkillName49": &"Rugido do Dragão!",
 "SkillName5": &"Pedra Perigosa",
 "SkillName6": &"Contato Carregado",
 "SkillName7": &"Leve Lufada",

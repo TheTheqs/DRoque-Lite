@@ -9,8 +9,9 @@ var digimons : Dictionary = {
 	3 : "res://resources/digimons/Guilmon.tres",
 	4 : "res://resources/digimons/Dorumon.tres",
 	5 : "res://resources/digimons/Betamon.tres",
+	86: "res://resources/digimons/Greymon.tres"
 }
 
 #Database Functions
-func getDigimonData(index: int) -> DigimonData:
+func getDigimonData(index: int) -> DigimonData: #sempre bom lembrar que ese index é o ID do digimon!!!!
 	return load(digimons[index])

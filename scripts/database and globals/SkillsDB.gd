@@ -45,7 +45,8 @@ var nativeSkills: Dictionary = {
 	2 : ["res://scripts/skills/passive skill (native)/DragonGrumble.gd", "res://scripts/skills/damage skills (native)/VeemonHeadbutt.gd"],
 	3 : ["res://scripts/skills/passive skill (native)/RelentlessAgression.gd", "res://scripts/skills/damage skills (native)/FireBall.gd"],
 	4 : ["res://scripts/skills/passive skill (native)/Keen.gd", "res://scripts/skills/damage skills (native)/MetalCannon.gd"],
-	5 : ["res://scripts/skills/passive skill (native)/MysticalScale.gd", "res://scripts/skills/damage skills (native)/ElectricShock.gd"]
+	5 : ["res://scripts/skills/passive skill (native)/MysticalScale.gd", "res://scripts/skills/damage skills (native)/ElectricShock.gd"],
+	86: ["res://scripts/skills/passive skill (native)/DragonRoar.gd", "res://scripts/skills/damage skills (native)/MegaFlare.gd"]
 }
 
 func getSkill(skillId: int) -> Skill:
@@ -55,9 +56,9 @@ func getSkill(skillId: int) -> Skill:
 		print("ERROR: Invalid skill ID")
 		return null
 
-func getNative(skillId: int, dicIndex: int) -> Skill:
-	if(self.nativeSkills.has(skillId)):
-		return load(self.nativeSkills[skillId][dicIndex]).new()
+func getNative(digimonId: int, dicIndex: int) -> Skill:
+	if(self.nativeSkills.has(digimonId)):
+		return load(self.nativeSkills[digimonId][dicIndex]).new()
 	else:
 		print("ERROR: Invalid skill ID")
 		return null
@@ -74,3 +75,7 @@ func getRandomSkills(size: int) -> Array:
 		randomSkills[indexes] = getSkill(newSkillId)
 		indexes -= 1
 	return randomSkills
+
+func getPassiveId(digimonId: int) -> int:
+	var relativePassive: PassiveSkill = getNative(digimonId, 0)
+	return relativePassive.skillId

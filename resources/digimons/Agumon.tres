@@ -11,6 +11,7 @@ digimonIcon = ExtResource("1_dhqfu")
 digimonTier = 0
 digimonType = 2
 element = 1
+possibleEvolution = Array[int]([86])
 texture = ExtResource("1_sgyxp")
 levelSTR = 6
 levelINT = 1

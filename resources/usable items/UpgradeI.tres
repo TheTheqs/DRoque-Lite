@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UsableItemData" load_steps=5 format=3 uid="uid://bts3q3y4bhihi"]
+
+[ext_resource type="Script" path="res://scripts/items/item effects/UpgradeIEffect.gd" id="1_lpkpj"]
+[ext_resource type="Texture2D" uid="uid://c166l8ur0c3q4" path="res://assets/interface/Icons/item icons/usable items/UpgradeI.png" id="2_hj8r1"]
+[ext_resource type="Texture2D" uid="uid://cugdrss36hrfb" path="res://assets/sprites/vfx/usable items/UpgradeI.png" id="3_ug3to"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/UsableItemData.gd" id="4_7lnle"]
+
+[resource]
+script = ExtResource("4_7lnle")
+itemId = 9
+itemIcon = ExtResource("2_hj8r1")
+itemTexture = ExtResource("3_ug3to")
+itemTextureRange = 9
+itemOrientation = 0
+itemEffect = ExtResource("1_lpkpj")

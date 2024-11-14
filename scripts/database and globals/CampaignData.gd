@@ -2,8 +2,8 @@ extends Node
 
 class_name CampaignData
 #essa classe vai "segurar" dados da campanha!
-var campaignLevel: int = 3 #Define o nível dos inimigos e as recomenpensas
-var playerLevel: int = 3 #define a força do personagem 
+var campaignLevel: int = 16 #Define o nível dos inimigos e as recomenpensas
+var playerLevel: int = 16 #define a força do personagem 
 var playerCurrentChoice: int = 0 #define o digimon que o jogador está no momento
 var playerInventory: Array[Item] #array que será inserido no inventário do jogador.
 var playerKarma: Enums.Karma
@@ -30,7 +30,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [Barrier.new(5)],
+	0 : [],
 	1 : [],
 	2 : []
 }
@@ -44,7 +44,7 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.RUTHLESS
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(1) 
+	self.addToParty(0) 
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
@@ -54,7 +54,7 @@ func loadContent() -> void:
 	#teste: gerando equipamentos.
 	self.currentEquipments[0].append(ItemDB.getEquipment(2))
 	#teste de inventário
-	playerInventory.append(ItemDB.getEquipment(1))
+	playerInventory.append(ItemDB.getUsableItem(9))
 	#teste status effect
 
 #Função que adiciona um digimon ao grupo
@@ -74,12 +74,13 @@ func addToParty(digimonId: int) -> bool:
 	return sucess
 #função que remove digimon da party
 func removeFromParty(index: int) -> void:
-	var removedId: int = playerParty[index]
+	var removedId: int = SkillDB.getPassiveId(DDB.getDigimonData(playerParty[index]).digimonId)
 	if(self.fixedPassives.has(removedId)):
 		self.fixedPassives[removedId][1] -= 1
 		if(self.fixedPassives[removedId][1] <= 0):
 			self.fixedPassives.erase(removedId)
 		self.partySize -= 1
+		self.playerParty[index] = null
 	else:
 		print("ERROR: No Skill found!")
 

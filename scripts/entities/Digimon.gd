@@ -32,7 +32,7 @@ var bonusAGI: int
 var bonusVIT: int
 var bonusWIS: int
 var bonusDEX: int
-#vida mana, experiência e nível
+#vida mana, experiência, nível e evoluções
 var maxHelth: float = 1
 var currentHealth: float = 1
 var maxMana: float = 1
@@ -40,6 +40,7 @@ var currentMana: float = 1
 var currentExp: float
 var maxExp: float
 var currentLevel: int
+var possibleEvolution: Array[int] #os valores desse array sao os ID dos digimons.
 #valores constantes de retorno.
 var totalDamage: float
 var criticalChance: float
@@ -94,6 +95,7 @@ var statusToRemove: Array[int]
 var isDisabled: bool = false
 var canUseItem: bool = true
 var onChanging: bool = false
+var onEvolving: bool = false
 #actions
 var selectedSkill: Skill = null
 var currentAction: Skill
@@ -171,22 +173,24 @@ var allTriggers: Array = [
 ]
 #Actions Array
 var actionsToGo: Array[Skill] = []
-
-func setBehave() -> void:
-	if(not isDisabled):
+var positionDic: Dictionary = {
+	Enums.Tier.ROOKIE : [40, 30],
+	Enums.Tier.CHAMPION : [40, 30]
+}
+func setBehave(setting: bool) -> void:
+	var constant: int = -1 if (not setting) else 1
+	if(not isDisabled and !self.onEvolving  and !self.onChanging):
 		digimonAnimator.play("Idle")
 		currentAnimation = "Idle"
 	if(not self.positionSet):
 		self.positionSet = true
 		if(self.position.x < 140):
 			digimonSprite.flip_h = true
-			if(self.digimonTier == Enums.Tier.ROOKIE):
-				self.position.x -= 40
-				self.position.y += 30
+			self.position.x -= (constant*self.positionDic[self.digimonTier][0])
+			self.position.y += (constant*self.positionDic[self.digimonTier][1])
 		else:
-			if(self.digimonTier == Enums.Tier.ROOKIE):
-				self.position.x += 40
-				self.position.y += 30
+			self.position.x += (constant*self.positionDic[self.digimonTier][0])
+			self.position.y += (constant*self.positionDic[self.digimonTier][1])
 
 func setStats(index: int) -> void:
 	self.onChanging = true
@@ -201,7 +205,7 @@ func setStats(index: int) -> void:
 	self.currentHealth = self.maxHelth*reference.currentHealthMana[index][0]
 	self.currentMana = self.maxMana*reference.currentHealthMana[index][1]
 	self.onChanging = false
-	self.setBehave()
+	self.setBehave(true)
 
 #função que seta os elementos visuais e descritivos do digimon
 func setBasics(stats: DigimonData) -> void:
@@ -212,6 +216,7 @@ func setBasics(stats: DigimonData) -> void:
 	self.element = stats.element
 	self.digimonTier = stats.digimonTier
 	self.digimonType = stats.digimonType
+	self.possibleEvolution = stats.possibleEvolution
 #função que seta os atirbutos, vida máxima e mana.
 func setAttributes(stats: DigimonData) -> void:
 	self.baseSTR = 0
@@ -228,6 +233,8 @@ func setAttributes(stats: DigimonData) -> void:
 		self.bonusWIS = 0
 		self.bonusDEX = 0
 	self.currentLevel = tamer.tamerLevel
+	self.maxHelth = 0
+	self.maxMana = 0
 	self.levelSTR = stats.levelSTR
 	self.levelINT = stats.levelINT
 	self.levelAGI = stats.levelAGI
@@ -279,12 +286,16 @@ func getAttribute(att: String) -> int:
 		return result
 	else:
 		return 1
+
 #retorna a chance de crítico no cálculo de habilidades
 func getCriticalChance(damageSkill: DamageSkill) -> float:
 	criticalChance = 0
-	criticalChance = float(getAttribute("dex"))
+	var totalDex: float = float(getAttribute("dex"))
+	criticalChance = Util.cap((1.0 - exp(-totalDex/150.0))*100)
 	triggerCheck(onCriticalCalc, damageSkill)
 	return criticalChance
+
+
 #retorna a precisão do digimon
 func getAccuracy(nobject, nemeny: Digimon) -> float:
 	currentAccuracy = 0
@@ -592,7 +603,7 @@ func getActions(nActions: int) -> void:
 
 #função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
 func triggerCheck(triggersToTest: Array, context) -> void:
-	if(self.onChanging and triggersToTest != self.onLearnSkill):
+	if((self.onChanging or self.onEvolving) and triggersToTest != self.onLearnSkill):
 		return
 	else:
 		if(triggersToTest.size() > 0):
@@ -696,3 +707,32 @@ func cleanChildren() -> void:
 	if(self.statusEffect.has(25)):
 		var instance: Barrier = self.statusEffect[25]
 		instance.barrierInstance.queue_free()
+
+func Evolve(newDigimonId: int) -> void:
+	var ncurrentHealth: float = Util.getProportion(self.currentHealth, self.maxHelth)
+	var ncurrentMana: float = Util.getProportion(self.currentMana, self.maxMana)
+	var ref = self.tamer.tamerReference
+	self.onEvolving = true
+	#tratamento de remoção do digimon
+	if(ref.playerParty[ref.playerCurrentChoice] == self.digimonId):
+		ref.removeFromParty(ref.playerCurrentChoice)
+	if(self.digimonPassiveSkills.has(SkillDB.getPassiveId(self.digimonId))):
+		self.unlearnSkill(self.digimonPassiveSkills[SkillDB.getPassiveId(self.digimonId)])
+	self.positionSet = false
+	self.setBehave(false)
+	var stats: DigimonData = DDB.getDigimonData(newDigimonId)
+	self.setBasics(stats)
+	self.setAttributes(stats)
+	self.levelUpAttributes(currentLevel)
+	#mudança de habilidades
+	self.unlearnSkill(self.digimonSkills[1])
+	self.learnSkill(SkillDB.getNative(self.digimonId, 1))
+	self.learnSkill(SkillDB.getNative(self.digimonId, 0))
+	self.currentHealth = self.maxHelth*ncurrentHealth
+	self.currentMana = self.maxMana*ncurrentMana
+	ref.addToParty(self.digimonId)
+	self.positionSet = false
+	self.setBehave(true)
+	if(self.tamer is Player):
+		self.tamer.updateInterface()
+	self.onEvolving = false

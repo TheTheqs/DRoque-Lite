@@ -22,9 +22,7 @@ func _ready() -> void:
 	var choice: int = Campaign.playerCurrentChoice
 	self.digimon.setStats(choice)
 	#atualização da interface. Sempre a última coisa a se fazer!
-	HUDD.updateValues()
-	buttonPanel.setButtons()
-	buttonPanel.updateButtons()
+	self.updateInterface()
 	judge.gettingStarted()
 
 func onFrameAnimation(anim_name: String):
@@ -59,9 +57,12 @@ func replaceDigimon() -> void:
 	self.digimon.digimonSprite.visible = true
 	Campaign.playerCurrentChoice = newerChoice
 	#atualização da interface. Sempre a última coisa a se fazer!
-	self.HUDD.updateValues()
-	self.buttonPanel.setButtons()
-	self.buttonPanel.updateButtons()
+	self.updateInterface()
 	self.buttonPanel.unBlockAllButtons()
 	self.BTM.outAction("Changing")
 	self.digimon.triggerCheck(self.digimon.onChange, "Changing")
+
+func updateInterface() -> void:
+	self.HUDD.updateValues()
+	self.buttonPanel.setButtons()
+	self.buttonPanel.updateButtons()
