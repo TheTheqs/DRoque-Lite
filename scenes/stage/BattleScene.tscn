@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b8cljij0hnlgg"]
+[gd_scene load_steps=39 format=3 uid="uid://b8cljij0hnlgg"]
 
 [ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_0d28g"]
 [ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_vipw6"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://ffkyibueeglu" path="res://assets/interface/Icons/SkillIcons/002SignatureSkillFrame.png" id="20_2kfkd"]
 [ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="21_6cti3"]
 [ext_resource type="PackedScene" uid="uid://dkhtck1ehj6gc" path="res://scenes/entities/ChangeDigimonWindow.tscn" id="22_tjuxr"]
+[ext_resource type="PackedScene" uid="uid://04rk14jaa03a" path="res://scenes/entities/GlobalEffects.tscn" id="26_fbi7d"]
 
 [sub_resource type="Animation" id="Animation_spino"]
 length = 0.001
@@ -215,7 +216,7 @@ numberSpawner = NodePath("ContentSpawner")
 actionsDisplay = NodePath("Actions Display")
 actionAnimator = NodePath("Actions Animator")
 
-[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer", "digimonDisplay") instance=ExtResource("5_lo720")]
+[node name="Digimon" parent="BattleManager/Enemy" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer", "digimonDisplay", "globalEffects") instance=ExtResource("5_lo720")]
 position = Vector2(173, 92)
 enemy = NodePath("../../Player/Digimon")
 tamer = NodePath("..")
@@ -223,6 +224,7 @@ BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
 skillAnnouncer = NodePath("../SkillAnnouncer")
 digimonDisplay = NodePath("../../Digimon Display")
+globalEffects = NodePath("../../../GlobalEffects")
 
 [node name="SkillAnnouncer" parent="BattleManager/Enemy" instance=ExtResource("6_d7sc6")]
 position = Vector2(33, 155)
@@ -274,7 +276,7 @@ numberSpawner = NodePath("ContentSpawner")
 actionsDisplay = NodePath("Actions")
 actionAnimator = NodePath("Actions Animator")
 
-[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer", "digimonDisplay") instance=ExtResource("5_lo720")]
+[node name="Digimon" parent="BattleManager/Player" node_paths=PackedStringArray("enemy", "tamer", "BM", "BTM", "skillAnnouncer", "digimonDisplay", "globalEffects") instance=ExtResource("5_lo720")]
 position = Vector2(101, 264)
 enemy = NodePath("../../Enemy/Digimon")
 tamer = NodePath("..")
@@ -282,6 +284,7 @@ BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
 skillAnnouncer = NodePath("../SkillAnnouncer")
 digimonDisplay = NodePath("../../Digimon Display")
+globalEffects = NodePath("../../../GlobalEffects")
 
 [node name="SkillAnnouncer" parent="BattleManager/Player" instance=ExtResource("6_d7sc6")]
 position = Vector2(238, 327)
@@ -463,6 +466,8 @@ buttonPanel = NodePath("../Player/ButtonPanel")
 visible = false
 position = Vector2(140, 200)
 buttonPanel = NodePath("../Player/ButtonPanel")
+
+[node name="GlobalEffects" parent="." instance=ExtResource("26_fbi7d")]
 
 [connection signal="animation_finished" from="BattleManager/Enemy/TurnAnimator" to="BattleManager/Enemy" method="onFrameAnimation"]
 [connection signal="animation_finished" from="BattleManager/Enemy/Actions Animator" to="BattleManager/Enemy" method="actionsAnimation"]

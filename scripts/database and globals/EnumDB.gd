@@ -91,3 +91,9 @@ enum Karma {
 	RUTHLESS, #Impiedoso
 	TREACHEROUS #Traiçoeiro
 }
+
+enum GlobalEffectState {
+	EVOLVING,
+	CASTING,
+	FINISHED
+}

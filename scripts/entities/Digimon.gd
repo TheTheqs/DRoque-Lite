@@ -62,6 +62,7 @@ var positionSet: bool = false
 @export var skillAnnouncer: SkillAnnouncer
 @export var statusDisplay: StatusDisplay
 @export var digimonDisplay: DigimonDisplay
+@export var globalEffects: GlobalVFX
 #Equipamentos #ATENÇÃO!!!!!! nunca usar erase no array abaixo, seu size() precisa ser sempre 4 ¬¬
 var armory: Array[Equipment] = [null, null, null, null]
 #[0] é para arma, [1] é para offhand, [2] é para armor e [3] é para acessório.
@@ -709,6 +710,8 @@ func cleanChildren() -> void:
 		instance.barrierInstance.queue_free()
 
 func Evolve(newDigimonId: int) -> void:
+	self.BTM.inAction()
+	self.digimonSprite.visible = false
 	var ncurrentHealth: float = Util.getProportion(self.currentHealth, self.maxHelth)
 	var ncurrentMana: float = Util.getProportion(self.currentMana, self.maxMana)
 	var ref = self.tamer.tamerReference
@@ -721,6 +724,8 @@ func Evolve(newDigimonId: int) -> void:
 	self.positionSet = false
 	self.setBehave(false)
 	var stats: DigimonData = DDB.getDigimonData(newDigimonId)
+	#a função abaixo é a que chama o global effect para fazer o vfx da evolução!
+	self.globalEffects.startEvolution(self.digimonSprite.texture, stats.texture, self) 
 	self.setBasics(stats)
 	self.setAttributes(stats)
 	self.levelUpAttributes(currentLevel)
@@ -733,6 +738,10 @@ func Evolve(newDigimonId: int) -> void:
 	ref.addToParty(self.digimonId)
 	self.positionSet = false
 	self.setBehave(true)
+
+
+func globalFeedback() ->void:
 	if(self.tamer is Player):
 		self.tamer.updateInterface()
 	self.onEvolving = false
+	self.BTM.outAction("Evolution Finished")
