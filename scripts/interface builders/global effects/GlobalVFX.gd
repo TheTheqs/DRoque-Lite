@@ -43,11 +43,9 @@ func afterAction(animName: String): #finish animation do digimon
 			self.startEvolutionVFX()
 		elif(self.state == Enums.GlobalEffectState.FINISHED):
 			self.globalText.showMessage(self.endDigivolve)
-			self.fade.startFade(false)
 
 func afterFade() -> void:
 	if(self.state == Enums.GlobalEffectState.EVOLVING):
-		self.digimonBehave.play("action")
 		self.globalText.showMessage(karmaText[self.currentDigimon.tamer.tamerKarma])
 	elif(self.state == Enums.GlobalEffectState.FINISHED):
 		if(self.currentDigimon != null):
@@ -100,3 +98,9 @@ func digimonFade(fadeIn: bool, value: float) -> void:
 		digimonSprite.modulate.a = min(1.0, digimonSprite.modulate.a + value)
 	else:
 		digimonSprite.modulate.a = max(self.fade.fadeLimit, digimonSprite.modulate.a - value)
+
+func afterMessage() -> void:
+	if(self.state == Enums.GlobalEffectState.EVOLVING):
+		self.digimonBehave.play("action")
+	elif(self.state == Enums.GlobalEffectState.FINISHED):
+		self.fade.startFade(false)
