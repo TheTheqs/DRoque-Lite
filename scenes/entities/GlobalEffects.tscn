@@ -1,25 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://04rk14jaa03a"]
+[gd_scene load_steps=14 format=3 uid="uid://04rk14jaa03a"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/global effects/GlobalVFX.gd" id="1_3ctgb"]
+[ext_resource type="Texture2D" uid="uid://40afmqsbt6ok" path="res://assets/sprites/creatures/Agumon.png" id="2_n2iy8"]
 [ext_resource type="Script" path="res://scripts/interface builders/global effects/Fade.gd" id="3_a5qe0"]
-
-[sub_resource type="Animation" id="Animation_hvv8h"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DigimonSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [1, 0, 1, 2]
-}
+[ext_resource type="Script" path="res://scripts/interface builders/global effects/GlobalTextWindow.gd" id="3_ef80k"]
+[ext_resource type="Texture2D" uid="uid://gvxb5dkfhnsc" path="res://assets/interface/UI/GlobalTextWindow.png" id="4_wvwgt"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="5_skb4a"]
 
 [sub_resource type="Animation" id="Animation_amkpe"]
 length = 0.001
@@ -77,11 +63,56 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_hvv8h"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DigimonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_34ipn"]
 _data = {
 "RESET": SubResource("Animation_amkpe"),
 "action": SubResource("Animation_8m2t2"),
 "idle": SubResource("Animation_hvv8h")
+}
+
+[sub_resource type="Animation" id="Animation_sucwu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/VFX/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Digimon/DigimonSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ynrfm"]
@@ -127,40 +158,13 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_sucwu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/VFX/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Digimon/DigimonSprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rsh1p"]
 _data = {
 "RESET": SubResource("Animation_sucwu"),
 "evolution": SubResource("Animation_ynrfm")
 }
 
-[node name="GlobalEffects" type="Node2D" node_paths=PackedStringArray("sprite", "anime", "fade", "canvas", "digimonSprite", "digimonBehave")]
+[node name="GlobalEffects" type="Node2D" node_paths=PackedStringArray("sprite", "anime", "fade", "canvas", "digimonSprite", "digimonBehave", "globalText")]
 position = Vector2(135, 240)
 script = ExtResource("1_3ctgb")
 sprite = NodePath("CanvasLayer/VFX/Sprite")
@@ -169,6 +173,7 @@ fade = NodePath("Fade")
 canvas = NodePath("CanvasLayer")
 digimonSprite = NodePath("CanvasLayer/Digimon/DigimonSprite")
 digimonBehave = NodePath("CanvasLayer/Digimon/Anime")
+globalText = NodePath("CanvasLayer/GlobalText")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -182,6 +187,7 @@ offset_bottom = 240.0
 
 [node name="DigimonSprite" type="Sprite2D" parent="CanvasLayer/Digimon"]
 visible = false
+texture = ExtResource("2_n2iy8")
 hframes = 3
 vframes = 2
 frame = 1
@@ -204,9 +210,28 @@ libraries = {
 "": SubResource("AnimationLibrary_rsh1p")
 }
 
+[node name="GlobalText" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("textTimer", "message")]
+position = Vector2(135, 412)
+script = ExtResource("3_ef80k")
+textTimer = NodePath("TextTimer")
+message = NodePath("Message")
+
+[node name="Window" type="Sprite2D" parent="CanvasLayer/GlobalText"]
+texture = ExtResource("4_wvwgt")
+
+[node name="TextTimer" type="Timer" parent="CanvasLayer/GlobalText"]
+one_shot = true
+
+[node name="Message" parent="CanvasLayer/GlobalText" instance=ExtResource("5_skb4a")]
+offset_left = -98.0
+offset_top = -33.0
+offset_right = 98.0
+offset_bottom = 33.0
+
 [node name="Fade" type="CanvasModulate" parent="." node_paths=PackedStringArray("globalVFX")]
 script = ExtResource("3_a5qe0")
 globalVFX = NodePath("..")
 
 [connection signal="animation_finished" from="CanvasLayer/Digimon/Anime" to="." method="afterAction"]
 [connection signal="animation_finished" from="CanvasLayer/VFX/anime" to="." method="afterSpecialVFX"]
+[connection signal="timeout" from="CanvasLayer/GlobalText/TextTimer" to="CanvasLayer/GlobalText" method="timerTimeOut"]

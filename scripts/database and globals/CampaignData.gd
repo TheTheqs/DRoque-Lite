@@ -42,7 +42,7 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 }
 #função init para teste
 func loadContent() -> void:
-	self.playerKarma = Enums.Karma.RUTHLESS
+	self.playerKarma = Enums.Karma.BRAVE
 	#teste: gerando grupo de tamanho aleatório aleatório.
 	self.addToParty(0) 
 	self.addToParty(Util.random(0,5))

@@ -19,6 +19,7 @@ func _process(delta) -> void:
 			currentColor.r = currentColor.r - darkSpeed*delta
 			currentColor.g = currentColor.g - darkSpeed*delta
 			currentColor.b = currentColor.b - darkSpeed*delta
+			self.globalVFX.digimonFade(true, darkSpeed*delta)
 			self.color = currentColor
 		else:
 			self.afterFade()
@@ -27,6 +28,7 @@ func _process(delta) -> void:
 			currentColor.r = min(currentColor.r + darkSpeed*delta, 1.0)
 			currentColor.g = min(currentColor.r + darkSpeed*delta, 1.0)
 			currentColor.b = min(currentColor.r + darkSpeed*delta, 1.0)
+			self.globalVFX.digimonFade(false, darkSpeed*delta)
 			self.color = currentColor
 		else:
 			self.afterFade()

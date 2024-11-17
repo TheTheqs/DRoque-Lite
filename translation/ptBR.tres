@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3 uid="uid://duyppoe436ki5"]
+[gd_resource type="Translation" format=3]
 
 [resource]
 messages = {
@@ -34,6 +34,7 @@ messages = {
 "DigimonName4": &"Dorumon",
 "DigimonName5": &"Betamon",
 "DigimonName86": &"Greymon",
+"Digivolved": &" divievoluiu para ",
 "Duration": &"Duração",
 "Equiped": &"Equipado",
 "Fail": &"Falha",
@@ -75,6 +76,18 @@ messages = {
 "Karma7": &"Hostil",
 "Karma8": &"Cruel",
 "Karma9": &"Avarento",
+"KarmaEvolution0": &"Sobrevivendo, agora me torno mais forte!",
+"KarmaEvolution1": &"Dando-me aos demais, ainda assim, transcendo!",
+"KarmaEvolution10": &"Para erradicar a fraqueza, busco na mudança a força de que preciso!",
+"KarmaEvolution11": &"Evoluir e se adaptar: a maior de todas as forças!",
+"KarmaEvolution2": &"A amizade é uma alma em dois corpos; um deles se torna agora mais poderoso!",
+"KarmaEvolution3": &"Depois de muito doar-me, agora venho primeiro!",
+"KarmaEvolution4": &"A evolução individual faz crescer, também, a nossa lealdade!",
+"KarmaEvolution5": &"Autônomo em minha vontade, agora escolho a evolução!",
+"KarmaEvolution6": &"Para a autopreservação, busca-se o progresso!",
+"KarmaEvolution7": &"Entre todos contra todos, serei eu o vitorioso!",
+"KarmaEvolution8": &"Mais temido do que amado, agora torno-me ainda mais temível!",
+"KarmaEvolution9": &"Recebe-se, enfim, a recompensa de viver apenas para si!",
 "LifeSteal": &"Porcentagem de dano convertido: ",
 "MAXHEALTH": &"Vida Máxima",
 "MAXMANA": &"Mana Máxima",

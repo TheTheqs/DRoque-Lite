@@ -711,7 +711,11 @@ func cleanChildren() -> void:
 
 func Evolve(newDigimonId: int) -> void:
 	self.BTM.inAction()
-	self.digimonSprite.visible = false
+	#bloquando os botõs e fechando janelas
+	if(self.tamer is Player):
+		self.tamer.buttonPanel.blockAllButtons()
+		self.BTM.closeAllWindows()
+	self.visible = false
 	var ncurrentHealth: float = Util.getProportion(self.currentHealth, self.maxHelth)
 	var ncurrentMana: float = Util.getProportion(self.currentMana, self.maxMana)
 	var ref = self.tamer.tamerReference
@@ -742,6 +746,8 @@ func Evolve(newDigimonId: int) -> void:
 
 func globalFeedback() ->void:
 	if(self.tamer is Player):
+		self.tamer.buttonPanel.unBlockAllButtons()
 		self.tamer.updateInterface()
 	self.onEvolving = false
+	self.triggerCheck(onEvolution, "Evolve")
 	self.BTM.outAction("Evolution Finished")
