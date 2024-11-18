@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://do4bbnx05qdu8"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=5 format=3 uid="uid://do4bbnx05qdu8"]
 
 [ext_resource type="Texture2D" uid="uid://d4bn75gre2qfj" path="res://assets/interface/Icons/digimons/Agumon.png" id="1_dhqfu"]
 [ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_kv7ex"]
 [ext_resource type="Texture2D" uid="uid://40afmqsbt6ok" path="res://assets/sprites/creatures/Agumon.png" id="1_sgyxp"]
+[ext_resource type="Script" path="res://scripts/evolution charts/AgumonEC.gd" id="1_xf51u"]
 
 [resource]
 script = ExtResource("1_kv7ex")
@@ -10,6 +11,7 @@ digimonId = 0
 digimonIcon = ExtResource("1_dhqfu")
 digimonTier = 0
 digimonType = 2
+digimonEVC = ExtResource("1_xf51u")
 element = 1
 possibleEvolution = Array[int]([86])
 texture = ExtResource("1_sgyxp")

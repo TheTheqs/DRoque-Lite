@@ -28,7 +28,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon um array de t
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [],
+	0 : [Burn.new()],
 	1 : [],
 	2 : []
 }
@@ -43,7 +43,7 @@ func loadContent() -> void:
 	self.playerLevel = self.calculateLevel()
 	self.playerKarma = Enums.Karma.TREACHEROUS
 	#teste de grupo
-	self.addToParty(86)
+	self.addToParty(0)
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
 	for key: int in self.playerParty:

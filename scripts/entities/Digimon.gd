@@ -218,6 +218,8 @@ func setBasics(stats: DigimonData) -> void:
 	self.digimonTier = stats.digimonTier
 	self.digimonType = stats.digimonType
 	self.possibleEvolution = stats.possibleEvolution
+	if(stats.digimonEVC != null):
+		stats.digimonEVC.new(self)
 #função que seta os atirbutos, vida máxima e mana.
 func setAttributes(stats: DigimonData) -> void:
 	self.baseSTR = 0

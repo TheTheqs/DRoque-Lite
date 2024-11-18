@@ -6,6 +6,7 @@ class_name DigimonData
 @export var digimonIcon: CompressedTexture2D
 @export var digimonTier: Enums.Tier
 @export var digimonType: Enums.Type
+@export var digimonEVC: Script
 @export var element: Enums.Element
 @export var possibleEvolution: Array[int]
 @export var texture: CompressedTexture2D

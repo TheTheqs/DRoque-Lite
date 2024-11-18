@@ -30,7 +30,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [],
+	0 : [Burn.new()],
 	1 : [],
 	2 : []
 }
@@ -42,7 +42,7 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 }
 #função init para teste
 func loadContent() -> void:
-	self.playerKarma = Enums.Karma.BRAVE
+	self.playerKarma = Enums.Karma.COWARDLY
 	#teste: gerando grupo de tamanho aleatório aleatório.
 	self.addToParty(0) 
 	self.addToParty(Util.random(0,5))

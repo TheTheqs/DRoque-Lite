@@ -9,7 +9,7 @@ func _init():
 func skillSingularity(digimon: Digimon) -> void:
 	if(digimon.statusEffect.has(2)):
 		self.damageValue *= 1.5
-		digimon.unapplyStatus(digimon.statusEffect[2])
+		digimon.unapplyStatus(digimon.statusEffect[2].statusId)
 
 func priorityCheck(digimon: Digimon) -> void:
 	if(digimon.statusEffect.has(2)):
