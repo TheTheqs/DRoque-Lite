@@ -12,11 +12,11 @@ func _init() -> void:
 func applyingEffect(digimon: Digimon) -> void:
 	if(digimon.statusEffect.has(19)):
 		digimon.unapplyStatus(19)
-	digimon.addImmunity(digimon.statusImunity, 19)
+	digimon.addImmunity(19)
 
 
 func unapplyingEffect(digimon: Digimon) -> void:
-	digimon.removeImmunity(digimon.statusImunity, 19)
+	digimon.removeImmunity(19)
 
 func getStatus() -> StatusEffect:
 	var newMark: Mark = Mark.new()

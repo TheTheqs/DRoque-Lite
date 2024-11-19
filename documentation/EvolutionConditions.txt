@@ -4,3 +4,9 @@ Monodramon
 -Strikedramon: Aprenda uma habilidade do tipo Terra durante a batlha.
 Veemon
 -ExVeemon: Com uma força total maior do que a Sabedoria total: Reduza a vida de um digimon para menos de 50% com uma habilidade do tipo Luz.
+Dorumon
+-Dorugamon: Cause dano de terra em um oponente que não esteja equipado com uma arma.
+Guilmon
+-Growlmon: Com 60% da vida máxima ou menos: Troque de lugar com um digimon em batalha enquanto possuir o status Adrenalina.
+Betamon
+-Seadramon: Com uma inteligência bonus superior a inteligência base: use uma habilidade do tipo água.

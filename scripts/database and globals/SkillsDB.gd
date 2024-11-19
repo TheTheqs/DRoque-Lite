@@ -37,6 +37,7 @@ var skills: Dictionary = {
 	29 : "res://scripts/skills/damage skills/BackupStrike.gd",
 	30 : "res://scripts/skills/passive skills/Counting.gd",
 	35 : "res://scripts/skills/passive skills/SupplySquad.gd",
+	64 : "res://scripts/skills/status skills/PumpItUp.gd"
 }
 
 var nativeSkills: Dictionary = {
@@ -46,9 +47,11 @@ var nativeSkills: Dictionary = {
 	3 : ["res://scripts/skills/passive skill (native)/RelentlessAgression.gd", "res://scripts/skills/damage skills (native)/FireBall.gd"],
 	4 : ["res://scripts/skills/passive skill (native)/Keen.gd", "res://scripts/skills/damage skills (native)/MetalCannon.gd"],
 	5 : ["res://scripts/skills/passive skill (native)/MysticalScale.gd", "res://scripts/skills/damage skills (native)/ElectricShock.gd"],
+	66: ["res://scripts/skills/passive skill (native)/MagicScale.gd", "res://scripts/skills/damage skills (native)/IceBlast.gd"],
 	84: ["res://scripts/skills/passive skill (native)/DragonWrath.gd", "res://scripts/skills/damage skills (native)/VeeLaser.gd"],
 	86: ["res://scripts/skills/passive skill (native)/DragonRoar.gd", "res://scripts/skills/damage skills (native)/MegaFlare.gd"],
 	87: ["res://scripts/skills/passive skill (native)/RevengeUnion.gd", "res://scripts/skills/damage skills (native)/FangStrike.gd"],
+	89: ["res://scripts/skills/passive skill (native)/SavageInstinct.gd", "res://scripts/skills/damage skills (native)/ExhaustFlame.gd"],
 	99: ["res://scripts/skills/passive skill (native)/SharpenedEdge.gd", "res://scripts/skills/damage skills (native)/PowerMetal.gd"]
 }
 

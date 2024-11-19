@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://dt7oy6rkehlhc"]
+
+[ext_resource type="Texture2D" uid="uid://bfcw2fsmuovdq" path="res://assets/interface/Icons/digimons/Growlmon.png" id="1_64kbg"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="2_oxko8"]
+[ext_resource type="Texture2D" uid="uid://bn0skxm4e3o4u" path="res://assets/sprites/creatures/Growlmon.png" id="3_rbxea"]
+
+[resource]
+script = ExtResource("2_oxko8")
+digimonId = 89
+digimonIcon = ExtResource("1_64kbg")
+digimonTier = 1
+digimonType = 0
+element = 1
+possibleEvolution = Array[int]([])
+texture = ExtResource("3_rbxea")
+levelSTR = 9
+levelINT = 7
+levelAGI = 6
+levelVIT = 3
+levelWIS = 2
+levelDEX = 3

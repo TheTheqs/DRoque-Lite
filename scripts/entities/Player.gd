@@ -66,8 +66,9 @@ func replaceDigimon() -> void:
 	#atualização da interface. Sempre a última coisa a se fazer!
 	self.updateInterface()
 	self.buttonPanel.unBlockAllButtons()
-	self.BTM.outAction("Changing")
 	self.digimon.triggerCheck(self.digimon.onChange, "Changing")
+	self.BTM.outAction("Changing")
+	
 
 func updateInterface() -> void:
 	self.HUDD.updateValues()

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://dbuixx7nlggs7"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=5 format=3 uid="uid://dbuixx7nlggs7"]
 
 [ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_atc1x"]
 [ext_resource type="Texture2D" uid="uid://driicmwcuhvsj" path="res://assets/interface/Icons/digimons/Betamon.png" id="1_ktqld"]
+[ext_resource type="Script" path="res://scripts/evolution charts/BetamonEC.gd" id="1_p87ps"]
 [ext_resource type="Texture2D" uid="uid://cbp0iqujatb8c" path="res://assets/sprites/creatures/Betamon.png" id="2_vd3jr"]
 
 [resource]
@@ -10,7 +11,9 @@ digimonId = 5
 digimonIcon = ExtResource("1_ktqld")
 digimonTier = 0
 digimonType = 0
+digimonEVC = ExtResource("1_p87ps")
 element = 2
+possibleEvolution = Array[int]([66])
 texture = ExtResource("2_vd3jr")
 levelSTR = 4
 levelINT = 5

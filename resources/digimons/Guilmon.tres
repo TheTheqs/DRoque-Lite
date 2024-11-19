@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://ddsti4ckrmo3l"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=5 format=3 uid="uid://ddsti4ckrmo3l"]
 
 [ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="1_7en31"]
+[ext_resource type="Script" path="res://scripts/evolution charts/GuilmonEC.gd" id="1_k262j"]
 [ext_resource type="Texture2D" uid="uid://u8rf6h6sfh1s" path="res://assets/interface/Icons/digimons/Guilmon.png" id="1_rdmw1"]
 [ext_resource type="Texture2D" uid="uid://d0q6r87uwqj0" path="res://assets/sprites/creatures/Guilmon.png" id="2_i1y5q"]
 
@@ -10,7 +11,9 @@ digimonId = 3
 digimonIcon = ExtResource("1_rdmw1")
 digimonTier = 0
 digimonType = 0
+digimonEVC = ExtResource("1_k262j")
 element = 1
+possibleEvolution = Array[int]([89])
 texture = ExtResource("2_i1y5q")
 levelSTR = 8
 levelINT = 1

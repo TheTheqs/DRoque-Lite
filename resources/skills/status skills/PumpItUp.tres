@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusSkillData" load_steps=4 format=3 uid="uid://m1dt8ytqq1l7"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/StatusSkillData.gd" id="1_hhqk6"]
+[ext_resource type="Texture2D" uid="uid://d4dfxl7aum328" path="res://assets/interface/Icons/SkillIcons/PumpItUp.png" id="2_o4nbr"]
+[ext_resource type="Texture2D" uid="uid://d168hv2rvlior" path="res://assets/sprites/vfx/skills/PumpItUp.png" id="3_k7nrq"]
+
+[resource]
+script = ExtResource("1_hhqk6")
+skillId = 64
+skillIcon = ExtResource("2_o4nbr")
+staticPriority = 2
+manaCost = 10
+coolDown = 4
+statusType = 0
+skillTexture = ExtResource("3_k7nrq")
+textureRange = 12

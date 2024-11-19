@@ -682,17 +682,17 @@ func unequipItem(equipIndex: int) -> void:
 	else:
 		print("ERROR: no equip to be removed!")
 
-func addImmunity(dicCount: Dictionary, key: int) -> void:
-	if(dicCount.has(key)):
-		dicCount[key] += 1
+func addImmunity(key: int) -> void:
+	if(self.statusImunity.has(key)):
+		self.statusImunity[key] += 1
 	else:
-		dicCount[key] = 1
+		self.statusImunity[key] = 1
 
-func removeImmunity(dicCount: Dictionary, key: int) -> void:
-	if(dicCount.has(key)):
-		dicCount[key] -= 1
-		if(dicCount[key] <= 0):
-			dicCount.erase(key)
+func removeImmunity(key: int) -> void:
+	if(self.statusImunity.has(key)):
+		self.statusImunity[key] -= 1
+		if(self.statusImunity[key] <= 0):
+			self.statusImunity.erase(key)
 	else:
 		print("ERROR: Immunnity does not exist!")
 #função que reseta todos os arrays, essencial para a troca de digmons

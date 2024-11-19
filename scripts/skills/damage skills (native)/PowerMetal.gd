@@ -5,6 +5,7 @@ var skillData: DamageSkillData = load("res://resources/skills/DamageSkills/Power
 
 func _init():
 	setStats(skillData)
+	self.isSlow = true
 	self.statusEffects.append(Disarm.new(1))
 
 func priorityCheck(digimon: Digimon) -> void:

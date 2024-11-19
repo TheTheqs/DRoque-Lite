@@ -15,7 +15,7 @@ var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	2 : null
 	}
 var digimonActiveSkills: Dictionary = {
-	0 : [RockyRumble.new()], #esses arrays precisam ter de prefencia size fixo em 3
+	0 : [DoubleDelta.new()], #esses arrays precisam ter de prefencia size fixo em 3
 	1 : [],
 	2 : [],
 	}
@@ -30,13 +30,13 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [],
+	0 : [IntPlus.new(138)],
 	1 : [],
 	2 : []
 }
 
 var currentHealthMana: Dictionary = { #proporção da vida de cada digimon 
-	0 : [1, 1],
+	0 : [0.5, 1],
 	1 : [1, 1],
 	2 : [1, 1]
 }
@@ -50,7 +50,7 @@ var currentCoolDown: Dictionary = {
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.COWARDLY
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(4) 
+	self.addToParty(5) 
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
