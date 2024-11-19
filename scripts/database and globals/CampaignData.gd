@@ -40,6 +40,12 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 	1 : [1, 1],
 	2 : [1, 1]
 }
+#segura o cooldown das habilidades de forma dinâmica
+var currentCoolDown: Dictionary = {
+	0 : [0, 0, 0, 0, 0],
+	1 : [0, 0, 0, 0, 0],
+	2 : [0, 0, 0, 0, 0]
+}
 #função init para teste
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.COWARDLY

@@ -200,7 +200,7 @@ func setStats(index: int) -> void:
 	self.setBasics(stats)
 	self.setAttributes(stats)
 	self.levelUpAttributes(currentLevel)
-	self.setSkills(reference.digimonActiveSkills[index], reference.fixedPassives.values())
+	self.setSkills(reference.digimonActiveSkills[index], reference.fixedPassives.values(), reference.currentCoolDown[index])
 	self.setEquips(reference.currentEquipments[index])
 	self.setPermanentStatus(reference.currentStatus[index])
 	self.currentHealth = self.maxHelth*reference.currentHealthMana[index][0]
@@ -245,7 +245,7 @@ func setAttributes(stats: DigimonData) -> void:
 	self.levelWIS = stats.levelWIS
 	self.levelDEX = stats.levelDEX
 #função para setar as habilidades (passivas e ativas) baseado na variável global de campanha
-func setSkills(skills: Array, passives: Array) -> void:
+func setSkills(skills: Array, passives: Array, coolDowns: Array) -> void:
 	self.digimonSkills = [null, null, null, null, null]
 	self.digimonPassiveSkills.clear()
 	self.learnSkill(BasicAtack.new())
@@ -257,6 +257,10 @@ func setSkills(skills: Array, passives: Array) -> void:
 	for nPassive: Array in passives:
 		if(nPassive[0] is PassiveSkill):
 			self.learnSkill(nPassive[0])
+	for i: int in range(self.digimonSkills.size()):
+		var nSkill: Skill = self.digimonSkills[i]
+		if(nSkill != null):
+			nSkill.currentCooldown = coolDowns[i]
 
 #função que busca os equipamentos na referência
 func setEquips(equips: Array) -> void:

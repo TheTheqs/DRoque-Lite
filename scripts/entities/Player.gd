@@ -41,6 +41,13 @@ func saveDigimon(oDigimon: Digimon) -> void:
 	Campaign.currentEquipments[choice] = oDigimon.armory
 	Campaign.currentStatus[choice] = oDigimon.statusEffect.values()
 	Campaign.currentHealthMana[choice] = [Util.getProportion(oDigimon.currentHealth, oDigimon.maxHelth), Util.getProportion(oDigimon.currentMana, oDigimon.maxMana)]
+	#salvando o tempo de recarga das habilidades
+	var coolDown: Array[int] = [0, 0, 0, 0, 0]
+	for i: int in range(oDigimon.digimonSkills.size()):
+		var nSkill: Skill = oDigimon.digimonSkills[i]
+		if(nSkill != null):
+			coolDown[i] = nSkill.currentCooldown
+	Campaign.currentCoolDown[choice] = coolDown
 
 #função de troca de digimon
 func changeDigimon(newChoice: int) -> void:

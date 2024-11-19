@@ -38,6 +38,12 @@ var currentHealthMana: Dictionary = { #proporção da vida de cada digimon
 	1 : [1, 1],
 	2 : [1, 1]
 }
+
+var currentCoolDown: Dictionary = {
+	0 : [0, 0, 0, 0, 0],
+	1 : [0, 0, 0, 0, 0],
+	2 : [0, 0, 0, 0, 0]
+}
 #função init para teste
 func loadContent() -> void:
 	self.playerLevel = self.calculateLevel()
