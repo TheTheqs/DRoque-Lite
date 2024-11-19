@@ -1,0 +1,6 @@
+1 - Ícone e Textura
+2 - Inclusão no Json de tradução
+3 - Inclusão no database e atributos associados
+4 - Definição de ativa/passiva e implementação das mesmas
+5 - Criação de recurso
+6 - teste e implementação no banco de dados interno.

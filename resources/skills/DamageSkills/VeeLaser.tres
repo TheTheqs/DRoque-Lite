@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://cf13pk0wm7eah"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_dvixo"]
+[ext_resource type="Texture2D" uid="uid://dqkbwpktwwuek" path="res://assets/interface/Icons/SkillIcons/NativeActives/VeeLaser.png" id="2_g40p2"]
+[ext_resource type="Texture2D" uid="uid://dmn5ws2wbfakr" path="res://assets/sprites/vfx/skills/VeeLaser.png" id="3_0fvxx"]
+
+[resource]
+script = ExtResource("1_dvixo")
+skillId = 53
+skillIcon = ExtResource("2_g40p2")
+staticPriority = 4
+element = 7
+damageType = 0
+damageSubType = 0
+ratio = 1.65
+manaCost = 50
+coolDown = 3
+hasEffect = false
+skillTexture = ExtResource("3_0fvxx")
+textureRange = 22

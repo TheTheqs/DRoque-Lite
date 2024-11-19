@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://04rk14jaa03a"]
+[gd_scene load_steps=14 format=3 uid="uid://04rk14jaa03a"]
 
 [ext_resource type="Script" path="res://scripts/interface builders/global effects/GlobalVFX.gd" id="1_3ctgb"]
-[ext_resource type="Texture2D" uid="uid://40afmqsbt6ok" path="res://assets/sprites/creatures/Agumon.png" id="2_n2iy8"]
 [ext_resource type="Script" path="res://scripts/interface builders/global effects/Fade.gd" id="3_a5qe0"]
 [ext_resource type="Script" path="res://scripts/interface builders/global effects/GlobalTextWindow.gd" id="3_ef80k"]
 [ext_resource type="Texture2D" uid="uid://gvxb5dkfhnsc" path="res://assets/interface/UI/GlobalTextWindow.png" id="4_wvwgt"]
@@ -189,7 +188,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="DigimonSprite" type="Sprite2D" parent="CanvasLayer/Digimon"]
 visible = false
-texture = ExtResource("2_n2iy8")
 hframes = 3
 vframes = 2
 frame = 1

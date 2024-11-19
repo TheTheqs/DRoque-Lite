@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=4 format=3 uid="uid://b6ulxpcqj13ti"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_8aaco"]
+[ext_resource type="Texture2D" uid="uid://b1ha8xdiqhu36" path="res://assets/interface/Icons/SkillIcons/NativePassives/StrikedramonPassive.png" id="2_itg21"]
+[ext_resource type="Script" path="res://scripts/triggers/passive skills triggers/RevengeUnionTrigger.gd" id="3_x6uka"]
+
+[resource]
+script = ExtResource("1_8aaco")
+skillId = 50
+skillIcon = ExtResource("2_itg21")
+cooldown = 0
+triggers = Array[Script]([ExtResource("3_x6uka")])

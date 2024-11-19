@@ -46,7 +46,10 @@ var nativeSkills: Dictionary = {
 	3 : ["res://scripts/skills/passive skill (native)/RelentlessAgression.gd", "res://scripts/skills/damage skills (native)/FireBall.gd"],
 	4 : ["res://scripts/skills/passive skill (native)/Keen.gd", "res://scripts/skills/damage skills (native)/MetalCannon.gd"],
 	5 : ["res://scripts/skills/passive skill (native)/MysticalScale.gd", "res://scripts/skills/damage skills (native)/ElectricShock.gd"],
-	86: ["res://scripts/skills/passive skill (native)/DragonRoar.gd", "res://scripts/skills/damage skills (native)/MegaFlare.gd"]
+	84: ["res://scripts/skills/passive skill (native)/DragonWrath.gd", "res://scripts/skills/damage skills (native)/VeeLaser.gd"],
+	86: ["res://scripts/skills/passive skill (native)/DragonRoar.gd", "res://scripts/skills/damage skills (native)/MegaFlare.gd"],
+	87: ["res://scripts/skills/passive skill (native)/RevengeUnion.gd", "res://scripts/skills/damage skills (native)/FangStrike.gd"],
+	99: ["res://scripts/skills/passive skill (native)/SharpenedEdge.gd", "res://scripts/skills/damage skills (native)/PowerMetal.gd"]
 }
 
 func getSkill(skillId: int) -> Skill:

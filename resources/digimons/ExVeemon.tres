@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://b58n0ppcudrfk"]
+
+[ext_resource type="Texture2D" uid="uid://cue0i80wdrdih" path="res://assets/interface/Icons/digimons/Xveemon.png" id="1_2dg3w"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="2_k6xdw"]
+[ext_resource type="Texture2D" uid="uid://cwmkcqcbf66" path="res://assets/sprites/creatures/XVeemon.png" id="3_uek7o"]
+
+[resource]
+script = ExtResource("2_k6xdw")
+digimonId = 84
+digimonIcon = ExtResource("1_2dg3w")
+digimonTier = 1
+digimonType = 3
+element = 0
+possibleEvolution = Array[int]([])
+texture = ExtResource("3_uek7o")
+levelSTR = 6
+levelINT = 5
+levelAGI = 6
+levelVIT = 4
+levelWIS = 6
+levelDEX = 3

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://cypteq5mibmio"]
+
+[ext_resource type="Texture2D" uid="uid://b86xnyd78jaq7" path="res://assets/interface/Icons/digimons/Strikedramon.png" id="1_jeunm"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="2_sr2bn"]
+[ext_resource type="Texture2D" uid="uid://0jm8k7mx73ml" path="res://assets/sprites/creatures/Strikedramon.png" id="3_dsidu"]
+
+[resource]
+script = ExtResource("2_sr2bn")
+digimonId = 87
+digimonIcon = ExtResource("1_jeunm")
+digimonTier = 1
+digimonType = 2
+element = 5
+possibleEvolution = Array[int]([])
+texture = ExtResource("3_dsidu")
+levelSTR = 7
+levelINT = 3
+levelAGI = 7
+levelVIT = 4
+levelWIS = 5
+levelDEX = 4

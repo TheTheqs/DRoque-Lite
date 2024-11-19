@@ -1,0 +1,6 @@
+Agumon
+-Greymon: Use a habilidade assinatura 2 vezes com o oponente em chamas
+Monodramon
+-Strikedramon: Aprenda uma habilidade do tipo Terra durante a batlha.
+Veemon
+-ExVeemon: Com uma força total maior do que a Sabedoria total: Reduza a vida de um digimon para menos de 50% com uma habilidade do tipo Luz.
