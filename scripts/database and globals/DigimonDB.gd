@@ -9,6 +9,7 @@ var digimons : Dictionary = {
 	3 : "res://resources/digimons/Guilmon.tres",
 	4 : "res://resources/digimons/Dorumon.tres",
 	5 : "res://resources/digimons/Betamon.tres",
+	19: "res://resources/digimons/Wormmon.tres",
 	66: "res://resources/digimons/Seadramon.tres",
 	84: "res://resources/digimons/ExVeemon.tres",
 	86: "res://resources/digimons/Greymon.tres",

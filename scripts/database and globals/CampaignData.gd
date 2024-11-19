@@ -50,7 +50,7 @@ var currentCoolDown: Dictionary = {
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.COWARDLY
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(5) 
+	self.addToParty(19) 
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
