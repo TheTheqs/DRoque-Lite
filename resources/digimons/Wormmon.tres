@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://cye3p5vp431pf"]
+[gd_resource type="Resource" script_class="DigimonData" load_steps=5 format=3 uid="uid://cye3p5vp431pf"]
 
+[ext_resource type="Script" path="res://scripts/evolution charts/WormmonEC.gd" id="1_nq8gx"]
 [ext_resource type="Texture2D" uid="uid://cp7cad2arl3d2" path="res://assets/interface/Icons/digimons/Wormmon.png" id="1_wrhye"]
 [ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="2_n7cd5"]
 [ext_resource type="Texture2D" uid="uid://b1r1d21wkvd68" path="res://assets/sprites/creatures/Wormmon.png" id="3_54jf2"]
@@ -10,8 +11,9 @@ digimonId = 19
 digimonIcon = ExtResource("1_wrhye")
 digimonTier = 0
 digimonType = 0
+digimonEVC = ExtResource("1_nq8gx")
 element = 3
-possibleEvolution = Array[int]([])
+possibleEvolution = Array[int]([85])
 texture = ExtResource("3_54jf2")
 levelSTR = 3
 levelINT = 4

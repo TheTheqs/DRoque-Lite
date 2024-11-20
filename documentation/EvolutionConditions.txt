@@ -10,3 +10,5 @@ Guilmon
 -Growlmon: Com 60% da vida máxima ou menos: Troque de lugar com um digimon em batalha enquanto possuir o status Adrenalina.
 Betamon
 -Seadramon: Com uma inteligência bonus superior a inteligência base: use uma habilidade do tipo água.
+Wormmon
+-Stingmon: Comece um turno possuindo uma agilidade bônus igual ou maior ao dobro da agilidade base.

@@ -50,6 +50,7 @@ var nativeSkills: Dictionary = {
 	19 : ["res://scripts/skills/passive skill (native)/NaturalSpirit.gd", "res://scripts/skills/damage skills (native)/StickyNet.gd"],
 	66: ["res://scripts/skills/passive skill (native)/MagicScale.gd", "res://scripts/skills/damage skills (native)/IceBlast.gd"],
 	84: ["res://scripts/skills/passive skill (native)/DragonWrath.gd", "res://scripts/skills/damage skills (native)/VeeLaser.gd"],
+	85: ["res://scripts/skills/passive skill (native)/NaturalSpectrum.gd", "res://scripts/skills/damage skills (native)/SpikingStrike.gd"],
 	86: ["res://scripts/skills/passive skill (native)/DragonRoar.gd", "res://scripts/skills/damage skills (native)/MegaFlare.gd"],
 	87: ["res://scripts/skills/passive skill (native)/RevengeUnion.gd", "res://scripts/skills/damage skills (native)/FangStrike.gd"],
 	89: ["res://scripts/skills/passive skill (native)/SavageInstinct.gd", "res://scripts/skills/damage skills (native)/ExhaustFlame.gd"],

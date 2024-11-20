@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DigimonData" load_steps=4 format=3 uid="uid://bykogf8ss31aa"]
+
+[ext_resource type="Texture2D" uid="uid://d0ydvbmim0opo" path="res://assets/interface/Icons/digimons/Stingmon.png" id="1_qauhx"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/DigimonData.gd" id="2_2ot8b"]
+[ext_resource type="Texture2D" uid="uid://dual6qvmq8y7e" path="res://assets/sprites/creatures/Stingmon.png" id="3_qvhjr"]
+
+[resource]
+script = ExtResource("2_2ot8b")
+digimonId = 85
+digimonIcon = ExtResource("1_qauhx")
+digimonTier = 1
+digimonType = 3
+element = 3
+possibleEvolution = Array[int]([])
+texture = ExtResource("3_qvhjr")
+levelSTR = 6
+levelINT = 4
+levelAGI = 8
+levelVIT = 8
+levelWIS = 3
+levelDEX = 1

@@ -30,7 +30,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [IntPlus.new(138)],
+	0 : [AgiPlus.new(64)],
 	1 : [],
 	2 : []
 }

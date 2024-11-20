@@ -223,7 +223,7 @@
   "SkillDescription58": "Once per battle: When targeted by an Attribute-Reducing Effect, reduces its success chance to zero and becomes immune to the effect for the rest of the battle.",
   "SkillDescription59": "Deals 135% Water-Type Magic damage. Applies Agi- to the opponent.",
   "SkillDescription60": "Increases Plant damage by 8% for each Plant-type Digimon in the party.",
-  "SkillDescription61": "Deals 70% Plant-Type Physical damage and reduces the target's agility by 10% of the damage dealt.",
+  "SkillDescription61": "Deals 100% Plant-Type Physical damage and reduces the target's agility by 20% of the damage dealt.",
   "SkillDescription62": "Increases Plant damage by 12% for each Plant-type Digimon in the party.",
   "SkillDescription63": "Deals 130% Plant-Type Physical damage to the opponent. This skill has a 20% chance to ignore the opponent's defense, dealing true damage.",
   "SkillDescription64": "Get Bravery +1. If the opponent's Total Strength is greater than yours, get +2 Bravery instead.",
