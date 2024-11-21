@@ -122,3 +122,11 @@ func checkArray(array: Array) -> bool:
 		return true
 	else:
 		return false
+
+func getValidParty(digimon: Digimon) -> Array:
+	var partyDic: Dictionary = digimon.tamer.tamerReference.playerParty
+	var validParty: Array = []
+	for key: int in partyDic:
+		if(partyDic[key] != null):
+			validParty.append(key)
+	return validParty

@@ -175,8 +175,8 @@ var allTriggers: Array = [
 #Actions Array
 var actionsToGo: Array[Skill] = []
 var positionDic: Dictionary = {
-	Enums.Tier.ROOKIE : [40, 30],
-	Enums.Tier.CHAMPION : [40, 30]
+	Enums.Tier.ROOKIE : [15, 30],
+	Enums.Tier.CHAMPION : [15, 30]
 }
 func setBehave(setting: bool) -> void:
 	var constant: int = -1 if (not setting) else 1
@@ -374,16 +374,19 @@ func processDamage(damageData: DamageData) -> void:
 		if(damageData.damageValue <= 0):
 			damageData.damageValue = 1.0
 		#calculando dano
-		if(self.currentHealth - damageData.damageValue <= 0):
-			currentHealth = 0
-		else:
-			currentHealth -= damageData.damageValue
+		currentHealth = max(0, currentHealth - damageData.damageValue)
 		triggerCheck(self.onGetDamage, damageData)
 		enemy.triggerCheck(enemy.onDamageDelt, damageData)
 		tamer.showContent(damageData)
 		addAnimation("damage")
 		tamer.HUDD.updateValues()
+		if(self.currentHealth <= 0):
+			self.dying()
 	
+#função de quando o digimon morre, será construída aos poucos
+func dying() -> void:
+	self.triggerCheck(self.onDying, "Dying")
+	pass
 #função que processa a aplica um status effect
 func applyStatus(nstatus: StatusEffect) -> void:
 	BTM.inAction()

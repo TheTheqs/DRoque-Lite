@@ -69,7 +69,6 @@ func replaceDigimon() -> void:
 	self.digimon.triggerCheck(self.digimon.onChange, "Changing")
 	self.BTM.outAction("Changing")
 	
-
 func updateInterface() -> void:
 	self.HUDD.updateValues()
 	self.buttonPanel.setButtons()

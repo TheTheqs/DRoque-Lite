@@ -21,7 +21,7 @@ var digimonActiveSkills: Dictionary = {
 	}
 #passivas comuns do grupo
 var fixedPassives: Dictionary = { #a chave vai ser o id da passiva, o valor vai ser um array de tamanho 2, o primeiro é a skill o segundo é contagem dela
-	
+	65: [SurvivalBaton.new(), 1]
 }
 
 var currentEquipments: Dictionary = { #equipamento de cada digimon
@@ -30,13 +30,13 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [AgiPlus.new(64)],
+	0 : [],
 	1 : [],
 	2 : []
 }
 
 var currentHealthMana: Dictionary = { #proporção da vida de cada digimon 
-	0 : [0.5, 1],
+	0 : [1, 1],
 	1 : [1, 1],
 	2 : [1, 1]
 }
@@ -50,7 +50,7 @@ var currentCoolDown: Dictionary = {
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.COWARDLY
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(19) 
+	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo

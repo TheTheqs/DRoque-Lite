@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PassiveSkillData" load_steps=4 format=3 uid="uid://bab3l7prwqb37"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/PassiveSkillData.gd" id="1_gmlqx"]
+[ext_resource type="Texture2D" uid="uid://chqei88qbljan" path="res://assets/interface/Icons/SkillIcons/SurvivalBaton.png" id="2_youbn"]
+[ext_resource type="Script" path="res://scripts/triggers/passive skills triggers/SurvivalBaton.gd" id="3_jwgss"]
+
+[resource]
+script = ExtResource("1_gmlqx")
+skillId = 65
+skillIcon = ExtResource("2_youbn")
+cooldown = 0
+triggers = Array[Script]([ExtResource("3_jwgss")])
