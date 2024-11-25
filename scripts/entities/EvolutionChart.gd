@@ -22,3 +22,6 @@ func activateEvolution(newIndex: int) -> void:
 		self.evolutioner.currentIndex = newIndex
 		relatedDigimon.actionsToGo.append(evolutioner)
 	
+
+func unsetting(_digimon: Digimon) -> void:
+	pass

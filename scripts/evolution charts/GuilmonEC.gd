@@ -8,3 +8,6 @@ func _init(digimon: Digimon) -> void:
 
 func arrangeTriggers(digimon: Digimon) ->void:
 	digimon.onChange.append(self.trigger)
+
+func unsetting(digimon: Digimon)-> void:
+	digimon.onChange.erase(self.trigger)

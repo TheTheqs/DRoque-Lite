@@ -37,7 +37,7 @@ func applyCooldown(_digimon: Digimon) -> void:
 	currentCooldown = cooldowm
 	if(currentCooldown > 0):
 		usable = false
-
+	
 #função que vai deminuir o cooldown a cada fim de turno.
 func countCooldown(digimon: Digimon) -> void:
 	if(currentCooldown > 0):
@@ -60,6 +60,7 @@ func priorityCalculation(digimon: Digimon) -> void:
 	priority = staticPriority
 	priority += getElementalChartPriority(digimon)
 	priority += bonusPriority
+	print(tr(StringName(self.skillName)) + " coolDown: " + str(self.currentCooldown))
 	priorityCheck(digimon)
 	if(!usable or currentCooldown != 0 or digimon.currentMana < self.manaCost):
 		self.priority = 0

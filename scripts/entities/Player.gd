@@ -5,6 +5,7 @@ class_name Player
 #scene elements
 @export var buttonPanel : ButtonPanel
 @export var inventoyDisplay: InventoryDisplay
+@export var replaceSkill: RearrangementWindow
 var newerChoice: int
 func _ready() -> void:
 	Campaign.loadContent() #essa é apenas uma função de testes
@@ -73,3 +74,6 @@ func updateInterface() -> void:
 	self.HUDD.updateValues()
 	self.buttonPanel.setButtons()
 	self.buttonPanel.updateButtons()
+
+func startRearrange() -> void:
+	self.replaceSkill.setRearrange(self.digimon.rearrangementSkills)

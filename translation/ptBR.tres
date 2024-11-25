@@ -43,8 +43,11 @@ messages = {
 "DigimonName99": &"Dorugamon",
 "Digivolved": &" divievoluiu para ",
 "Duration": &"Duração",
+"EVRearrengeAlert": &"Você precisa escolher uma habilidade para substituir!",
 "Equiped": &"Equipado",
+"EvolutionRearrange": &" aprendeu sua nova habilidade assinatura, mas excedeu o limite permitido. Escolha uma das habilidades abaixo para ser substituída: ",
 "Fail": &"Falha",
+"ForgetSkill": &"Tem certeza que deseja esquecer a habilidade ",
 "INT": &"INT",
 "Immunity": &"IMUNE",
 "Inventory": &"Inventário",
@@ -101,6 +104,7 @@ messages = {
 "MenuButtonDescription": &"Abre o menu. O jogo não será pausado.",
 "MenuButtonTitle": &"Abrir menu",
 "Miss": &"ERROU",
+"No": &"Não",
 "NoAccessory": &"Nenhum acessório equipado",
 "NoArmor": &"Nenhuma Armadura equipada.",
 "NoCD": &"A habilidade está em recarga!",
@@ -309,6 +313,7 @@ messages = {
 "Turn": &"Turno(s)",
 "Unequiped": &"Desequipado",
 "VIT": &"VIT",
-"WIS": &"SAB"
+"WIS": &"SAB",
+"Yes": &"Sim"
 }
 locale = "pt"

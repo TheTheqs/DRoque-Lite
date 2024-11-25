@@ -7,6 +7,7 @@ var digimonId: int
 var digimonName: String
 var digimonIcon: CompressedTexture2D
 var digimonDescription: String
+var evolutionChart: EvolutionChart
 #enums
 var element: Enums.Element
 var digimonTier: Enums.Tier
@@ -96,7 +97,10 @@ var statusToRemove: Array[int]
 var isDisabled: bool = false
 var canUseItem: bool = true
 var onChanging: bool = false
+#variáveis de controle durante evolução
 var onEvolving: bool = false
+var needRearrangement: bool = false
+var rearrangementSkills: Array = []
 #actions
 var selectedSkill: Skill = null
 var currentAction: Skill
@@ -219,7 +223,7 @@ func setBasics(stats: DigimonData) -> void:
 	self.digimonType = stats.digimonType
 	self.possibleEvolution = stats.possibleEvolution
 	if(stats.digimonEVC != null):
-		stats.digimonEVC.new(self)
+		self.evolutionChart = stats.digimonEVC.new(self)
 #função que seta os atirbutos, vida máxima e mana.
 func setAttributes(stats: DigimonData) -> void:
 	self.baseSTR = 0
@@ -682,6 +686,10 @@ func unequipItem(equipIndex: int) -> void:
 		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 			digimonDisplay.armory.buildIcons(self.armory)
 		tamer.showContent(tr(StringName("Unequiped")) + "("+ tr(StringName(equip.itemName))+")")
+		if(equip.equipType == Enums.EquipmentType.WEAPON):
+			self.learnSkill(BasicAtack.new())
+			if(self.tamer is Player):
+				self.tamer.updateInterface()
 	else:
 		print("ERROR: no equip to be removed!")
 
@@ -723,7 +731,9 @@ func Evolve(newDigimonId: int) -> void:
 	#bloquando os botõs e fechando janelas
 	if(self.tamer is Player):
 		self.tamer.buttonPanel.blockAllButtons()
-		self.BTM.closeAllWindows()
+	else:
+		self.tamer.opponent.buttonPanel.blockAllButtons()
+	self.BTM.closeAllWindows()
 	self.visible = false
 	var ncurrentHealth: float = Util.getProportion(self.currentHealth, self.maxHelth)
 	var ncurrentMana: float = Util.getProportion(self.currentMana, self.maxMana)
@@ -734,8 +744,11 @@ func Evolve(newDigimonId: int) -> void:
 		ref.removeFromParty(ref.playerCurrentChoice)
 	if(self.digimonPassiveSkills.has(SkillDB.getPassiveId(self.digimonId))):
 		self.unlearnSkill(self.digimonPassiveSkills[SkillDB.getPassiveId(self.digimonId)])
+	self.evolutionChart.unsetting(self)
+	self.evolutionChart = null
 	self.positionSet = false
 	self.setBehave(false)
+	#chamada do novo digimon
 	var stats: DigimonData = DDB.getDigimonData(newDigimonId)
 	#a função abaixo é a que chama o global effect para fazer o vfx da evolução!
 	self.globalEffects.startEvolution(self.digimonSprite.texture, stats.texture, self) 
@@ -743,8 +756,25 @@ func Evolve(newDigimonId: int) -> void:
 	self.setAttributes(stats)
 	self.levelUpAttributes(currentLevel)
 	#mudança de habilidades
-	self.unlearnSkill(self.digimonSkills[1])
-	self.learnSkill(SkillDB.getNative(self.digimonId, 1))
+	var extraSkills: Array = ref.digimonActiveSkills[ref.playerCurrentChoice] #criação de array com habilidades extras
+	if(self.tamer is Enemy): #tratando skills do inimigo para que ele nunca tenha que rearranjar (dinâmica exclusiva para jogadores)
+		self.rearrangementSkills = extraSkills
+		self.needRearrangement = false
+	else:
+		if(extraSkills.size() < 3): #validação do array
+			while(extraSkills.size() < 3): #ajuste se necessário
+				extraSkills.append(null)
+		var newIndex: int = Util.emptySlot(extraSkills) #encontrando index válido
+		if(newIndex != -1): #caso tenha espaçoa para uma habilidade nova
+			extraSkills[newIndex] = extraSkills[0]
+			extraSkills[0] = self.digimonSkills[1] #incluindo habilidade assinatura nas novas skills, pois será mantida
+			self.needRearrangement = false 
+			self.rearrangementSkills.append_array(extraSkills)
+		else: #caso nao tenha espaço
+			self.rearrangementSkills.clear()
+			self.rearrangementSkills.append(self.digimonSkills[1])
+			self.rearrangementSkills.append_array(extraSkills)
+			self.needRearrangement = true
 	self.learnSkill(SkillDB.getNative(self.digimonId, 0))
 	self.currentHealth = self.maxHelth*ncurrentHealth
 	self.currentMana = self.maxMana*ncurrentMana
@@ -754,9 +784,33 @@ func Evolve(newDigimonId: int) -> void:
 
 
 func globalFeedback() ->void:
+	if(not self.needRearrangement or self.tamer is Enemy):
+		self.rearrangeSkill()
+		self.finishEvolution()
+	else:
+		if(self.tamer is Enemy):
+			print("ERROR: Tamer is enemy!")
+		else:
+			self.tamer.startRearrange()
+
+func rearrangeSkill() -> void:
+	var newSkills: Array[Skill] = [self.digimonSkills[0], SkillDB.getNative(self.digimonId, 1)]
+	#resetando skills
+	for oskill: Skill in self.digimonSkills:
+		if(oskill != null):
+			self.unlearnSkill(oskill)
+	newSkills.append_array(rearrangementSkills)
+	for nSkill: Skill in newSkills:
+		self.learnSkill(nSkill)
+
+#função que finalmente encerra o processo de evolução
+func finishEvolution() -> void:
 	if(self.tamer is Player):
 		self.tamer.buttonPanel.unBlockAllButtons()
 		self.tamer.updateInterface()
+	else:
+		self.tamer.opponent.buttonPanel.unBlockAllButtons()
+		self.tamer.HUDD.updateValues()
 	self.onEvolving = false
 	self.triggerCheck(onEvolution, "Evolve")
 	self.BTM.outAction("Evolution Finished")

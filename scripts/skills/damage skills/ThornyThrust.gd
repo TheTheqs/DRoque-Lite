@@ -26,11 +26,13 @@ func setValues(digimon: Digimon) -> void:
 #funções de aprendizado que dobram o tempo de recarga quando o digimon for do tipo planta.
 func learn(learner: Digimon, index: int) -> bool:
 	learner.digimonSkills[index] = self
+	oldCDR = cooldowm
 	if(learner.element == Enums.Element.PLANT):
-		oldCDR = cooldowm
 		cooldowm *= 2
+		print(str(cooldowm))
 	return true
 
 func unlearn(_unlearner: Digimon) -> void:
 	cooldowm = oldCDR
 	oldCDR = 0
+	print(str(cooldowm))

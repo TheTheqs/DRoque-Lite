@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck1ecynqhvd5e"]
+
+[ext_resource type="Texture2D" uid="uid://c0masc0vm1teb" path="res://assets/interface/UI/AlertPopWindow.png" id="1_3dpjf"]
+[ext_resource type="Script" path="res://scripts/interface builders/Alert.gd" id="1_5btk5"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="2_nhejf"]
+[ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="3_ksall"]
+
+[node name="Alert" type="Node2D" node_paths=PackedStringArray("message", "closeButton")]
+script = ExtResource("1_5btk5")
+message = NodePath("AlertMessage")
+closeButton = NodePath("AlertButton")
+
+[node name="AlertWindow" type="Sprite2D" parent="."]
+position = Vector2(130, 252)
+texture = ExtResource("1_3dpjf")
+
+[node name="AlertMessage" parent="." instance=ExtResource("2_nhejf")]
+offset_left = 50.0
+offset_top = 219.0
+offset_right = 210.0
+offset_bottom = 285.0
+
+[node name="AlertButton" parent="." instance=ExtResource("3_ksall")]
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 264.0
+offset_bottom = 476.0
+
+[connection signal="button_down" from="AlertButton" to="." method="closeAlert"]

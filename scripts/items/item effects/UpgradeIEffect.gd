@@ -12,6 +12,6 @@ func itemEffect(digimon: Digimon) -> void:
 
 func priorityCalc(digimon: Digimon) -> int:
 	var priority: int = 0
-	if(Util.checkArray(digimon.possibleEvolution)):
+	if(Util.checkArray(digimon.possibleEvolution) and digimon.currentLevel >= 15):
 		priority += Util.random(10, 20)
 	return priority

@@ -15,9 +15,9 @@ var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	2 : null
 	}
 var digimonActiveSkills: Dictionary = {
-	0 : [DoubleDelta.new()], #esses arrays precisam ter de prefencia size fixo em 3
-	1 : [],
-	2 : [],
+	0 : [ThornyThrust.new(), GulibleGust.new(), LimiterRemoval.new()], #esses arrays precisam ter de prefencia size fixo em 3
+	1 : [null, null, null],
+	2 : [null, null, null],
 	}
 #passivas comuns do grupo
 var fixedPassives: Dictionary = { #a chave vai ser o id da passiva, o valor vai ser um array de tamanho 2, o primeiro é a skill o segundo é contagem dela

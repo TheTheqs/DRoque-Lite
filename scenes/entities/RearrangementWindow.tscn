@@ -1,0 +1,175 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0g711owsn45d"]
+
+[ext_resource type="Texture2D" uid="uid://c78b6rpcatha4" path="res://assets/interface/UI/RearrangeSkillWindow.png" id="1_d7xo5"]
+[ext_resource type="Script" path="res://scripts/interface builders/rearrange system/RearrangementWindow.gd" id="1_q2m37"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="2_gi6n1"]
+[ext_resource type="Texture2D" uid="uid://bbhy46uj6x3ms" path="res://assets/interface/UI/SkillsWindow.png" id="3_plix8"]
+[ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="5_gk5n8"]
+[ext_resource type="Script" path="res://scripts/interface builders/rearrange system/EvolutionSkills.gd" id="5_knohq"]
+[ext_resource type="Texture2D" uid="uid://ru1a3vamdvmb" path="res://assets/interface/Icons/SkillIcons/003ExtraSkillIcon.png" id="6_8x43y"]
+[ext_resource type="Script" path="res://scripts/interface builders/ButtonDescription.gd" id="7_nwors"]
+[ext_resource type="PackedScene" uid="uid://dqw2q55o530pr" path="res://scenes/formatting standards/closeButton.tscn" id="9_nttud"]
+[ext_resource type="Texture2D" uid="uid://qs5bgy3bmjjw" path="res://assets/interface/Icons/InterfaceIcons/closeIcon.png" id="10_yisrc"]
+[ext_resource type="PackedScene" uid="uid://4fg6qy6sgy36" path="res://scenes/entities/ConfirmationWindow.tscn" id="11_4sxc5"]
+[ext_resource type="PackedScene" uid="uid://ck1ecynqhvd5e" path="res://scenes/entities/Alert.tscn" id="12_5ywxw"]
+[ext_resource type="PackedScene" uid="uid://bjvpe6qbtqj17" path="res://scenes/entities/infoWindow.tscn" id="13_kh6qv"]
+
+[node name="Rearrangement Window" type="Node2D" node_paths=PackedStringArray("currentMessage", "evolutionSkills", "replaceSkills", "infoWindow", "closeButton", "confirmWindow", "alert", "layer", "fade")]
+z_index = 2
+script = ExtResource("1_q2m37")
+currentMessage = NodePath("CanvasLayer/Label")
+evolutionSkills = NodePath("CanvasLayer/EvolutionSkills")
+replaceSkills = NodePath("CanvasLayer/ReplaceSkills")
+infoWindow = NodePath("CanvasLayer/InfoWindow")
+closeButton = NodePath("CanvasLayer/CloseButton")
+confirmWindow = NodePath("CanvasLayer/Confirmation Window")
+alert = NodePath("CanvasLayer/Alert")
+layer = NodePath("CanvasLayer")
+fade = NodePath("BackFade")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Window" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(135, 231)
+texture = ExtResource("1_d7xo5")
+
+[node name="Label" parent="CanvasLayer" instance=ExtResource("2_gi6n1")]
+offset_left = 10.0
+offset_top = 192.0
+offset_right = 260.0
+offset_bottom = 269.0
+
+[node name="SkillsDisplay" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(135, 305)
+texture = ExtResource("3_plix8")
+
+[node name="EvolutionSkills" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("window", "skillButtons", "showTimer")]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_knohq")
+window = NodePath("../..")
+skillButtons = [NodePath("Skill0"), NodePath("Skill1"), NodePath("Skill2"), NodePath("Skill3")]
+showTimer = NodePath("ShowTimer")
+
+[node name="Skill0" parent="CanvasLayer/EvolutionSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 289.0
+offset_right = 64.0
+offset_bottom = 321.0
+script = ExtResource("7_nwors")
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/EvolutionSkills/Skill0"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="Skill1" parent="CanvasLayer/EvolutionSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 289.0
+offset_right = 122.0
+offset_bottom = 321.0
+script = ExtResource("7_nwors")
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/EvolutionSkills/Skill1"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="Skill2" parent="CanvasLayer/EvolutionSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 289.0
+offset_right = 180.0
+offset_bottom = 321.0
+script = ExtResource("7_nwors")
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/EvolutionSkills/Skill2"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="Skill3" parent="CanvasLayer/EvolutionSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 289.0
+offset_right = 238.0
+offset_bottom = 321.0
+script = ExtResource("7_nwors")
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/EvolutionSkills/Skill3"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="ShowTimer" type="Timer" parent="CanvasLayer/EvolutionSkills"]
+one_shot = true
+
+[node name="ReplaceSkills" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Skill0" parent="CanvasLayer/ReplaceSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 289.0
+offset_right = 77.0
+offset_bottom = 321.0
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/ReplaceSkills/Skill0"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="Skill1" parent="CanvasLayer/ReplaceSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 289.0
+offset_right = 151.0
+offset_bottom = 321.0
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/ReplaceSkills/Skill1"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="Skill2" parent="CanvasLayer/ReplaceSkills" instance=ExtResource("5_gk5n8")]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 289.0
+offset_right = 225.0
+offset_bottom = 321.0
+
+[node name="Frame" type="Sprite2D" parent="CanvasLayer/ReplaceSkills/Skill2"]
+position = Vector2(16, 16)
+texture = ExtResource("6_8x43y")
+
+[node name="CloseButton" parent="CanvasLayer" instance=ExtResource("9_nttud")]
+offset_left = 243.0
+offset_top = 160.0
+offset_right = 265.0
+offset_bottom = 182.0
+icon = ExtResource("10_yisrc")
+
+[node name="Confirmation Window" parent="CanvasLayer" instance=ExtResource("11_4sxc5")]
+visible = false
+
+[node name="Alert" parent="CanvasLayer" instance=ExtResource("12_5ywxw")]
+visible = false
+
+[node name="InfoWindow" parent="CanvasLayer" node_paths=PackedStringArray("replaceWindow") instance=ExtResource("13_kh6qv")]
+visible = false
+position = Vector2(146, 238)
+replaceWindow = NodePath("../..")
+
+[node name="BackFade" type="CanvasModulate" parent="."]
+
+[connection signal="button_down" from="CanvasLayer/EvolutionSkills/Skill0" to="CanvasLayer/EvolutionSkills" method="onSkill0ButtonDown"]
+[connection signal="button_up" from="CanvasLayer/EvolutionSkills/Skill0" to="CanvasLayer/EvolutionSkills" method="tryConfirmation"]
+[connection signal="button_down" from="CanvasLayer/EvolutionSkills/Skill1" to="CanvasLayer/EvolutionSkills" method="onSkill1ButtonDown"]
+[connection signal="button_up" from="CanvasLayer/EvolutionSkills/Skill1" to="CanvasLayer/EvolutionSkills" method="tryConfirmation"]
+[connection signal="button_down" from="CanvasLayer/EvolutionSkills/Skill2" to="CanvasLayer/EvolutionSkills" method="onSkill2ButtonDown"]
+[connection signal="button_up" from="CanvasLayer/EvolutionSkills/Skill2" to="CanvasLayer/EvolutionSkills" method="tryConfirmation"]
+[connection signal="button_down" from="CanvasLayer/EvolutionSkills/Skill3" to="CanvasLayer/EvolutionSkills" method="onSkill3ButtonDown"]
+[connection signal="button_up" from="CanvasLayer/EvolutionSkills/Skill3" to="CanvasLayer/EvolutionSkills" method="tryConfirmation"]
+[connection signal="timeout" from="CanvasLayer/EvolutionSkills/ShowTimer" to="CanvasLayer/EvolutionSkills" method="activateShowDesc"]
+[connection signal="button_down" from="CanvasLayer/CloseButton" to="." method="onClosingButton"]

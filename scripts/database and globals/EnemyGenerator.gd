@@ -14,9 +14,9 @@ var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	2 : null
 	}
 var digimonActiveSkills: Dictionary = {
-	0 : [], #esses arrays precisam ter de prefencia size fixo em 3
-	1 : [],
-	2 : [],
+	0 : [ThornyThrust.new(), FieryFlicker.new(), ShadowSlice.new()], #esses arrays precisam ter de prefencia size fixo em 3
+	1 : [null, null, null],
+	2 : [null, null, null],
 	}
 #passivas comuns do grupo
 var fixedPassives: Dictionary = { #a chave vai ser o id da passiva, o valor vai ser um array de tamanho 2, o primeiro é a skill o segundo é contagem dela
@@ -52,10 +52,7 @@ func loadContent() -> void:
 	#teste de grupo
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
-	#selecionando 3 skills para cada digimon no grupo
-	for key: int in self.playerParty:
-		if(playerParty[key] != null):
-			digimonActiveSkills[key] = SkillDB.getRandomSkills(Util.random(1, 3))
+	self.addToParty(Util.random(0,5))
 	#teste de equipamento
 	currentEquipments[0].append(ItemDB.getEquipment(2))
 	#teste de inventário

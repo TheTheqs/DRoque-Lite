@@ -48,9 +48,12 @@ func showItemDescription(nicon: CompressedTexture2D, ntitle: String, ncontent: S
 	infoWindow.popWindow(nicon, tr(StringName(ntitle)), tr(StringName(ncontent)), self)
 
 func blockAllButtons() -> void:
+	if(!self.closeButton in self.allButtons):
+		self.allButtons.append(self.closeButton)
 	if(allButtons.size() > 0):
 		for butt : Button in allButtons:
 			butt.disabled = true
+
 func unblockAllButtons() -> void:
 	if(allButtons.size() > 0):
 		for butt : Button in allButtons:

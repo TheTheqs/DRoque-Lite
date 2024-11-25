@@ -130,3 +130,9 @@ func getValidParty(digimon: Digimon) -> Array:
 		if(partyDic[key] != null):
 			validParty.append(key)
 	return validParty
+#função que retorna o index de um elemento vazio em um array. Retorna -1 caso nao haja elementos vazios.
+func emptySlot(array: Array) -> int:
+	for i: int in range(array.size()):
+		if(array[i] == null):
+			return i
+	return -1

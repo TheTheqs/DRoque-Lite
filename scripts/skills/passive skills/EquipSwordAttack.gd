@@ -17,3 +17,4 @@ func unlearn(learner: Digimon) -> void:
 	if(learner.digimonSkills[0] != null):
 		learner.unlearnSkill(learner.digimonSkills[0])
 		learner.digimonSkills[0] = null
+	

@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://4fg6qy6sgy36"]
+
+[ext_resource type="Texture2D" uid="uid://bn7gxt8t3nppe" path="res://assets/interface/UI/ConfirmationWindow.png" id="1_1fcfc"]
+[ext_resource type="Script" path="res://scripts/interface builders/ConfirmationWindow.gd" id="1_ia6kh"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="2_iam12"]
+[ext_resource type="PackedScene" uid="uid://da3w0sp16uw5m" path="res://scenes/formatting standards/button.tscn" id="3_1w54f"]
+[ext_resource type="Texture2D" uid="uid://b0lcxiokcxnjb" path="res://assets/interface/UI/YesButton.png" id="4_3dpkv"]
+[ext_resource type="Texture2D" uid="uid://be6s7bbagoobt" path="res://assets/interface/UI/NoButton.png" id="5_shmok"]
+
+[node name="Confirmation Window" type="Node2D" node_paths=PackedStringArray("message", "yesLabel", "noLabel")]
+script = ExtResource("1_ia6kh")
+message = NodePath("Label")
+yesLabel = NodePath("Yes/Label")
+noLabel = NodePath("No/Label")
+
+[node name="Window" type="Sprite2D" parent="."]
+position = Vector2(132, 152)
+texture = ExtResource("1_1fcfc")
+
+[node name="Label" parent="." instance=ExtResource("2_iam12")]
+offset_left = 53.0
+offset_top = 93.0
+offset_right = 211.0
+offset_bottom = 210.0
+
+[node name="Yes" parent="." instance=ExtResource("3_1w54f")]
+custom_minimum_size = Vector2(64, 32)
+offset_left = 59.0
+offset_top = 220.0
+offset_right = 123.0
+offset_bottom = 252.0
+icon = ExtResource("4_3dpkv")
+
+[node name="Label" parent="Yes" instance=ExtResource("2_iam12")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(0.482353, 1, 0.188235, 1)
+
+[node name="No" parent="." instance=ExtResource("3_1w54f")]
+custom_minimum_size = Vector2(64, 32)
+offset_left = 141.0
+offset_top = 220.0
+offset_right = 205.0
+offset_bottom = 252.0
+icon = ExtResource("5_shmok")
+
+[node name="Label" parent="No" instance=ExtResource("2_iam12")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(0.996078, 0, 0, 1)
+
+[connection signal="button_down" from="Yes" to="." method="confirmYes"]
+[connection signal="button_down" from="No" to="." method="confirmNo"]
