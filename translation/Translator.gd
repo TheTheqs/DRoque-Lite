@@ -2,7 +2,7 @@ extends Node
 
 class_name Translator
 #manter o valor abaixo sempre atualizado! ele representa o número de msgs no banco de dados
-var currentMessageSize: int = 313
+var currentMessageSize: int = 317
 #lista de documentos referência
 var languages: Dictionary = {
 	"en" : "res://translation/enUS.tres",

@@ -464,7 +464,7 @@ func learnSkill(skill: Skill) -> void:
 			BM.showMessage(tr(StringName("AlreadyKnowSkill")))
 			_learned = true
 			if(passiveCount.has(skill.skillId)):
-				passiveCount[skill.skillId] += 1 #incrementa as fontas da habilidade passiva caso haja mais de uma
+				passiveCount[skill.skillId] += 1 #incrementa as fontes da habilidade passiva caso haja mais de uma
 		else:
 			if(skill is PassiveSkill):
 				skill.learn(self, -1) #esse menos um é figurativo
@@ -477,7 +477,11 @@ func learnSkill(skill: Skill) -> void:
 					if(digimonSkills[i] == null):
 						_learned = skill.learn(self, i)
 						break
-			self.digimonLearnedSkills.append(skill.skillId)
+				if(not _learned and self.tamer is Player):
+					self.rearrangementSkills = [self.digimonSkills[2], self.digimonSkills[3], self.digimonSkills[4], skill]
+					self.tamer.startRearrange()
+			if(_learned):
+				self.digimonLearnedSkills.append(skill.skillId)
 
 
 func unlearnSkill(skill: Skill) -> void:
@@ -617,6 +621,7 @@ func getActions(nActions: int) -> void:
 
 #função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
 func triggerCheck(triggersToTest: Array, context) -> void:
+	self.BTM.inAction()
 	if((self.onChanging or self.onEvolving) and triggersToTest != self.onLearnSkill):
 		return
 	else:
@@ -624,6 +629,7 @@ func triggerCheck(triggersToTest: Array, context) -> void:
 			for trigger: Trigger in triggersToTest:
 				if(trigger != null):
 					trigger.triggerValidation(self, context)
+	self.BTM.outAction("Trigger Check")
 
 func addAnimation(animeName: String) -> void:
 	if(self.digimonAnimator.current_animation != "Idle" and digimonAnimator.is_playing()):
@@ -785,8 +791,15 @@ func Evolve(newDigimonId: int) -> void:
 
 func globalFeedback() ->void:
 	if(not self.needRearrangement or self.tamer is Enemy):
-		self.rearrangeSkill()
-		self.finishEvolution()
+		print("Vindo aqui")
+		self.rearrangeSkill() 
+		if(self.onEvolving):
+			self.finishEvolution()
+		else:
+			if(self.tamer is Player):
+				self.tamer.buttonPanel.unBlockAllButtons()
+				self.tamer.updateInterface()
+			self.BTM.outAction("ReplaceSkill")
 	else:
 		if(self.tamer is Enemy):
 			print("ERROR: Tamer is enemy!")

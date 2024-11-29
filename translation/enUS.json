@@ -14,7 +14,9 @@
   "Equiped": "Equiped",
   "Duration": "Duration",
   "Stacks": "Stacks",
-  "EvolutionRearrange": " has learned their new signature skill but has exceeded the allowed limit. Choose one of the skills below to be replaced: ",
+  "EvolutionRearrange": " has reached the maximum limit of Skills. Choose a skill to forget",
+  "ReplaceSkill0": " wants to learn the skill ",
+  "ReplaceSkill1": ", but the maximum number of skills has already been reached. Choose a skill to forget:",
   "EVRearrengeAlert": "You need to choose a skill to replace!",
   "ForgetSkill": "Are you sure you want to forget the skill ",
   "Turn": "Turn(s)",
@@ -302,6 +304,7 @@
   "ItemName7": "Iron Necklace",
   "ItemName8": "\"Ruby\" Ring",
   "ItemName9": "Upgrade I",
+  "ItemName10": "Skill Disk",
   "ItemDescription0": "Heals 50% of max health.",
   "ItemDescription1": "A sword designed for friendly practice, but it may prove useful in combat when the situation turns desperate.",
   "ItemDescription2": "A rudimentary club made of sturdy wood. Simple but effective in close combat.",
@@ -311,5 +314,6 @@
   "ItemDescription6": "A shield made from a round piece. It's so ordinary that anything round could do the same.",
   "ItemDescription7": "Although iron is heavy, this necklace makes you feel a bit lighter—and a bit like a prisoner too.",
   "ItemDescription8": "The maker claims this ring was truly made from ruby. He's the only one who believes such nonsense.",
-  "ItemDescription9": "Forces the evolution of a Rookie Digimon. The item will fail if the Digimon does not meet the minimum level requirement or belongs to a different tier."
+  "ItemDescription9": "Forces the evolution of a Rookie Digimon. The item will fail if the Digimon does not meet the minimum level requirement or belongs to a different tier.",
+  "ItemDescription10": "Disk that stores a skill. When used, the Digimon learns the skill named after the item."
 }

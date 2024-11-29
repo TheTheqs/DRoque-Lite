@@ -1,7 +1,7 @@
 extends Node
 
 class_name ItemDataBase
-var usablesIds: Array[int] = [0, 9]
+var usablesIds: Array[int] = [0, 9, 10]
 var weapons: Array[int] = [1, 2]
 var armors: Array[int] = [3, 4]
 var offHands : Array[int] = [5, 6]
@@ -17,7 +17,8 @@ var itemDataBase: Dictionary = {
 	6 : "res://resources/equipments/BasicShield.tres",
 	7 : "res://resources/equipments/IronNecklace.tres",
 	8 : "res://resources/equipments/RubyRing.tres",
-	9 : "res://resources/usable items/UpgradeI.tres"
+	9 : "res://resources/usable items/UpgradeI.tres",
+	10 : "res://resources/usable items/SkillLearner.tres",
 }
 
 #funções de retorno

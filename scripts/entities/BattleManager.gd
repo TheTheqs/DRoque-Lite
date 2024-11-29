@@ -35,7 +35,7 @@ func outAction(_location: String) -> void:
 	#print(_location)
 	manageTimer()
 	somethingIsHappening -= 1
-	#print("Something is Happening: ", str(somethingIsHappening))
+	print("Something is Happening: ", str(somethingIsHappening))
 	if(somethingIsHappening <= 0):
 		somethingIsHappening = 0
 		if(currentDigimon!= null and (currentDigimon.actionsToGo.size() > 0)):

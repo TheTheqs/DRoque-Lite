@@ -4,7 +4,7 @@ class_name RearrangementWindow
 #elementos de cena
 @export var currentMessage: Label
 @export var evolutionSkills: EvolutionSkills
-@export var replaceSkills: Control
+@export var replaceSkills: ReplaceSkills
 @export var infoWindow: InfoWindow
 @export var relatedDigimon: Digimon
 @export var closeButton: Button
@@ -23,14 +23,20 @@ func _ready() -> void:
 var allButtons: Array[Button] = []
 #função de abertura de janela
 func setRearrange(newSkills: Array) -> void:
+	self.relatedDigimon.BTM.inAction()
 	self.fade.color = Color(0.15, 0.15, 0.15)
-	if(newSkills.size() == 4):
+	self.currentSkillArray = newSkills
+	if(newSkills.size() == 4 and self.relatedDigimon.onEvolving):
 		self.isReplace = false
-		self.currentSkillArray = newSkills
 		self.currentMessage.text = tr(StringName(relatedDigimon.digimonName)) + tr(StringName("EvolutionRearrange"))
 		self.evolutionSkills.settButtons(newSkills)
-		self.visible = true
-		self.layer.visible = true
+	elif(newSkills.size() == 4):
+		self.isReplace = true
+		self.currentMessage.text = tr(StringName(relatedDigimon.digimonName)) + tr(StringName("ReplaceSkill0")) + tr(StringName(newSkills[3].skillName)) + tr(StringName("ReplaceSkill1"))
+		self.replaceSkills.settButtons(newSkills)
+	self.visible = true
+	self.layer.visible = true
+	self.unBlockAllButtons()
 
 #função que bloqueia botões
 func blockAllButtons() ->void:
@@ -56,10 +62,10 @@ func endSelection() -> void:
 		self.relatedDigimon.rearrangementSkills = currentSkillArray
 		self.relatedDigimon.needRearrangement = false
 		self.settingVisible(false)
-		if(relatedDigimon.onEvolving):
-			self.relatedDigimon.globalFeedback()
+		self.relatedDigimon.globalFeedback()
 	else:
 		print("ERROR: Something went wrong, skill array size is ", str(currentSkillArray.size()))
+	self.relatedDigimon.BTM.outAction("Skill Rearrangement")
 	self.fade.color = Color(1, 1, 1)
 
 func triggerConfirmation(skillName: String) -> void:
@@ -67,16 +73,17 @@ func triggerConfirmation(skillName: String) -> void:
 	self.confirmWindow.requireConfirmation(tr(StringName("ForgetSkill")) + tr(StringName(skillName)) + "?", self)
 #padrão de função de retorno para confirmWindow
 func confirmation(confirm: bool) -> void:
-	if(!self.isReplace):
-		if(confirm):
+	if(confirm):
+		if(!self.isReplace):
 			self.evolutionSkills.finishingSelection()
 		else:
-			self.unBlockAllButtons()
+			self.replaceSkills.finishingSelection()
+	else:
+		self.unBlockAllButtons()
 
 func onClosingButton() -> void:
-	if(!self.isReplace):
-		self.blockAllButtons()
-		self.alert.showAlert(tr(StringName("EVRearrengeAlert")), self)
+	self.blockAllButtons()
+	self.alert.showAlert(tr(StringName("EVRearrengeAlert")), self)
 
 func closeAlert() -> void:
 	self.unBlockAllButtons()

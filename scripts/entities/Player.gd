@@ -76,4 +76,5 @@ func updateInterface() -> void:
 	self.buttonPanel.updateButtons()
 
 func startRearrange() -> void:
+	self.buttonPanel.blockAllButtons()
 	self.replaceSkill.setRearrange(self.digimon.rearrangementSkills)

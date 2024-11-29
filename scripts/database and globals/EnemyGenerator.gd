@@ -56,7 +56,6 @@ func loadContent() -> void:
 	#teste de equipamento
 	currentEquipments[0].append(ItemDB.getEquipment(2))
 	#teste de inventário
-	playerInventory.append(ItemDB.getUsableItem(9))
 
 func addToParty(digimonId: int) -> bool:
 	var sucess: bool = false

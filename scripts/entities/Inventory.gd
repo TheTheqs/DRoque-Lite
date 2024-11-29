@@ -26,6 +26,9 @@ func addItem(newItem: Item, quantity: int) -> void:
 			else:
 				miscItems[newItem.itemId] = newItem
 		elif(newItem is UsableItem):
+			#tratamento com disquetes
+			if(newItem.itemId == 10):
+				newItem.itemId = -(newItem.itemId*newItem.relatedSkill.skillId)
 			if(usableItems.has(newItem.itemId)):
 				if(usableItems[newItem.itemId].quantity + newItem.quantity > 99):
 					usableItems[newItem.itemId].quantity = 99

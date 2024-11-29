@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UsableItemData" load_steps=5 format=3 uid="uid://c0gk2i3hjo0fw"]
+
+[ext_resource type="Script" path="res://scripts/items/item effects/SkillLearner.gd" id="1_fl5wd"]
+[ext_resource type="Texture2D" uid="uid://bi30lkqq1831o" path="res://assets/interface/Icons/item icons/usable items/EmptyDisket.png" id="2_imgwl"]
+[ext_resource type="Texture2D" uid="uid://c2w0i62ct4n01" path="res://assets/sprites/vfx/usable items/SkillLearner.png" id="3_xftdt"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/UsableItemData.gd" id="4_8efh1"]
+
+[resource]
+script = ExtResource("4_8efh1")
+itemId = 10
+itemIcon = ExtResource("2_imgwl")
+itemTexture = ExtResource("3_xftdt")
+itemTextureRange = 10
+itemOrientation = 0
+itemEffect = ExtResource("1_fl5wd")
+relatedSkill = 0

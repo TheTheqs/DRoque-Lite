@@ -14,7 +14,9 @@
   "Equiped": "Equipado",
   "Duration": "Duração",
   "Stacks": "Acúmulos",
-  "EvolutionRearrange": " aprendeu sua nova habilidade assinatura, mas excedeu o limite permitido. Escolha uma das habilidades abaixo para ser substituída: ",
+  "EvolutionRearrange": " atingiu o limite máximo de Habilidades. Escolha uma habilidadeo para ser esquecida: ",
+  "ReplaceSkill0": " quer aprender a habilidade ",
+  "ReplaceSkill1": ", mas ele já atingiu o número máximo de habilidades. Escolha uma habilidade para ser esquecida:",
   "EVRearrengeAlert": "Você precisa escolher uma habilidade para substituir!",
   "ForgetSkill": "Tem certeza que deseja esquecer a habilidade ",
   "Turn": "Turno(s)",
@@ -302,6 +304,7 @@
   "ItemName7": "Colar de Ferro",
   "ItemName8": "Anel de \"Rubi\"",
   "ItemName9": "Upgrade I",
+  "ItemName10": "Disquete de Habilidade",
   "ItemDescription0": "Cura 50% da vida máxima.",
   "ItemDescription1": "Uma espada projetada para treinos amistosos, mas que pode se mostrar útil em combate quando a situação se torna desesperadora.",
   "ItemDescription2": "Uma clava rudimentar feita de madeira resistente. Simples, mas eficaz em combates corpo a corpo.",
@@ -311,5 +314,6 @@
   "ItemDescription6": "Um escudo feito a partir de uma peça redonda. Ele é tão ordinário que qualquer coisa redonda é capaz de fazer o mesmo.",
   "ItemDescription7": "Por mais que o ferro seja pesado, esse colar faz você se sentir um pocuo mais leve, e um pouco presidiário também.",
   "ItemDescription8": "O fabricante disse que esse anel realmente foi feito de Rubi. Ele é o único que afirma tal absurdo.",
-  "ItemDescription9": "Força a evolução de um digimon Rookie. O item resulta em falha caso o Digimon não possua nível mínimo ou seja de um tier diferente."
+  "ItemDescription9": "Força a evolução de um digimon Rookie. O item resulta em falha caso o Digimon não possua nível mínimo ou seja de um tier diferente.",
+  "ItemDescription10": "Disquete que armazena uma habilidade. Ao ser utilizado, o Digimon aprende a habilidade que dá nome ao item."
 }

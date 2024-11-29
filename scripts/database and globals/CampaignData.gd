@@ -21,7 +21,7 @@ var digimonActiveSkills: Dictionary = {
 	}
 #passivas comuns do grupo
 var fixedPassives: Dictionary = { #a chave vai ser o id da passiva, o valor vai ser um array de tamanho 2, o primeiro é a skill o segundo é contagem dela
-	65: [SurvivalBaton.new(), 1]
+	
 }
 
 var currentEquipments: Dictionary = { #equipamento de cada digimon
@@ -58,6 +58,20 @@ func loadContent() -> void:
 	self.currentEquipments[0].append(ItemDB.getEquipment(2))
 	#teste de inventário
 	playerInventory.append(ItemDB.getUsableItem(9))
+	#teste com disquetes
+	var passDisk: UsableItem = ItemDB.getUsableItem(10)
+	passDisk.buildDisket(19)
+	var statusDisk: UsableItem = ItemDB.getUsableItem(10)
+	statusDisk.buildDisket(13)
+	var damageDisk: UsableItem = ItemDB.getUsableItem(10)
+	damageDisk.buildDisket(10)
+	var damageDisk2: UsableItem = ItemDB.getUsableItem(10)
+	damageDisk2.buildDisket(10)
+	playerInventory.append(passDisk)
+	playerInventory.append(statusDisk)
+	playerInventory.append(statusDisk)
+	playerInventory.append(damageDisk)
+	playerInventory.append(damageDisk2)
 	#teste status effect
 
 #Função que adiciona um digimon ao grupo
