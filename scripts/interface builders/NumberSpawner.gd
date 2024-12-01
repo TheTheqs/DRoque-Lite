@@ -45,7 +45,7 @@ func spawnContent(content) -> void:
 			contentToShow = processHealData(content)
 		if(not onShowing):
 			onShowing = true
-			relatedTamer.BTM.inAction()
+			relatedTamer.BTM.inAction("Content Spawner")
 			contentQueue.append(contentToShow)
 			sweepQueue()
 		else:

@@ -58,6 +58,7 @@ func loadContent() -> void:
 	self.currentEquipments[0].append(ItemDB.getEquipment(2))
 	#teste de inventário
 	playerInventory.append(ItemDB.getUsableItem(9))
+	playerInventory.append(ItemDB.getUsableItem(9))
 	#teste com disquetes
 	var passDisk: UsableItem = ItemDB.getUsableItem(10)
 	passDisk.buildDisket(19)

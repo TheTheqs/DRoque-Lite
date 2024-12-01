@@ -12,7 +12,7 @@ var messageQueue: Array[String] = []
 func showMessage(newMessage: String) -> void:
 	if!(newMessage in messageQueue):
 		if(not speaking):
-			BTM.inAction()
+			BTM.inAction("Battle Messenger")
 			speaking = true
 			messageQueue.append(newMessage)
 			speak()

@@ -50,7 +50,7 @@ func loadContent() -> void:
 	self.playerLevel = self.calculateLevel()
 	self.playerKarma = Enums.Karma.TREACHEROUS
 	#teste de grupo
-	self.addToParty(Util.random(0,5))
+	self.addToParty(4)
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#teste de equipamento

@@ -23,7 +23,7 @@ func _ready() -> void:
 var allButtons: Array[Button] = []
 #função de abertura de janela
 func setRearrange(newSkills: Array) -> void:
-	self.relatedDigimon.BTM.inAction()
+	self.relatedDigimon.BTM.inAction("Skill Rearrangement")
 	self.fade.color = Color(0.15, 0.15, 0.15)
 	self.currentSkillArray = newSkills
 	if(newSkills.size() == 4 and self.relatedDigimon.onEvolving):

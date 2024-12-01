@@ -145,3 +145,9 @@ func toggleDisplay(hide: bool) -> void:
 		playerHUDD.modulate.a = 1
 		enemyHUDD.modulate.a = 1
 	
+
+func checkSkillDisplay() -> void:
+	for i in range(relatedDigimon.digimonSkills.size()):
+		if(relatedDigimon.digimonSkills[i] != null and relatedDigimon.digimonSkills[i] != skillButtons[i].relatedSkill):
+			skillButtons[i].associateSkill(relatedDigimon.digimonSkills[i])
+			skillButtons[i].visible = true

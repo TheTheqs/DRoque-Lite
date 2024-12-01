@@ -29,10 +29,8 @@ func learn(learner: Digimon, index: int) -> bool:
 	oldCDR = cooldowm
 	if(learner.element == Enums.Element.PLANT):
 		cooldowm *= 2
-		print(str(cooldowm))
 	return true
 
 func unlearn(_unlearner: Digimon) -> void:
 	cooldowm = oldCDR
 	oldCDR = 0
-	print(str(cooldowm))

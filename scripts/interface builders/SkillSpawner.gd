@@ -17,7 +17,7 @@ func _ready():
 func spawSkill(skill: Skill) -> void:
 	skillSprite.hframes = skill.textureRange
 	skillSprite.vframes = 1
-	relatedDigimon.BTM.inAction()
+	relatedDigimon.BTM.inAction("Skill Spawner")
 	currentSkill = skill
 	skillSprite.texture = skill.texture
 	var animationCommand: String = "action" + str(skill.textureRange)
@@ -37,7 +37,7 @@ func _onAnimationFinished(anim_name: String) -> void:
 	relatedDigimon.BTM.outAction("Skill Spawner")
 
 func exchangeAnimation() -> void:
-	relatedDigimon.BTM.inAction()
+	relatedDigimon.BTM.inAction("Skill Spawner")
 	self.skillSprite.texture = self.exchangeTexture
 	self.skillSprite.hframes = 5
 	self.skillSprite.vframes = 4

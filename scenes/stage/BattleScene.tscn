@@ -254,7 +254,6 @@ offset_top = -1.0
 offset_right = 254.0
 offset_bottom = 17.0
 theme_override_colors/font_outline_color = Color(1, 0.258824, 0, 1)
-text = "Actions:0"
 
 [node name="Actions Animator" type="AnimationPlayer" parent="BattleManager/Enemy"]
 libraries = {
@@ -320,7 +319,6 @@ offset_top = 174.0
 offset_right = 103.0
 offset_bottom = 187.0
 theme_override_colors/font_outline_color = Color(0.482353, 1, 0.188235, 1)
-text = "Actions:0"
 
 [node name="Actions Animator" type="AnimationPlayer" parent="BattleManager/Player"]
 libraries = {

@@ -330,7 +330,7 @@ func getSkillDamage(nskill: DamageSkill) -> float:
 
 #função que chama o skill spawner para executar o vfx de uma skill usada no digimon
 func getTageted(skill: Skill) -> void:
-	BTM.inAction()
+	BTM.inAction("Digimon getTargeted")
 	getHited = true
 	triggerCheck(self.onGotTargeted, skill)
 	if(getHited):
@@ -342,7 +342,7 @@ func getTageted(skill: Skill) -> void:
 
 #função que determina o acerto das habilidades.
 func gotTargeted(skill: Skill) -> void:
-	BTM.inAction()
+	BTM.inAction("Digimon Got Targeted")
 	gotHited = false
 	if(skill is DamageSkill):
 		if(self.isDisabled):
@@ -368,7 +368,7 @@ func gotTargeted(skill: Skill) -> void:
 
 #Função que processa o dano recebido
 func processDamage(damageData: DamageData) -> void:
-	BTM.inAction()
+	BTM.inAction("Process Damage")
 	if(self.elementalImunity.has(damageData.damageElement)):
 		tamer.showContent(tr(StringName("Immunity")))
 	else:
@@ -382,18 +382,16 @@ func processDamage(damageData: DamageData) -> void:
 		triggerCheck(self.onGetDamage, damageData)
 		enemy.triggerCheck(enemy.onDamageDelt, damageData)
 		tamer.showContent(damageData)
-		addAnimation("damage")
+		self.addAnimation("damage")
 		tamer.HUDD.updateValues()
-		if(self.currentHealth <= 0):
-			self.dying()
 	
 #função de quando o digimon morre, será construída aos poucos
 func dying() -> void:
 	self.triggerCheck(self.onDying, "Dying")
-	pass
+	BTM.outAction("Process Damage")
+	
 #função que processa a aplica um status effect
 func applyStatus(nstatus: StatusEffect) -> void:
-	BTM.inAction()
 	if(statusImunity.has(nstatus.statusId)):
 		if(nstatus.statusType == Enums.StatusType.DEBUFF):
 			tamer.showContent(tr(StringName(nstatus.statusName)) + " " + tr(StringName("Immunity")))
@@ -438,7 +436,6 @@ func applyStatus(nstatus: StatusEffect) -> void:
 	if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 		var statsList: Array = self.statusEffect.values()
 		digimonDisplay.status.resetStatusList(statsList)
-	BTM.outAction("Aplying Status")
 
 #função para remover um status.
 func unapplyStatus(statusID: int) -> void:
@@ -482,6 +479,8 @@ func learnSkill(skill: Skill) -> void:
 					self.tamer.startRearrange()
 			if(_learned):
 				self.digimonLearnedSkills.append(skill.skillId)
+				if(self.tamer is Player):
+					self.tamer.buttonPanel.checkSkillDisplay()
 
 
 func unlearnSkill(skill: Skill) -> void:
@@ -535,7 +534,7 @@ func updateMaxMana(newMaxMana: float) -> void:
 	tamer.HUDD.setMana()
 
 func heal(value: float, isMana: bool) -> void:
-	BTM.inAction()
+	BTM.inAction("Digimon Heal")
 	value = Util.cap(value)
 	var newHealData: HealData = HealData.new()
 	newHealData.buildData(value, isMana)
@@ -565,7 +564,7 @@ func manaConsumption(value: float) -> void:
 	tamer.HUDD.updateValues()
 
 func action() -> void:
-	BTM.inAction()
+	BTM.inAction("Digimon Action Process")
 	if(selectedSkill != null):
 		actionsToGo.append(selectedSkill)
 		selectedSkill = null
@@ -576,26 +575,29 @@ func action() -> void:
 			if(currentAction.skillIcon != null):
 				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
 			currentAction.effect(self)
-			BTM.outAction("Action: no animation skill")
+			BTM.outAction("Digimon Action Process")
 		elif(currentAction.needsAnimation == true and isDisabled == false):
 			addAnimation("action")
 			if(currentAction.skillIcon != null):
 				self.skillAnnouncer.announceSkill(currentAction.skillIcon)
 		else:
 			self.tamer.showContent(tr(StringName("Denied"))+"("+tr(StringName(currentAction.skillName))+")")
-			BTM.outAction("Disabled")
+			BTM.outAction("Digimon Action Process(Disabled)")
 		triggerCheck(self.onActing, self.currentAction)
 	else:
-		BTM.outAction("Digimon no action")
+		BTM.outAction("Digimon Action Process")
 
 func animationFinished(anim_name: String) -> void:
 	if(anim_name == "action"):
 		currentAction.effect(self)
 		addAnimation(currentAnimation)
-		BTM.outAction("Action: animation skill")
+		BTM.outAction("Digimon Action Process")
 	elif(anim_name == "damage"):
 		addAnimation(currentAnimation)
-		BTM.outAction("Digimon finish damaged")
+		if(self.currentHealth <= 0):
+			self.dying()
+		else:
+			BTM.outAction("Process Damage")
 	elif(anim_name == "freeze"):
 		currentAnimation = anim_name
 	if(animationQueue.size() > 0):
@@ -621,8 +623,9 @@ func getActions(nActions: int) -> void:
 
 #função que varre e verifica triggers, semelhante a mesma função encontrada no BattleManager
 func triggerCheck(triggersToTest: Array, context) -> void:
-	self.BTM.inAction()
+	self.BTM.inAction("Trigger Check")
 	if((self.onChanging or self.onEvolving) and triggersToTest != self.onLearnSkill):
+		self.BTM.outAction("Trigger Check")
 		return
 	else:
 		if(triggersToTest.size() > 0):
@@ -693,6 +696,7 @@ func unequipItem(equipIndex: int) -> void:
 			digimonDisplay.armory.buildIcons(self.armory)
 		tamer.showContent(tr(StringName("Unequiped")) + "("+ tr(StringName(equip.itemName))+")")
 		if(equip.equipType == Enums.EquipmentType.WEAPON):
+			self.unlearnSkill(self.digimonSkills[0])
 			self.learnSkill(BasicAtack.new())
 			if(self.tamer is Player):
 				self.tamer.updateInterface()
@@ -733,7 +737,7 @@ func cleanChildren() -> void:
 		instance.barrierInstance.queue_free()
 
 func Evolve(newDigimonId: int) -> void:
-	self.BTM.inAction()
+	self.BTM.inAction("Evolution")
 	#bloquando os botõs e fechando janelas
 	if(self.tamer is Player):
 		self.tamer.buttonPanel.blockAllButtons()
@@ -745,6 +749,7 @@ func Evolve(newDigimonId: int) -> void:
 	var ncurrentMana: float = Util.getProportion(self.currentMana, self.maxMana)
 	var ref = self.tamer.tamerReference
 	self.onEvolving = true
+	var extraSkills: Array =  [self.digimonSkills[2], self.digimonSkills[3], self.digimonSkills[4]]#criação de array com habilidades extras
 	#tratamento de remoção do digimon
 	if(ref.playerParty[ref.playerCurrentChoice] == self.digimonId):
 		ref.removeFromParty(ref.playerCurrentChoice)
@@ -762,16 +767,12 @@ func Evolve(newDigimonId: int) -> void:
 	self.setAttributes(stats)
 	self.levelUpAttributes(currentLevel)
 	#mudança de habilidades
-	var extraSkills: Array = ref.digimonActiveSkills[ref.playerCurrentChoice] #criação de array com habilidades extras
 	if(self.tamer is Enemy): #tratando skills do inimigo para que ele nunca tenha que rearranjar (dinâmica exclusiva para jogadores)
 		self.rearrangementSkills = extraSkills
 		self.needRearrangement = false
 	else:
-		if(extraSkills.size() < 3): #validação do array
-			while(extraSkills.size() < 3): #ajuste se necessário
-				extraSkills.append(null)
 		var newIndex: int = Util.emptySlot(extraSkills) #encontrando index válido
-		if(newIndex != -1): #caso tenha espaçoa para uma habilidade nova
+		if(newIndex != -1): #caso tenha espaço para uma habilidade nova
 			extraSkills[newIndex] = extraSkills[0]
 			extraSkills[0] = self.digimonSkills[1] #incluindo habilidade assinatura nas novas skills, pois será mantida
 			self.needRearrangement = false 
@@ -791,7 +792,6 @@ func Evolve(newDigimonId: int) -> void:
 
 func globalFeedback() ->void:
 	if(not self.needRearrangement or self.tamer is Enemy):
-		print("Vindo aqui")
 		self.rearrangeSkill() 
 		if(self.onEvolving):
 			self.finishEvolution()
@@ -808,13 +808,13 @@ func globalFeedback() ->void:
 
 func rearrangeSkill() -> void:
 	var newSkills: Array[Skill] = [self.digimonSkills[0], SkillDB.getNative(self.digimonId, 1)]
+	newSkills.append_array(self.rearrangementSkills)
 	#resetando skills
-	for oskill: Skill in self.digimonSkills:
-		if(oskill != null):
-			self.unlearnSkill(oskill)
-	newSkills.append_array(rearrangementSkills)
-	for nSkill: Skill in newSkills:
-		self.learnSkill(nSkill)
+	for i: int in range(newSkills.size()):
+		if(newSkills[i].skillId != self.digimonSkills[i].skillId):
+			self.unlearnSkill(self.digimonSkills[i])
+			self.learnSkill(newSkills[i])
+	self.rearrangementSkills.clear()
 
 #função que finalmente encerra o processo de evolução
 func finishEvolution() -> void:
@@ -826,4 +826,4 @@ func finishEvolution() -> void:
 		self.tamer.HUDD.updateValues()
 	self.onEvolving = false
 	self.triggerCheck(onEvolution, "Evolve")
-	self.BTM.outAction("Evolution Finished")
+	self.BTM.outAction("Evolution")
