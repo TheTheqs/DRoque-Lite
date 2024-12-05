@@ -55,7 +55,7 @@ func loadContent() -> void:
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
 	#teste: gerando equipamentos.
-	self.currentEquipments[0].append(ItemDB.getEquipment(2))
+	self.currentEquipments[0].append(ItemDB.getEquipment(1))
 	#teste de inventário
 	playerInventory.append(ItemDB.getUsableItem(9))
 	playerInventory.append(ItemDB.getUsableItem(9))
@@ -73,6 +73,7 @@ func loadContent() -> void:
 	playerInventory.append(statusDisk)
 	playerInventory.append(damageDisk)
 	playerInventory.append(damageDisk2)
+	playerInventory.append(ItemDB.getEquipment(2))
 	#teste status effect
 
 #Função que adiciona um digimon ao grupo

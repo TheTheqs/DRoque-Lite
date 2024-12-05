@@ -465,6 +465,7 @@ func learnSkill(skill: Skill) -> void:
 		else:
 			if(skill is PassiveSkill):
 				skill.learn(self, -1) #esse menos um é figurativo
+				_learned = true
 				self.digimonPassiveSkills[skill.skillId] = skill
 				self.passiveCount[skill.skillId] = 1 #cria uma contagem de passivas, para evitar remoção indevida
 				if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
@@ -497,14 +498,14 @@ func unlearnSkill(skill: Skill) -> void:
 						self.digimonDisplay.passives.removePass(skill.skillId)
 					passiveCount.erase(skill.skillId)
 			else:
-				print("ERROR: Skill not known")
+				print("ERROR: Skill not known 4")
 		else:
 			var skillIndex: int = self.digimonSkills.find(skill)
 			skill.unlearn(self)
 			self.digimonSkills[skillIndex] = null
 			digimonLearnedSkills.erase(skill.skillId)
 	else:
-		print("ERROR: Skill not known")
+		print("ERROR: Skill not known ", str(skill.skillId), tr(StringName(skill.skillName)))
 
 
 func levelUpAttributes(level: int) -> void:
@@ -695,11 +696,8 @@ func unequipItem(equipIndex: int) -> void:
 		if(self.digimonDisplay.currentDigimon == self and digimonDisplay.visible):
 			digimonDisplay.armory.buildIcons(self.armory)
 		tamer.showContent(tr(StringName("Unequiped")) + "("+ tr(StringName(equip.itemName))+")")
-		if(equip.equipType == Enums.EquipmentType.WEAPON):
-			self.unlearnSkill(self.digimonSkills[0])
-			self.learnSkill(BasicAtack.new())
-			if(self.tamer is Player):
-				self.tamer.updateInterface()
+		if(self.tamer is Player):
+			self.tamer.updateInterface()
 	else:
 		print("ERROR: no equip to be removed!")
 
@@ -749,7 +747,10 @@ func Evolve(newDigimonId: int) -> void:
 	var ncurrentMana: float = Util.getProportion(self.currentMana, self.maxMana)
 	var ref = self.tamer.tamerReference
 	self.onEvolving = true
-	var extraSkills: Array =  [self.digimonSkills[2], self.digimonSkills[3], self.digimonSkills[4]]#criação de array com habilidades extras
+	var extraSkills: Array = [] #criação de array com habilidades extras
+	for i: int in range(2, self.digimonSkills.size()):
+		if(self.digimonSkills[i] != null):
+			extraSkills.append(self.digimonSkills[i])
 	#tratamento de remoção do digimon
 	if(ref.playerParty[ref.playerCurrentChoice] == self.digimonId):
 		ref.removeFromParty(ref.playerCurrentChoice)
@@ -767,18 +768,16 @@ func Evolve(newDigimonId: int) -> void:
 	self.setAttributes(stats)
 	self.levelUpAttributes(currentLevel)
 	#mudança de habilidades
+	self.rearrangementSkills.clear()
 	if(self.tamer is Enemy): #tratando skills do inimigo para que ele nunca tenha que rearranjar (dinâmica exclusiva para jogadores)
 		self.rearrangementSkills = extraSkills
 		self.needRearrangement = false
 	else:
-		var newIndex: int = Util.emptySlot(extraSkills) #encontrando index válido
-		if(newIndex != -1): #caso tenha espaço para uma habilidade nova
-			extraSkills[newIndex] = extraSkills[0]
-			extraSkills[0] = self.digimonSkills[1] #incluindo habilidade assinatura nas novas skills, pois será mantida
+		if(extraSkills.size() < 3): #caso tenha espaço para uma habilidade nova
+			extraSkills.append(self.digimonSkills[1]) #incluindo habilidade assinatura nas novas skills, pois será mantida
 			self.needRearrangement = false 
 			self.rearrangementSkills.append_array(extraSkills)
 		else: #caso nao tenha espaço
-			self.rearrangementSkills.clear()
 			self.rearrangementSkills.append(self.digimonSkills[1])
 			self.rearrangementSkills.append_array(extraSkills)
 			self.needRearrangement = true
@@ -811,7 +810,9 @@ func rearrangeSkill() -> void:
 	newSkills.append_array(self.rearrangementSkills)
 	#resetando skills
 	for i: int in range(newSkills.size()):
-		if(newSkills[i].skillId != self.digimonSkills[i].skillId):
+		if(self.digimonSkills[i] == null ):
+			self.learnSkill(newSkills[i])
+		elif(newSkills[i].skillId != self.digimonSkills[i].skillId):
 			self.unlearnSkill(self.digimonSkills[i])
 			self.learnSkill(newSkills[i])
 	self.rearrangementSkills.clear()

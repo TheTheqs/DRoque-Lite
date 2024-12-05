@@ -158,6 +158,10 @@ func updateTurn() -> void:
 		self.turnLabel.text = str(turn)
 	else:
 		upgradeTurn = true
+	if(turn == 2):
+		var disarm: Disarm = Disarm.new(2)
+		disarm.schance = -1
+		playerDigimon.applyStatus(disarm)
 
 func closeAllWindows() -> void: #função usada para forçar que todas as janelas sejam fechadas. Ainda nao inclui menu por ainda nao estar implementado
 	for window in allWindows:

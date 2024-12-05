@@ -2,7 +2,7 @@ extends Node
 
 class_name Translator
 #manter o valor abaixo sempre atualizado! ele representa o número de msgs no banco de dados
-var currentMessageSize: int = 317
+var currentMessageSize: int = 324
 #lista de documentos referência
 var languages: Dictionary = {
 	"en" : "res://translation/enUS.tres",
@@ -19,7 +19,7 @@ var currentDictionary: Translation
 
 func _ready() -> void:
 	if(not currentLanguage):
-		changeLanguage("pt")
+		changeLanguage("en")
 
 func changeLanguage(newLanguage: String) -> void:
 	if (newLanguage in languages):

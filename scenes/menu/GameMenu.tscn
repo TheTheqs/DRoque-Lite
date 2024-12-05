@@ -1,0 +1,169 @@
+[gd_scene load_steps=11 format=3 uid="uid://xgfdfa47udcd"]
+
+[ext_resource type="Script" path="res://scripts/interface builders/game menu/GameMenu.gd" id="1_qk4ei"]
+[ext_resource type="Texture2D" uid="uid://bqleyrevmlrnn" path="res://assets/interface/UI/MenuWindow.png" id="2_bey48"]
+[ext_resource type="PackedScene" uid="uid://cy7ro4867yebk" path="res://scenes/formatting standards/label.tscn" id="3_u8ugn"]
+[ext_resource type="Texture2D" uid="uid://sww7gcysggkm" path="res://assets/interface/Icons/InterfaceIcons/BackButton.png" id="3_v3iwh"]
+[ext_resource type="Script" path="res://scripts/interface builders/game menu/MainOptions.gd" id="4_e88lr"]
+[ext_resource type="PackedScene" uid="uid://bvn4a06hcweg3" path="res://scenes/formatting standards/MenuButton.tscn" id="5_y8gnr"]
+[ext_resource type="Script" path="res://scripts/interface builders/game menu/Config.gd" id="7_8tvpq"]
+[ext_resource type="Script" path="res://scripts/interface builders/game menu/Language.gd" id="8_bnnl7"]
+[ext_resource type="PackedScene" uid="uid://dqw2q55o530pr" path="res://scenes/formatting standards/closeButton.tscn" id="8_vxb74"]
+[ext_resource type="PackedScene" uid="uid://4fg6qy6sgy36" path="res://scenes/entities/ConfirmationWindow.tscn" id="9_uhvlg"]
+
+[node name="GameMenu" type="Node2D" node_paths=PackedStringArray("title", "closeButton", "backButton", "canvas", "confimWindow", "fade", "allMenus")]
+visible = false
+position = Vector2(135, 212)
+script = ExtResource("1_qk4ei")
+title = NodePath("FadeProtector/Title")
+closeButton = NodePath("FadeProtector/CloseButton")
+backButton = NodePath("FadeProtector/BackButton")
+canvas = NodePath("FadeProtector")
+confimWindow = NodePath("FadeProtector/Confirmation Window")
+fade = NodePath("BackFade")
+allMenus = [NodePath("FadeProtector/Main"), NodePath("FadeProtector/Config"), NodePath("FadeProtector/Language")]
+
+[node name="FadeProtector" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="BackButton" parent="FadeProtector" instance=ExtResource("8_vxb74")]
+offset_left = 220.0
+offset_top = 338.0
+offset_right = 242.0
+offset_bottom = 360.0
+icon = ExtResource("3_v3iwh")
+
+[node name="CloseButton" parent="FadeProtector" instance=ExtResource("8_vxb74")]
+offset_left = 220.0
+offset_top = 86.0
+offset_right = 242.0
+offset_bottom = 108.0
+
+[node name="Window" type="Sprite2D" parent="FadeProtector"]
+position = Vector2(135, 212)
+texture = ExtResource("2_bey48")
+
+[node name="Title" parent="FadeProtector" instance=ExtResource("3_u8ugn")]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -147.0
+offset_right = -50.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="Node2D" parent="FadeProtector" node_paths=PackedStringArray("allButtons", "gameMenu")]
+visible = false
+position = Vector2(135, 131)
+script = ExtResource("4_e88lr")
+allButtons = [NodePath("MainOptions/Options/Config")]
+gameMenu = NodePath("../..")
+
+[node name="MainOptions" type="ScrollContainer" parent="FadeProtector/Main"]
+custom_minimum_size = Vector2(160, 190)
+layout_direction = 2
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = -18.0
+offset_right = 80.0
+offset_bottom = 204.0
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Options" type="BoxContainer" parent="FadeProtector/Main/MainOptions"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+vertical = true
+
+[node name="Config" parent="FadeProtector/Main/MainOptions/Options" instance=ExtResource("5_y8gnr")]
+layout_mode = 2
+
+[node name="Config" type="Node2D" parent="FadeProtector" node_paths=PackedStringArray("allButtons", "gameMenu")]
+visible = false
+position = Vector2(135, 131)
+script = ExtResource("7_8tvpq")
+allButtons = [NodePath("MainOptions/Options/Language")]
+gameMenu = NodePath("../..")
+
+[node name="MainOptions" type="ScrollContainer" parent="FadeProtector/Config"]
+custom_minimum_size = Vector2(160, 190)
+layout_direction = 2
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = -18.0
+offset_right = 80.0
+offset_bottom = 204.0
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Options" type="BoxContainer" parent="FadeProtector/Config/MainOptions"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+vertical = true
+
+[node name="Language" parent="FadeProtector/Config/MainOptions/Options" instance=ExtResource("5_y8gnr")]
+layout_mode = 2
+
+[node name="Language" type="Node2D" parent="FadeProtector" node_paths=PackedStringArray("currentLanguageText", "flag", "allButtons", "gameMenu")]
+visible = false
+position = Vector2(135, 131)
+script = ExtResource("8_bnnl7")
+currentLanguageText = NodePath("CLang")
+flag = NodePath("Flag")
+allButtons = [NodePath("MainOptions/Options/enUS"), NodePath("MainOptions/Options/ptBR")]
+gameMenu = NodePath("../..")
+
+[node name="MainOptions" type="ScrollContainer" parent="FadeProtector/Language"]
+custom_minimum_size = Vector2(160, 150)
+layout_direction = 2
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = -18.0
+offset_right = 80.0
+offset_bottom = 132.0
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Options" type="BoxContainer" parent="FadeProtector/Language/MainOptions"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+vertical = true
+
+[node name="enUS" parent="FadeProtector/Language/MainOptions/Options" instance=ExtResource("5_y8gnr")]
+layout_mode = 2
+expand_icon = false
+
+[node name="ptBR" parent="FadeProtector/Language/MainOptions/Options" instance=ExtResource("5_y8gnr")]
+layout_mode = 2
+expand_icon = false
+
+[node name="CLang" parent="FadeProtector/Language" instance=ExtResource("3_u8ugn")]
+offset_left = -82.0
+offset_top = 150.0
+offset_right = 82.0
+offset_bottom = 171.0
+
+[node name="Flag" type="Sprite2D" parent="FadeProtector/Language"]
+position = Vector2(0, 185)
+
+[node name="Confirmation Window" parent="FadeProtector" instance=ExtResource("9_uhvlg")]
+visible = false
+position = Vector2(3, 55)
+
+[node name="BackFade" type="CanvasModulate" parent="."]
+
+[connection signal="button_down" from="FadeProtector/BackButton" to="." method="goingBack"]
+[connection signal="button_down" from="FadeProtector/CloseButton" to="." method="closing"]
+[connection signal="button_down" from="FadeProtector/Main/MainOptions/Options/Config" to="FadeProtector/Main" method="openConfig"]
+[connection signal="button_down" from="FadeProtector/Config/MainOptions/Options/Language" to="FadeProtector/Config" method="openLanguage"]
+[connection signal="button_down" from="FadeProtector/Language/MainOptions/Options/enUS" to="FadeProtector/Language" method="usSelected"]
+[connection signal="button_down" from="FadeProtector/Language/MainOptions/Options/ptBR" to="FadeProtector/Language" method="ptSelected"]

@@ -7,12 +7,13 @@ class_name ButtonPanel
 @export var displayWindow: DigimonDisplay
 @export var playerHUDD: HUDDisplay
 @export var enemyHUDD: HUDDisplay 
-#Botões
+#Botões e janelas
 @export var allButtons: Array[ButtonDescription]
 @export var skillButtons: Array[ButtonDescription]
 @export var showDescTimer: Timer
 @export var infoWindow: InfoWindow
 @export var inventoryDisplay: InventoryDisplay
+@export var gameMenu: GameMenu
 @export var changeDigimonWindow: ChangeDigimonWindow
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
@@ -125,6 +126,8 @@ func activateButton() -> void:
 		inventoryDisplay.opening()
 	elif(currentButtonToShow == allButtons[3] and !descWindowOn):
 		changeDigimonWindow.opening()
+	elif(currentButtonToShow == allButtons[1] and !descWindowOn):
+		gameMenu.opening()
 #funções de exibição da tela de informações de digimon
 func showDisplay(digimon: Digimon) -> void:
 	displayWindow.currentDigimon = digimon

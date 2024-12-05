@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvn4a06hcweg3"]
+
+[ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_7px5k"]
+[ext_resource type="StyleBox" uid="uid://c4cw6xtmw832l" path="res://resources/styles/ButtonStyle.tres" id="2_03ii7"]
+
+[node name="MenuButton" type="Button"]
+custom_minimum_size = Vector2(160, 20)
+theme_override_colors/font_outline_color = Color(1, 0.905882, 0.772549, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("1_7px5k")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = ExtResource("2_03ii7")
+theme_override_styles/disabled_mirrored = ExtResource("2_03ii7")
+theme_override_styles/disabled = ExtResource("2_03ii7")
+theme_override_styles/hover_pressed_mirrored = ExtResource("2_03ii7")
+theme_override_styles/hover_pressed = ExtResource("2_03ii7")
+theme_override_styles/hover_mirrored = ExtResource("2_03ii7")
+theme_override_styles/hover = ExtResource("2_03ii7")
+theme_override_styles/pressed_mirrored = ExtResource("2_03ii7")
+theme_override_styles/pressed = ExtResource("2_03ii7")
+theme_override_styles/normal_mirrored = ExtResource("2_03ii7")
+theme_override_styles/normal = ExtResource("2_03ii7")
+alignment = 0
+expand_icon = true

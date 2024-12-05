@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b8cljij0hnlgg"]
+[gd_scene load_steps=41 format=3 uid="uid://b8cljij0hnlgg"]
 
 [ext_resource type="Script" path="res://scripts/entities/BattleManager.gd" id="1_0d28g"]
 [ext_resource type="Texture2D" uid="uid://nan8eriucsik" path="res://assets/interface/UI/PlayerPanel.png" id="1_vipw6"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dkhtck1ehj6gc" path="res://scenes/entities/ChangeDigimonWindow.tscn" id="22_tjuxr"]
 [ext_resource type="PackedScene" uid="uid://c0g711owsn45d" path="res://scenes/entities/RearrangementWindow.tscn" id="23_de3u7"]
 [ext_resource type="PackedScene" uid="uid://04rk14jaa03a" path="res://scenes/entities/GlobalEffects.tscn" id="26_fbi7d"]
+[ext_resource type="PackedScene" uid="uid://xgfdfa47udcd" path="res://scenes/menu/GameMenu.tscn" id="27_dswo8"]
 
 [sub_resource type="Animation" id="Animation_spino"]
 length = 0.001
@@ -325,7 +326,7 @@ libraries = {
 "": SubResource("AnimationLibrary_120a3")
 }
 
-[node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "playerHUDD", "enemyHUDD", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "inventoryDisplay", "changeDigimonWindow", "BM", "BTM")]
+[node name="ButtonPanel" type="Node2D" parent="BattleManager/Player" node_paths=PackedStringArray("relatedPlayer", "relatedDigimon", "displayWindow", "playerHUDD", "enemyHUDD", "allButtons", "skillButtons", "showDescTimer", "infoWindow", "inventoryDisplay", "gameMenu", "changeDigimonWindow", "BM", "BTM")]
 script = ExtResource("14_eg1gf")
 relatedPlayer = NodePath("..")
 relatedDigimon = NodePath("../Digimon")
@@ -337,6 +338,7 @@ skillButtons = [NodePath("BasicAttack"), NodePath("SignatureSkill"), NodePath("E
 showDescTimer = NodePath("DescTimer")
 infoWindow = NodePath("../../InfoWindow")
 inventoryDisplay = NodePath("../Inventory")
+gameMenu = NodePath("../../GameMenu")
 changeDigimonWindow = NodePath("../ChangeDigimonWindow")
 BM = NodePath("../../BattleMessage")
 BTM = NodePath("../..")
@@ -469,6 +471,9 @@ buttonPanel = NodePath("../Player/ButtonPanel")
 [node name="InfoWindow" parent="BattleManager" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("17_st51s")]
 visible = false
 position = Vector2(140, 200)
+buttonPanel = NodePath("../Player/ButtonPanel")
+
+[node name="GameMenu" parent="BattleManager" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("27_dswo8")]
 buttonPanel = NodePath("../Player/ButtonPanel")
 
 [node name="GlobalEffects" parent="." instance=ExtResource("26_fbi7d")]

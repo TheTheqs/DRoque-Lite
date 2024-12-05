@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3]
+[gd_resource type="Translation" format=3 uid="uid://dn5pohwy67swb"]
 
 [resource]
 messages = {
@@ -18,12 +18,15 @@ messages = {
 "BattleMessage6": &"Encerrando o turno...",
 "BattleMessage7": &" passou o turno.",
 "Block": &"BLOQUEADO",
+"CLang": &"Idioma Atual",
+"CLangChange": &"Tem certeza que deseja mudar o idioma para ",
 "CantEquip": &"Equipamento bloqueado",
 "CantUse": &"Habilidade Indisponível!",
 "CantUseItem": &"O Digimon não pode usar itens!",
 "ChangeLanguage": &"Mudar idioma",
-"CompanionButtonDescription": &"Selecione um Digimon Companheiro (se possrui um) para tomar o seu lugar na batalha.",
+"CompanionButtonDescription": &"Selecione um Digimon Companheiro (se possuir um) para tomar o seu lugar na batalha.",
 "CompanionButtonTittle": &"Trocar de lugar com o Companheiro.",
+"Config": &"CONFIGURAÇÕES",
 "DEX": &"DES",
 "Denied": &"NEGADO",
 "Desabled": &"Incapacitado",
@@ -45,7 +48,7 @@ messages = {
 "Duration": &"Duração",
 "EVRearrengeAlert": &"Você precisa escolher uma habilidade para substituir!",
 "Equiped": &"Equipado",
-"EvolutionRearrange": &" atingiu o limite máximo de Habilidades. Escolha uma habilidadeo para ser esquecida: ",
+"EvolutionRearrange": &" atingiu o limite máximo de Habilidades. Escolha uma habilidade para ser esquecida: ",
 "Fail": &"Falha",
 "ForgetSkill": &"Tem certeza que deseja esquecer a habilidade ",
 "INT": &"INT",
@@ -100,9 +103,11 @@ messages = {
 "KarmaEvolution7": &"Entre todos contra todos, serei eu o vitorioso!",
 "KarmaEvolution8": &"Mais temido do que amado, agora torno-me ainda mais temível!",
 "KarmaEvolution9": &"Recebe-se, enfim, a recompensa de viver apenas para si!",
+"Language": &"IDIOMA",
 "LifeSteal": &"Porcentagem de dano convertido: ",
 "MAXHEALTH": &"Vida Máxima",
 "MAXMANA": &"Mana Máxima",
+"Menu": &"MENU",
 "MenuButtonDescription": &"Abre o menu. O jogo não será pausado.",
 "MenuButtonTitle": &"Abrir menu",
 "Miss": &"ERROU",
@@ -318,6 +323,8 @@ messages = {
 "Unequiped": &"Desequipado",
 "VIT": &"VIT",
 "WIS": &"SAB",
-"Yes": &"Sim"
+"Yes": &"Sim",
+"en": &"Inglês(US)",
+"pt": &"Português(BR)"
 }
 locale = "pt"
