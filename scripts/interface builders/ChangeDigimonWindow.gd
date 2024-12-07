@@ -40,7 +40,8 @@ func closing() -> void:
 
 #função que força o fechamento da janela
 func forcedClose() -> void:
-	self.visible = false
+	if(self.visible):
+		self.closing()
 
 #chamadas de troca
 func changeDigmon0() -> void:

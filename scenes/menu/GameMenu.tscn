@@ -20,7 +20,7 @@ closeButton = NodePath("FadeProtector/CloseButton")
 backButton = NodePath("FadeProtector/BackButton")
 canvas = NodePath("FadeProtector")
 confimWindow = NodePath("FadeProtector/Confirmation Window")
-fade = NodePath("BackFade")
+fade = NodePath("FadeCanvas")
 allMenus = [NodePath("FadeProtector/Main"), NodePath("FadeProtector/Config"), NodePath("FadeProtector/Language")]
 
 [node name="FadeProtector" type="CanvasLayer" parent="."]
@@ -159,7 +159,7 @@ position = Vector2(0, 185)
 visible = false
 position = Vector2(3, 55)
 
-[node name="BackFade" type="CanvasModulate" parent="."]
+[node name="FadeCanvas" type="CanvasModulate" parent="."]
 
 [connection signal="button_down" from="FadeProtector/BackButton" to="." method="goingBack"]
 [connection signal="button_down" from="FadeProtector/CloseButton" to="." method="closing"]

@@ -739,8 +739,10 @@ func Evolve(newDigimonId: int) -> void:
 	#bloquando os botõs e fechando janelas
 	if(self.tamer is Player):
 		self.tamer.buttonPanel.blockAllButtons()
+		self.tamer.buttonPanel.allowBlockUnblock = false
 	else:
 		self.tamer.opponent.buttonPanel.blockAllButtons()
+		self.tamer.opponent.buttonPanel.allowBlockUnblock = false
 	self.BTM.closeAllWindows()
 	self.visible = false
 	var ncurrentHealth: float = Util.getProportion(self.currentHealth, self.maxHelth)
@@ -820,9 +822,11 @@ func rearrangeSkill() -> void:
 #função que finalmente encerra o processo de evolução
 func finishEvolution() -> void:
 	if(self.tamer is Player):
+		self.tamer.buttonPanel.allowBlockUnblock = false
 		self.tamer.buttonPanel.unBlockAllButtons()
 		self.tamer.updateInterface()
 	else:
+		self.tamer.opponent.buttonPanel.allowBlockUnblock = true
 		self.tamer.opponent.buttonPanel.unBlockAllButtons()
 		self.tamer.HUDD.updateValues()
 	self.onEvolving = false

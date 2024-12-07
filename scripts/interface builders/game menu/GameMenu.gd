@@ -9,6 +9,7 @@ class_name GameMenu
 @export var confimWindow: ConfirmationWindow
 @export var fade: CanvasModulate
 @export var buttonPanel: ButtonPanel
+@export var BTM: BattleManager
 #lista de janelas em cena
 @export var allMenus: Array[MenuWindow]
 #variável que indica a janela que está atualmente aberta
@@ -35,6 +36,8 @@ func openMenu(index: int) -> void:
 
 func closing() -> void:
 	self.toggleVisible(false)
+	if(self.confimWindow.visible):
+		self.confimWindow.confirmNo()
 	self.fade.color = Color(1, 1, 1)
 	self.buttonPanel.unBlockAllButtons()
 
@@ -44,3 +47,7 @@ func goingBack() -> void:
 func toggleVisible(isVisible: bool) -> void:
 	self.canvas.visible = isVisible
 	self.visible = isVisible
+#função que força o fechamento do menu quando necessário
+func forcedClose() -> void:
+	if(self.visible):
+		self.closing()

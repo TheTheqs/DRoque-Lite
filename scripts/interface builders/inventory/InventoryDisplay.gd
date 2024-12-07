@@ -27,6 +27,7 @@ func opening() -> void:
 
 func closing() -> void:
 	self.visible = false
+	self.infoWindow.visible = false
 	buttonPanel.unBlockAllButtons()
 
 func resetInventory() -> void:
@@ -74,5 +75,5 @@ func showEquipWindow(equip: Equipment) -> void:
 	infoWindow.popEquipWindow(equip, self)
 
 func forcedClose() -> void:
-	self.infoWindow.visible = false
-	self.visible = false
+	if(self.visible):
+		self.closing()

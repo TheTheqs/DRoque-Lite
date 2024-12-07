@@ -67,8 +67,8 @@ func showEquipWindow(equip: Equipment) -> void:
 	quickWindow.popEquipWindow(equip, self)
 
 func forcedClose() -> void:
-	self.quickWindow.visible = false
-	self.visible = false
+	if(self.visible):
+		self.toggleDisplay()
 
 func resetEquips() -> void:
 	self.armory.resetEquipButtons()

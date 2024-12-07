@@ -84,7 +84,6 @@ func saveDigimon(oDigimon: Digimon) -> void:
 
 #função de troca de digimon
 func changeDigimon(newChoice: int) -> void:
-	self.BTM.closeAllWindows()
 	self.digimon.statusDisplay.stopShowing()
 	self.saveDigimon(self.digimon)
 	self.digimon.resetTriggers()

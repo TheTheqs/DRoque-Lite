@@ -18,6 +18,7 @@ class_name ButtonPanel
 @export var BM: BattleMessenger
 @export var BTM: BattleManager
 var descWindowOn: bool = false
+var allowBlockUnblock: bool = true #variável que vai barrar a manipulação da disponobilidade de botões.
 var currentButtonToShow: ButtonDescription
 #setar os botões padrões.
 func _ready() -> void:
@@ -44,16 +45,18 @@ func updateButtons() -> void:
 		nbutton.updateSkills()
 
 func blockAllButtons() -> void:
-	for cbutton in allButtons:
-		cbutton.visible = false
+	if(self.allowBlockUnblock):
+		for cbutton in allButtons:
+			cbutton.visible = false
 
 
 func unBlockAllButtons() -> void:
-	for cbutton in allButtons:
-		cbutton.visible = true
-	setButtons()
-	updateButtons()
-	toggleDisplay(false)
+	if(self.allowBlockUnblock):
+		for cbutton in allButtons:
+			cbutton.visible = true
+		setButtons()
+		updateButtons()
+		toggleDisplay(false)
 
 func _on_pass_turn_button_down():
 	currentButtonToShow = allButtons[0]

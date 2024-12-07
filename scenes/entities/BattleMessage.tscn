@@ -1,12 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkgpmujw3pmp1"]
+[gd_scene load_steps=6 format=3 uid="uid://dkgpmujw3pmp1"]
 
 [ext_resource type="FontFile" uid="uid://okb5knv2qkj7" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_djrxr"]
 [ext_resource type="Script" path="res://scripts/interface builders/BattleMessenger.gd" id="2_v0aoc"]
 
-[node name="BattleMessage" type="Node2D" node_paths=PackedStringArray("changeMessageTimer", "content")]
+[sub_resource type="Animation" id="Animation_bl0rv"]
+resource_name = "blink"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Content:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ovg7h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Content:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mff2l"]
+_data = {
+"RESET": SubResource("Animation_ovg7h"),
+"blink": SubResource("Animation_bl0rv")
+}
+
+[node name="BattleMessage" type="Node2D" node_paths=PackedStringArray("changeMessageTimer", "content", "anime")]
 script = ExtResource("2_v0aoc")
 changeMessageTimer = NodePath("ChangeMessage")
 content = NodePath("Content")
+anime = NodePath("Anime")
 
 [node name="Content" type="RichTextLabel" parent="."]
 offset_left = 4.0
@@ -23,4 +62,10 @@ scroll_active = false
 [node name="ChangeMessage" type="Timer" parent="."]
 one_shot = true
 
+[node name="Anime" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mff2l")
+}
+
 [connection signal="timeout" from="ChangeMessage" to="." method="onChangeMessageTimeout"]
+[connection signal="animation_finished" from="Anime" to="." method="afterBlink"]

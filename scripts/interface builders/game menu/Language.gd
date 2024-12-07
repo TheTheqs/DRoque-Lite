@@ -47,10 +47,15 @@ func changeLanguage() -> void:
 func confirmation(confirm: bool) -> void:
 	if(confirm):
 		self.changeLanguage()
-	self.gameMenu.closeButton.disabled = false
-	self.gameMenu.backButton.disabled = false
+		self.gameMenu.BTM.updateInterface()
+	self.manageBlockUnblock(false)
 
 func askPermition() -> void:
-	self.gameMenu.closeButton.disabled = true
-	self.gameMenu.backButton.disabled = true
+	self.manageBlockUnblock(true)
 	self.gameMenu.confimWindow.requireConfirmation(tr(StringName("CLangChange")) + tr(StringName(self.choiceLanguage[0])) + "?", self)
+
+func manageBlockUnblock(command: bool) -> void:
+	for button: Button in self.allButtons:
+		button.disabled = command
+	self.gameMenu.closeButton.disabled = command
+	self.gameMenu.backButton.disabled = command

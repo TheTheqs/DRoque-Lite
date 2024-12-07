@@ -202,7 +202,7 @@ enemyDigimon = NodePath("Enemy/Digimon")
 changeTurnTimer = NodePath("ChangeTurn")
 BM = NodePath("BattleMessage")
 turnLabel = NodePath("Turn")
-allWindows = [NodePath("InfoWindow"), NodePath("Digimon Display"), NodePath("Player/Inventory"), NodePath("Player/ChangeDigimonWindow")]
+allWindows = [NodePath("InfoWindow"), NodePath("Digimon Display"), NodePath("Player/Inventory"), NodePath("Player/ChangeDigimonWindow"), NodePath("GameMenu")]
 
 [node name="Enemy" type="Node2D" parent="BattleManager" node_paths=PackedStringArray("digimon", "opponent", "HUDD", "judge", "turnFrame", "frameAnimator", "BM", "BTM", "numberSpawner", "actionsDisplay", "actionAnimator")]
 script = ExtResource("4_r5xd6")
@@ -473,8 +473,9 @@ visible = false
 position = Vector2(140, 200)
 buttonPanel = NodePath("../Player/ButtonPanel")
 
-[node name="GameMenu" parent="BattleManager" node_paths=PackedStringArray("buttonPanel") instance=ExtResource("27_dswo8")]
+[node name="GameMenu" parent="BattleManager" node_paths=PackedStringArray("buttonPanel", "BTM") instance=ExtResource("27_dswo8")]
 buttonPanel = NodePath("../Player/ButtonPanel")
+BTM = NodePath("..")
 
 [node name="GlobalEffects" parent="." instance=ExtResource("26_fbi7d")]
 

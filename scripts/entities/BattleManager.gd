@@ -158,12 +158,15 @@ func updateTurn() -> void:
 		self.turnLabel.text = str(turn)
 	else:
 		upgradeTurn = true
-	if(turn == 2):
-		var disarm: Disarm = Disarm.new(2)
-		disarm.schance = -1
-		playerDigimon.applyStatus(disarm)
 
-func closeAllWindows() -> void: #função usada para forçar que todas as janelas sejam fechadas. Ainda nao inclui menu por ainda nao estar implementado
+func closeAllWindows() -> void: #função usada para forçar que todas as janelas sejam fechadas.
 	for window in allWindows:
 		if (window.visible):
 			window.forcedClose()
+
+func updateInterface() -> void: #essa função atualiza as informações de interface, útil em casos, por exemplo, de mudança de idioma no jogo
+	self.BM.showMessage(tr(StringName("LangUpdate")))
+	self.player.HUDD.updateValues()
+	self.enemy.HUDD.updateValues()
+	self.player.takeActions(0)
+	self.enemy.takeActions(0)

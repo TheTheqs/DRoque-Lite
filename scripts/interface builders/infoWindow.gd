@@ -46,7 +46,8 @@ func showIcon(skill: Skill) -> void:
 		skillIcon.visible = false
 
 func forcedClose() -> void:
-	self.visible = false
+	if(self.visible):
+		self.hideWindow()
 
 func showWindow2(icon: CompressedTexture2D, ntitle: String, ncontent: String) -> void:
 	self.onReplace = true

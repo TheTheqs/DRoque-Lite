@@ -53,6 +53,7 @@ func saveDigimon(oDigimon: Digimon) -> void:
 #função de troca de digimon
 func changeDigimon(newChoice: int) -> void:
 	self.buttonPanel.blockAllButtons()
+	self.buttonPanel.allowBlockUnblock = false
 	self.BTM.closeAllWindows()
 	self.digimon.statusDisplay.stopShowing()
 	self.saveDigimon(self.digimon)
@@ -65,6 +66,7 @@ func replaceDigimon() -> void:
 	self.digimon.digimonSprite.visible = true
 	Campaign.playerCurrentChoice = newerChoice
 	#atualização da interface. Sempre a última coisa a se fazer!
+	self.buttonPanel.allowBlockUnblock = true
 	self.updateInterface()
 	self.buttonPanel.unBlockAllButtons()
 	self.digimon.triggerCheck(self.digimon.onChange, "Changing")

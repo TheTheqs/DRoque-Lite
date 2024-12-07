@@ -1,4 +1,4 @@
-[gd_resource type="Translation" format=3 uid="uid://dn5pohwy67swb"]
+[gd_resource type="Translation" format=3]
 
 [resource]
 messages = {
@@ -103,6 +103,7 @@ messages = {
 "KarmaEvolution7": &"Entre todos contra todos, serei eu o vitorioso!",
 "KarmaEvolution8": &"Mais temido do que amado, agora torno-me ainda mais temível!",
 "KarmaEvolution9": &"Recebe-se, enfim, a recompensa de viver apenas para si!",
+"LangUpdate": &"O idioma foi alterado para Português.",
 "Language": &"IDIOMA",
 "LifeSteal": &"Porcentagem de dano convertido: ",
 "MAXHEALTH": &"Vida Máxima",

@@ -7,6 +7,7 @@ var speaking: bool = false
 var messageQueue: Array[String] = []
 @export var changeMessageTimer: Timer
 @export var content: RichTextLabel
+@export var anime: AnimationPlayer
 @export var BTM: BattleManager
 
 func showMessage(newMessage: String) -> void:
@@ -22,8 +23,6 @@ func showMessage(newMessage: String) -> void:
 func speak() -> void:
 	if(messageQueue.size() > 0):
 		changeText(messageQueue[0])
-		messageQueue.remove_at(0)
-		changeMessageTimer.start(1.0)
 
 func onChangeMessageTimeout():
 	if(messageQueue.size() > 0):
@@ -35,3 +34,9 @@ func onChangeMessageTimeout():
 func changeText(newMsg: String) -> void:
 	content.text = ""
 	content.text = str("[center]" + newMsg + "[/center]")
+	self.anime.play("blink")
+
+func afterBlink(anim: String) -> void:
+	if(anim == "blink"):
+		messageQueue.remove_at(0)
+		changeMessageTimer.start(1.0)
