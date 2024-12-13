@@ -23,6 +23,7 @@ var isSlow: bool = false
 #scene elements
 var texture: CompressedTexture2D
 var textureRange: int
+var isGlobal: bool = false
 
 #learning and unlearning abstract functions
 func learn(learner: Digimon, index: int) -> bool:

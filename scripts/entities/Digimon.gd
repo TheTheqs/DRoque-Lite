@@ -822,7 +822,7 @@ func rearrangeSkill() -> void:
 #função que finalmente encerra o processo de evolução
 func finishEvolution() -> void:
 	if(self.tamer is Player):
-		self.tamer.buttonPanel.allowBlockUnblock = false
+		self.tamer.buttonPanel.allowBlockUnblock = true
 		self.tamer.buttonPanel.unBlockAllButtons()
 		self.tamer.updateInterface()
 	else:

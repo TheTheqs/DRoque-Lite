@@ -15,7 +15,7 @@ var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	2 : null
 	}
 var digimonActiveSkills: Dictionary = {
-	0 : [ThornyThrust.new(), GulibleGust.new(), LimiterRemoval.new()], #esses arrays precisam ter de prefencia size fixo em 3
+	0 : [NewsYearEve.new(), GulibleGust.new(), LimiterRemoval.new()], #esses arrays precisam ter de prefencia size fixo em 3
 	1 : [null, null, null],
 	2 : [null, null, null],
 	}

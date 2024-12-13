@@ -15,19 +15,22 @@ func _ready():
 		skillSprite.flip_h = true
 
 func spawSkill(skill: Skill) -> void:
-	skillSprite.hframes = skill.textureRange
-	skillSprite.vframes = 1
 	relatedDigimon.BTM.inAction("Skill Spawner")
 	currentSkill = skill
-	skillSprite.texture = skill.texture
-	var animationCommand: String = "action" + str(skill.textureRange)
-	#manipulação do speed scale para algumas habilidade que ficam melhores quando lentas
-	if(skill.isSlow):
-		animator.speed_scale = 1.0
+	if(skill.isGlobal):
+		self.relatedDigimon.globalEffects.globalSkill.spawGlobalSkill(skill, self)
 	else:
-		animator.speed_scale = 2.0
-	animator.play(animationCommand)
-	self.visible = true
+		skillSprite.hframes = skill.textureRange
+		skillSprite.vframes = 1
+		skillSprite.texture = skill.texture
+		var animationCommand: String = "action" + str(skill.textureRange)
+		#manipulação do speed scale para algumas habilidade que ficam melhores quando lentas
+		if(skill.isSlow):
+			animator.speed_scale = 1.0
+		else:
+			animator.speed_scale = 2.0
+		animator.play(animationCommand)
+		self.visible = true
 
 func _onAnimationFinished(anim_name: String) -> void:
 	self.visible = false

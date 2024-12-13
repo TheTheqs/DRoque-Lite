@@ -3,10 +3,12 @@ extends CanvasModulate
 class_name Fade
 #elementos de cena
 @export var globalVFX: GlobalVFX
+@export var globalSkill: GlobalSkill
 #controle de fade
 var darkSpeed: float = 0.5
 var fading: bool = true
 var fadeLimit: float = 0.15
+var isEvolution = true
 
 func _ready():
 	self.set_process(false)
@@ -40,5 +42,11 @@ func startFade(inOrOut: bool) -> void:
 	self.set_process(true)
 
 func afterFade() -> void:
-	self.globalVFX.afterFade()
+	if(self.isEvolution):
+		self.globalVFX.afterFade()
+	else:
+		if(self.fading):
+			self.globalSkill.afterFading()
+		else:
+			self.globalSkill.afterFadeOut()
 	self.set_process(false)

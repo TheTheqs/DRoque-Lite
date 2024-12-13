@@ -9,6 +9,7 @@ class_name GlobalVFX
 @export var digimonSprite: Sprite2D
 @export var digimonBehave: AnimationPlayer
 @export var globalText: GlobalTextWindow
+@export var globalSkill: GlobalSkill
 #controle de estado
 var state: Enums.GlobalEffectState 
 var currentDigimon: Digimon
@@ -82,6 +83,7 @@ func startEvolution(oldDigimon: CompressedTexture2D, newDigimon: CompressedTextu
 	self.sprite.visible = false
 	self.digimonSprite.visible = true
 	self.digimonBehave.play("idle")
+	self.fade.isEvolution = true
 	self.fade.startFade(true)
 
 func changeSprite() -> void:
