@@ -8,6 +8,7 @@ var digimonName: String
 var digimonIcon: CompressedTexture2D
 var digimonDescription: String
 var evolutionChart: EvolutionChart
+var digimonFusions: Dictionary
 #enums
 var element: Enums.Element
 var digimonTier: Enums.Tier
@@ -225,6 +226,8 @@ func setBasics(stats: DigimonData) -> void:
 	self.possibleEvolution = stats.possibleEvolution
 	if(stats.digimonEVC != null):
 		self.evolutionChart = stats.digimonEVC.new(self)
+	if(stats.digimonFusions.size() > 0):
+		self.digimonFusions = stats.digimonFusions
 #função que seta os atirbutos, vida máxima e mana.
 func setAttributes(stats: DigimonData) -> void:
 	self.baseSTR = 0
@@ -756,8 +759,9 @@ func Evolve(newDigimonId: int) -> void:
 		ref.removeFromParty(ref.playerCurrentChoice)
 	if(self.digimonPassiveSkills.has(SkillDB.getPassiveId(self.digimonId))):
 		self.unlearnSkill(self.digimonPassiveSkills[SkillDB.getPassiveId(self.digimonId)])
-	self.evolutionChart.unsetting(self)
-	self.evolutionChart = null
+	if(self.evolutionChart != null):
+		self.evolutionChart.unsetting(self)
+		self.evolutionChart = null
 	self.positionSet = false
 	self.setBehave(false)
 	#chamada do novo digimon
@@ -784,7 +788,7 @@ func Evolve(newDigimonId: int) -> void:
 	self.learnSkill(SkillDB.getNative(self.digimonId, 0))
 	self.currentHealth = self.maxHelth*ncurrentHealth
 	self.currentMana = self.maxMana*ncurrentMana
-	ref.addToParty(self.digimonId)
+	ref.addPassive(self.digimonId)
 	self.positionSet = false
 	self.setBehave(true)
 

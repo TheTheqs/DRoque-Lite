@@ -10,6 +10,9 @@ digimonId = 84
 digimonIcon = ExtResource("1_2dg3w")
 digimonTier = 1
 digimonType = 3
+digimonFusions = {
+85: 200
+}
 element = 0
 possibleEvolution = Array[int]([])
 texture = ExtResource("3_uek7o")

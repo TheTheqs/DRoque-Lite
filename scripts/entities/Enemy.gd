@@ -8,6 +8,7 @@ var newerChoice: int
 func _ready() -> void:
 	EnemyGen.loadContent()
 	self.tamerReference = EnemyGen
+	EnemyGen.currentTamer = self
 	var choice: int = EnemyGen.playerCurrentChoice
 	self.tamerName = "Enemy"
 	self.tamerLevel = EnemyGen.playerLevel

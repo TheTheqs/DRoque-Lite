@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UsableItemData" load_steps=5 format=3 uid="uid://bddhrqfey2lvc"]
+
+[ext_resource type="Script" path="res://scripts/items/item effects/UniqueDNA.gd" id="1_xs6g4"]
+[ext_resource type="Texture2D" uid="uid://c0xhw3arqxlve" path="res://assets/interface/Icons/item icons/usable items/UniqueDNA.png" id="2_3gb48"]
+[ext_resource type="Texture2D" uid="uid://djxsqn5oi4f4o" path="res://assets/sprites/vfx/usable items/UniqueDNA.png" id="3_uif0i"]
+[ext_resource type="Script" path="res://scripts/resources abstracts/UsableItemData.gd" id="4_ks1f8"]
+
+[resource]
+script = ExtResource("4_ks1f8")
+itemId = 11
+itemIcon = ExtResource("2_3gb48")
+itemTexture = ExtResource("3_uif0i")
+itemTextureRange = 9
+itemOrientation = 0
+itemEffect = ExtResource("1_xs6g4")

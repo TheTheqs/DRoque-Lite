@@ -12,6 +12,7 @@ digimonIcon = ExtResource("1_dhqfu")
 digimonTier = 0
 digimonType = 2
 digimonEVC = ExtResource("1_xf51u")
+digimonFusions = {}
 element = 1
 possibleEvolution = Array[int]([86])
 texture = ExtResource("1_sgyxp")

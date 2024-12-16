@@ -73,6 +73,7 @@ func startEvolutionVFX() -> void:
 		self.digimonSprite.visible = false
 		self.digimonSprite.texture = self.textureDB["newDigimon"]
 		self.digimonBehave.play("idle")
+		self.endDigivolve += tr(StringName(currentDigimon.digimonName))
 		self.sprite.texture = load(textureDB["Fusion"])
 		self.sprite.hframes = 8
 		self.sprite.vframes = 8
@@ -103,12 +104,15 @@ func startEvolution(oldDigimon: CompressedTexture2D, newDigimon: CompressedTextu
 	self.textureDB["newDigimon"] = newDigimon
 	self.endDigivolve = tr(StringName(digimon.digimonName)) + tr(StringName("Digivolved")) 
 	self.sprite.visible = false
+	self.digimonSprite.modulate.a = 1.0
 	if(self.isFusion):
-		self.digimonNode.visible = false
+		self.digimonSprite.visible = false
 		self.fusionDigimons.visible = true
 		self.fusionDigimon1.texture = oldDigimon
 		self.fusionDigimon1.modulate.a = self.fade.fadeLimit
 		self.fusionDigimon2.modulate.a = self.fade.fadeLimit
+		self.fusionDigimon1.visible = true
+		self.fusionDigimon2.visible = true
 		self.digimon1Behave.play("idle")
 		self.digimon2Behave.play("idle")
 	else:
@@ -131,10 +135,18 @@ func manageVisible(seeing: bool) -> void:
 	self.canvas.visible = seeing
 
 func digimonFade(fadeIn: bool, value: float) -> void:
-	if(fadeIn):
-		digimonSprite.modulate.a = min(1.0, digimonSprite.modulate.a + value)
+	if(self.isFusion):
+		if(fadeIn):
+			self.fusionDigimon1.modulate.a = min(1.0, self.fusionDigimon1.modulate.a + value)
+			self.fusionDigimon2.modulate.a = min(1.0, self.fusionDigimon2.modulate.a + value)
+		else:
+			self.fusionDigimon1.modulate.a = max(self.fade.fadeLimit, self.fusionDigimon1.modulate.a - value)
+			self.fusionDigimon2.modulate.a = max(self.fade.fadeLimit, self.fusionDigimon2.modulate.a - value)
 	else:
-		digimonSprite.modulate.a = max(self.fade.fadeLimit, digimonSprite.modulate.a - value)
+		if(fadeIn):
+			digimonSprite.modulate.a = min(1.0, digimonSprite.modulate.a + value)
+		else:
+			digimonSprite.modulate.a = max(self.fade.fadeLimit, digimonSprite.modulate.a - value)
 
 func afterMessage() -> void:
 	if(self.state == Enums.GlobalEffectState.EVOLVING):

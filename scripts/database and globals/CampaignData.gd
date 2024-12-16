@@ -7,7 +7,8 @@ var playerLevel: int = 40 #define a força do personagem
 var playerCurrentChoice: int = 0 #define o digimon que o jogador está no momento
 var playerInventory: Array[Item] #array que será inserido no inventário do jogador.
 var playerKarma: Enums.Karma
-var partySize: int
+var partyMembers: Array[int]
+var currentTamer: Tamer
 #Dicionários do grupo
 var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	0 : null,
@@ -50,8 +51,8 @@ var currentCoolDown: Dictionary = {
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.COWARDLY
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(200)
-	self.addToParty(Util.random(0,5))
+	self.addToParty(85)
+	self.addToParty(84)
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
 	#teste: gerando equipamentos.
@@ -74,6 +75,7 @@ func loadContent() -> void:
 	playerInventory.append(damageDisk)
 	playerInventory.append(damageDisk2)
 	playerInventory.append(ItemDB.getEquipment(2))
+	playerInventory.append(ItemDB.getUsableItem(11))
 	#teste status effect
 
 #Função que adiciona um digimon ao grupo
@@ -82,13 +84,8 @@ func addToParty(digimonId: int) -> bool:
 	for key: int in playerParty:
 		if(playerParty[key] == null):
 			playerParty[key] = digimonId
-			var passiveSkill: PassiveSkill = SkillDB.getNative(digimonId, 0)
-			if(self.fixedPassives.has(passiveSkill.skillId)):
-				self.fixedPassives[passiveSkill.skillId][1] += 1
-			else:
-				self.fixedPassives[passiveSkill.skillId] = [SkillDB.getNative(digimonId, 0), 1]
+			self.addPassive(digimonId)
 			sucess = true
-			self.partySize += 1
 			break
 	return sucess
 #função que remove digimon da party
@@ -98,13 +95,30 @@ func removeFromParty(index: int) -> void:
 		self.fixedPassives[removedId][1] -= 1
 		if(self.fixedPassives[removedId][1] <= 0):
 			self.fixedPassives.erase(removedId)
-		self.partySize -= 1
+		self.partyMembers.erase(self.playerParty[index])
 		self.playerParty[index] = null
 	else:
 		print("ERROR: No Skill found!")
+	if(index != self.playerCurrentChoice):
+		if(self.currentEquipments[index].size() > 0):
+			for equip: Equipment in self.currentEquipments[index]:
+				if(equip != null):
+					self.playerInventory.append(equip)
+					self.currentTamer.inventory.addItem(equip, 1)
+		self.currentEquipments[index] = []
+		self.currentCoolDown[index] = [0, 0, 0, 0, 0]
+		self.currentStatus[index] = []
 
 #função de teste que gera arrays com valores únicos
 
 #função de teste que gera um full set para o Digimon
 func getFullSet() -> Array:
 	return [ItemDB.getEquipment(Util.pickOne(ItemDB.weapons)), ItemDB.getEquipment(Util.pickOne(ItemDB.offHands)), ItemDB.getEquipment(Util.pickOne(ItemDB.armors)), ItemDB.getEquipment(Util.pickOne(ItemDB.accessories))]
+
+func addPassive(digimonId: int)-> void:
+	var passiveSkill: PassiveSkill = SkillDB.getNative(digimonId, 0)
+	if(self.fixedPassives.has(passiveSkill.skillId)):
+		self.fixedPassives[passiveSkill.skillId][1] += 1
+	else:
+		self.fixedPassives[passiveSkill.skillId] = [SkillDB.getNative(digimonId, 0), 1]
+	self.partyMembers.append(digimonId)

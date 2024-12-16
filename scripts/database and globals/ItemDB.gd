@@ -19,6 +19,7 @@ var itemDataBase: Dictionary = {
 	8 : "res://resources/equipments/RubyRing.tres",
 	9 : "res://resources/usable items/UpgradeI.tres",
 	10 : "res://resources/usable items/SkillLearner.tres",
+	11 : "res://resources/usable items/UniqueDNA.tres"
 }
 
 #funções de retorno

@@ -24,6 +24,8 @@ func opening() -> void:
 	self.buttonPanel.blockAllButtons()
 	var configuration: Array = configure[Campaign.playerCurrentChoice]
 	if(Campaign.playerParty[configuration[0]] == null and Campaign.playerParty[configuration[1]] == null):
+		self.card0.visible = false
+		self.card1.visible = false
 		self.noCompanionLabel.text = tr(StringName("NoCompanion"))
 		self.noCompanionLabel.visible = true
 	else:

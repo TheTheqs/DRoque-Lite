@@ -11,6 +11,7 @@ func _ready() -> void:
 	Campaign.loadContent() #essa é apenas uma função de testes
 	#as declarações abaixo recebem dados da variável global.
 	self.tamerName = "Player"
+	Campaign.currentTamer = self
 	self.tamerReference = Campaign
 	self.tamerLevel = Campaign.playerLevel
 	self.tamerKarma = Campaign.playerKarma

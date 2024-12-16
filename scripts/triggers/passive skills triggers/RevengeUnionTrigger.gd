@@ -7,7 +7,7 @@ func _init(relatedPassiveSkill: PassiveSkill) -> void:
 
 func checkContext(digimon: Digimon, context) -> bool:
 	if(context is String and context == "Changing"):
-		var chance: int = digimon.tamer.tamerReference.partySize*10
+		var chance: int = digimon.tamer.tamerReference.partyMembers.size()*10
 		chance = min(30, chance)
 		if(Util.chance(chance)):
 			return true
