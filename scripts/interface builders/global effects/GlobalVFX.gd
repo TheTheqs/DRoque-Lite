@@ -6,18 +6,27 @@ class_name GlobalVFX
 @export var anime: AnimationPlayer
 @export var fade: Fade
 @export var canvas: CanvasLayer
+@export var digimonNode: Control
 @export var digimonSprite: Sprite2D
 @export var digimonBehave: AnimationPlayer
 @export var globalText: GlobalTextWindow
 @export var globalSkill: GlobalSkill
+#fusion digimons
+@export var fusionDigimons: Node2D
+@export var fusionDigimon1: GlitchShader
+@export var digimon1Behave: AnimationPlayer
+@export var fusionDigimon2: GlitchShader
+@export var digimon2Behave: AnimationPlayer
 #controle de estado
+var isFusion: bool = false
 var state: Enums.GlobalEffectState 
 var currentDigimon: Digimon
 var endDigivolve: String
 #banco de dados de texturas
 var textureDB: Dictionary = {
 	"Evolution" : "res://assets/sprites/vfx/special effects/EvolutionVFX.png",
-	"newDigimon" : null
+	"newDigimon" : null,
+	"Fusion" : "res://assets/sprites/vfx/special effects/FusionVFX.png"
 }
 #banco de frases em relação ao karma
 var karmaText: Dictionary = {
@@ -44,6 +53,10 @@ func afterAction(animName: String): #finish animation do digimon
 			self.startEvolutionVFX()
 		elif(self.state == Enums.GlobalEffectState.FINISHED):
 			self.globalText.showMessage(self.endDigivolve)
+			if(self.isFusion):
+				self.isFusion = false
+				self.fusionDigimon1.setGlitchEffect(false)
+				self.fusionDigimon2.setGlitchEffect(false)
 
 func afterFade() -> void:
 	if(self.state == Enums.GlobalEffectState.EVOLVING):
@@ -56,19 +69,30 @@ func afterFade() -> void:
 			self.currentDigimon.globalFeedback()
 
 func startEvolutionVFX() -> void:
-	self.sprite.texture = load(textureDB["Evolution"])
-	self.sprite.hframes = 5
-	self.sprite.vframes = 9
-	self.anime.speed_scale = 1.0
-	self.sprite.visible = true
-	self.anime.play("evolution")
+	if(self.isFusion):
+		self.digimonSprite.visible = false
+		self.digimonSprite.texture = self.textureDB["newDigimon"]
+		self.digimonBehave.play("idle")
+		self.sprite.texture = load(textureDB["Fusion"])
+		self.sprite.hframes = 8
+		self.sprite.vframes = 8
+		self.anime.speed_scale = 1.0
+		self.sprite.visible = true
+		self.anime.play("fusion")
+	else:
+		self.sprite.texture = load(textureDB["Evolution"])
+		self.sprite.hframes = 5
+		self.sprite.vframes = 9
+		self.anime.speed_scale = 1.0
+		self.sprite.visible = true
+		self.anime.play("evolution")
 
 func afterSpecialVFX(animName: String):
 	self.sprite.visible = false
 	self.sprite.hframes = 1
 	self.sprite.vframes = 1
 	if(self.state == Enums.GlobalEffectState.EVOLVING):
-		if(animName == "evolution"):
+		if(animName == "evolution" or animName == "fusion"):
 			self.state = Enums.GlobalEffectState.FINISHED
 			self.digimonBehave.play("action")
 #a função abaixo desencaideia automarticamente a fusão e todas as suas camadas!
@@ -76,13 +100,24 @@ func startEvolution(oldDigimon: CompressedTexture2D, newDigimon: CompressedTextu
 	self.currentDigimon = digimon
 	self.manageVisible(true)
 	self.state = Enums.GlobalEffectState.EVOLVING
-	self.digimonSprite.texture = oldDigimon
-	self.digimonSprite.modulate.a = self.fade.fadeLimit
 	self.textureDB["newDigimon"] = newDigimon
-	self.endDigivolve = tr(StringName(digimon.digimonName)) + tr(StringName("Digivolved"))
+	self.endDigivolve = tr(StringName(digimon.digimonName)) + tr(StringName("Digivolved")) 
 	self.sprite.visible = false
-	self.digimonSprite.visible = true
-	self.digimonBehave.play("idle")
+	if(self.isFusion):
+		self.digimonNode.visible = false
+		self.fusionDigimons.visible = true
+		self.fusionDigimon1.texture = oldDigimon
+		self.fusionDigimon1.modulate.a = self.fade.fadeLimit
+		self.fusionDigimon2.modulate.a = self.fade.fadeLimit
+		self.digimon1Behave.play("idle")
+		self.digimon2Behave.play("idle")
+	else:
+		self.digimonNode.visible = true
+		self.fusionDigimons.visible = false
+		self.digimonSprite.texture = oldDigimon
+		self.digimonSprite.modulate.a = self.fade.fadeLimit
+		self.digimonSprite.visible = true
+		self.digimonBehave.play("idle")
 	self.fade.isEvolution = true
 	self.fade.startFade(true)
 
@@ -103,6 +138,22 @@ func digimonFade(fadeIn: bool, value: float) -> void:
 
 func afterMessage() -> void:
 	if(self.state == Enums.GlobalEffectState.EVOLVING):
-		self.digimonBehave.play("action")
+		if(self.isFusion):
+			self.digimon1Behave.play("action")
+			self.digimon2Behave.play("action")
+		else:
+			self.digimonBehave.play("action")
 	elif(self.state == Enums.GlobalEffectState.FINISHED):
 		self.fade.startFade(false)
+
+func setFusion(digi2Texture: CompressedTexture2D) ->void:
+	self.isFusion = true
+	self.fusionDigimon2.texture = digi2Texture
+
+func afterFusionAction(animName: String) -> void:
+	if(animName == "action"):
+		self.fusionDigimon1.setGlitchEffect(true)
+		self.fusionDigimon2.setGlitchEffect(true)
+		self.digimon1Behave.play("idle")
+		self.digimon2Behave.play("idle")
+		self.startEvolutionVFX()

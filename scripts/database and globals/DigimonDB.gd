@@ -16,7 +16,8 @@ var digimons : Dictionary = {
 	86: "res://resources/digimons/Greymon.tres",
 	87: "res://resources/digimons/Strikedramon.tres",
 	89: "res://resources/digimons/Growlmon.tres",
-	99: "res://resources/digimons/Dorugamon.tres"
+	99: "res://resources/digimons/Dorugamon.tres",
+	200: "res://resources/digimons/Paildramon.tres"
 }
 
 #Database Functions

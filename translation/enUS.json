@@ -112,6 +112,7 @@
   "DigimonName87": "Strikedramon",
   "DigimonName89": "Growlmon",
   "DigimonName99": "Dorugamon",
+  "DigimonName200": "Paildramon",
   "SkillName0": "Basic Attack",
   "SkillName1": "Neutral Nudge",
   "SkillName2": "Fiery Flicker",
@@ -179,6 +180,8 @@
   "SkillName64": "Pump It Up!",
   "SkillName65": "Survival Baton",
   "SkillName66": "Happy New Year!!",
+  "SkillName67": "Backwater Camp",
+  "SkillName68": "Death Parade Blaster",
   "SkillDescription0": "Delivers an unarmed attack to the opponent, dealing 100% Neutral Physical damage.",
   "SkillDescription1": "Deals 120% Neutral-type Physical damage. Increases damage by 20% for each Tier above Rookie. If this skill is used by a Neutral-type Digimon, its cooldown is reduced to zero.",
   "SkillDescription2": "Deals 180% Fire-type Physical Damage. If used by a Fire-type Digimon, this ability restores the Mana cost instead of consuming it.",
@@ -246,6 +249,8 @@
   "SkillDescription64": "Get Bravery +1. If the opponent's Total Strength is greater than yours, get +2 Bravery instead.",
   "SkillDescription65": "Upon receiving a fatal blow, heals the Digimon by 20% of its maximum health and swaps it with another member of the group. This effect can only be activated once per battle and only if the group has more than one Digimon available.",
   "SkillDescription66": "Deals 400% Magic damage. By default, this skill is classified as Neutral type. However, each time it is used, its element alternates between Light, Thunder, Fire, and Neutral.",
+  "SkillDescription67": "Increases damage delt by 20%, but also increases damage taken by 20%.",
+  "SkillDescription68": "Deals 250% Light-Type Physical damage and drains 50% of the enemy's maximum mana.",
   "StatusName0": "Poison",
   "StatusName1": "Haste",
   "StatusName2": "Burn",
@@ -315,6 +320,7 @@
   "ItemName8": "\"Ruby\" Ring",
   "ItemName9": "Upgrade I",
   "ItemName10": "Skill Disk",
+  "ItemName11": "Unique DNA",
   "ItemDescription0": "Heals 50% of max health.",
   "ItemDescription1": "A sword designed for friendly practice, but it may prove useful in combat when the situation turns desperate.",
   "ItemDescription2": "A rudimentary club made of sturdy wood. Simple but effective in close combat.",
@@ -325,5 +331,6 @@
   "ItemDescription7": "Although iron is heavy, this necklace makes you feel a bit lighter—and a bit like a prisoner too.",
   "ItemDescription8": "The maker claims this ring was truly made from ruby. He's the only one who believes such nonsense.",
   "ItemDescription9": "Forces the evolution of a Rookie Digimon. The item will fail if the Digimon does not meet the minimum level requirement or belongs to a different tier.",
-  "ItemDescription10": "Disk that stores a skill. When used, the Digimon learns the skill named after the item."
+  "ItemDescription10": "Disk that stores a skill. When used, the Digimon learns the skill named after the item.",
+  "ItemDescription11": "Performs an evolutionary fusion between two Digimons. The item will fail if the Digimon does not meet the required conditions, has no available evolutionary fusion, or if the material Digimon for the fusion is not present in the party."
 }

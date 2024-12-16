@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DamageSkillData" load_steps=4 format=3 uid="uid://dqw2jintvfc6p"]
+
+[ext_resource type="Script" path="res://scripts/resources abstracts/DamageSkillData.gd" id="1_qud21"]
+[ext_resource type="Texture2D" uid="uid://ds25etacnbp4w" path="res://assets/interface/Icons/SkillIcons/NativeActives/DeathParadeBlaster.png" id="2_6i4dj"]
+[ext_resource type="Texture2D" uid="uid://c2m8ps0m3jcj4" path="res://assets/sprites/vfx/skills/DeathParadeBlaster.png" id="3_3ggam"]
+
+[resource]
+script = ExtResource("1_qud21")
+skillId = 68
+skillIcon = ExtResource("2_6i4dj")
+staticPriority = 4
+element = 7
+damageType = 0
+damageSubType = 0
+ratio = 2.5
+manaCost = 100
+coolDown = 15
+hasEffect = true
+skillTexture = ExtResource("3_3ggam")
+textureRange = 28

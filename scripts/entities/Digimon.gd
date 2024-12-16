@@ -180,7 +180,8 @@ var allTriggers: Array = [
 var actionsToGo: Array[Skill] = []
 var positionDic: Dictionary = {
 	Enums.Tier.ROOKIE : [15, 30],
-	Enums.Tier.CHAMPION : [15, 30]
+	Enums.Tier.CHAMPION : [15, 30],
+	Enums.Tier.ULTIMATE : [15, 30]
 }
 func setBehave(setting: bool) -> void:
 	var constant: int = -1 if (not setting) else 1
@@ -558,10 +559,7 @@ func heal(value: float, isMana: bool) -> void:
 func manaConsumption(value: float) -> void:
 	self.consumedMana = value
 	self.triggerCheck(onManaConsumption, consumedMana)
-	if(currentMana - consumedMana <= 0):
-		currentMana = 0
-	else:
-		currentMana -= consumedMana
+	self.currentMana = max(0, currentMana - consumedMana)
 	tamer.HUDD.updateValues()
 
 func action() -> void:

@@ -112,6 +112,7 @@
   "DigimonName87": "Strikedramon",
   "DigimonName89": "Growlmon",
   "DigimonName99": "Dorugamon",
+  "DigimonName200": "Paildramon",
   "SkillName0": "Ataque Básico",
   "SkillName1": "Golpe Gracioso",
   "SkillName2": "Chama Charmosa",
@@ -179,6 +180,8 @@
   "SkillName64": "Treino Furioso!",
   "SkillName65": "Bastão da Sobrevivência",
   "SkillName66": "Feliz Ano Novo!!",
+  "SkillName67": "Acampamento no Fim do Mundo",
+  "SkillName68": "Desintegrador Espiritual",
   "SkillDescription0": "Desfere um ataque desarmado no oponente, causando 100% de dano Físico do tipo Neutro.",
   "SkillDescription1": "Causa 120% de dano Físico do tipo Neutro. Aumenta o dano em 20% para cada Tier acima de Rookie. Se esta habilidade for utilizada por um Digimon do tipo Neutro, seu Tempo de Recarga é reduzido a 0.",
   "SkillDescription2": "Causa 180% de dano Físico de Fogo. Se usada por um Digimon do tipo Fogo, em vez de consumir Mana, a habilidade restaura o custo gasto.",
@@ -246,6 +249,8 @@
   "SkillDescription64": "Recebe Bravura + 1. Se a Força Total do oponenete for maior que a sua, Recebe + 2 de Bravura.",
   "SkillDescription65": "Ao receber um golpe fatal, cura o Digimon em 20% da sua vida máxima e o substitui por outro membro do grupo. Este efeito só pode ser ativado uma vez por batalha e apenas se o grupo tiver mais de um Digimon disponível.",
   "SkillDescription66": "Causa 400% de dano mágico. Por padrão, esta habilidade é classificada como do tipo Neutro. No entanto, a cada utilização, seu elemento alterna entre Luz, Trovão, Fogo e Neutro.",
+  "SkillDescription67": "Aumenta o dano causado em 20%, porém também aumenta o dano recebido em 20%.",
+  "SkillDescription68": "Causa 250% de dano Físico do tipo Luz e drena 50% da Mana Máxima do alvo.",
   "StatusName0": "Envenenamento",
   "StatusName1": "Aceleração",
   "StatusName2": "Queimando",
@@ -315,6 +320,7 @@
   "ItemName8": "Anel de \"Rubi\"",
   "ItemName9": "Upgrade I",
   "ItemName10": "Disquete de Habilidade",
+  "ItemName11": "DNA diferente",
   "ItemDescription0": "Cura 50% da vida máxima.",
   "ItemDescription1": "Uma espada projetada para treinos amistosos, mas que pode se mostrar útil em combate quando a situação se torna desesperadora.",
   "ItemDescription2": "Uma clava rudimentar feita de madeira resistente. Simples, mas eficaz em combates corpo a corpo.",
@@ -325,5 +331,6 @@
   "ItemDescription7": "Por mais que o ferro seja pesado, esse colar faz você se sentir um pocuo mais leve, e um pouco presidiário também.",
   "ItemDescription8": "O fabricante disse que esse anel realmente foi feito de Rubi. Ele é o único que afirma tal absurdo.",
   "ItemDescription9": "Força a evolução de um digimon Rookie. O item resulta em falha caso o Digimon não possua nível mínimo ou seja de um tier diferente.",
-  "ItemDescription10": "Disquete que armazena uma habilidade. Ao ser utilizado, o Digimon aprende a habilidade que dá nome ao item."
+  "ItemDescription10": "Disquete que armazena uma habilidade. Ao ser utilizado, o Digimon aprende a habilidade que dá nome ao item.",
+  "ItemDescription11": "Realiza uma fusão evolutiva entre dois Digimons. O item falhará se o Digimon não atender aos requisitos necessários, não possuir nenhuma fusão evolutiva disponível ou se o Digimon material para a fusão não estiver presente no grupo."
 }

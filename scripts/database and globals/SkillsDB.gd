@@ -37,7 +37,9 @@ var skills: Dictionary = {
 	29 : "res://scripts/skills/damage skills/BackupStrike.gd",
 	30 : "res://scripts/skills/passive skills/Counting.gd",
 	35 : "res://scripts/skills/passive skills/SupplySquad.gd",
-	64 : "res://scripts/skills/status skills/PumpItUp.gd"
+	64 : "res://scripts/skills/status skills/PumpItUp.gd",
+	65 : "res://scripts/skills/passive skills/SurvivalBaton.gd",
+	66 : "res://scripts/skills/damage skills/NewYearsEve.gd"
 }
 
 var nativeSkills: Dictionary = {
@@ -54,7 +56,8 @@ var nativeSkills: Dictionary = {
 	86: ["res://scripts/skills/passive skill (native)/DragonRoar.gd", "res://scripts/skills/damage skills (native)/MegaFlare.gd"],
 	87: ["res://scripts/skills/passive skill (native)/RevengeUnion.gd", "res://scripts/skills/damage skills (native)/FangStrike.gd"],
 	89: ["res://scripts/skills/passive skill (native)/SavageInstinct.gd", "res://scripts/skills/damage skills (native)/ExhaustFlame.gd"],
-	99: ["res://scripts/skills/passive skill (native)/SharpenedEdge.gd", "res://scripts/skills/damage skills (native)/PowerMetal.gd"]
+	99: ["res://scripts/skills/passive skill (native)/SharpenedEdge.gd", "res://scripts/skills/damage skills (native)/PowerMetal.gd"],
+	200: ["res://scripts/skills/passive skill (native)/BackwaterCamp.gd", "res://scripts/skills/damage skills (native)/DeathParadeBlaster.gd"]
 }
 
 func getSkill(skillId: int) -> Skill:

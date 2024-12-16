@@ -2,8 +2,8 @@ extends Node
 
 class_name CampaignData
 #essa classe vai "segurar" dados da campanha!
-var campaignLevel: int = 16 #Define o nível dos inimigos e as recomenpensas
-var playerLevel: int = 16 #define a força do personagem 
+var campaignLevel: int = 40 #Define o nível dos inimigos e as recomenpensas
+var playerLevel: int = 40 #define a força do personagem 
 var playerCurrentChoice: int = 0 #define o digimon que o jogador está no momento
 var playerInventory: Array[Item] #array que será inserido no inventário do jogador.
 var playerKarma: Enums.Karma
@@ -15,7 +15,7 @@ var playerParty: Dictionary = { #guarda os IDs de cada digimon do jogador
 	2 : null
 	}
 var digimonActiveSkills: Dictionary = {
-	0 : [NewsYearEve.new(), GulibleGust.new(), LimiterRemoval.new()], #esses arrays precisam ter de prefencia size fixo em 3
+	0 : [GulibleGust.new(), LimiterRemoval.new(), null], #esses arrays precisam ter de prefencia size fixo em 3
 	1 : [null, null, null],
 	2 : [null, null, null],
 	}
@@ -50,7 +50,7 @@ var currentCoolDown: Dictionary = {
 func loadContent() -> void:
 	self.playerKarma = Enums.Karma.COWARDLY
 	#teste: gerando grupo de tamanho aleatório aleatório.
-	self.addToParty(Util.random(0,5))
+	self.addToParty(200)
 	self.addToParty(Util.random(0,5))
 	self.addToParty(Util.random(0,5))
 	#selecionando 3 skills para cada digimon no grupo
