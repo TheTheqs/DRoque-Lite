@@ -486,6 +486,7 @@ func learnSkill(skill: Skill) -> void:
 				self.digimonLearnedSkills.append(skill.skillId)
 				if(self.tamer is Player):
 					self.tamer.buttonPanel.checkSkillDisplay()
+				self.triggerCheck(self.onLearnSkill, skill)
 
 
 func unlearnSkill(skill: Skill) -> void:

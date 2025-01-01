@@ -158,6 +158,10 @@ func updateTurn() -> void:
 		self.turnLabel.text = str(turn)
 	else:
 		upgradeTurn = true
+	if(self.turn == 2):
+		var taunt: Taunt = Taunt.new(4)
+		taunt.schance = -1
+		self.playerDigimon.applyStatus(taunt)
 
 func closeAllWindows() -> void: #função usada para forçar que todas as janelas sejam fechadas.
 	for window in allWindows:

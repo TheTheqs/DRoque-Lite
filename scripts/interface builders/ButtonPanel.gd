@@ -44,6 +44,13 @@ func updateButtons() -> void:
 	for nbutton: ButtonDescription in skillButtons:
 		nbutton.updateSkills()
 
+func manageSkillUtility() -> void:
+	for bd: ButtonDescription in skillButtons:
+		if(bd.relatedSkill != null and !bd.relatedSkill.usable):
+			bd.disabled = true
+		else:
+			bd.disabled = false
+
 func blockAllButtons() -> void:
 	if(self.allowBlockUnblock):
 		for cbutton in allButtons:

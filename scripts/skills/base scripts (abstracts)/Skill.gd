@@ -13,6 +13,7 @@ var staticPriority: int
 var priority: int
 var bonusPriority: int = 0
 var usable: bool = true
+var usableCount: int = 0
 var accuracy : float
 var cooldowm: int
 var currentCooldown: int = 0 #valor zero por padrão
@@ -68,3 +69,11 @@ func priorityCalculation(digimon: Digimon) -> void:
  #a função abaixo é criada apra ser sobreescrita nas classes DamageSkill
 func getElementalChartPriority(_digimon: Digimon) -> int:
 	return 0
+
+func manageUsability(discount: int) -> void:
+	usableCount = max(0, usableCount + discount)
+	if(usableCount != 0):
+		self.usable = false
+	else:
+		self.usable = true
+	

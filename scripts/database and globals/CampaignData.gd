@@ -53,7 +53,7 @@ func loadContent() -> void:
 	#teste: gerando grupo de tamanho aleatório aleatório.
 	self.addToParty(85)
 	self.addToParty(84)
-	self.addToParty(Util.random(0,5))
+	self.addToParty(0)
 	#selecionando 3 skills para cada digimon no grupo
 	#teste: gerando equipamentos.
 	self.currentEquipments[0].append(ItemDB.getEquipment(1))
