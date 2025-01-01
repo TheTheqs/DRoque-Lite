@@ -159,7 +159,7 @@ func updateTurn() -> void:
 	else:
 		upgradeTurn = true
 	if(self.turn == 2):
-		var taunt: Protect = Protect.new()
+		var taunt: Regen = Regen.new()
 		taunt.schance = -1
 		self.playerDigimon.applyStatus(taunt)
 		self.enemyDigimon.applyStatus(taunt)
