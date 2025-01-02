@@ -159,8 +159,11 @@ func updateTurn() -> void:
 	else:
 		upgradeTurn = true
 	if(self.turn == 2):
-		var taunt: Sick = Sick.new()
-		self.playerDigimon.applyStatus(taunt)
+		var taunt: Cursed = Cursed.new()
+		taunt.schance = -1
+		var taunt1: Cursed = Cursed.new()
+		taunt1.schance = -1
+		self.playerDigimon.applyStatus(taunt1)
 		self.enemyDigimon.applyStatus(taunt)
 
 func closeAllWindows() -> void: #função usada para forçar que todas as janelas sejam fechadas.

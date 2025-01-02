@@ -49,3 +49,6 @@ func getAditionalDescription() -> String:
 	if(self.isExpirable):
 		newString += "\n" + tr(StringName("Duration")) + ": " + str(self.duration) + " " + tr("Turn")
 	return newString
+
+func setStack(stak: int) -> void:
+	self.stacks = min(self.stacks + stak, self.stacksLimit)
