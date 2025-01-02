@@ -159,8 +159,7 @@ func updateTurn() -> void:
 	else:
 		upgradeTurn = true
 	if(self.turn == 2):
-		var taunt: Faith = Faith.new(2)
-		taunt.schance = -1
+		var taunt: Sick = Sick.new()
 		self.playerDigimon.applyStatus(taunt)
 		self.enemyDigimon.applyStatus(taunt)
 

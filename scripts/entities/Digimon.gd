@@ -130,7 +130,7 @@ var onUnequipingItem: Array[Trigger] #Quando o digimon desequipa um item
 var onGotHited: Array[Trigger] #Quando uma habilidade acerta o digimon. Veja que difere pouco de quando ele é apenas alvo.
 var onEvadeDamage: Array[Trigger] #Quando o digimon se esquiva de uma damage skill
 var onEvadeStats: Array[Trigger] #Quando o digimon se esquiva da aplicação de um efeito
-var onBeforeGettingStats: Array[Trigger] #para quando há a atentativa de aplicação de um efeito no digimon
+var onBeforeGettingStats: Array[Trigger] #para quando há a tentativa de aplicação de um efeito no digimon
 var onGettingStats: Array[Trigger] #Quando um efeito é aplicado com sucesso
 var onUnapplyStatus: Array[Trigger] #Qaundo um status termina ou é removido.
 var onDamageDelt: Array[Trigger] #Quando o digimon causa dano. Atenção, a chamada desse contexto deve ser feita no digimon inimigo
@@ -404,7 +404,6 @@ func applyStatus(nstatus: StatusEffect) -> void:
 	else:
 		if(self.isDisabled):
 			nstatus.schance = -1
-		triggerCheck(onBeforeGettingStats, nstatus) #checagem de trigger antes de ativar o status
 		if(nstatus.schance <= -1 or nstatus.statusType == Enums.StatusType.BUFF): #dizer que a chance é -1 é o mesmo que dizer que o status será obrigatoriamente aplicado
 			if(statusEffect.has(nstatus.statusId)):
 				nstatus.effectOverlap(self)
@@ -421,6 +420,7 @@ func applyStatus(nstatus: StatusEffect) -> void:
 		else:
 			#a inteligência base é a taxa de acerto do atacante, mas também e a taxa de esquiva do atacado
 			nstatus.calculateChance(self)
+			triggerCheck(onBeforeGettingStats, nstatus) #checagem de trigger antes de ativar o status
 			gotHited = Util.chance(nstatus.schance)
 			triggerCheck(onGotHited, nstatus)
 			if(gotHited):
