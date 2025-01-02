@@ -159,9 +159,9 @@ func updateTurn() -> void:
 	else:
 		upgradeTurn = true
 	if(self.turn == 2):
-		var taunt: Cursed = Cursed.new()
+		var taunt: Petrify = Petrify.new(20)
 		taunt.schance = -1
-		var taunt1: Cursed = Cursed.new()
+		var taunt1: Petrify = Petrify.new(20)
 		taunt1.schance = -1
 		self.playerDigimon.applyStatus(taunt1)
 		self.enemyDigimon.applyStatus(taunt)

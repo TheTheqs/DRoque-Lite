@@ -390,8 +390,9 @@ func processDamage(damageData: DamageData) -> void:
 		tamer.HUDD.updateValues()
 	
 #função de quando o digimon morre, será construída aos poucos
-func dying() -> void:
-	self.triggerCheck(self.onDying, "Dying")
+func dying(isSpeacialDeath: bool) -> void:
+	if(!isSpeacialDeath):
+		self.triggerCheck(self.onDying, "Dying")
 	BTM.outAction("Process Damage")
 	
 #função que processa a aplica um status effect
@@ -598,7 +599,7 @@ func animationFinished(anim_name: String) -> void:
 	elif(anim_name == "damage"):
 		addAnimation(currentAnimation)
 		if(self.currentHealth <= 0):
-			self.dying()
+			self.dying(false)
 		else:
 			BTM.outAction("Process Damage")
 	elif(anim_name == "freeze"):
