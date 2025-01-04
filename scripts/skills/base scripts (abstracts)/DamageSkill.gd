@@ -38,7 +38,10 @@ func setValues(digimon: Digimon) -> void:
 	self.accuracy = digimon.getAccuracy(self, digimon.enemy)
 	self.isCritic = Util.chance(digimon.getCriticalChance(self))
 	if(self.isCritic):
-		self.damageValue *= 1.5
+		if(digimon.statusEffect.has(21)):
+			self.damageValue *= 1.8
+		else:
+			self.damageValue *= 1.5
 
 #função de ataque de fato
 func effect(digimon: Digimon) -> void:
