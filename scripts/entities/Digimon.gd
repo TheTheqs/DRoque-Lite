@@ -548,15 +548,9 @@ func heal(value: float, isMana: bool) -> void:
 	triggerCheck(onHealing, newHealData)
 	if(newHealData.healValue != 0):
 		if(not isMana):
-			if((currentHealth + newHealData.healValue) > maxHelth):
-				currentHealth = maxHelth
-			else:
-				currentHealth += newHealData.healValue
+			self.currentHealth = min(currentHealth + value, maxHelth)
 		else:
-			if((currentMana + newHealData.healValue) > maxMana):
-				currentHealth = maxMana
-			else:
-				currentMana += newHealData.healValue
+			self.currentMana = min(currentMana + value, maxMana)
 		tamer.showContent(newHealData)
 		tamer.HUDD.updateValues()
 	BTM.outAction("Digimon Heal")

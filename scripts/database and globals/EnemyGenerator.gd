@@ -21,7 +21,7 @@ var digimonActiveSkills: Dictionary = {
 	}
 #passivas comuns do grupo
 var fixedPassives: Dictionary = { #a chave vai ser o id da passiva, o valor vai ser um array de tamanho 2, o primeiro é a skill o segundo é contagem dela
-	65: [SurvivalBaton.new(), 1]
+	
 }
 
 var currentEquipments: Dictionary = { #equipamento de cada digimon um array de tamanho máximo de 4
@@ -30,7 +30,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon um array de t
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [Regen.new()],
+	0 : [Rejuvenation.new(3)],
 	1 : [],
 	2 : []
 }

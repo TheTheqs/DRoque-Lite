@@ -158,10 +158,10 @@ func updateTurn() -> void:
 		self.turnLabel.text = str(turn)
 	else:
 		upgradeTurn = true
-	if(self.turn == 2):
-		var taunt: Confuse = Confuse.new(3)
+	if(self.turn == 99):
+		var taunt: Rejuvenation = Rejuvenation.new(3)
 		taunt.schance = -1
-		var taunt1: Confuse = Confuse.new(3)
+		var taunt1: Rejuvenation = Rejuvenation.new(3)
 		taunt1.schance = -1
 		self.playerDigimon.applyStatus(taunt1)
 		self.enemyDigimon.applyStatus(taunt)

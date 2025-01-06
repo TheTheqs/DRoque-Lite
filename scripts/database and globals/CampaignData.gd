@@ -31,7 +31,7 @@ var currentEquipments: Dictionary = { #equipamento de cada digimon
 	2 : []
 }
 var currentStatus: Dictionary = { #Status Effect ativos em cada Digimon
-	0 : [Regen.new()],
+	0 : [Rejuvenation.new(3)],
 	1 : [],
 	2 : []
 }
