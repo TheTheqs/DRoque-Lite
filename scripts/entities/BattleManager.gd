@@ -159,9 +159,9 @@ func updateTurn() -> void:
 	else:
 		upgradeTurn = true
 	if(self.turn == 2):
-		var taunt: Sleep = Sleep.new()
+		var taunt: Charm = Charm.new(10)
 		taunt.schance = -1
-		var taunt1: Sleep = Sleep.new()
+		var taunt1: Charm = Charm.new(10)
 		taunt1.schance = -1
 		self.playerDigimon.applyStatus(taunt1)
 		self.enemyDigimon.applyStatus(taunt)

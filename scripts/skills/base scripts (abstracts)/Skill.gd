@@ -46,10 +46,11 @@ func countCooldown(digimon: Digimon) -> void:
 		currentCooldown -= 1
 		if(currentCooldown <= 0):
 			currentCooldown = 0
-			usable = true
+			manageUsability(0)
 	if(digimon.tamer is Player):
 		var theTamer: Player = digimon.tamer
 		theTamer.buttonPanel.updateButtons()
+		digimon.tamer.buttonPanel.manageSkillUtility()
 
 func effect(_digimon: Digimon) -> void:
 	pass
@@ -72,7 +73,7 @@ func getElementalChartPriority(_digimon: Digimon) -> int:
 
 func manageUsability(discount: int) -> void:
 	usableCount = max(0, usableCount + discount)
-	if(usableCount != 0):
+	if(usableCount != 0 and currentCooldown <= 0):
 		self.usable = false
 	else:
 		self.usable = true
