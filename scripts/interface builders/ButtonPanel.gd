@@ -135,7 +135,10 @@ func activateButton() -> void:
 	if(currentButtonToShow == allButtons[2] and !descWindowOn):
 		inventoryDisplay.opening()
 	elif(currentButtonToShow == allButtons[3] and !descWindowOn):
-		changeDigimonWindow.opening()
+		if(relatedDigimon.statusEffect.has(32)):
+			BM.showMessage(tr(StringName("RootMessage")))
+		else:
+			changeDigimonWindow.opening()
 	elif(currentButtonToShow == allButtons[1] and !descWindowOn):
 		gameMenu.opening()
 #funções de exibição da tela de informações de digimon

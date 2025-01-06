@@ -315,7 +315,7 @@ func getCriticalChance(damageSkill: DamageSkill) -> float:
 func getAccuracy(nobject, nemeny: Digimon) -> float:
 	currentAccuracy = 0
 	if(nobject is DamageSkill):
-		currentAccuracy = 250.0*self.baseDEX/(self.baseDEX + nemeny.baseAGI)
+		currentAccuracy = 320.0*self.baseDEX/(self.baseDEX + nemeny.baseAGI)
 	elif(nobject is StatusEffect):
 		currentAccuracy = 100.0*self.baseINT/(self.baseINT + nemeny.baseINT)
 	currentAccuracy = Util.cap(currentAccuracy)

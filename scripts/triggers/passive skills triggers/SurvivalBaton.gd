@@ -10,7 +10,7 @@ func checkContext(digimon: Digimon, context) -> bool:
 	if(context is String and context == "BattleStart"):
 		self.effectApplied = false
 		return false
-	elif(context is String and context == "Dying" and digimon.currentHealth <= 0 and self.effectApplied == false and (Util.getValidParty(digimon).size() > 1)):
+	elif(context is String and context == "Dying" and digimon.currentHealth <= 0 and self.effectApplied == false and (Util.getValidParty(digimon).size() > 1) and !digimon.statusEffect.has(32)):
 		self.effectApplied = true
 		return true
 	else:
