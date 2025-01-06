@@ -159,9 +159,9 @@ func updateTurn() -> void:
 	else:
 		upgradeTurn = true
 	if(self.turn == 2):
-		var taunt: Charm = Charm.new(10)
+		var taunt: Doom = Doom.new(2)
 		taunt.schance = -1
-		var taunt1: Charm = Charm.new(10)
+		var taunt1: Doom = Doom.new(2)
 		taunt1.schance = -1
 		self.playerDigimon.applyStatus(taunt1)
 		self.enemyDigimon.applyStatus(taunt)
