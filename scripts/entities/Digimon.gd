@@ -569,6 +569,7 @@ func manaConsumption(value: float) -> void:
 
 func action() -> void:
 	BTM.inAction("Digimon Action Process")
+	triggerCheck(self.onActing, "BeforeAction")
 	if(selectedSkill != null):
 		actionsToGo.append(selectedSkill)
 		selectedSkill = null
